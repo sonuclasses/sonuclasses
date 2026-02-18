@@ -10,22 +10,81 @@
         h2 { color: #2E7D32; margin-bottom: 20px; font-size: 28px; }
         input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; outline: none; transition: 0.3s; }
         input:focus { border-color: #2E7D32; }
-        button { width: 100%; padding: 12px; background-color: #2E7D32; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: bold; margin-top: 10px; }
-        button:hover { background-color: #1b5e20; }
+        button { width: 100%; padding: 12px; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; margin-top: 10px; }
+        .btn-signup { background-color: #E65100; }
+        .btn-signup:hover { background-color: #BF360C; }
+        .btn-login { background-color: #2E7D32; }
+        .btn-login:hover { background-color: #1b5e20; }
         .links { margin-top: 20px; font-size: 14px; }
         .links a { color: #1976D2; text-decoration: none; margin: 0 5px; }
+        #message { margin-top: 15px; font-weight: bold; font-size: 14px; }
     </style>
 </head>
 <body>
     <div class="login-container">
         <h2>सोनू क्लासेस</h2>
-        <p>पढ़ाई की दुनिया में आपका स्वागत है!</p>
-        <input type="text" placeholder="मोबाइल नंबर या ईमेल" id="username">
-        <input type="password" placeholder="पासवर्ड" id="password">
-        <button onclick="alert('सोनू, अभी लॉगिन सिस्टम कनेक्ट हो रहा है!')">लॉगिन करें</button>
+        <input type="email" placeholder="ईमेल आईडी डालें" id="email">
+        <input type="password" placeholder="पासवर्ड बनाएँ" id="password">
+        
+        <button id="signup-btn" class="btn-signup">नया अकाउंट बनाएँ</button>
+        <button id="login-btn" class="btn-login">लॉगिन करें</button>
+        
+        <p id="message"></p>
+        
         <div class="links">
             <a href="index.html">होमपेज पर वापस जाएँ</a>
         </div>
     </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+      import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
+        authDomain: "sonuclasses-b19db.firebaseapp.com",
+        projectId: "sonuclasses-b19db",
+        storageBucket: "sonuclasses-b19db.firebasestorage.app",
+        messagingSenderId: "166740602272",
+        appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const signupBtn = document.getElementById('signup-btn');
+      const loginBtn = document.getElementById('login-btn');
+      const message = document.getElementById('message');
+
+      signupBtn.addEventListener('click', () => {
+          message.style.color = "blue";
+          message.innerText = "अकाउंट बन रहा है, रुकिए...";
+          createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
+          .then((userCredential) => {
+              message.style.color = "green";
+              message.innerText = "बधाई हो! आपका अकाउंट बन गया। अब आप लॉगिन कर सकते हैं।";
+          })
+          .catch((error) => {
+              message.style.color = "red";
+              message.innerText = "ईमेल सही से डालें या पासवर्ड 6 अक्षरों से बड़ा रखें!";
+          });
+      });
+
+      loginBtn.addEventListener('click', () => {
+          message.style.color = "blue";
+          message.innerText = "लॉगिन हो रहा है...";
+          signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
+          .then((userCredential) => {
+              message.style.color = "green";
+              message.innerText = "लॉगिन सफल! सोनू क्लासेस में आपका स्वागत है।";
+          })
+          .catch((error) => {
+              message.style.color = "red";
+              message.innerText = "गलत ईमेल या पासवर्ड!";
+          });
+      });
+    </script>
 </body>
 </html>
