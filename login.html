@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
@@ -52,39 +52,4 @@
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
 
-      const emailInput = document.getElementById('email');
-      const passwordInput = document.getElementById('password');
-      const signupBtn = document.getElementById('signup-btn');
-      const loginBtn = document.getElementById('login-btn');
-      const message = document.getElementById('message');
-
-      signupBtn.addEventListener('click', () => {
-          message.style.color = "blue";
-          message.innerText = "अकाउंट बन रहा है, रुकिए...";
-          createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
-          .then((userCredential) => {
-              message.style.color = "green";
-              message.innerText = "बधाई हो! आपका अकाउंट बन गया। अब आप लॉगिन कर सकते हैं।";
-          })
-          .catch((error) => {
-              message.style.color = "red";
-              message.innerText = "ईमेल सही से डालें या पासवर्ड 6 अक्षरों से बड़ा रखें!";
-          });
-      });
-
-      loginBtn.addEventListener('click', () => {
-          message.style.color = "blue";
-          message.innerText = "लॉगिन हो रहा है...";
-          signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
-          .then((userCredential) => {
-              message.style.color = "green";
-              message.innerText = "लॉगिन सफल! सोनू क्लासेस में आपका स्वागत है।";
-          })
-          .catch((error) => {
-              message.style.color = "red";
-              message.innerText = "गलत ईमेल या पासवर्ड!";
-          });
-      });
-    </script>
-</body>
-</html>
+      const emailInput 
