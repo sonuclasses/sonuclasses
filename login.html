@@ -25,6 +25,7 @@
         <input type="password" placeholder="पासवर्ड बनाएँ" id="password">
         
         <button id="signup-btn" class="btn-signup">नया अकाउंट बनाएँ</button>
+        
         <button id="login-btn" class="btn-login">लॉगिन करें</button>
         
         <p id="message"></p>
@@ -59,6 +60,9 @@
           .then((userCredential) => {
               message.style.color = "green";
               message.innerText = "अकाउंट बन गया! अब 'लॉगिन करें' बटन दबाएँ।";
+              
+              // यह लाइन बटन को छुपा देगी
+              signupBtn.style.display = "none"; 
           })
           .catch((error) => {
               message.style.color = "red";
@@ -73,7 +77,6 @@
           .then((userCredential) => {
               message.style.color = "green";
               message.innerText = "लॉगिन सफल! होमपेज खुल रहा है...";
-              // 1 सेकंड बाद अपने आप होमपेज पर भेज देगा
               setTimeout(() => {
                   window.location.replace("index.html");
               }, 1000);
