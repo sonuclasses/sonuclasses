@@ -5,23 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>लॉगिन - सोनू क्लासेस</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .login-container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 300px; text-align: center; }
-        h2 { color: #007bff; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
-        button:hover { background-color: #0056b3; }
-        .back-home { margin-top: 15px; display: block; color: #666; text-decoration: none; font-size: 14px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #2E7D32, #1976D2); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; color: #333; }
+        .login-container { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 320px; text-align: center; }
+        h2 { color: #2E7D32; margin-bottom: 20px; font-size: 28px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; outline: none; transition: 0.3s; }
+        input:focus { border-color: #2E7D32; }
+        button { width: 100%; padding: 12px; background-color: #2E7D32; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: bold; margin-top: 10px; }
+        button:hover { background-color: #1b5e20; }
+        .links { margin-top: 20px; font-size: 14px; }
+        .links a { color: #1976D2; text-decoration: none; margin: 0 5px; }
+        .links a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
     <div class="login-container">
         <h2>सोनू क्लासेस</h2>
-        <p>अपना अकाउंट लॉगिन करें</p>
-        <input type="text" placeholder="यूजरनेम या ईमेल" id="username">
+        <p>पढ़ाई की दुनिया में आपका स्वागत है!</p>
+        <input type="text" placeholder="मोबाइल नंबर या ईमेल" id="username">
         <input type="password" placeholder="पासवर्ड" id="password">
-        <button onclick="alert('अभी लॉगिन सिस्टम सेट हो रहा है!')">लॉगिन करें</button>
-        <a href="index.html" class="back-home">← होमपेज पर वापस जाएँ</a>
+        <button onclick="alert('सोनू, अभी लॉगिन सिस्टम कनेक्ट हो रहा है!')">लॉगिन करें</button>
+        <div class="links">
+            <a href="#">पासवर्ड भूल गए?</a> | 
+            <a href="index.html">होमपेज</a>
+        </div>
+        <p style="font-size: 13px; margin-top: 20px; color: #777;">नया अकाउंट बनाएँ (Sign Up)</p>
     </div>
 </body>
 </html>
