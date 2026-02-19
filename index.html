@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sonu Classes - Home</title>
     <style>
-        /* डार्क मोड के लिए वेरिएबल्स */
         :root { 
             --primary-green: #2E7D32; 
             --primary-blue: #1976D2; 
@@ -28,7 +27,6 @@
         h1 { margin: 0; font-size: 20px; }
         
         .header-right { display: flex; align-items: center; gap: 15px; }
-        
         .theme-toggle { background: none; border: none; font-size: 24px; cursor: pointer; color: white; padding: 0; margin: 0; }
 
         .profile-section { position: relative; }
@@ -42,7 +40,6 @@
         .news-ticker span { display: inline-block; animation: marquee 20s linear infinite; padding-left: 100%; }
         @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* --- नया हीरो सेक्शन (Hero Section) --- */
         .hero-section { display: flex; flex-wrap: wrap-reverse; align-items: center; justify-content: center; padding: 30px 20px; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); margin: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         body.dark-mode .hero-section { background: linear-gradient(135deg, #1b5e20 0%, #003300 100%); box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
         
@@ -60,7 +57,6 @@
         .hero-image { flex: 1; min-width: 150px; display: flex; justify-content: center; align-items: center; padding: 10px; }
         .hero-image img { width: 150px; animation: float 3s ease-in-out infinite; }
         @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
-        /* --- हीरो सेक्शन खत्म --- */
 
         .class-btn { display: inline-block; width: 140px; padding: 15px; margin: 10px; background: var(--primary-blue); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .class-btn:active { transform: scale(0.9); background: #1565C0; }
@@ -68,7 +64,6 @@
         .action-btn { display: block; width: 250px; margin: 15px auto; padding: 15px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; }
         .btn-quiz { background: #FFD600; color: #333; }
         
-        /* व्हाट्सएप फ्लोटिंग बटन */
         .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 35px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.3s; }
         .whatsapp-float:active { transform: scale(0.9); }
 
@@ -124,10 +119,11 @@
         <img src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png" alt="Study Illustration">
     </div>
 </div>
+
 <div class="container" style="margin-bottom: 20px;">
     <a href="#" class="class-btn">Class 8</a>
     <a href="#" class="class-btn">Class 9</a>
-    <a href="#" class="class-btn">Class 10</a>
+    <a href="class10.html" class="class-btn">Class 10</a>
 </div>
 
 <button class="action-btn btn-quiz" onclick="showModal('quiz-modal')">📝 आज का क्विज़ खेलें</button>
@@ -197,7 +193,6 @@
     if (user) {
       document.getElementById('main-body').style.display = "block";
       const name = user.displayName || user.email.split('@')[0];
-      // यहाँ नाम अपने आप हीरो बैनर में आ जाएगा
       document.getElementById('student-name').innerText = name;
       if(user.photoURL) document.getElementById('user-photo').src = user.photoURL;
     } else {
@@ -251,8 +246,18 @@
       const btn = document.getElementById('theme-btn');
       if(document.body.classList.contains('dark-mode')) {
           btn.innerText = '☀️';
+          localStorage.setItem('theme', 'dark'); // थीम याद रखने के लिए
       } else {
           btn.innerText = '🌙';
+          localStorage.setItem('theme', 'light');
+      }
+  };
+
+  // पेज लोड होने पर थीम चेक करें
+  window.onload = () => {
+      if(localStorage.getItem('theme') === 'dark') {
+          document.body.classList.add('dark-mode');
+          document.getElementById('theme-btn').innerText = '☀️';
       }
   };
 </script>
