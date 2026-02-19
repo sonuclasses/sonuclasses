@@ -29,12 +29,11 @@
         
         .header-right { display: flex; align-items: center; gap: 15px; }
         
-        /* डार्क मोड बटन */
         .theme-toggle { background: none; border: none; font-size: 24px; cursor: pointer; color: white; padding: 0; margin: 0; }
 
         .profile-section { position: relative; }
         .profile-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid white; cursor: pointer; object-fit: cover; background: #fff; }
-        .dropdown { display: none; position: absolute; right: 0; top: 55px; background: var(--box-bg); box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-radius: 10px; min-width: 160px; z-index: 100; overflow: hidden; border: 1px solid var(--border-color); }
+        .dropdown { display: none; position: absolute; right: 0; top: 55px; background: var(--box-bg); box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-radius: 10px; min-width: 160px; z-index: 100; overflow: hidden; border: 1px solid var(--border-color); text-align: left; }
         .dropdown button { width: 100%; padding: 12px; border: none; background: none; color: var(--text-color); cursor: pointer; font-weight: bold; text-align: left; }
         .dropdown button:hover { background: var(--bg-light); }
         .btn-logout { color: #ff5252 !important; border-top: 1px solid var(--border-color) !important; }
@@ -43,20 +42,38 @@
         .news-ticker span { display: inline-block; animation: marquee 20s linear infinite; padding-left: 100%; }
         @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-        .welcome-section { margin: 40px 20px; }
-        #student-name { font-size: 32px; color: var(--primary-green); font-weight: 900; text-transform: uppercase; margin-top: 10px; }
-        body.dark-mode #student-name { color: #81C784; }
+        /* --- नया हीरो सेक्शन (Hero Section) --- */
+        .hero-section { display: flex; flex-wrap: wrap-reverse; align-items: center; justify-content: center; padding: 30px 20px; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); margin: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        body.dark-mode .hero-section { background: linear-gradient(135deg, #1b5e20 0%, #003300 100%); box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
         
-        .class-btn { display: inline-block; width: 150px; padding: 15px; margin: 10px; background: var(--primary-blue); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .hero-text { flex: 1; min-width: 250px; text-align: left; padding: 10px; }
+        .hero-text p.welcome-msg { font-size: 16px; font-weight: bold; color: #555; margin-bottom: 5px; }
+        body.dark-mode .hero-text p.welcome-msg { color: #ccc; }
+        .hero-text h2 { font-size: 28px; margin-top: 0; color: var(--primary-blue); line-height: 1.3; }
+        body.dark-mode .hero-text h2 { color: #64B5F6; }
+        .hero-text p.sub-text { font-size: 15px; color: #444; line-height: 1.5; margin-bottom: 15px; }
+        body.dark-mode .hero-text p.sub-text { color: #ddd; }
+        
+        .hero-btn { background: var(--primary-green); color: white; padding: 12px 25px; border: none; border-radius: 30px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: 0.3s; }
+        body.dark-mode .hero-btn { background: #4CAF50; color: #000; }
+        
+        .hero-image { flex: 1; min-width: 150px; display: flex; justify-content: center; align-items: center; padding: 10px; }
+        .hero-image img { width: 150px; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+        /* --- हीरो सेक्शन खत्म --- */
+
+        .class-btn { display: inline-block; width: 140px; padding: 15px; margin: 10px; background: var(--primary-blue); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .class-btn:active { transform: scale(0.9); background: #1565C0; }
 
         .action-btn { display: block; width: 250px; margin: 15px auto; padding: 15px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; }
         .btn-quiz { background: #FFD600; color: #333; }
-        .btn-notes { background: #4CAF50; color: white; }
+        
+        /* व्हाट्सएप फ्लोटिंग बटन */
+        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 35px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.3s; }
+        .whatsapp-float:active { transform: scale(0.9); }
 
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; }
         .modal-content { background: var(--box-bg); color: var(--text-color); padding: 25px; border-radius: 20px; width: 90%; max-width: 400px; max-height: 80vh; overflow-y: auto; position: relative; text-align: left; border: 1px solid var(--border-color); }
-        
         .close-btn { background: #333; color: white; border: none; padding: 12px 20px; border-radius: 5px; margin-top: 20px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; text-align: center; }
         body.dark-mode .close-btn { background: #555; }
 
@@ -64,7 +81,6 @@
         .q-block h4 { margin-top: 0; font-size: 16px; }
         .option-btn { width: 100%; padding: 10px; margin: 5px 0; border: 2px solid var(--border-color); border-radius: 8px; background: var(--box-bg); color: var(--text-color); cursor: pointer; font-weight: bold; transition: 0.3s; text-align: left; }
         .option-btn:disabled { opacity: 0.8; cursor: not-allowed; }
-        
         .correct { background-color: #4CAF50 !important; color: white !important; border-color: #2E7D32 !important; }
         .wrong { background-color: #F44336 !important; color: white !important; border-color: #B71C1C !important; }
 
@@ -72,10 +88,6 @@
         .notes-card h3 { margin: 0 0 10px 0; color: var(--primary-green); font-size: 18px; }
         body.dark-mode .notes-card h3 { color: #81C784; }
         .notes-card p { margin: 0; font-size: 14px; line-height: 1.5; }
-
-        /* व्हाट्सएप फ्लोटिंग बटन */
-        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 35px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.3s; }
-        .whatsapp-float:active { transform: scale(0.9); }
 
         .show { display: flex !important; }
     </style>
@@ -86,7 +98,6 @@
     <h1>Sonu Classes</h1>
     <div class="header-right">
         <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">🌙</button>
-        
         <div class="profile-section">
             <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" id="user-photo" class="profile-img" onclick="toggleDropdown()">
             <div id="dropdown-menu" class="dropdown">
@@ -99,21 +110,26 @@
 </header>
 
 <div class="news-ticker" onclick="showModal('news-modal')">
-    <span>📢 आज का ताज़ा न्यूज़: 10वीं बोर्ड परीक्षा 2027 के लिए विशेष नोट्स... IAS की तैयारी के लिए महत्वपूर्ण सामान्य ज्ञान... पूरा न्यूज़ पढ़ने के लिए यहाँ क्लिक करें! 📢</span>
+    <span>📢 आज का ताज़ा न्यूज़: 10वीं बोर्ड परीक्षा 2027 के लिए विशेष नोट्स... पूरा न्यूज़ पढ़ने के लिए यहाँ क्लिक करें! 📢</span>
 </div>
 
-<div class="welcome-section">
-    <p style="font-size: 18px; margin-bottom: 0;">आपका स्वागत है,</p>
-    <div id="student-name">लोडिंग...</div>
+<div class="hero-section">
+    <div class="hero-text">
+        <p class="welcome-msg">आपका स्वागत है, <span id="student-name" style="color: var(--primary-green);">लोडिंग...</span></p>
+        <h2>Welcome to <br><span style="color: var(--primary-blue);">Sonu Classes</span></h2>
+        <p class="sub-text">10वीं बोर्ड परीक्षा 2027 और IAS की तैयारी के लिए फ्री नोट्स एवं सर्वश्रेष्ठ क्विज़।</p>
+        <button class="hero-btn" onclick="showModal('notes-modal')">📚 पढ़ना शुरू करें</button>
+    </div>
+    <div class="hero-image">
+        <img src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png" alt="Study Illustration">
+    </div>
 </div>
-
 <div class="container" style="margin-bottom: 20px;">
     <a href="#" class="class-btn">Class 8</a>
     <a href="#" class="class-btn">Class 9</a>
     <a href="#" class="class-btn">Class 10</a>
 </div>
 
-<button class="action-btn btn-notes" onclick="showModal('notes-modal')">📚 10वीं के स्टडी नोट्स</button>
 <button class="action-btn btn-quiz" onclick="showModal('quiz-modal')">📝 आज का क्विज़ खेलें</button>
 
 <a href="https://wa.me/918521057039?text=नमस्ते सोनू सर, मुझे आपकी वेबसाइट से मदद चाहिए।" target="_blank" class="whatsapp-float">
@@ -135,20 +151,14 @@
 <div id="notes-modal" class="modal">
     <div class="modal-content">
         <h2 style="color: #4CAF50; text-align: center; margin-top: 0;">📚 स्टडी नोट्स</h2>
-        
         <div class="notes-card">
             <h3>📜 इतिहास (History)</h3>
             <p><b>यूरोप में राष्ट्रवाद का उदय:</b> 1789 की फ्रांसीसी क्रांति से राष्ट्रवाद की पहली स्पष्ट अभिव्यक्ति हुई। जलियांवाला बाग हत्याकांड 13 अप्रैल 1919 को हुआ था।</p>
         </div>
-
         <div class="notes-card">
             <h3>📐 गणित (Mathematics)</h3>
-            <p><b>महत्वपूर्ण सूत्र:</b><br>
-            - वृत्त का क्षेत्रफल = πr²<br>
-            - बेलन का आयतन = πr²h<br>
-            - पाइथागोरस प्रमेय: (कर्ण)² = (लंब)² + (आधार)²</p>
+            <p><b>महत्वपूर्ण सूत्र:</b><br>- वृत्त का क्षेत्रफल = πr²<br>- बेलन का आयतन = πr²h<br>- पाइथागोरस प्रमेय: (कर्ण)² = (लंब)² + (आधार)²</p>
         </div>
-
         <button class="close-btn" onclick="hideModal('notes-modal')">IT'S (बाहर निकलें)</button>
     </div>
 </div>
@@ -156,7 +166,6 @@
 <div id="quiz-modal" class="modal">
     <div class="modal-content" id="quiz-container">
         <h2 style="color: #E65100; text-align: center; margin-top: 0;">आज का क्विज़</h2>
-        
         <div class="q-block" style="border-bottom: none;">
             <h4>1. जलियांवाला बाग हत्याकांड किस वर्ष हुआ था?</h4>
             <button class="option-btn" onclick="checkAnswer(this, false)">A. 1917</button>
@@ -164,7 +173,6 @@
             <button class="option-btn" onclick="checkAnswer(this, false)">C. 1920</button>
             <button class="option-btn" onclick="checkAnswer(this, false)">D. 1922</button>
         </div>
-
         <button class="close-btn" onclick="hideModal('quiz-modal')">IT'S (बाहर निकलें)</button>
     </div>
 </div>
@@ -189,6 +197,7 @@
     if (user) {
       document.getElementById('main-body').style.display = "block";
       const name = user.displayName || user.email.split('@')[0];
+      // यहाँ नाम अपने आप हीरो बैनर में आ जाएगा
       document.getElementById('student-name').innerText = name;
       if(user.photoURL) document.getElementById('user-photo').src = user.photoURL;
     } else {
@@ -237,7 +246,6 @@
     }
   };
 
-  // डार्क मोड बदलने का फंक्शन
   window.toggleTheme = () => {
       document.body.classList.toggle('dark-mode');
       const btn = document.getElementById('theme-btn');
