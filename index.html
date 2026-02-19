@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Sonu Classes - 10वीं बोर्ड परीक्षा 2027 और IAS की तैयारी के लिए फ्री PDF नोट्स, VVI प्रश्न और क्विज़। Founder: Sonu Kumar">
+    <meta name="keywords" content="Sonu Classes, class 10 notes in hindi, Bihar Board 10th notes 2027, free online test, IAS preparation, Sonu Kumar Maheshkhut, Bihar board toppers notes">
+    <meta name="author" content="Sonu Kumar">
+    <meta name="robots" content="index, follow">
     <title>Sonu Classes - Home</title>
     <style>
         :root { --primary-green: #2E7D32; --primary-blue: #1976D2; --bg-light: #f4f4f9; --text-color: #333; --box-bg: white; --border-color: #ddd; }
@@ -71,6 +76,9 @@
         .leaderboard-list li:last-child { border-bottom: none; }
 
         .show { display: flex !important; }
+        
+        footer { margin-top: 30px; padding: 15px; background: var(--box-bg); border-top: 1px solid var(--border-color); font-size: 14px; color: #666; }
+        body.dark-mode footer { color: #aaa; }
     </style>
 </head>
 <body style="display: none;" id="main-body">
@@ -160,6 +168,11 @@
     </div>
 </div>
 
+<footer>
+    <strong>Owner & Founder: Sonu Kumar</strong><br>
+    Mission: Education for All | Target: IAS
+</footer>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
@@ -181,7 +194,7 @@
 
   let currentStudentName = "Student";
   let myScore = 0;
-  let currentCorrectAnswer = "A"; // बाय डिफॉल्ट
+  let currentCorrectAnswer = "A"; 
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -207,7 +220,6 @@
     }
   };
 
-  // --- एडमिन से न्यूज़ लाना ---
   const newsRef = ref(db, 'appData/news');
   onValue(newsRef, (snapshot) => {
       const data = snapshot.val();
@@ -217,7 +229,6 @@
       }
   });
 
-  // --- एडमिन से क्विज़ लाना ---
   const quizRef = ref(db, 'appData/quiz');
   onValue(quizRef, (snapshot) => {
       const data = snapshot.val();
@@ -234,17 +245,15 @@
           btnC.innerText = "C. " + data.optionC;
           btnD.innerText = "D. " + data.optionD;
 
-          // हर बार नया सवाल आने पर बटन को ठीक करना
           [btnA, btnB, btnC, btnD].forEach(b => {
               b.className = "option-btn";
               b.disabled = false;
           });
 
-          currentCorrectAnswer = data.answer; // एडमिन द्वारा सेट किया गया सही जवाब
+          currentCorrectAnswer = data.answer; 
       }
   });
 
-  // --- सही या गलत जवाब चेक करना ---
   window.checkAnswer = (btn, selectedOption) => {
     const questionBlock = btn.parentElement; 
     if(selectedOption === currentCorrectAnswer) {
@@ -252,7 +261,6 @@
       myScore += 10;
     } else {
       btn.classList.add('wrong');
-      // सही जवाब को हरा रंग दिखाना
       if(currentCorrectAnswer === 'A') document.getElementById('btn-opt-a').classList.add('correct');
       if(currentCorrectAnswer === 'B') document.getElementById('btn-opt-b').classList.add('correct');
       if(currentCorrectAnswer === 'C') document.getElementById('btn-opt-c').classList.add('correct');
@@ -337,3 +345,4 @@
 </script>
 </body>
 </html>
+         
