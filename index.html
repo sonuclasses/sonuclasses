@@ -91,7 +91,7 @@
 </header>
 
 <div class="news-ticker" onclick="showModal('news-modal')">
-    <span>📢 आज का ताज़ा न्यूज़: 10वीं बोर्ड परीक्षा 2027 के लिए विशेष नोट्स... पूरा न्यूज़ पढ़ने के लिए यहाँ क्लिक करें! 📢</span>
+    <span id="news-text-display">📢 आज का ताज़ा न्यूज़: बोर्ड परीक्षा 2027 के लिए विशेष नोट्स। 📢</span>
 </div>
 
 <div class="hero-section">
@@ -132,9 +132,7 @@
 <div id="news-modal" class="modal">
     <div class="modal-content">
         <h2 style="color: var(--primary-blue); text-align: center;">आज की बड़ी खबरें</h2>
-        <ul style="line-height: 1.8; padding-left: 20px; font-size: 15px;">
-            <li><b>बोर्ड परीक्षा 2027:</b> 10वीं कक्षा के छात्रों के लिए गणित और इतिहास की नियमित प्रैक्टिस शुरू करने का सही समय आ गया है।</li>
-        </ul>
+        <p id="news-modal-text" style="line-height: 1.8; font-size: 15px;">यहाँ आपकी न्यूज़ दिखेगी...</p>
         <button class="close-btn" onclick="hideModal('news-modal')">IT'S (बाहर निकलें)</button>
     </div>
 </div>
@@ -151,11 +149,11 @@
     <div class="modal-content" id="quiz-container">
         <h2 style="color: #E65100; text-align: center; margin-top: 0;">आज का क्विज़</h2>
         <div class="q-block" style="border-bottom: none;">
-            <h4>1. जलियांवाला बाग हत्याकांड किस वर्ष हुआ था?</h4>
-            <button class="option-btn" onclick="checkAnswer(this, false)">A. 1917</button>
-            <button class="option-btn" onclick="checkAnswer(this, true)">B. 1919</button>
-            <button class="option-btn" onclick="checkAnswer(this, false)">C. 1920</button>
-            <button class="option-btn" onclick="checkAnswer(this, false)">D. 1922</button>
+            <h4 id="quiz-q">प्रश्न लोड हो रहा है...</h4>
+            <button class="option-btn" id="btn-opt-a" onclick="checkAnswer(this, 'A')">A.</button>
+            <button class="option-btn" id="btn-opt-b" onclick="checkAnswer(this, 'B')">B.</button>
+            <button class="option-btn" id="btn-opt-c" onclick="checkAnswer(this, 'C')">C.</button>
+            <button class="option-btn" id="btn-opt-d" onclick="checkAnswer(this, 'D')">D.</button>
         </div>
         <button class="submit-quiz-btn" onclick="submitQuiz()">✅ स्कोर सबमिट करें</button>
         <button class="close-btn" onclick="hideModal('quiz-modal')">IT'S (बाहर निकलें)</button>
@@ -163,7 +161,6 @@
 </div>
 
 <script type="module">
-  // फायरबेस डेटाबेस को यहाँ जोड़ा गया है
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
   import { getDatabase, ref, set, onValue, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
@@ -171,7 +168,7 @@
   const firebaseConfig = {
     apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
     authDomain: "sonuclasses-b19db.firebaseapp.com",
-    databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com", // आपका नया डेटाबेस लिंक
+    databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com",
     projectId: "sonuclasses-b19db",
     storageBucket: "sonuclasses-b19db.firebasestorage.app",
     messagingSenderId: "166740602272",
@@ -180,10 +177,11 @@
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  const db = getDatabase(app); // डेटाबेस चालू
+  const db = getDatabase(app);
 
   let currentStudentName = "Student";
-  let myScore = 0; // क्विज़ का स्कोर
+  let myScore = 0;
+  let currentCorrectAnswer = "A"; // बाय डिफॉल्ट
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -199,7 +197,7 @@
   window.toggleDropdown = () => document.getElementById('dropdown-menu').classList.toggle('show');
   window.showModal = (id) => {
       document.getElementById(id).classList.add('show');
-      if(id === 'quiz-modal') myScore = 0; // नया क्विज़ शुरू करने पर स्कोर 0
+      if(id === 'quiz-modal') myScore = 0;
   };
   window.hideModal = (id) => document.getElementById(id).classList.remove('show');
 
@@ -209,21 +207,60 @@
     }
   };
 
-  window.checkAnswer = (btn, isCorrect) => {
+  // --- एडमिन से न्यूज़ लाना ---
+  const newsRef = ref(db, 'appData/news');
+  onValue(newsRef, (snapshot) => {
+      const data = snapshot.val();
+      if(data) {
+          document.getElementById('news-text-display').innerText = "📢 आज का ताज़ा न्यूज़: " + data + " 📢";
+          document.getElementById('news-modal-text').innerText = data;
+      }
+  });
+
+  // --- एडमिन से क्विज़ लाना ---
+  const quizRef = ref(db, 'appData/quiz');
+  onValue(quizRef, (snapshot) => {
+      const data = snapshot.val();
+      if(data) {
+          document.getElementById('quiz-q').innerText = data.question;
+          
+          const btnA = document.getElementById('btn-opt-a');
+          const btnB = document.getElementById('btn-opt-b');
+          const btnC = document.getElementById('btn-opt-c');
+          const btnD = document.getElementById('btn-opt-d');
+
+          btnA.innerText = "A. " + data.optionA;
+          btnB.innerText = "B. " + data.optionB;
+          btnC.innerText = "C. " + data.optionC;
+          btnD.innerText = "D. " + data.optionD;
+
+          // हर बार नया सवाल आने पर बटन को ठीक करना
+          [btnA, btnB, btnC, btnD].forEach(b => {
+              b.className = "option-btn";
+              b.disabled = false;
+          });
+
+          currentCorrectAnswer = data.answer; // एडमिन द्वारा सेट किया गया सही जवाब
+      }
+  });
+
+  // --- सही या गलत जवाब चेक करना ---
+  window.checkAnswer = (btn, selectedOption) => {
     const questionBlock = btn.parentElement; 
-    if(isCorrect) {
+    if(selectedOption === currentCorrectAnswer) {
       btn.classList.add('correct');
-      myScore += 10; // सही जवाब पर 10 नंबर
+      myScore += 10;
     } else {
       btn.classList.add('wrong');
-      questionBlock.querySelectorAll('.option-btn').forEach(b => { 
-        if(b.getAttribute('onclick').includes('true')) b.classList.add('correct'); 
-      });
+      // सही जवाब को हरा रंग दिखाना
+      if(currentCorrectAnswer === 'A') document.getElementById('btn-opt-a').classList.add('correct');
+      if(currentCorrectAnswer === 'B') document.getElementById('btn-opt-b').classList.add('correct');
+      if(currentCorrectAnswer === 'C') document.getElementById('btn-opt-c').classList.add('correct');
+      if(currentCorrectAnswer === 'D') document.getElementById('btn-opt-d').classList.add('correct');
     }
     questionBlock.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
   };
 
-  // डेटाबेस में स्कोर सेव करने का फंक्शन
   window.submitQuiz = () => {
       const user = auth.currentUser;
       if(user) {
@@ -234,23 +271,22 @@
           }).then(() => {
               alert("🎉 आपका स्कोर लीडरबोर्ड में सेव हो गया है!");
               hideModal('quiz-modal');
-              showModal('leaderboard-modal'); // स्कोर सेव होते ही लीडरबोर्ड दिखाओ
+              showModal('leaderboard-modal');
           }).catch((error) => {
               alert("स्कोर सेव करने में गलती हुई: " + error.message);
           });
       }
   };
 
-  // डेटाबेस से टॉप स्कोर निकालकर लीडरबोर्ड में दिखाना
   const topScoresRef = query(ref(db, 'leaderboard'), orderByChild('score'), limitToLast(10));
   onValue(topScoresRef, (snapshot) => {
       const list = document.getElementById('leaderboard-list');
-      list.innerHTML = ''; // पुराना लिस्ट खाली करें
+      list.innerHTML = ''; 
       let scores = [];
       snapshot.forEach((childSnapshot) => {
           scores.push(childSnapshot.val());
       });
-      scores.reverse(); // सबसे ज़्यादा नंबर वाला सबसे ऊपर
+      scores.reverse(); 
       
       if(scores.length === 0) {
           list.innerHTML = '<li style="justify-content: center; color: gray;">अभी तक किसी ने क्विज़ नहीं खेला है!</li>';
