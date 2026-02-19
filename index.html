@@ -5,18 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sonu Classes - Home</title>
     <style>
-        :root { --primary-green: #2E7D32; --primary-blue: #1976D2; --bg-light: #f4f4f9; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); margin: 0; padding: 0; text-align: center; }
+        /* डार्क मोड के लिए वेरिएबल्स */
+        :root { 
+            --primary-green: #2E7D32; 
+            --primary-blue: #1976D2; 
+            --bg-light: #f4f4f9; 
+            --text-color: #333;
+            --box-bg: white;
+            --border-color: #ddd;
+        }
+        
+        body.dark-mode {
+            --bg-light: #121212;
+            --text-color: #f1f1f1;
+            --box-bg: #1e1e1e;
+            --border-color: #444;
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); color: var(--text-color); margin: 0; padding: 0; text-align: center; transition: background-color 0.3s, color 0.3s; }
         
         header { background-color: var(--primary-green); color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         h1 { margin: 0; font-size: 20px; }
         
+        .header-right { display: flex; align-items: center; gap: 15px; }
+        
+        /* डार्क मोड बटन */
+        .theme-toggle { background: none; border: none; font-size: 24px; cursor: pointer; color: white; padding: 0; margin: 0; }
+
         .profile-section { position: relative; }
         .profile-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid white; cursor: pointer; object-fit: cover; background: #fff; }
-        .dropdown { display: none; position: absolute; right: 0; top: 55px; background: white; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-radius: 10px; min-width: 160px; z-index: 100; overflow: hidden; }
-        .dropdown button { width: 100%; padding: 12px; border: none; background: none; cursor: pointer; font-weight: bold; text-align: left; }
-        .dropdown button:hover { background: #f0f0f0; }
-        .btn-logout { color: red; border-top: 1px solid #eee !important; }
+        .dropdown { display: none; position: absolute; right: 0; top: 55px; background: var(--box-bg); box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-radius: 10px; min-width: 160px; z-index: 100; overflow: hidden; border: 1px solid var(--border-color); }
+        .dropdown button { width: 100%; padding: 12px; border: none; background: none; color: var(--text-color); cursor: pointer; font-weight: bold; text-align: left; }
+        .dropdown button:hover { background: var(--bg-light); }
+        .btn-logout { color: #ff5252 !important; border-top: 1px solid var(--border-color) !important; }
 
         .news-ticker { background-color: var(--primary-blue); color: white; padding: 10px; overflow: hidden; white-space: nowrap; cursor: pointer; font-weight: bold; }
         .news-ticker span { display: inline-block; animation: marquee 20s linear infinite; padding-left: 100%; }
@@ -24,6 +45,7 @@
 
         .welcome-section { margin: 40px 20px; }
         #student-name { font-size: 32px; color: var(--primary-green); font-weight: 900; text-transform: uppercase; margin-top: 10px; }
+        body.dark-mode #student-name { color: #81C784; }
         
         .class-btn { display: inline-block; width: 150px; padding: 15px; margin: 10px; background: var(--primary-blue); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .class-btn:active { transform: scale(0.9); background: #1565C0; }
@@ -32,22 +54,28 @@
         .btn-quiz { background: #FFD600; color: #333; }
         .btn-notes { background: #4CAF50; color: white; }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-content { background: white; padding: 25px; border-radius: 20px; width: 90%; max-width: 400px; max-height: 80vh; overflow-y: auto; position: relative; text-align: left; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: var(--box-bg); color: var(--text-color); padding: 25px; border-radius: 20px; width: 90%; max-width: 400px; max-height: 80vh; overflow-y: auto; position: relative; text-align: left; border: 1px solid var(--border-color); }
         
         .close-btn { background: #333; color: white; border: none; padding: 12px 20px; border-radius: 5px; margin-top: 20px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; text-align: center; }
+        body.dark-mode .close-btn { background: #555; }
 
-        .q-block { margin-bottom: 25px; border-bottom: 2px dashed #ddd; padding-bottom: 15px; }
-        .q-block h4 { margin-top: 0; color: #333; font-size: 16px; }
-        .option-btn { width: 100%; padding: 10px; margin: 5px 0; border: 2px solid #ddd; border-radius: 8px; background: white; cursor: pointer; font-weight: bold; transition: 0.3s; text-align: left; }
+        .q-block { margin-bottom: 25px; border-bottom: 2px dashed var(--border-color); padding-bottom: 15px; }
+        .q-block h4 { margin-top: 0; font-size: 16px; }
+        .option-btn { width: 100%; padding: 10px; margin: 5px 0; border: 2px solid var(--border-color); border-radius: 8px; background: var(--box-bg); color: var(--text-color); cursor: pointer; font-weight: bold; transition: 0.3s; text-align: left; }
         .option-btn:disabled { opacity: 0.8; cursor: not-allowed; }
         
-        .correct { background-color: #4CAF50 !important; color: white; border-color: #2E7D32 !important; }
-        .wrong { background-color: #F44336 !important; color: white; border-color: #B71C1C !important; }
+        .correct { background-color: #4CAF50 !important; color: white !important; border-color: #2E7D32 !important; }
+        .wrong { background-color: #F44336 !important; color: white !important; border-color: #B71C1C !important; }
 
-        .notes-card { background: #f9f9f9; padding: 15px; border-left: 5px solid var(--primary-green); margin-bottom: 15px; border-radius: 5px; }
+        .notes-card { background: var(--bg-light); padding: 15px; border-left: 5px solid var(--primary-green); margin-bottom: 15px; border-radius: 5px; border: 1px solid var(--border-color); }
         .notes-card h3 { margin: 0 0 10px 0; color: var(--primary-green); font-size: 18px; }
-        .notes-card p { margin: 0; font-size: 14px; color: #555; line-height: 1.5; }
+        body.dark-mode .notes-card h3 { color: #81C784; }
+        .notes-card p { margin: 0; font-size: 14px; line-height: 1.5; }
+
+        /* व्हाट्सएप फ्लोटिंग बटन */
+        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 35px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.3s; }
+        .whatsapp-float:active { transform: scale(0.9); }
 
         .show { display: flex !important; }
     </style>
@@ -56,12 +84,16 @@
 
 <header>
     <h1>Sonu Classes</h1>
-    <div class="profile-section">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" id="user-photo" class="profile-img" onclick="toggleDropdown()">
-        <div id="dropdown-menu" class="dropdown">
-            <button onclick="document.getElementById('photo-input').click()">📷 फोटो बदलें</button>
-            <button onclick="confirmLogout()" class="btn-logout">🚪 लॉगआउट</button>
-            <input type="file" id="photo-input" style="display:none" accept="image/*" onchange="changePhoto(event)">
+    <div class="header-right">
+        <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">🌙</button>
+        
+        <div class="profile-section">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" id="user-photo" class="profile-img" onclick="toggleDropdown()">
+            <div id="dropdown-menu" class="dropdown">
+                <button onclick="document.getElementById('photo-input').click()">📷 फोटो बदलें</button>
+                <button onclick="confirmLogout()" class="btn-logout">🚪 लॉगआउट</button>
+                <input type="file" id="photo-input" style="display:none" accept="image/*" onchange="changePhoto(event)">
+            </div>
         </div>
     </div>
 </header>
@@ -84,6 +116,10 @@
 <button class="action-btn btn-notes" onclick="showModal('notes-modal')">📚 10वीं के स्टडी नोट्स</button>
 <button class="action-btn btn-quiz" onclick="showModal('quiz-modal')">📝 आज का क्विज़ खेलें</button>
 
+<a href="https://wa.me/918521057039?text=नमस्ते सोनू सर, मुझे आपकी वेबसाइट से मदद चाहिए।" target="_blank" class="whatsapp-float">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 35px; height: 35px;">
+</a>
+
 <div id="news-modal" class="modal">
     <div class="modal-content">
         <h2 style="color: var(--primary-blue); text-align: center;">आज की बड़ी खबरें</h2>
@@ -98,7 +134,7 @@
 
 <div id="notes-modal" class="modal">
     <div class="modal-content">
-        <h2 style="color: var(--primary-green); text-align: center; margin-top: 0;">📚 स्टडी नोट्स</h2>
+        <h2 style="color: #4CAF50; text-align: center; margin-top: 0;">📚 स्टडी नोट्स</h2>
         
         <div class="notes-card">
             <h3>📜 इतिहास (History)</h3>
@@ -113,11 +149,6 @@
             - पाइथागोरस प्रमेय: (कर्ण)² = (लंब)² + (आधार)²</p>
         </div>
 
-        <div class="notes-card">
-            <h3>🌍 सामान्य ज्ञान (IAS / GK)</h3>
-            <p>भारत का संविधान 2 साल 11 महीने 18 दिन में बनकर तैयार हुआ था। डॉ. राजेन्द्र प्रसाद भारत के प्रथम राष्ट्रपति थे।</p>
-        </div>
-
         <button class="close-btn" onclick="hideModal('notes-modal')">IT'S (बाहर निकलें)</button>
     </div>
 </div>
@@ -126,20 +157,12 @@
     <div class="modal-content" id="quiz-container">
         <h2 style="color: #E65100; text-align: center; margin-top: 0;">आज का क्विज़</h2>
         
-        <div class="q-block">
+        <div class="q-block" style="border-bottom: none;">
             <h4>1. जलियांवाला बाग हत्याकांड किस वर्ष हुआ था?</h4>
             <button class="option-btn" onclick="checkAnswer(this, false)">A. 1917</button>
             <button class="option-btn" onclick="checkAnswer(this, true)">B. 1919</button>
             <button class="option-btn" onclick="checkAnswer(this, false)">C. 1920</button>
             <button class="option-btn" onclick="checkAnswer(this, false)">D. 1922</button>
-        </div>
-        
-        <div class="q-block" style="border-bottom: none;">
-            <h4>2. वृत्त के क्षेत्रफल का सही सूत्र क्या है?</h4>
-            <button class="option-btn" onclick="checkAnswer(this, true)">A. πr²</button>
-            <button class="option-btn" onclick="checkAnswer(this, false)">B. 2πr</button>
-            <button class="option-btn" onclick="checkAnswer(this, false)">C. π²r</button>
-            <button class="option-btn" onclick="checkAnswer(this, false)">D. 2πr²</button>
         </div>
 
         <button class="close-btn" onclick="hideModal('quiz-modal')">IT'S (बाहर निकलें)</button>
@@ -213,7 +236,17 @@
       document.getElementById('dropdown-menu').classList.remove('show');
     }
   };
+
+  // डार्क मोड बदलने का फंक्शन
+  window.toggleTheme = () => {
+      document.body.classList.toggle('dark-mode');
+      const btn = document.getElementById('theme-btn');
+      if(document.body.classList.contains('dark-mode')) {
+          btn.innerText = '☀️';
+      } else {
+          btn.innerText = '🌙';
+      }
+  };
 </script>
 </body>
 </html>
-
