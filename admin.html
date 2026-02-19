@@ -26,6 +26,19 @@
         <button onclick="updateNews()" style="background-color: #1976D2;">✅ न्यूज़ अपडेट करें</button>
     </div>
 
+    <div class="admin-box" style="border-top-color: #4CAF50;">
+        <h2 style="color: #4CAF50;">📚 स्टडी नोट्स (PDF) के लिंक डालें</h2>
+        <p style="font-size: 12px; color: gray; margin-top: 0;">यहाँ अपने Google Drive के PDF का लिंक पेस्ट करें</p>
+        
+        <label>गणित (Math) PDF का लिंक:</label>
+        <input type="text" id="math-pdf" placeholder="यहाँ लिंक पेस्ट करें...">
+        
+        <label>इतिहास (History) PDF का लिंक:</label>
+        <input type="text" id="history-pdf" placeholder="यहाँ लिंक पेस्ट करें...">
+        
+        <button onclick="updatePDFs()" style="background-color: #4CAF50;">✅ PDF लिंक अपडेट करें</button>
+    </div>
+
     <div class="admin-box">
         <h2>📝 आज का नया क्विज़ डालें</h2>
         <label>प्रश्न (Question):</label>
@@ -48,7 +61,6 @@
     </div>
 
 <script type="module">
-  // फायरबेस डेटाबेस को यहाँ जोड़ा गया है
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
   import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
@@ -68,10 +80,21 @@
   window.updateNews = () => {
       const news = document.getElementById('news-text').value;
       if(news.trim() === "") { alert("कृपया न्यूज़ बॉक्स में कुछ लिखें!"); return; }
-      
-      // यह न्यूज़ को फायरबेस में सेव करेगा
       set(ref(db, 'appData/news'), news)
       .then(() => alert("🎉 बहुत बढ़िया! नई न्यूज़ वेबसाइट पर सेव हो गई है!"))
+      .catch((error) => alert("एरर: " + error.message));
+  };
+
+  // नया PDF अपडेट करने का फंक्शन
+  window.updatePDFs = () => {
+      const mathLink = document.getElementById('math-pdf').value;
+      const historyLink = document.getElementById('history-pdf').value;
+      
+      set(ref(db, 'appData/pdfs'), {
+          math: mathLink,
+          history: historyLink
+      })
+      .then(() => alert("🎉 शानदार! PDF के नए लिंक वेबसाइट पर लाइव हो गए हैं!"))
       .catch((error) => alert("एरर: " + error.message));
   };
 
@@ -87,7 +110,6 @@
           alert("कृपया प्रश्न और सभी 4 विकल्प भरें!"); return;
       }
 
-      // यह क्विज़ को फायरबेस में सेव करेगा
       set(ref(db, 'appData/quiz'), {
           question: q, optionA: a, optionB: b, optionC: c, optionD: d, answer: ans
       })
