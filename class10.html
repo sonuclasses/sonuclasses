@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 10 - Notes & PDF</title>
+    <style>
+        :root { --primary-green: #2E7D32; --primary-blue: #1976D2; --bg-light: #f4f4f9; --text-color: #333; --box-bg: white; --border-color: #ddd; }
+        body.dark-mode { --bg-light: #121212; --text-color: #f1f1f1; --box-bg: #1e1e1e; --border-color: #444; }
+        
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); color: var(--text-color); margin: 0; padding: 0; transition: 0.3s; }
+        
+        header { background-color: var(--primary-blue); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        h1 { margin: 0; font-size: 20px; }
+        
+        .back-btn { color: white; text-decoration: none; font-weight: bold; font-size: 16px; background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; }
+        
+        .container { padding: 20px; max-width: 800px; margin: auto; }
+        
+        .subject-card { background: var(--box-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); border-left: 6px solid var(--primary-green); }
+        .subject-card h2 { margin-top: 0; color: var(--primary-green); display: flex; align-items: center; gap: 10px; }
+        body.dark-mode .subject-card h2 { color: #81C784; }
+        
+        .notes-text { font-size: 15px; line-height: 1.6; margin-bottom: 20px; }
+        
+        .download-btn { display: inline-block; background-color: #E53935; color: white; padding: 12px 20px; text-decoration: none; font-weight: bold; border-radius: 8px; transition: 0.3s; box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
+        .download-btn:active { transform: scale(0.95); }
+        .download-btn img { width: 18px; vertical-align: middle; margin-right: 8px; }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="back-btn">⬅ होमपेज</a>
+    <h1>Class 10 - Study Material</h1>
+    <div style="width: 70px;"></div> </header>
+
+<div class="container">
+    <p style="text-align: center; font-size: 18px; font-weight: bold;">अपनी पढ़ाई के लिए विषय चुनें:</p>
+
+    <div class="subject-card">
+        <h2>📐 गणित (Mathematics)</h2>
+        <div class="notes-text">
+            <b>अध्याय 1: वास्तविक संख्याएँ</b><br>
+            यहाँ आपको 10वीं बोर्ड के लिए गणित के सभी महत्वपूर्ण सूत्र (Formulas), प्रमेय (Theorems) और हल किए गए प्रश्न मिलेंगे। रोज़ाना प्रैक्टिस करने से गणित में 100/100 लाना आसान है।
+        </div>
+        <a href="#" class="download-btn" onclick="alert('सोनू, यहाँ हम आपका असली Math PDF लिंक लगाएंगे!')">
+            📥 Math PDF डाउनलोड करें
+        </a>
+    </div>
+
+    <div class="subject-card" style="border-left-color: #F57C00;">
+        <h2 style="color: #F57C00;">📜 इतिहास (History)</h2>
+        <div class="notes-text">
+            <b>अध्याय: यूरोप में राष्ट्रवाद का उदय</b><br>
+            इतिहास की तारीखें और महत्वपूर्ण घटनाएँ याद रखने के लिए हमने खास शॉर्ट-नोट्स तैयार किए हैं। बोर्ड परीक्षा और IAS जैसी प्रतियोगी परीक्षाओं के लिए यह बहुत ज़रूरी है।
+        </div>
+        <a href="#" class="download-btn" onclick="alert('सोनू, यहाँ हम आपका असली History PDF लिंक लगाएंगे!')">
+            📥 History PDF डाउनलोड करें
+        </a>
+    </div>
+
+</div>
+
+<script>
+    // यह चेक करेगा कि होमपेज पर डार्क मोड चालू था या नहीं
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+</script>
+
+</body>
+</html>
