@@ -5,21 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sonu Classes - Home</title>
     <style>
-        :root { 
-            --primary-green: #2E7D32; 
-            --primary-blue: #1976D2; 
-            --bg-light: #f4f4f9; 
-            --text-color: #333;
-            --box-bg: white;
-            --border-color: #ddd;
-        }
-        
-        body.dark-mode {
-            --bg-light: #121212;
-            --text-color: #f1f1f1;
-            --box-bg: #1e1e1e;
-            --border-color: #444;
-        }
+        :root { --primary-green: #2E7D32; --primary-blue: #1976D2; --bg-light: #f4f4f9; --text-color: #333; --box-bg: white; --border-color: #ddd; }
+        body.dark-mode { --bg-light: #121212; --text-color: #f1f1f1; --box-bg: #1e1e1e; --border-color: #444; }
 
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); color: var(--text-color); margin: 0; padding: 0; text-align: center; transition: background-color 0.3s, color 0.3s; }
         
@@ -42,7 +29,6 @@
 
         .hero-section { display: flex; flex-wrap: wrap-reverse; align-items: center; justify-content: center; padding: 30px 20px; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); margin: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         body.dark-mode .hero-section { background: linear-gradient(135deg, #1b5e20 0%, #003300 100%); box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        
         .hero-text { flex: 1; min-width: 250px; text-align: left; padding: 10px; }
         .hero-text p.welcome-msg { font-size: 16px; font-weight: bold; color: #555; margin-bottom: 5px; }
         body.dark-mode .hero-text p.welcome-msg { color: #ccc; }
@@ -50,10 +36,8 @@
         body.dark-mode .hero-text h2 { color: #64B5F6; }
         .hero-text p.sub-text { font-size: 15px; color: #444; line-height: 1.5; margin-bottom: 15px; }
         body.dark-mode .hero-text p.sub-text { color: #ddd; }
-        
         .hero-btn { background: var(--primary-green); color: white; padding: 12px 25px; border: none; border-radius: 30px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: 0.3s; }
         body.dark-mode .hero-btn { background: #4CAF50; color: #000; }
-        
         .hero-image { flex: 1; min-width: 150px; display: flex; justify-content: center; align-items: center; padding: 10px; }
         .hero-image img { width: 150px; animation: float 3s ease-in-out infinite; }
         @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
@@ -63,6 +47,7 @@
 
         .action-btn { display: block; width: 250px; margin: 15px auto; padding: 15px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; }
         .btn-quiz { background: #FFD600; color: #333; }
+        .btn-leaderboard { background: #FF9800; color: white; }
         
         .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 35px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.3s; }
         .whatsapp-float:active { transform: scale(0.9); }
@@ -71,6 +56,8 @@
         .modal-content { background: var(--box-bg); color: var(--text-color); padding: 25px; border-radius: 20px; width: 90%; max-width: 400px; max-height: 80vh; overflow-y: auto; position: relative; text-align: left; border: 1px solid var(--border-color); }
         .close-btn { background: #333; color: white; border: none; padding: 12px 20px; border-radius: 5px; margin-top: 20px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; text-align: center; }
         body.dark-mode .close-btn { background: #555; }
+        
+        .submit-quiz-btn { background: var(--primary-green); color: white; border: none; padding: 12px 20px; border-radius: 5px; margin-top: 10px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; text-align: center; }
 
         .q-block { margin-bottom: 25px; border-bottom: 2px dashed var(--border-color); padding-bottom: 15px; }
         .q-block h4 { margin-top: 0; font-size: 16px; }
@@ -79,10 +66,9 @@
         .correct { background-color: #4CAF50 !important; color: white !important; border-color: #2E7D32 !important; }
         .wrong { background-color: #F44336 !important; color: white !important; border-color: #B71C1C !important; }
 
-        .notes-card { background: var(--bg-light); padding: 15px; border-left: 5px solid var(--primary-green); margin-bottom: 15px; border-radius: 5px; border: 1px solid var(--border-color); }
-        .notes-card h3 { margin: 0 0 10px 0; color: var(--primary-green); font-size: 18px; }
-        body.dark-mode .notes-card h3 { color: #81C784; }
-        .notes-card p { margin: 0; font-size: 14px; line-height: 1.5; }
+        .leaderboard-list { list-style: none; padding: 0; margin: 0; }
+        .leaderboard-list li { padding: 12px; border-bottom: 1px solid var(--border-color); font-size: 16px; font-weight: bold; display: flex; justify-content: space-between; }
+        .leaderboard-list li:last-child { border-bottom: none; }
 
         .show { display: flex !important; }
     </style>
@@ -127,18 +113,27 @@
 </div>
 
 <button class="action-btn btn-quiz" onclick="showModal('quiz-modal')">📝 आज का क्विज़ खेलें</button>
+<button class="action-btn btn-leaderboard" onclick="showModal('leaderboard-modal')">🏆 लीडरबोर्ड देखें</button>
 
 <a href="https://wa.me/918521057039?text=नमस्ते सोनू सर, मुझे आपकी वेबसाइट से मदद चाहिए।" target="_blank" class="whatsapp-float">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 35px; height: 35px;">
 </a>
+
+<div id="leaderboard-modal" class="modal">
+    <div class="modal-content">
+        <h2 style="color: #FF9800; text-align: center; margin-top: 0;">🏆 टॉप स्कोरर्स</h2>
+        <ul id="leaderboard-list" class="leaderboard-list">
+            <li style="justify-content: center; color: gray;">स्कोर लोड हो रहा है...</li>
+        </ul>
+        <button class="close-btn" onclick="hideModal('leaderboard-modal')">IT'S (बाहर निकलें)</button>
+    </div>
+</div>
 
 <div id="news-modal" class="modal">
     <div class="modal-content">
         <h2 style="color: var(--primary-blue); text-align: center;">आज की बड़ी खबरें</h2>
         <ul style="line-height: 1.8; padding-left: 20px; font-size: 15px;">
             <li><b>बोर्ड परीक्षा 2027:</b> 10वीं कक्षा के छात्रों के लिए गणित और इतिहास की नियमित प्रैक्टिस शुरू करने का सही समय आ गया है।</li>
-            <li><b>IAS की तैयारी:</b> UPSC क्लियर करने के लिए 10वीं से ही सामान्य ज्ञान (GK) और अख़बार पढ़ने की आदत डालें।</li>
-            <li><b>सफलता का मंत्र:</b> निरंतरता (Consistency) ही सफलता की चाबी है। रोज़ाना छोटे लक्ष्य बनाएँ और उन्हें पूरा करें।</li>
         </ul>
         <button class="close-btn" onclick="hideModal('news-modal')">IT'S (बाहर निकलें)</button>
     </div>
@@ -147,14 +142,7 @@
 <div id="notes-modal" class="modal">
     <div class="modal-content">
         <h2 style="color: #4CAF50; text-align: center; margin-top: 0;">📚 स्टडी नोट्स</h2>
-        <div class="notes-card">
-            <h3>📜 इतिहास (History)</h3>
-            <p><b>यूरोप में राष्ट्रवाद का उदय:</b> 1789 की फ्रांसीसी क्रांति से राष्ट्रवाद की पहली स्पष्ट अभिव्यक्ति हुई। जलियांवाला बाग हत्याकांड 13 अप्रैल 1919 को हुआ था।</p>
-        </div>
-        <div class="notes-card">
-            <h3>📐 गणित (Mathematics)</h3>
-            <p><b>महत्वपूर्ण सूत्र:</b><br>- वृत्त का क्षेत्रफल = πr²<br>- बेलन का आयतन = πr²h<br>- पाइथागोरस प्रमेय: (कर्ण)² = (लंब)² + (आधार)²</p>
-        </div>
+        <p>असली नोट्स पढ़ने के लिए 'Class 10' बटन पर क्लिक करें।</p>
         <button class="close-btn" onclick="hideModal('notes-modal')">IT'S (बाहर निकलें)</button>
     </div>
 </div>
@@ -169,17 +157,21 @@
             <button class="option-btn" onclick="checkAnswer(this, false)">C. 1920</button>
             <button class="option-btn" onclick="checkAnswer(this, false)">D. 1922</button>
         </div>
+        <button class="submit-quiz-btn" onclick="submitQuiz()">✅ स्कोर सबमिट करें</button>
         <button class="close-btn" onclick="hideModal('quiz-modal')">IT'S (बाहर निकलें)</button>
     </div>
 </div>
 
 <script type="module">
+  // फायरबेस डेटाबेस को यहाँ जोड़ा गया है
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+  import { getDatabase, ref, set, onValue, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
     authDomain: "sonuclasses-b19db.firebaseapp.com",
+    databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com", // आपका नया डेटाबेस लिंक
     projectId: "sonuclasses-b19db",
     storageBucket: "sonuclasses-b19db.firebasestorage.app",
     messagingSenderId: "166740602272",
@@ -188,12 +180,16 @@
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  const db = getDatabase(app); // डेटाबेस चालू
+
+  let currentStudentName = "Student";
+  let myScore = 0; // क्विज़ का स्कोर
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
       document.getElementById('main-body').style.display = "block";
-      const name = user.displayName || user.email.split('@')[0];
-      document.getElementById('student-name').innerText = name;
+      currentStudentName = user.displayName || user.email.split('@')[0];
+      document.getElementById('student-name').innerText = currentStudentName;
       if(user.photoURL) document.getElementById('user-photo').src = user.photoURL;
     } else {
       window.location.replace("login.html");
@@ -201,7 +197,10 @@
   });
 
   window.toggleDropdown = () => document.getElementById('dropdown-menu').classList.toggle('show');
-  window.showModal = (id) => document.getElementById(id).classList.add('show');
+  window.showModal = (id) => {
+      document.getElementById(id).classList.add('show');
+      if(id === 'quiz-modal') myScore = 0; // नया क्विज़ शुरू करने पर स्कोर 0
+  };
   window.hideModal = (id) => document.getElementById(id).classList.remove('show');
 
   window.confirmLogout = () => {
@@ -214,6 +213,7 @@
     const questionBlock = btn.parentElement; 
     if(isCorrect) {
       btn.classList.add('correct');
+      myScore += 10; // सही जवाब पर 10 नंबर
     } else {
       btn.classList.add('wrong');
       questionBlock.querySelectorAll('.option-btn').forEach(b => { 
@@ -222,6 +222,45 @@
     }
     questionBlock.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
   };
+
+  // डेटाबेस में स्कोर सेव करने का फंक्शन
+  window.submitQuiz = () => {
+      const user = auth.currentUser;
+      if(user) {
+          const scoreRef = ref(db, 'leaderboard/' + user.uid);
+          set(scoreRef, {
+              name: currentStudentName,
+              score: myScore
+          }).then(() => {
+              alert("🎉 आपका स्कोर लीडरबोर्ड में सेव हो गया है!");
+              hideModal('quiz-modal');
+              showModal('leaderboard-modal'); // स्कोर सेव होते ही लीडरबोर्ड दिखाओ
+          }).catch((error) => {
+              alert("स्कोर सेव करने में गलती हुई: " + error.message);
+          });
+      }
+  };
+
+  // डेटाबेस से टॉप स्कोर निकालकर लीडरबोर्ड में दिखाना
+  const topScoresRef = query(ref(db, 'leaderboard'), orderByChild('score'), limitToLast(10));
+  onValue(topScoresRef, (snapshot) => {
+      const list = document.getElementById('leaderboard-list');
+      list.innerHTML = ''; // पुराना लिस्ट खाली करें
+      let scores = [];
+      snapshot.forEach((childSnapshot) => {
+          scores.push(childSnapshot.val());
+      });
+      scores.reverse(); // सबसे ज़्यादा नंबर वाला सबसे ऊपर
+      
+      if(scores.length === 0) {
+          list.innerHTML = '<li style="justify-content: center; color: gray;">अभी तक किसी ने क्विज़ नहीं खेला है!</li>';
+      } else {
+          scores.forEach((data, index) => {
+              let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🏅';
+              list.innerHTML += `<li><span>${medal} ${data.name}</span> <span style="color: var(--primary-green);">${data.score} अंक</span></li>`;
+          });
+      }
+  });
 
   window.changePhoto = (event) => {
     const file = event.target.files[0];
@@ -246,14 +285,13 @@
       const btn = document.getElementById('theme-btn');
       if(document.body.classList.contains('dark-mode')) {
           btn.innerText = '☀️';
-          localStorage.setItem('theme', 'dark'); // थीम याद रखने के लिए
+          localStorage.setItem('theme', 'dark');
       } else {
           btn.innerText = '🌙';
           localStorage.setItem('theme', 'light');
       }
   };
 
-  // पेज लोड होने पर थीम चेक करें
   window.onload = () => {
       if(localStorage.getItem('theme') === 'dark') {
           document.body.classList.add('dark-mode');
