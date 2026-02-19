@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Sonu Classes</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f9; padding: 20px; text-align: center; }
+        .admin-box { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 500px; margin: auto; text-align: left; margin-bottom: 20px; border-top: 5px solid #E65100;}
+        h2 { color: #E65100; margin-top: 0; font-size: 20px; border-bottom: 2px dashed #ddd; padding-bottom: 10px;}
+        label { font-weight: bold; margin-top: 15px; display: block; color: #333; font-size: 14px;}
+        input, textarea, select { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
+        button { background-color: #2E7D32; color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+        button:active { transform: scale(0.98); background-color: #1b5e20; }
+    </style>
+</head>
+<body>
+
+    <h1 style="color: #1976D2; margin-bottom: 5px;">Sonu Classes</h1>
+    <p style="margin-top: 0; color: #555; font-weight: bold;">🛠️ खूफ़िया एडमिन पैनल</p>
+
+    <div class="admin-box" style="border-top-color: #1976D2;">
+        <h2 style="color: #1976D2;">📢 आज की ताज़ा न्यूज़ बदलें</h2>
+        <label>न्यूज़ टाइप करें:</label>
+        <textarea id="news-text" rows="3" placeholder="यहाँ नई न्यूज़ लिखें..."></textarea>
+        <button onclick="updateNews()" style="background-color: #1976D2;">✅ न्यूज़ अपडेट करें</button>
+    </div>
+
+    <div class="admin-box">
+        <h2>📝 आज का नया क्विज़ डालें</h2>
+        <label>प्रश्न (Question):</label>
+        <input type="text" id="q-text" placeholder="जैसे: भारत की राजधानी क्या है?">
+        
+        <label>Option A:</label> <input type="text" id="opt-a" placeholder="पहला विकल्प">
+        <label>Option B:</label> <input type="text" id="opt-b" placeholder="दूसरा विकल्प">
+        <label>Option C:</label> <input type="text" id="opt-c" placeholder="तीसरा विकल्प">
+        <label>Option D:</label> <input type="text" id="opt-d" placeholder="चौथा विकल्प">
+        
+        <label>इनमें से सही जवाब कौन सा है?</label>
+        <select id="correct-ans">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+        </select>
+
+        <button onclick="updateQuiz()">✅ क्विज़ अपडेट करें</button>
+    </div>
+
+<script type="module">
+  // फायरबेस डेटाबेस को यहाँ जोड़ा गया है
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
+    authDomain: "sonuclasses-b19db.firebaseapp.com",
+    databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com",
+    projectId: "sonuclasses-b19db",
+    storageBucket: "sonuclasses-b19db.firebasestorage.app",
+    messagingSenderId: "166740602272",
+    appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  window.updateNews = () => {
+      const news = document.getElementById('news-text').value;
+      if(news.trim() === "") { alert("कृपया न्यूज़ बॉक्स में कुछ लिखें!"); return; }
+      
+      // यह न्यूज़ को फायरबेस में सेव करेगा
+      set(ref(db, 'appData/news'), news)
+      .then(() => alert("🎉 बहुत बढ़िया! नई न्यूज़ वेबसाइट पर सेव हो गई है!"))
+      .catch((error) => alert("एरर: " + error.message));
+  };
+
+  window.updateQuiz = () => {
+      const q = document.getElementById('q-text').value;
+      const a = document.getElementById('opt-a').value;
+      const b = document.getElementById('opt-b').value;
+      const c = document.getElementById('opt-c').value;
+      const d = document.getElementById('opt-d').value;
+      const ans = document.getElementById('correct-ans').value;
+
+      if(q==="" || a==="" || b==="" || c==="" || d==="") {
+          alert("कृपया प्रश्न और सभी 4 विकल्प भरें!"); return;
+      }
+
+      // यह क्विज़ को फायरबेस में सेव करेगा
+      set(ref(db, 'appData/quiz'), {
+          question: q, optionA: a, optionB: b, optionC: c, optionD: d, answer: ans
+      })
+      .then(() => alert("🎉 शानदार! आज का नया क्विज़ वेबसाइट पर लाइव हो गया है!"))
+      .catch((error) => alert("एरर: " + error.message));
+  };
+</script>
+</body>
+</html>
