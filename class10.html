@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class 10 - Sonu Classes</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; text-align: center; }
-        header { background-color: #1976D2; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; text-align: center; padding-bottom: 30px;}
+        header { background-color: #1976D2; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100;}
         h1 { margin: 0; font-size: 22px; }
         .back-btn { background: white; color: #1976D2; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; text-decoration: none; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         .back-btn:active { transform: scale(0.95); }
         
-        .subject-card { background: white; margin: 20px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-top: 5px solid #2E7D32; text-align: left; }
-        .subject-card h2 { color: #2E7D32; margin-top: 0; }
-        .subject-desc { color: #555; line-height: 1.5; margin-bottom: 15px; font-size: 15px; }
+        .subject-card { background: white; margin: 20px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-top: 5px solid; text-align: left; }
+        .subject-card h2 { margin-top: 0; margin-bottom: 5px;}
+        .subject-desc { color: #555; line-height: 1.5; margin-bottom: 15px; font-size: 14px; }
         
-        .download-btn { display: inline-block; background: #FF9800; color: white; padding: 12px 20px; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 10px; cursor: pointer; border: none; font-size: 16px; box-shadow: 0 3px 6px rgba(0,0,0,0.2); width: 100%; text-align: center; }
+        .download-btn { display: inline-block; color: white; padding: 12px 20px; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 5px; cursor: pointer; border: none; font-size: 16px; box-shadow: 0 3px 6px rgba(0,0,0,0.2); width: 100%; text-align: center; transition: 0.2s;}
         .download-btn:active { transform: scale(0.98); }
     </style>
 </head>
@@ -26,16 +26,40 @@
     <a href="index.html" class="back-btn">⬅️ वापस</a>
 </header>
 
-<div class="subject-card">
-    <h2>📐 गणित (Mathematics)</h2>
-    <p class="subject-desc">10वीं बोर्ड परीक्षा 2027 के लिए गणित के सबसे बेहतरीन, आसान और परीक्षा में आने वाले ज़रूरी नोट्स।</p>
-    <button class="download-btn" onclick="downloadPdf('math')">📥 Math PDF डाउनलोड करें</button>
+<div class="subject-card" style="border-top-color: #2E7D32;">
+    <h2 style="color: #2E7D32;">📐 गणित (Mathematics)</h2>
+    <p class="subject-desc">10वीं बोर्ड के लिए गणित के सबसे बेहतरीन, आसान और VVI प्रश्न।</p>
+    <button class="download-btn" onclick="downloadPdf('math')" style="background: #2E7D32;">📥 Math PDF डाउनलोड करें</button>
+</div>
+
+<div class="subject-card" style="border-top-color: #1976D2;">
+    <h2 style="color: #1976D2;">🔬 विज्ञान (Science)</h2>
+    <p class="subject-desc">भौतिकी, रसायन और जीव विज्ञान के महत्वपूर्ण चित्र और आसान नोट्स।</p>
+    <button class="download-btn" onclick="downloadPdf('science')" style="background: #1976D2;">📥 Science PDF डाउनलोड करें</button>
 </div>
 
 <div class="subject-card" style="border-top-color: #E65100;">
-    <h2 style="color: #E65100;">📜 इतिहास (History)</h2>
-    <p class="subject-desc">इतिहास की महत्वपूर्ण तारीखें, घटनाएँ और परीक्षा में 100% पूछे जाने वाले वीवीआई (VVI) प्रश्न।</p>
-    <button class="download-btn" onclick="downloadPdf('history')" style="background: #E65100;">📥 History PDF डाउनलोड करें</button>
+    <h2 style="color: #E65100;">🌍 सामाजिक विज्ञान (Social Science)</h2>
+    <p class="subject-desc">इतिहास, भूगोल, नागरिक शास्त्र और अर्थशास्त्र के 100% लड़ने वाले प्रश्न।</p>
+    <button class="download-btn" onclick="downloadPdf('social')" style="background: #E65100;">📥 Social Science PDF डाउनलोड करें</button>
+</div>
+
+<div class="subject-card" style="border-top-color: #009688;">
+    <h2 style="color: #009688;">📘 हिंदी (Hindi)</h2>
+    <p class="subject-desc">कहानी, कविता और व्याकरण के शॉर्टकट नोट्स।</p>
+    <button class="download-btn" onclick="downloadPdf('hindi')" style="background: #009688;">📥 Hindi PDF डाउनलोड करें</button>
+</div>
+
+<div class="subject-card" style="border-top-color: #8E24AA;">
+    <h2 style="color: #8E24AA;">📙 संस्कृत (Sanskrit)</h2>
+    <p class="subject-desc">अनुवाद, पत्र लेखन और श्लोक के अर्थ एकदम सरल भाषा में।</p>
+    <button class="download-btn" onclick="downloadPdf('sanskrit')" style="background: #8E24AA;">📥 Sanskrit PDF डाउनलोड करें</button>
+</div>
+
+<div class="subject-card" style="border-top-color: #607D8B;">
+    <h2 style="color: #607D8B;">📝 अंग्रेजी (English)</h2>
+    <p class="subject-desc">ग्रामर और किताबों के सवालों के आसान जवाब।</p>
+    <button class="download-btn" onclick="downloadPdf('english')" style="background: #607D8B;">📥 English PDF डाउनलोड करें</button>
 </div>
 
 <script type="module">
@@ -55,33 +79,27 @@
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
 
-  let mathLink = "";
-  let historyLink = "";
+  let pdfLinks = {};
 
-  // एडमिन पैनल से PDF के लिंक खींचने का काम
+  // एडमिन पैनल से सभी PDF के लिंक खींचने का स्मार्ट तरीका
   const pdfRef = ref(db, 'appData/pdfs');
   onValue(pdfRef, (snapshot) => {
       const data = snapshot.val();
       if(data) {
-          mathLink = data.math || "";
-          historyLink = data.history || "";
+          pdfLinks = data;
       }
   });
 
-  // बटन दबाने पर क्या होगा, यह फंक्शन तय करता है
+  // बटन दबाने पर क्या होगा
   window.downloadPdf = (subject) => {
-      let link = subject === 'math' ? mathLink : historyLink;
+      let link = pdfLinks[subject] || "";
       
-      // अगर आपने एडमिन पैनल में लिंक डाला है
       if(link && link.trim() !== "") {
-          // अगर लिंक में http नहीं है, तो अपने आप जोड़ दो
           if (!link.startsWith('http://') && !link.startsWith('https://')) {
               link = 'https://' + link;
           }
-          // लिंक को नए टैब में खोलो
           window.open(link, "_blank");
       } else {
-          // अगर लिंक खाली है (कोई PDF नहीं डाला गया है)
           alert("🚧 काम चल रहा है! सोनू सर जल्द ही यहाँ 10वीं के बेस्ट PDF नोट्स अपलोड करेंगे।");
       }
   };
