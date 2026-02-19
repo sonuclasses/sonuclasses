@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>लॉगिन - सोनू क्लासेस</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #2E7D32, #1976D2); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; color: #333; }
-        .login-container { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 320px; text-align: center; }
-        h2 { color: #2E7D32; margin-bottom: 20px; font-size: 28px; }
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; outline: none; transition: 0.3s; }
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #2E7D32, #1976D2); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-container { background: white; padding: 35px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); width: 320px; text-align: center; }
+        h2 { color: #2E7D32; margin-bottom: 25px; font-size: 28px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; outline: none; transition: 0.3s; }
         input:focus { border-color: #2E7D32; }
-        button { width: 100%; padding: 12px; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; margin-top: 10px; }
-        .btn-signup { background-color: #E65100; }
-        .btn-signup:hover { background-color: #BF360C; }
-        .btn-login { background-color: #2E7D32; }
-        .btn-login:hover { background-color: #1b5e20; }
-        #message { margin-top: 15px; font-weight: bold; font-size: 14px; }
+        
+        .btn-signup { width: 100%; padding: 12px; background-color: #E65100; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: 10px; font-size: 16px; }
+        .btn-login { width: 100%; padding: 12px; background-color: #2E7D32; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: 10px; font-size: 16px; }
+        
+        .divider { margin: 20px 0; color: #888; position: relative; }
+        .divider::before { content: ""; position: absolute; left: 0; top: 50%; width: 40%; height: 1px; background: #ddd; }
+        .divider::after { content: ""; position: absolute; right: 0; top: 50%; width: 40%; height: 1px; background: #ddd; }
+
+        .btn-google { width: 100%; padding: 10px; background-color: white; color: #444; border: 2px solid #eee; border-radius: 10px; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; font-size: 15px; transition: 0.3s; }
+        .btn-google img { width: 22px; margin-right: 12px; }
+        .btn-google:hover { background-color: #f9f9f9; border-color: #ddd; }
+        
+        #message { margin-top: 20px; font-weight: bold; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -24,16 +31,24 @@
         <input type="email" placeholder="ईमेल आईडी डालें" id="email">
         <input type="password" placeholder="पासवर्ड बनाएँ" id="password">
         
-        <button id="signup-btn" class="btn-signup">नया अकाउंट बनाएँ</button>
-        
-        <button id="login-btn" class="btn-login">लॉगिन करें</button>
+        <div id="action-area">
+            <button id="signup-btn" class="btn-signup">नया अकाउंट बनाएँ</button>
+            <button id="login-btn" class="btn-login">लॉगिन करें</button>
+            
+            <div class="divider">या</div>
+
+            <button id="google-btn" class="btn-google">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
+                Google से लॉगिन करें
+            </button>
+        </div>
         
         <p id="message"></p>
     </div>
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-      import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+      import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
       const firebaseConfig = {
         apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
@@ -46,42 +61,42 @@
 
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
+      const provider = new GoogleAuthProvider();
 
       const emailInput = document.getElementById('email');
       const passwordInput = document.getElementById('password');
-      const signupBtn = document.getElementById('signup-btn');
-      const loginBtn = document.getElementById('login-btn');
       const message = document.getElementById('message');
+      const actionArea = document.getElementById('action-area');
 
-      signupBtn.addEventListener('click', () => {
-          message.style.color = "blue";
-          message.innerText = "अकाउंट बन रहा है, रुकिए...";
-          createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
-          .then((userCredential) => {
-              message.style.color = "green";
-              message.innerText = "अकाउंट बन गया! अब 'लॉगिन करें' बटन दबाएँ।";
-              
-              // यह लाइन बटन को छुपा देगी
-              signupBtn.style.display = "none"; 
-          })
-          .catch((error) => {
+      // 1. गूगल लॉगिन
+      document.getElementById('google-btn').addEventListener('click', () => {
+          signInWithPopup(auth, provider).then(() => {
+              window.location.replace("index.html");
+          }).catch(() => {
               message.style.color = "red";
-              message.innerText = "ईमेल सही से डालें या पासवर्ड 6 अक्षरों से बड़ा रखें!";
+              message.innerText = "गूगल लॉगिन नहीं हो पाया!";
           });
       });
 
-      loginBtn.addEventListener('click', () => {
-          message.style.color = "blue";
-          message.innerText = "लॉगिन हो रहा है...";
-          signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
-          .then((userCredential) => {
+      // 2. नया अकाउंट (बटन छुपाने वाला फीचर)
+      document.getElementById('signup-btn').addEventListener('click', () => {
+          createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
+          .then(() => {
               message.style.color = "green";
-              message.innerText = "लॉगिन सफल! होमपेज खुल रहा है...";
-              setTimeout(() => {
-                  window.location.replace("index.html");
-              }, 1000);
-          })
-          .catch((error) => {
+              message.innerText = "अकाउंट बन गया! अब लॉगिन करें।";
+              actionArea.style.display = "none"; // बटन गायब हो जाएंगे
+          }).catch(() => {
+              message.style.color = "red";
+              message.innerText = "पासवर्ड 6 अक्षर से बड़ा रखें!";
+          });
+      });
+
+      // 3. ईमेल लॉगिन
+      document.getElementById('login-btn').addEventListener('click', () => {
+          signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
+          .then(() => {
+              window.location.replace("index.html");
+          }).catch(() => {
               message.style.color = "red";
               message.innerText = "गलत ईमेल या पासवर्ड!";
           });
