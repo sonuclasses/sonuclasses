@@ -3,23 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#2E7D32">
-
     <title>Sonu Classes - Home</title>
     <style>
         :root { --primary-green: #2E7D32; --primary-blue: #1976D2; --bg-light: #f4f4f9; --text-color: #333; --box-bg: white; --border-color: #ddd; }
         body.dark-mode { --bg-light: #121212; --text-color: #f1f1f1; --box-bg: #1e1e1e; --border-color: #444; }
-
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); color: var(--text-color); margin: 0; padding: 0; text-align: center; transition: background-color 0.3s, color 0.3s; }
-        
         header { background-color: var(--primary-green); color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         h1 { margin: 0; font-size: 20px; }
-        
         .header-right { display: flex; align-items: center; gap: 15px; }
         .theme-toggle { background: none; border: none; font-size: 24px; cursor: pointer; color: white; padding: 0; margin: 0; }
-
         .profile-section { position: relative; }
         .profile-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid white; cursor: pointer; object-fit: cover; background: #fff; }
         .dropdown { display: none; position: absolute; right: 0; top: 55px; background: var(--box-bg); box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-radius: 10px; min-width: 160px; z-index: 100; overflow: hidden; border: 1px solid var(--border-color); text-align: left; }
@@ -45,9 +39,11 @@
         #installAppBtn { display: none; background: #D50000; color: white; padding: 15px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); margin: 20px auto; width: 250px; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
+        /* नया नोटिफिकेशन बटन */
+        #notifyBtn { background: #00ACC1; color: white; padding: 12px 20px; border: none; border-radius: 30px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2); margin: 10px auto; display: block; }
+
         .class-btn { display: inline-block; width: 140px; padding: 15px; margin: 10px; background: var(--primary-blue); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .class-btn:active { transform: scale(0.9); background: #1565C0; }
-
         .action-btn { display: block; width: 250px; margin: 15px auto; padding: 15px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; }
         .btn-quiz { background: #FFD600; color: #333; }
         .btn-leaderboard { background: #FF9800; color: white; }
@@ -57,21 +53,16 @@
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; }
         .modal-content { background: var(--box-bg); color: var(--text-color); padding: 25px; border-radius: 20px; width: 90%; max-width: 400px; max-height: 85vh; overflow-y: auto; position: relative; text-align: left; border: 1px solid var(--border-color); }
         .close-btn { background: #333; color: white; border: none; padding: 12px 20px; border-radius: 5px; margin-top: 20px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; text-align: center; }
-        
         .submit-quiz-btn { background: var(--primary-green); color: white; border: none; padding: 12px 20px; border-radius: 5px; margin-top: 10px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
-
         .q-block h4 { margin-top: 0; font-size: 17px; line-height: 1.4; color: var(--primary-blue); }
         .option-btn { width: 100%; padding: 12px; margin: 6px 0; border: 2px solid var(--border-color); border-radius: 8px; background: var(--box-bg); color: var(--text-color); cursor: pointer; font-weight: bold; transition: 0.3s; text-align: left; font-size: 15px;}
         .option-btn:disabled { opacity: 0.8; cursor: not-allowed; }
         .correct { background-color: #4CAF50 !important; color: white !important; border-color: #2E7D32 !important; }
         .wrong { background-color: #F44336 !important; color: white !important; border-color: #B71C1C !important; }
-
         .leaderboard-list { list-style: none; padding: 0; margin: 0; }
         .leaderboard-list li { padding: 12px; border-bottom: 1px solid var(--border-color); font-size: 16px; font-weight: bold; display: flex; justify-content: space-between; }
         .leaderboard-list li:last-child { border-bottom: none; }
-
         .show { display: flex !important; }
-        
         footer { margin-top: 30px; padding: 15px; background: var(--box-bg); border-top: 1px solid var(--border-color); font-size: 14px; color: #666; }
     </style>
 </head>
@@ -108,6 +99,7 @@
     </div>
 </div>
 
+<button id="notifyBtn" onclick="enableNotifications()">🔔 नोटिफिकेशन चालू करें</button>
 <button id="installAppBtn">📲 App इंस्टॉल करें</button>
 
 <div class="container" style="margin-bottom: 20px;">
@@ -181,6 +173,7 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
   import { getDatabase, ref, set, onValue, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+  import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-messaging.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
@@ -195,6 +188,7 @@
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getDatabase(app);
+  const messaging = getMessaging(app);
 
   let currentStudentName = "Student";
   let myScore = 0;
@@ -208,9 +202,37 @@
       currentStudentName = user.displayName || user.email.split('@')[0];
       document.getElementById('student-name').innerText = currentStudentName;
       if(user.photoURL) document.getElementById('user-photo').src = user.photoURL;
+      
+      // चेक करें कि परमिशन पहले से मिली हुई है या नहीं
+      if (Notification.permission === 'granted') {
+          document.getElementById('notifyBtn').style.display = 'none';
+      }
     } else {
       window.location.replace("login.html");
     }
+  });
+
+  // नोटिफिकेशन चालू करने का जादू
+  window.enableNotifications = () => {
+      Notification.requestPermission().then((permission) => {
+          if (permission === 'granted') {
+              getToken(messaging, { vapidKey: 'BDyAN1nRFqGA7lqM7rs93-AykFTsvE-d1ocxmE6IYPqfWT2839QucicsJ43LgiGdUBGi-CaJtZOcmDHuW7FR1Ow' })
+              .then((currentToken) => {
+                  if (currentToken) {
+                      const user = auth.currentUser;
+                      if(user) set(ref(db, 'fcmTokens/' + user.uid), currentToken);
+                      alert("🔔 बहुत बढ़िया! अब आपको नए टेस्ट और नोट्स के नोटिफिकेशन मिला करेंगे!");
+                      document.getElementById('notifyBtn').style.display = 'none';
+                  }
+              }).catch((err) => console.log('Token Error:', err));
+          } else {
+              alert("⚠️ आपने नोटिफिकेशन ब्लॉक कर दिया है। इसे चालू करने के लिए ब्राउज़र की सेटिंग में जाएँ।");
+          }
+      });
+  };
+
+  onMessage(messaging, (payload) => {
+      alert("🔔 नई सूचना: \n" + payload.notification.title + "\n" + payload.notification.body);
   });
 
   window.toggleDropdown = () => document.getElementById('dropdown-menu').classList.toggle('show');
@@ -224,19 +246,14 @@
 
   let deferredPrompt;
   window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      document.getElementById('installAppBtn').style.display = 'block';
+      e.preventDefault(); deferredPrompt = e; document.getElementById('installAppBtn').style.display = 'block';
   });
 
   document.getElementById('installAppBtn').addEventListener('click', async () => {
       if (deferredPrompt) {
           deferredPrompt.prompt();
           const { outcome } = await deferredPrompt.userChoice;
-          if (outcome === 'accepted') {
-              console.log('App इंस्टॉल हो गया!');
-              document.getElementById('installAppBtn').style.display = 'none';
-          }
+          if (outcome === 'accepted') { document.getElementById('installAppBtn').style.display = 'none'; }
           deferredPrompt = null;
       }
   });
@@ -279,8 +296,7 @@
       if(data.optionD) { btnD.innerText = "D. " + data.optionD; btnD.style.display = 'block'; } else { btnD.style.display = 'none'; }
 
       [btnA, btnB, btnC, btnD].forEach(b => { b.className = "option-btn"; b.disabled = false; if(b.innerText !== "C." && b.innerText !== "D.") b.style.display = 'block'; });
-      currentCorrectAnswer = data.answer;
-      document.getElementById('next-btn').style.display = 'none';
+      currentCorrectAnswer = data.answer; document.getElementById('next-btn').style.display = 'none';
   };
 
   window.checkAnswer = (selectedOption) => {
