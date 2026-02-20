@@ -8,12 +8,14 @@
         body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f9; padding: 20px; text-align: center; }
         .admin-box { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 450px; margin: auto; text-align: left; border-top: 5px solid #1976D2;}
         h2 { color: #1976D2; text-align: center; margin-top: 0; }
-        label { font-weight: bold; color: #333; display: block; margin-top: 20px; font-size: 15px; }
+        label { font-weight: bold; color: #333; display: block; margin-top: 15px; font-size: 15px; }
         input, textarea, select { width: 100%; padding: 12px; margin-top: 8px; border: 2px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none; transition: 0.3s; font-family: inherit; }
         input:focus, textarea:focus, select:focus { border-color: #1976D2; }
         .save-btn { background: #2E7D32; color: white; padding: 12px; border: none; border-radius: 8px; width: 100%; font-weight: bold; margin-top: 10px; cursor: pointer; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.2s; }
         .save-btn:active { transform: scale(0.95); }
         .divider { border-top: 2px dashed #ccc; margin: 30px 0; }
+        .del-btn { background:#d32f2f; color:white; border:none; padding:10px; border-radius:8px; margin-bottom:15px; cursor:pointer; width:100%; font-weight:bold; }
+        .del-btn:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
@@ -23,17 +25,23 @@
     
     <div style="background: #e3f2fd; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
         <label style="margin-top:0; color:#1976D2;">📢 आज का न्यूज़ बदलें:</label>
-        <textarea id="news_input" rows="3" placeholder="यहाँ आज की ताज़ा न्यूज़ टाइप करें..."></textarea>
+        <p style="font-size:12px; color:gray; margin-top:2px;">(एक से ज़्यादा न्यूज़ देने के लिए बीच में | लगाएं)</p>
+        <textarea id="news_input" rows="3" placeholder="जैसे: कल साइंस का टेस्ट है | फॉर्म की डेट आ गई..."></textarea>
         <button class="save-btn" style="background:#1976D2;" onclick="saveNews()">💾 न्यूज़ अपडेट करें</button>
     </div>
 
     <div style="background: #fff3e0; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-        <label style="margin-top:0; color:#E65100;">📝 आज का क्विज़ सेट करें:</label>
-        <input type="text" id="quiz_q" placeholder="सवाल (Question) टाइप करें...">
+        <h3 style="color:#E65100; margin-top:0; text-align:center;">📝 ऑनलाइन टेस्ट बनाएँ</h3>
+        
+        <button class="del-btn" onclick="clearQuiz()">🗑️ पहले पुराना टेस्ट डिलीट करें</button>
+        
+        <label style="margin-top:0;">नया सवाल (Question) टाइप करें:</label>
+        <input type="text" id="quiz_q" placeholder="सवाल...">
         <input type="text" id="quiz_a" placeholder="ऑप्शन A">
         <input type="text" id="quiz_b" placeholder="ऑप्शन B">
         <input type="text" id="quiz_c" placeholder="ऑप्शन C">
         <input type="text" id="quiz_d" placeholder="ऑप्शन D">
+        
         <label style="font-size: 13px;">सही जवाब चुनें:</label>
         <select id="quiz_ans">
             <option value="A">सही जवाब: Option A</option>
@@ -41,7 +49,13 @@
             <option value="C">सही जवाब: Option C</option>
             <option value="D">सही जवाब: Option D</option>
         </select>
-        <button class="save-btn" style="background:#E65100;" onclick="saveQuiz()">💾 क्विज़ अपडेट करें</button>
+        
+        <button class="save-btn" style="background:#E65100;" onclick="addQuestion()">➕ यह सवाल टेस्ट में जोड़ें</button>
+
+        <h4 style="margin-bottom:5px; color:#333;">अभी टेस्ट में जुड़े हुए सवाल:</h4>
+        <ul id="quiz-list" style="font-size:13px; text-align:left; padding-left:20px; color:#555; margin-top:5px;">
+            <li>लोड हो रहा है...</li>
+        </ul>
     </div>
 
     <div class="divider"></div>
@@ -55,24 +69,14 @@
                 <option value="sci_ch1">Lesson 1: रासायनिक अभिक्रियाएँ...</option>
                 <option value="sci_ch2">Lesson 2: अम्ल, क्षारक एवं लवण</option>
                 <option value="sci_ch3">Lesson 3: धातु एवं अधातु</option>
-                <option value="sci_ch4">Lesson 4: कार्बन एवं उसके यौगिक</option>
-                <option value="sci_ch5">Lesson 5: तत्वों का आवर्त वर्गीकरण</option>
-                <option value="sci_ch6">Lesson 6: जैव प्रक्रम</option>
             </optgroup>
             <optgroup label="📜 इतिहास (History)">
                 <option value="hist_ch1">Lesson 1: यूरोप में राष्ट्रवाद</option>
                 <option value="hist_ch2">Lesson 2: समाजवाद एवं साम्यवाद</option>
-                <option value="hist_ch3">Lesson 3: हिंद-चीन में राष्ट्रवादी आंदोलन</option>
-                <option value="hist_ch4">Lesson 4: भारत में राष्ट्रवाद</option>
-                <option value="hist_ch5">Lesson 5: अर्थव्यवस्था और आजीविका</option>
-                <option value="hist_ch6">Lesson 6: शहरीकरण एवं शहरी जीवन</option>
-                <option value="hist_ch7">Lesson 7: व्यापार और भूमंडलीकरण</option>
-                <option value="hist_ch8">Lesson 8: प्रेस संस्कृति एवं राष्ट्रवाद</option>
             </optgroup>
             <optgroup label="📐 गणित (Mathematics)">
                 <option value="math_ch1">Lesson 1: वास्तविक संख्याएँ</option>
                 <option value="math_ch2">Lesson 2: बहुपद (Polynomials)</option>
-                <option value="math_ch3">Lesson 3: दो चर वाले रैखिक समीकरण</option>
             </optgroup>
         </select>
 
@@ -86,7 +90,7 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-  import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+  import { getDatabase, ref, set, get, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
@@ -102,70 +106,81 @@
   const db = getDatabase(app);
   let allPdfData = {};
 
-  // पुराना डाटा लोड करना
+  // PDF डाटा लोड
   get(ref(db, 'appData/pdfs')).then((snapshot) => {
-      if (snapshot.exists()) {
-          allPdfData = snapshot.val();
-          updatePdfInput(); // पेज खुलते ही लिंक दिखाएगा
-      }
+      if (snapshot.exists()) { allPdfData = snapshot.val(); updatePdfInput(); }
   });
 
+  // न्यूज़ लोड
   get(ref(db, 'appData/news')).then((snapshot) => {
       if (snapshot.exists()) document.getElementById('news_input').value = snapshot.val();
   });
 
-  get(ref(db, 'appData/quiz')).then((snapshot) => {
-      if (snapshot.exists()) {
-          const data = snapshot.val();
-          document.getElementById('quiz_q').value = data.question || '';
-          document.getElementById('quiz_a').value = data.optionA || '';
-          document.getElementById('quiz_b').value = data.optionB || '';
-          document.getElementById('quiz_c').value = data.optionC || '';
-          document.getElementById('quiz_d').value = data.optionD || '';
-          document.getElementById('quiz_ans').value = data.answer || 'A';
+  // नया: जुड़े हुए सवालों की लिस्ट दिखाना
+  const quizRef = ref(db, 'appData/quizzes');
+  onValue(quizRef, (snapshot) => {
+      const list = document.getElementById('quiz-list');
+      list.innerHTML = '';
+      if(snapshot.exists()) {
+          let count = 1;
+          snapshot.forEach((child) => {
+              list.innerHTML += `<li>${count}. ${child.val().question}</li>`;
+              count++;
+          });
+      } else {
+          list.innerHTML = '<li>अभी कोई सवाल नहीं जुड़ा है।</li>';
       }
   });
 
-  // ड्रॉपडाउन बदलने पर लिंक का डब्बा अपडेट करना
   window.updatePdfInput = () => {
       const selectedChapter = document.getElementById('pdf_chapter_select').value;
       document.getElementById('pdf_link_input').value = allPdfData[selectedChapter] || "";
   };
 
-  // सेव करने के फंक्शन्स
   window.savePdfLink = () => {
       const selectedChapter = document.getElementById('pdf_chapter_select').value;
       const linkValue = document.getElementById('pdf_link_input').value;
-      
-      if(linkValue.trim() === "") { alert("⚠️ पहले खाली डब्बे में लिंक पेस्ट करें!"); return; }
-      
-      set(ref(db, 'appData/pdfs/' + selectedChapter), linkValue)
-      .then(() => {
-          alert("🎉 लिंक सफलतापूर्वक सेव हो गया!");
-          allPdfData[selectedChapter] = linkValue; // सेव होने के बाद याद रखेगा
+      if(linkValue.trim() === "") { alert("⚠️ पहले लिंक पेस्ट करें!"); return; }
+      set(ref(db, 'appData/pdfs/' + selectedChapter), linkValue).then(() => {
+          alert("🎉 लिंक सेव हो गया!");
+          allPdfData[selectedChapter] = linkValue; 
       });
   };
 
   window.saveNews = () => {
       const newsText = document.getElementById('news_input').value;
       if(newsText.trim() === "") { alert("⚠️ पहले न्यूज़ टाइप करें!"); return; }
-      set(ref(db, 'appData/news'), newsText)
-      .then(() => alert("🎉 न्यूज़ अपडेट हो गई!"));
+      set(ref(db, 'appData/news'), newsText).then(() => alert("🎉 न्यूज़ अपडेट हो गई!"));
   };
 
-  window.saveQuiz = () => {
+  // नया: सवाल जोड़ना (एक-एक करके)
+  window.addQuestion = () => {
       const q = document.getElementById('quiz_q').value;
       const a = document.getElementById('quiz_a').value;
       const b = document.getElementById('quiz_b').value;
       if(q.trim() === "" || a.trim() === "" || b.trim() === "") { 
           alert("⚠️ कृपया सवाल और कम से कम 2 ऑप्शन ज़रूर डालें!"); return; 
       }
-      set(ref(db, 'appData/quiz'), {
+      push(ref(db, 'appData/quizzes'), {
           question: q, optionA: a, optionB: b, 
           optionC: document.getElementById('quiz_c').value, 
           optionD: document.getElementById('quiz_d').value, 
           answer: document.getElementById('quiz_ans').value
-      }).then(() => alert("🎉 आज का क्विज़ अपडेट हो गया!"));
+      }).then(() => {
+          alert("🎉 सवाल सफलतापूर्वक टेस्ट में जुड़ गया!");
+          document.getElementById('quiz_q').value = '';
+          document.getElementById('quiz_a').value = '';
+          document.getElementById('quiz_b').value = '';
+          document.getElementById('quiz_c').value = '';
+          document.getElementById('quiz_d').value = '';
+      });
+  };
+
+  // नया: पुराना टेस्ट डिलीट करना
+  window.clearQuiz = () => {
+      if(confirm("क्या आप सच में पुराना टेस्ट डिलीट करके नया टेस्ट बनाना चाहते हैं?")) {
+          remove(ref(db, 'appData/quizzes')).then(() => alert("पुराना टेस्ट डिलीट हो गया! अब आप नए सवाल जोड़ सकते हैं।"));
+      }
   };
 </script>
 </body>
