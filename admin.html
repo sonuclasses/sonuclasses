@@ -6,35 +6,82 @@
     <title>Admin Panel - Sonu Classes</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f9; padding: 20px; text-align: center; }
-        .admin-box { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 400px; margin: auto; text-align: left; border-top: 5px solid #1976D2;}
+        .admin-box { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 450px; margin: auto; text-align: left; border-top: 5px solid #1976D2;}
         h2 { color: #1976D2; text-align: center; margin-top: 0; }
         label { font-weight: bold; color: #333; display: block; margin-top: 20px; font-size: 15px; }
-        input { width: 100%; padding: 12px; margin-top: 8px; border: 2px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none; transition: 0.3s; }
-        input:focus { border-color: #1976D2; }
+        input, textarea, select { width: 100%; padding: 12px; margin-top: 8px; border: 2px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none; transition: 0.3s; font-family: inherit; }
+        input:focus, textarea:focus, select:focus { border-color: #1976D2; }
         .save-btn { background: #2E7D32; color: white; padding: 12px; border: none; border-radius: 8px; width: 100%; font-weight: bold; margin-top: 10px; cursor: pointer; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.2s; }
         .save-btn:active { transform: scale(0.95); }
+        .divider { border-top: 2px dashed #ccc; margin: 30px 0; }
     </style>
 </head>
 <body>
 
 <div class="admin-box">
     <h2>🔒 खूफ़िया एडमिन पैनल</h2>
-    <p style="text-align:center; color:gray; font-size:13px; margin-bottom: 20px;">यहाँ अपने Google Drive का लिंक पेस्ट करें और 'सेव' दबाएँ।</p>
     
-    <label>🔬 विज्ञान - Lesson 1:</label>
-    <input type="text" id="sci_ch1" placeholder="यहाँ लिंक पेस्ट करें...">
-    <button class="save-btn" onclick="saveLink('sci_ch1')">💾 सेव करें</button>
+    <div style="background: #e3f2fd; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+        <label style="margin-top:0; color:#1976D2;">📢 आज का न्यूज़ बदलें:</label>
+        <textarea id="news_input" rows="3" placeholder="यहाँ आज की ताज़ा न्यूज़ टाइप करें..."></textarea>
+        <button class="save-btn" style="background:#1976D2;" onclick="saveNews()">💾 न्यूज़ अपडेट करें</button>
+    </div>
 
-    <label>📜 इतिहास - Lesson 1:</label>
-    <input type="text" id="hist_ch1" placeholder="यहाँ लिंक पेस्ट करें...">
-    <button class="save-btn" onclick="saveLink('hist_ch1')">💾 सेव करें</button>
+    <div style="background: #fff3e0; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+        <label style="margin-top:0; color:#E65100;">📝 आज का क्विज़ सेट करें:</label>
+        <input type="text" id="quiz_q" placeholder="सवाल (Question) टाइप करें...">
+        <input type="text" id="quiz_a" placeholder="ऑप्शन A">
+        <input type="text" id="quiz_b" placeholder="ऑप्शन B">
+        <input type="text" id="quiz_c" placeholder="ऑप्शन C">
+        <input type="text" id="quiz_d" placeholder="ऑप्शन D">
+        <label style="font-size: 13px;">सही जवाब चुनें:</label>
+        <select id="quiz_ans">
+            <option value="A">सही जवाब: Option A</option>
+            <option value="B">सही जवाब: Option B</option>
+            <option value="C">सही जवाब: Option C</option>
+            <option value="D">सही जवाब: Option D</option>
+        </select>
+        <button class="save-btn" style="background:#E65100;" onclick="saveQuiz()">💾 क्विज़ अपडेट करें</button>
+    </div>
 
-    <label>📐 गणित - Lesson 1:</label>
-    <input type="text" id="math_ch1" placeholder="यहाँ लिंक पेस्ट करें...">
-    <button class="save-btn" onclick="saveLink('math_ch1')">💾 सेव करें</button>
+    <div class="divider"></div>
+
+    <div style="background: #e8f5e9; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+        <h3 style="color:#2E7D32; text-align:center; margin-top:0;">📚 PDF नोट्स अपलोड</h3>
+        
+        <label>विषय और लेसन चुनें:</label>
+        <select id="pdf_chapter_select" onchange="updatePdfInput()">
+            <optgroup label="🔬 विज्ञान (Science)">
+                <option value="sci_ch1">Lesson 1: रासायनिक अभिक्रियाएँ...</option>
+                <option value="sci_ch2">Lesson 2: अम्ल, क्षारक एवं लवण</option>
+                <option value="sci_ch3">Lesson 3: धातु एवं अधातु</option>
+                <option value="sci_ch4">Lesson 4: कार्बन एवं उसके यौगिक</option>
+                <option value="sci_ch5">Lesson 5: तत्वों का आवर्त वर्गीकरण</option>
+                <option value="sci_ch6">Lesson 6: जैव प्रक्रम</option>
+            </optgroup>
+            <optgroup label="📜 इतिहास (History)">
+                <option value="hist_ch1">Lesson 1: यूरोप में राष्ट्रवाद</option>
+                <option value="hist_ch2">Lesson 2: समाजवाद एवं साम्यवाद</option>
+                <option value="hist_ch3">Lesson 3: हिंद-चीन में राष्ट्रवादी आंदोलन</option>
+                <option value="hist_ch4">Lesson 4: भारत में राष्ट्रवाद</option>
+                <option value="hist_ch5">Lesson 5: अर्थव्यवस्था और आजीविका</option>
+                <option value="hist_ch6">Lesson 6: शहरीकरण एवं शहरी जीवन</option>
+                <option value="hist_ch7">Lesson 7: व्यापार और भूमंडलीकरण</option>
+                <option value="hist_ch8">Lesson 8: प्रेस संस्कृति एवं राष्ट्रवाद</option>
+            </optgroup>
+            <optgroup label="📐 गणित (Mathematics)">
+                <option value="math_ch1">Lesson 1: वास्तविक संख्याएँ</option>
+                <option value="math_ch2">Lesson 2: बहुपद (Polynomials)</option>
+                <option value="math_ch3">Lesson 3: दो चर वाले रैखिक समीकरण</option>
+            </optgroup>
+        </select>
+
+        <label>PDF लिंक पेस्ट करें:</label>
+        <input type="text" id="pdf_link_input" placeholder="यहाँ Google Drive का लिंक पेस्ट करें...">
+        <button class="save-btn" onclick="savePdfLink()">💾 लिंक सेव करें</button>
+    </div>
     
-    <br><br>
-    <a href="class10.html" style="display:block; text-align:center; color:#1976D2; text-decoration:none; font-weight:bold; padding: 10px; border: 2px solid #1976D2; border-radius: 8px;">🌐 वेबसाइट पर वापस जाएँ</a>
+    <a href="index.html" style="display:block; text-align:center; color:#1976D2; text-decoration:none; font-weight:bold; padding: 10px; border: 2px solid #1976D2; border-radius: 8px;">🌐 वेबसाइट के होमपेज पर जाएँ</a>
 </div>
 
 <script type="module">
@@ -53,29 +100,72 @@
 
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
+  let allPdfData = {};
 
+  // पुराना डाटा लोड करना
   get(ref(db, 'appData/pdfs')).then((snapshot) => {
       if (snapshot.exists()) {
-          const data = snapshot.val();
-          if(data.sci_ch1) document.getElementById('sci_ch1').value = data.sci_ch1;
-          if(data.hist_ch1) document.getElementById('hist_ch1').value = data.hist_ch1;
-          if(data.math_ch1) document.getElementById('math_ch1').value = data.math_ch1;
+          allPdfData = snapshot.val();
+          updatePdfInput(); // पेज खुलते ही लिंक दिखाएगा
       }
   });
 
-  window.saveLink = (chapterId) => {
-      const linkValue = document.getElementById(chapterId).value;
-      if(linkValue.trim() === "") {
-          alert("⚠️ पहले खाली डब्बे में लिंक पेस्ट करें!");
-          return;
+  get(ref(db, 'appData/news')).then((snapshot) => {
+      if (snapshot.exists()) document.getElementById('news_input').value = snapshot.val();
+  });
+
+  get(ref(db, 'appData/quiz')).then((snapshot) => {
+      if (snapshot.exists()) {
+          const data = snapshot.val();
+          document.getElementById('quiz_q').value = data.question || '';
+          document.getElementById('quiz_a').value = data.optionA || '';
+          document.getElementById('quiz_b').value = data.optionB || '';
+          document.getElementById('quiz_c').value = data.optionC || '';
+          document.getElementById('quiz_d').value = data.optionD || '';
+          document.getElementById('quiz_ans').value = data.answer || 'A';
       }
-      set(ref(db, 'appData/pdfs/' + chapterId), linkValue)
+  });
+
+  // ड्रॉपडाउन बदलने पर लिंक का डब्बा अपडेट करना
+  window.updatePdfInput = () => {
+      const selectedChapter = document.getElementById('pdf_chapter_select').value;
+      document.getElementById('pdf_link_input').value = allPdfData[selectedChapter] || "";
+  };
+
+  // सेव करने के फंक्शन्स
+  window.savePdfLink = () => {
+      const selectedChapter = document.getElementById('pdf_chapter_select').value;
+      const linkValue = document.getElementById('pdf_link_input').value;
+      
+      if(linkValue.trim() === "") { alert("⚠️ पहले खाली डब्बे में लिंक पेस्ट करें!"); return; }
+      
+      set(ref(db, 'appData/pdfs/' + selectedChapter), linkValue)
       .then(() => {
-          alert("🎉 बधाई हो! आपका लिंक वेबसाइट में सफलतापूर्वक सेव हो गया है।");
-      })
-      .catch((error) => {
-          alert("Error: " + error.message);
+          alert("🎉 लिंक सफलतापूर्वक सेव हो गया!");
+          allPdfData[selectedChapter] = linkValue; // सेव होने के बाद याद रखेगा
       });
+  };
+
+  window.saveNews = () => {
+      const newsText = document.getElementById('news_input').value;
+      if(newsText.trim() === "") { alert("⚠️ पहले न्यूज़ टाइप करें!"); return; }
+      set(ref(db, 'appData/news'), newsText)
+      .then(() => alert("🎉 न्यूज़ अपडेट हो गई!"));
+  };
+
+  window.saveQuiz = () => {
+      const q = document.getElementById('quiz_q').value;
+      const a = document.getElementById('quiz_a').value;
+      const b = document.getElementById('quiz_b').value;
+      if(q.trim() === "" || a.trim() === "" || b.trim() === "") { 
+          alert("⚠️ कृपया सवाल और कम से कम 2 ऑप्शन ज़रूर डालें!"); return; 
+      }
+      set(ref(db, 'appData/quiz'), {
+          question: q, optionA: a, optionB: b, 
+          optionC: document.getElementById('quiz_c').value, 
+          optionD: document.getElementById('quiz_d').value, 
+          answer: document.getElementById('quiz_ans').value
+      }).then(() => alert("🎉 आज का क्विज़ अपडेट हो गया!"));
   };
 </script>
 </body>
