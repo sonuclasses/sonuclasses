@@ -42,7 +42,6 @@
         body.dark-mode .hero-text p.sub-text { color: #ddd; }
         .hero-btn { background: var(--primary-green); color: white; padding: 12px 25px; border: none; border-radius: 30px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: 0.3s; }
         
-        /* नया जादुई Install App बटन */
         #installAppBtn { display: none; background: #D50000; color: white; padding: 15px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); margin: 20px auto; width: 250px; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
@@ -105,7 +104,7 @@
         <button class="hero-btn" onclick="showModal('notes-modal')">📚 पढ़ना शुरू करें</button>
     </div>
     <div class="hero-image">
-        <img src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png" alt="Study Illustration">
+        <img src="Screenshot_2026-02-20-17-10-57-613_com.google.android.googlequicksearchbox.jpg" alt="Sonu Classes Logo" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.2); animation: float 3s ease-in-out infinite;">
     </div>
 </div>
 
@@ -219,7 +218,6 @@
   window.hideModal = (id) => document.getElementById(id).classList.remove('show');
   window.confirmLogout = () => { if(confirm("लॉगआउट करना चाहते हैं?")) { signOut(auth).then(() => window.location.replace("login.html")); } };
 
-  // जादुई App Install Button का कोड
   if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js').then(() => console.log("Service Worker Registered"));
   }
@@ -228,7 +226,6 @@
   window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      // बटन तभी दिखेगा जब मोबाइल में App पहले से इंस्टॉल नहीं होगा
       document.getElementById('installAppBtn').style.display = 'block';
   });
 
