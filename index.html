@@ -202,14 +202,22 @@
       document.getElementById('student-name').innerText = currentStudentName;
       if(user.photoURL) document.getElementById('user-photo').src = user.photoURL;
       
-      // यह है ऑटोमैटिक टोकन सेवर!
+      // यह है नया फिक्स! जो वेबसाइट को सही रास्ता और आपको रिजल्ट बताएगा
       if (Notification.permission === 'granted') {
-          getToken(messaging, { vapidKey: 'BDyAN1nRFqGA7lqM7rs93-AykFTsvE-d1ocxmE6IYPqfWT2839QucicsJ43LgiGdUBGi-CaJtZOcmDHuW7FR1Ow' })
-          .then((currentToken) => {
-              if (currentToken) {
-                  set(ref(db, 'fcmTokens/' + user.uid), currentToken);
-              }
-          }).catch((err) => console.log('Token Error:', err));
+          navigator.serviceWorker.register('./firebase-messaging-sw.js')
+          .then((registration) => {
+              getToken(messaging, { 
+                  vapidKey: 'BDyAN1nRFqGA7lqM7rs93-AykFTsvE-d1ocxmE6IYPqfWT2839QucicsJ43LgiGdUBGi-CaJtZOcmDHuW7FR1Ow',
+                  serviceWorkerRegistration: registration
+              })
+              .then((currentToken) => {
+                  if (currentToken) {
+                      set(ref(db, 'fcmTokens/' + user.uid), currentToken);
+                      // यह अलर्ट आपको बताएगा कि काम सफल हो गया
+                      alert("✅ कनेक्शन सक्सेसफुल! जादुई टोकन Firebase में सेव हो गया है।");
+                  }
+              }).catch((err) => alert('टोकन एरर: ' + err.message));
+          }).catch((err) => alert('फाइल एरर: ' + err.message));
       } else if (Notification.permission !== 'denied') {
           document.getElementById('notifyBtn').style.display = 'block';
       }
@@ -221,15 +229,21 @@
   window.enableNotifications = () => {
       Notification.requestPermission().then((permission) => {
           if (permission === 'granted') {
-              getToken(messaging, { vapidKey: 'BDyAN1nRFqGA7lqM7rs93-AykFTsvE-d1ocxmE6IYPqfWT2839QucicsJ43LgiGdUBGi-CaJtZOcmDHuW7FR1Ow' })
-              .then((currentToken) => {
-                  if (currentToken) {
-                      const user = auth.currentUser;
-                      if(user) set(ref(db, 'fcmTokens/' + user.uid), currentToken);
-                      alert("🔔 बहुत बढ़िया! अब आपको नए टेस्ट और नोट्स के नोटिफिकेशन मिला करेंगे!");
-                      document.getElementById('notifyBtn').style.display = 'none';
-                  }
-              }).catch((err) => console.log('Token Error:', err));
+              navigator.serviceWorker.register('./firebase-messaging-sw.js')
+              .then((registration) => {
+                  getToken(messaging, { 
+                      vapidKey: 'BDyAN1nRFqGA7lqM7rs93-AykFTsvE-d1ocxmE6IYPqfWT2839QucicsJ43LgiGdUBGi-CaJtZOcmDHuW7FR1Ow',
+                      serviceWorkerRegistration: registration
+                  })
+                  .then((currentToken) => {
+                      if (currentToken) {
+                          const user = auth.currentUser;
+                          if(user) set(ref(db, 'fcmTokens/' + user.uid), currentToken);
+                          alert("🔔 बहुत बढ़िया! टोकन सेट हो गया। अब आपको नए टेस्ट के नोटिफिकेशन मिला करेंगे!");
+                          document.getElementById('notifyBtn').style.display = 'none';
+                      }
+                  }).catch((err) => alert('टोकन एरर: ' + err.message));
+              });
           } else {
               alert("⚠️ आपने नोटिफिकेशन ब्लॉक कर दिया है।");
           }
