@@ -39,8 +39,7 @@
         #installAppBtn { display: none; background: #D50000; color: white; padding: 15px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); margin: 20px auto; width: 250px; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
-        /* नया नोटिफिकेशन बटन */
-        #notifyBtn { background: #00ACC1; color: white; padding: 12px 20px; border: none; border-radius: 30px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2); margin: 10px auto; display: block; }
+        #notifyBtn { display: none; background: #00ACC1; color: white; padding: 12px 20px; border: none; border-radius: 30px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2); margin: 10px auto; }
 
         .class-btn { display: inline-block; width: 140px; padding: 15px; margin: 10px; background: var(--primary-blue); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .class-btn:active { transform: scale(0.9); background: #1565C0; }
@@ -203,16 +202,22 @@
       document.getElementById('student-name').innerText = currentStudentName;
       if(user.photoURL) document.getElementById('user-photo').src = user.photoURL;
       
-      // चेक करें कि परमिशन पहले से मिली हुई है या नहीं
+      // यह है ऑटोमैटिक टोकन सेवर!
       if (Notification.permission === 'granted') {
-          document.getElementById('notifyBtn').style.display = 'none';
+          getToken(messaging, { vapidKey: 'BDyAN1nRFqGA7lqM7rs93-AykFTsvE-d1ocxmE6IYPqfWT2839QucicsJ43LgiGdUBGi-CaJtZOcmDHuW7FR1Ow' })
+          .then((currentToken) => {
+              if (currentToken) {
+                  set(ref(db, 'fcmTokens/' + user.uid), currentToken);
+              }
+          }).catch((err) => console.log('Token Error:', err));
+      } else if (Notification.permission !== 'denied') {
+          document.getElementById('notifyBtn').style.display = 'block';
       }
     } else {
       window.location.replace("login.html");
     }
   });
 
-  // नोटिफिकेशन चालू करने का जादू
   window.enableNotifications = () => {
       Notification.requestPermission().then((permission) => {
           if (permission === 'granted') {
@@ -226,7 +231,7 @@
                   }
               }).catch((err) => console.log('Token Error:', err));
           } else {
-              alert("⚠️ आपने नोटिफिकेशन ब्लॉक कर दिया है। इसे चालू करने के लिए ब्राउज़र की सेटिंग में जाएँ।");
+              alert("⚠️ आपने नोटिफिकेशन ब्लॉक कर दिया है।");
           }
       });
   };
