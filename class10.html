@@ -11,12 +11,23 @@
         .back-btn { background: white; color: #1976D2; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; text-decoration: none; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         .back-btn:active { transform: scale(0.95); }
         
-        .subject-card { background: white; margin: 20px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-top: 5px solid; text-align: left; }
-        .subject-card h2 { margin-top: 0; margin-bottom: 5px;}
-        .subject-desc { color: #555; line-height: 1.5; margin-bottom: 15px; font-size: 14px; }
+        .container { padding: 20px; text-align: left; }
         
-        .download-btn { display: inline-block; color: white; padding: 12px 20px; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 5px; cursor: pointer; border: none; font-size: 16px; box-shadow: 0 3px 6px rgba(0,0,0,0.2); width: 100%; text-align: center; transition: 0.2s;}
-        .download-btn:active { transform: scale(0.98); }
+        /* टच करने वाला मुख्य बटन (Accordion) */
+        .accordion { background-color: white; color: #333; cursor: pointer; padding: 18px; width: 100%; border: none; text-align: left; outline: none; font-size: 18px; font-weight: bold; border-radius: 10px; margin-top: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.3s; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid #1976D2; }
+        .accordion.active, .accordion:hover { background-color: #e3f2fd; }
+        
+        /* प्लस (+) और माइनस (-) का निशान */
+        .accordion:after { content: '\002B'; font-size: 24px; color: #777; font-weight: bold; }
+        .accordion.active:after { content: "\2212"; color: #1976D2; }
+        
+        /* छुपने वाला डब्बा (Panel) */
+        .panel { padding: 0 15px; background-color: white; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05) inset; }
+        
+        /* चैप्टर डाउनलोड करने वाला बटन */
+        .chapter-btn { display: block; background: #f9f9f9; color: #444; padding: 12px 15px; text-decoration: none; border-radius: 8px; font-weight: bold; margin: 10px 0; cursor: pointer; border: 1px solid #ddd; font-size: 15px; text-align: left; transition: 0.2s; width: 100%; box-sizing: border-box; }
+        .chapter-btn:hover { background: #e8f5e9; border-color: #2E7D32; color: #2E7D32; }
+        .chapter-btn:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
@@ -26,40 +37,39 @@
     <a href="index.html" class="back-btn">⬅️ वापस</a>
 </header>
 
-<div class="subject-card" style="border-top-color: #2E7D32;">
-    <h2 style="color: #2E7D32;">📐 गणित (Mathematics)</h2>
-    <p class="subject-desc">10वीं बोर्ड के लिए गणित के सबसे बेहतरीन, आसान और VVI प्रश्न।</p>
-    <button class="download-btn" onclick="downloadPdf('math')" style="background: #2E7D32;">📥 Math PDF डाउनलोड करें</button>
-</div>
+<div class="container">
+    
+    <button class="accordion" style="border-left-color: #1976D2;">🔬 विज्ञान (Science)</button>
+    <div class="panel">
+        <button class="chapter-btn" onclick="downloadPdf('sci_ch1')">📄 Lesson 1: रासायनिक अभिक्रियाएँ एवं समीकरण</button>
+        <button class="chapter-btn" onclick="downloadPdf('sci_ch2')">📄 Lesson 2: अम्ल, क्षारक एवं लवण</button>
+        <button class="chapter-btn" onclick="downloadPdf('sci_ch3')">📄 Lesson 3: धातु एवं अधातु</button>
+        <button class="chapter-btn" onclick="downloadPdf('sci_ch4')">📄 Lesson 4: कार्बन एवं उसके यौगिक</button>
+        <button class="chapter-btn" onclick="downloadPdf('sci_ch5')">📄 Lesson 5: तत्वों का आवर्त वर्गीकरण</button>
+        <button class="chapter-btn" onclick="downloadPdf('sci_ch6')">📄 Lesson 6: जैव प्रक्रम</button>
+        <p style="text-align:center; font-size:12px; color:gray;">(बाकी चैप्टर जल्द आ रहे हैं...)</p>
+    </div>
 
-<div class="subject-card" style="border-top-color: #1976D2;">
-    <h2 style="color: #1976D2;">🔬 विज्ञान (Science)</h2>
-    <p class="subject-desc">भौतिकी, रसायन और जीव विज्ञान के महत्वपूर्ण चित्र और आसान नोट्स।</p>
-    <button class="download-btn" onclick="downloadPdf('science')" style="background: #1976D2;">📥 Science PDF डाउनलोड करें</button>
-</div>
+    <button class="accordion" style="border-left-color: #E65100;">📜 इतिहास (History)</button>
+    <div class="panel">
+        <button class="chapter-btn" onclick="downloadPdf('hist_ch1')">📄 Lesson 1: यूरोप में राष्ट्रवाद</button>
+        <button class="chapter-btn" onclick="downloadPdf('hist_ch2')">📄 Lesson 2: समाजवाद एवं साम्यवाद</button>
+        <button class="chapter-btn" onclick="downloadPdf('hist_ch3')">📄 Lesson 3: हिंद-चीन में राष्ट्रवादी आंदोलन</button>
+        <button class="chapter-btn" onclick="downloadPdf('hist_ch4')">📄 Lesson 4: भारत में राष्ट्रवाद</button>
+        <button class="chapter-btn" onclick="downloadPdf('hist_ch5')">📄 Lesson 5: अर्थव्यवस्था और आजीविका</button>
+        <button class="chapter-btn" onclick="downloadPdf('hist_ch6')">📄 Lesson 6: शहरीकरण एवं शहरी जीवन</button>
+        <button class="chapter-btn" onclick="downloadPdf('hist_ch7')">📄 Lesson 7: व्यापार और भूमंडलीकरण</button>
+        <button class="chapter-btn" onclick="downloadPdf('hist_ch8')">📄 Lesson 8: प्रेस संस्कृति एवं राष्ट्रवाद</button>
+    </div>
 
-<div class="subject-card" style="border-top-color: #E65100;">
-    <h2 style="color: #E65100;">🌍 सामाजिक विज्ञान (Social Science)</h2>
-    <p class="subject-desc">इतिहास, भूगोल, नागरिक शास्त्र और अर्थशास्त्र के 100% लड़ने वाले प्रश्न।</p>
-    <button class="download-btn" onclick="downloadPdf('social')" style="background: #E65100;">📥 Social Science PDF डाउनलोड करें</button>
-</div>
+    <button class="accordion" style="border-left-color: #2E7D32;">📐 गणित (Mathematics)</button>
+    <div class="panel">
+        <button class="chapter-btn" onclick="downloadPdf('math_ch1')">📄 Lesson 1: वास्तविक संख्याएँ</button>
+        <button class="chapter-btn" onclick="downloadPdf('math_ch2')">📄 Lesson 2: बहुपद (Polynomials)</button>
+        <button class="chapter-btn" onclick="downloadPdf('math_ch3')">📄 Lesson 3: दो चर वाले रैखिक समीकरण</button>
+        <p style="text-align:center; font-size:12px; color:gray;">(बाकी चैप्टर जल्द आ रहे हैं...)</p>
+    </div>
 
-<div class="subject-card" style="border-top-color: #009688;">
-    <h2 style="color: #009688;">📘 हिंदी (Hindi)</h2>
-    <p class="subject-desc">कहानी, कविता और व्याकरण के शॉर्टकट नोट्स।</p>
-    <button class="download-btn" onclick="downloadPdf('hindi')" style="background: #009688;">📥 Hindi PDF डाउनलोड करें</button>
-</div>
-
-<div class="subject-card" style="border-top-color: #8E24AA;">
-    <h2 style="color: #8E24AA;">📙 संस्कृत (Sanskrit)</h2>
-    <p class="subject-desc">अनुवाद, पत्र लेखन और श्लोक के अर्थ एकदम सरल भाषा में।</p>
-    <button class="download-btn" onclick="downloadPdf('sanskrit')" style="background: #8E24AA;">📥 Sanskrit PDF डाउनलोड करें</button>
-</div>
-
-<div class="subject-card" style="border-top-color: #607D8B;">
-    <h2 style="color: #607D8B;">📝 अंग्रेजी (English)</h2>
-    <p class="subject-desc">ग्रामर और किताबों के सवालों के आसान जवाब।</p>
-    <button class="download-btn" onclick="downloadPdf('english')" style="background: #607D8B;">📥 English PDF डाउनलोड करें</button>
 </div>
 
 <script type="module">
@@ -81,7 +91,6 @@
 
   let pdfLinks = {};
 
-  // एडमिन पैनल से सभी PDF के लिंक खींचने का स्मार्ट तरीका
   const pdfRef = ref(db, 'appData/pdfs');
   onValue(pdfRef, (snapshot) => {
       const data = snapshot.val();
@@ -90,17 +99,29 @@
       }
   });
 
-  // बटन दबाने पर क्या होगा
-  window.downloadPdf = (subject) => {
-      let link = pdfLinks[subject] || "";
-      
+  // यह कोड बटनों को टच करने पर खोलने और बंद करने का जादू करता है
+  var acc = document.getElementsByClassName("accordion");
+  for (var i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      } 
+    });
+  }
+
+  window.downloadPdf = (chapterId) => {
+      let link = pdfLinks[chapterId] || "";
       if(link && link.trim() !== "") {
           if (!link.startsWith('http://') && !link.startsWith('https://')) {
               link = 'https://' + link;
           }
           window.open(link, "_blank");
       } else {
-          alert("🚧 काम चल रहा है! सोनू सर जल्द ही यहाँ 10वीं के बेस्ट PDF नोट्स अपलोड करेंगे।");
+          alert("🚧 काम चल रहा है! सोनू सर जल्द ही इस चैप्टर का PDF अपलोड करेंगे।");
       }
   };
 </script>
