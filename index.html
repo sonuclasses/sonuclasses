@@ -29,8 +29,9 @@
         .dropdown button:hover { background: var(--bg-light); }
         .btn-logout { color: #ff5252 !important; border-top: 1px solid var(--border-color) !important; }
 
-        .news-ticker { background-color: var(--primary-blue); color: white; padding: 10px; overflow: hidden; white-space: nowrap; cursor: pointer; font-weight: bold; }
-        .news-ticker span { display: inline-block; animation: marquee 20s linear infinite; padding-left: 100%; }
+        /* न्यूज़ टिकर की फिक्स की गई सेटिंग */
+        .news-ticker { background-color: var(--primary-blue); color: white; padding: 10px; overflow: hidden; white-space: nowrap; cursor: pointer; font-weight: bold; height: 25px; display: flex; align-items: center; }
+        .news-ticker span { display: inline-block; white-space: nowrap; animation: marquee 30s linear infinite; padding-left: 100%; font-size: 15px; }
         @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
         .hero-section { display: flex; flex-wrap: wrap-reverse; align-items: center; justify-content: center; padding: 30px 20px; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); margin: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
@@ -100,7 +101,7 @@
 </header>
 
 <div class="news-ticker" onclick="showModal('news-modal')">
-    <span id="news-text-display">📢 आज का ताज़ा न्यूज़: बोर्ड परीक्षा 2027 के लिए विशेष नोट्स। 📢</span>
+    <span id="news-text-display">📢 आज का ताज़ा न्यूज़... 📢</span>
 </div>
 
 <div class="hero-section">
@@ -225,7 +226,8 @@
   onValue(newsRef, (snapshot) => {
       const data = snapshot.val();
       if(data) {
-          document.getElementById('news-text-display').innerText = "📢 आज का ताज़ा न्यूज़: " + data + " 📢";
+          // अब न्यूज़ एकदम एक लाइन में सेट होकर चलेगी
+          document.getElementById('news-text-display').innerText = "📢 " + data.replace(/\n/g, " | ") + " 📢";
           document.getElementById('news-modal-text').innerText = data;
       }
   });
