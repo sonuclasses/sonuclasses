@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1976D2">
+    <title>Class 6 Notes - Sonu Classes</title>
+    <style>
+        :root { --primary-green: #2E7D32; --primary-blue: #1976D2; --bg-light: #f4f4f9; --text-color: #333; --box-bg: white; --border-color: #ddd; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); color: var(--text-color); margin: 0; padding: 0; }
+        header { background-color: var(--primary-blue); color: white; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        h1 { margin: 0; font-size: 20px; display: flex; align-items: center; gap: 10px; }
+        .back-btn { background: white; color: var(--primary-blue); padding: 8px 15px; border: none; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        
+        .container { padding: 20px; max-width: 800px; margin: auto; }
+        
+        .subject-card { background: var(--box-bg); margin-bottom: 15px; border-radius: 10px; border: 1px solid var(--border-color); overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .subject-header { padding: 15px 20px; background: #f8f9fa; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 18px; font-weight: bold; border-bottom: 1px solid transparent; transition: 0.3s; }
+        .subject-header:hover { background: #e9ecef; }
+        .subject-header.active { border-bottom: 1px solid var(--border-color); background: #e3f2fd; color: var(--primary-blue); }
+        
+        .lesson-list { display: none; padding: 15px; background: white; }
+        .lesson-list.show { display: block; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .lesson-btn { display: block; width: 100%; text-align: left; padding: 15px; margin-bottom: 10px; background: white; border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); text-decoration: none; font-size: 15px; font-weight: 500; transition: 0.2s; box-sizing: border-box; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .lesson-btn:hover { border-color: var(--primary-blue); color: var(--primary-blue); background: #f8f9fa; transform: translateX(5px); }
+        
+        /* Icons styling */
+        .icon-math { color: #E65100; }
+        .icon-sci { color: #2E7D32; }
+        .icon-sst { color: #1565C0; }
+        .icon-lang { color: #C2185B; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>📚 Class 6 Notes</h1>
+    <a href="index.html" class="back-btn">⬅ वापस होम</a>
+</header>
+
+<div class="container">
+    
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-sci">🔬</span> विज्ञान (Science)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <a href="#" class="lesson-btn">📄 Lesson 1: भोजन: यह कहाँ से आता है?</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: भोजन के घटक</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: तंतु से वस्त्र तक</a>
+            <p style="text-align:center; color:gray; font-size: 13px; margin-top: 10px;">(बाकी चैप्टर जल्द आ रहे हैं...)</p>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-math">📐</span> गणित (Mathematics)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <a href="#" class="lesson-btn">📄 Lesson 1: अपनी संख्याओं की जानकारी</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: पूर्ण संख्याएँ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: संख्याओं के साथ खेलना</a>
+            <p style="text-align:center; color:gray; font-size: 13px; margin-top: 10px;">(बाकी चैप्टर जल्द आ रहे हैं...)</p>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-sst">🌍</span> सामाजिक विज्ञान (SST)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <a href="#" class="lesson-btn">📄 इतिहास: क्या, कब, कहाँ और कैसे?</a>
+            <a href="#" class="lesson-btn">📄 भूगोल: सौरमंडल में पृथ्वी</a>
+            <a href="#" class="lesson-btn">📄 नागरिक शास्त्र: विविधता की समझ</a>
+            <p style="text-align:center; color:gray; font-size: 13px; margin-top: 10px;">(बाकी चैप्टर जल्द आ रहे हैं...)</p>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-lang">📝</span> हिंदी (Hindi)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <a href="#" class="lesson-btn">📄 Lesson 1: वह चिड़िया जो</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: बचपन</a>
+            <p style="text-align:center; color:gray; font-size: 13px; margin-top: 10px;">(बाकी चैप्टर जल्द आ रहे हैं...)</p>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-lang">🅰️</span> अंग्रेज़ी (English)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <a href="#" class="lesson-btn">📄 Lesson 1: Who Did Patrick's Homework?</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: How the Dog Found Himself a New Master!</a>
+            <p style="text-align:center; color:gray; font-size: 13px; margin-top: 10px;">(बाकी चैप्टर जल्द आ रहे हैं...)</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function toggleLessons(header) {
+        const content = header.nextElementSibling;
+        const icon = header.querySelector("span:last-child");
+        
+        if (content.classList.contains("show")) {
+            content.classList.remove("show");
+            header.classList.remove("active");
+            icon.innerText = "➕";
+        } else {
+            // पहले से खुले हुए डब्बों को बंद करें
+            document.querySelectorAll(".lesson-list").forEach(list => list.classList.remove("show"));
+            document.querySelectorAll(".subject-header").forEach(h => {
+                h.classList.remove("active");
+                h.querySelector("span:last-child").innerText = "➕";
+            });
+            
+            // जिस पर क्लिक किया है उसे खोलें
+            content.classList.add("show");
+            header.classList.add("active");
+            icon.innerText = "➖";
+        }
+    }
+</script>
+</body>
+</html>
