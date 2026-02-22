@@ -41,7 +41,7 @@
 
         #notifyBtn { display: none; background: #00ACC1; color: white; padding: 12px 20px; border: none; border-radius: 30px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2); margin: 10px auto; }
 
-        .class-btn { display: inline-block; width: 140px; padding: 15px; margin: 10px; background: var(--primary-blue); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .class-btn { display: inline-block; width: 120px; padding: 15px; margin: 10px; background: var(--primary-blue); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .class-btn:active { transform: scale(0.9); background: #1565C0; }
         .action-btn { display: block; width: 250px; margin: 15px auto; padding: 15px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; }
         .btn-quiz { background: #FFD600; color: #333; }
@@ -90,7 +90,7 @@
     <div class="hero-text">
         <p class="welcome-msg">आपका स्वागत है, <span id="student-name" style="color: var(--primary-green);">लोडिंग...</span></p>
         <h2>Welcome to <br><span style="color: var(--primary-blue);">Sonu Classes</span></h2>
-        <p class="sub-text">10वीं बोर्ड परीक्षा 2027 और IAS की तैयारी के लिए फ्री नोट्स एवं सर्वश्रेष्ठ क्विज़।</p>
+        <p class="sub-text">बोर्ड परीक्षा 2027 और IAS की तैयारी के लिए फ्री नोट्स एवं सर्वश्रेष्ठ क्विज़।</p>
         <button class="hero-btn" onclick="showModal('notes-modal')">📚 पढ़ना शुरू करें</button>
     </div>
     <div class="hero-image">
@@ -102,9 +102,13 @@
 <button id="installAppBtn">📲 App इंस्टॉल करें</button>
 
 <div class="container" style="margin-bottom: 20px;">
+    <a href="#" class="class-btn">Class 6</a>
+    <a href="#" class="class-btn">Class 7</a>
     <a href="#" class="class-btn">Class 8</a>
     <a href="#" class="class-btn">Class 9</a>
     <a href="class10.html" class="class-btn">Class 10</a>
+    <a href="#" class="class-btn">Class 11</a>
+    <a href="#" class="class-btn">Class 12</a>
 </div>
 
 <button class="action-btn btn-quiz" onclick="startQuiz()">📝 ऑनलाइन टेस्ट दें</button>
@@ -202,7 +206,6 @@
       document.getElementById('student-name').innerText = currentStudentName;
       if(user.photoURL) document.getElementById('user-photo').src = user.photoURL;
       
-      // यह है नया फिक्स! जो वेबसाइट को सही रास्ता और आपको रिजल्ट बताएगा
       if (Notification.permission === 'granted') {
           navigator.serviceWorker.register('./firebase-messaging-sw.js')
           .then((registration) => {
@@ -213,11 +216,9 @@
               .then((currentToken) => {
                   if (currentToken) {
                       set(ref(db, 'fcmTokens/' + user.uid), currentToken);
-                      // यह अलर्ट आपको बताएगा कि काम सफल हो गया
-                      alert("✅ कनेक्शन सक्सेसफुल! जादुई टोकन Firebase में सेव हो गया है।");
                   }
-              }).catch((err) => alert('टोकन एरर: ' + err.message));
-          }).catch((err) => alert('फाइल एरर: ' + err.message));
+              }).catch((err) => console.log('Token Error: ' + err.message));
+          }).catch((err) => console.log('SW Error: ' + err.message));
       } else if (Notification.permission !== 'denied') {
           document.getElementById('notifyBtn').style.display = 'block';
       }
