@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1976D2">
+    <title>Class 11 Science - Sonu Classes</title>
+    <style>
+        :root { --primary-green: #2E7D32; --primary-blue: #1976D2; --bg-light: #f4f4f9; --text-color: #333; --box-bg: white; --border-color: #ddd; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); color: var(--text-color); margin: 0; padding: 0; }
+        header { background-color: var(--primary-blue); color: white; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        h1 { margin: 0; font-size: 20px; display: flex; align-items: center; gap: 10px; }
+        .back-btn { background: white; color: var(--primary-blue); padding: 8px 15px; border: none; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        
+        .container { padding: 20px; max-width: 800px; margin: auto; }
+        
+        .subject-card { background: var(--box-bg); margin-bottom: 15px; border-radius: 10px; border: 1px solid var(--border-color); overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .subject-header { padding: 15px 20px; background: #f8f9fa; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 18px; font-weight: bold; border-bottom: 1px solid transparent; transition: 0.3s; }
+        .subject-header:hover { background: #e9ecef; }
+        .subject-header.active { border-bottom: 1px solid var(--border-color); background: #e3f2fd; color: var(--primary-blue); }
+        
+        .lesson-list { display: none; padding: 15px; background: white; }
+        .lesson-list.show { display: block; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .lesson-btn { display: block; width: 100%; text-align: left; padding: 15px; margin-bottom: 10px; background: white; border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); text-decoration: none; font-size: 15px; font-weight: 500; transition: 0.2s; box-sizing: border-box; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .lesson-btn:hover { border-color: var(--primary-blue); color: var(--primary-blue); background: #f8f9fa; transform: translateX(5px); }
+        
+        .icon-phy { color: #1976D2; }
+        .icon-chem { color: #E65100; }
+        .icon-math { color: #D32F2F; }
+        .icon-bio { color: #2E7D32; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🔬 11th Science</h1>
+    <a href="class11.html" class="back-btn">⬅ पीछे जाएँ</a>
+</header>
+
+<div class="container">
+    
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-phy">⚡</span> भौतिक विज्ञान (Physics)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <a href="#" class="lesson-btn">📄 Lesson 1: मात्रक और मापन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: सरल रेखा में गति</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: समतल में गति</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: गति के नियम</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: कार्य, ऊर्जा और शक्ति</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: कणों के निकाय तथा घूर्णी गति</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: गुरुत्वाकर्षण</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: ठोसों के यांत्रिक गुण</a>
+            <a href="#" class="lesson-btn">📄 Lesson 9: तरलों के यांत्रिकी गुण</a>
+            <a href="#" class="lesson-btn">📄 Lesson 10: द्रव्य के तापीय गुण</a>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-chem">🧪</span> रसायन विज्ञान (Chemistry)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <a href="#" class="lesson-btn">📄 Lesson 1: रसायन विज्ञान की कुछ मूल अवधारणाएँ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: परमाणु की संरचना</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: तत्त्वों का वर्गीकरण एवं गुणधर्मों में आवर्तिता</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: रासायनिक आबंधन तथा आण्विक संरचना</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: ऊष्मागतिकी</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: साम्यावस्था</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: अपचयोपचय अभिक्रियाएँ (Redox)</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: कार्बनिक रसायन: कुछ आधारभूत सिद्धांत</a>
+            <a href="#" class="lesson-btn">📄 Lesson 9: हाइड्रोकार्बन</a>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-math">📐</span> गणित (Mathematics)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <a href="#" class="lesson-btn">📄 Lesson 1: समुच्चय (Sets)</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: संबंध एवं फलन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: त्रिकोणमितीय फलन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: सम्मिश्र संख्याएँ और द्विघातीय समीकरण</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: रैखिक असमिकाएँ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: क्रमचय और संचय</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: द्विपद प्रमेय</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: अनुक्रम तथा श्रेणी</a>
+            <a href="#" class="lesson-btn">📄 Lesson 9: सरल रेखाएँ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 10: शंकु परिच्छेद</a>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-bio">🧬</span> जीव विज्ञान (Biology)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <a href="#" class="lesson-btn">📄 Lesson 1: जीव जगत्</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: जीव जगत् का वर्गीकरण</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: वनस्पति जगत्</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: प्राणि जगत्</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: पुष्पी पादपों की आकारिकी</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: पुष्पी पादपों का शारीर</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: प्राणियों में संरचनात्मक संगठन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: कोशिका: जीवन की इकाई</a>
+            <a href="#" class="lesson-btn">📄 Lesson 9: जैव अणु</a>
+            <a href="#" class="lesson-btn">📄 Lesson 10: कोशिका चक्र और कोशिका विभाजन</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function toggleLessons(header) {
+        const content = header.nextElementSibling;
+        const icon = header.querySelector("span:last-child");
+        
+        if (content.classList.contains("show")) {
+            content.classList.remove("show");
+            header.classList.remove("active");
+            icon.innerText = "➕";
+        } else {
+            document.querySelectorAll(".lesson-list").forEach(list => list.classList.remove("show"));
+            document.querySelectorAll(".subject-header").forEach(h => {
+                h.classList.remove("active");
+                h.querySelector("span:last-child").innerText = "➕";
+            });
+            content.classList.add("show");
+            header.classList.add("active");
+            icon.innerText = "➖";
+        }
+    }
+</script>
+</body>
+</html>
