@@ -40,28 +40,42 @@
     <textarea id="news-input" rows="3" placeholder="यहाँ न्यूज़ टाइप करें..."></textarea>
     <button onclick="updateNews()" class="publish-btn">🚀 न्यूज़ पब्लिश करें</button>
     
-    <div class="section-title">📝 2. नया 'ऑनलाइन टेस्ट' का सवाल डालें</div>
+    <div class="section-title">📝 2. नया 'ऑनलाइन टेस्ट' डालें</div>
     <label>सवाल (Question):</label>
     <input type="text" id="q-text" placeholder="जैसे: भारत की राजधानी क्या है?">
-    
-    <label>ऑप्शन A:</label>
-    <input type="text" id="opt-a" placeholder="ऑप्शन A लिखें">
-    <label>ऑप्शन B:</label>
-    <input type="text" id="opt-b" placeholder="ऑप्शन B लिखें">
-    <label>ऑप्शन C:</label>
-    <input type="text" id="opt-c" placeholder="ऑप्शन C लिखें">
-    <label>ऑप्शन D:</label>
-    <input type="text" id="opt-d" placeholder="ऑप्शन D लिखें">
-    
+    <label>ऑप्शन A:</label><input type="text" id="opt-a">
+    <label>ऑप्शन B:</label><input type="text" id="opt-b">
+    <label>ऑप्शन C:</label><input type="text" id="opt-c">
+    <label>ऑप्शन D:</label><input type="text" id="opt-d">
     <label style="color: #D32F2F; font-weight: bold;">सही जवाब कौन सा है?</label>
     <select id="correct-ans">
-        <option value="A">A</option>
-        <option value="B">B</option>
-        <option value="C">C</option>
-        <option value="D">D</option>
+        <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option>
     </select>
+    <button onclick="addQuizQuestion()" class="publish-btn" style="background: #E65100;">➕ टेस्ट में सवाल डालें</button>
+
+    <div class="section-title">📚 3. लेसन का PDF/Notes लिंक डालें</div>
     
-    <button onclick="addQuizQuestion()" class="publish-btn" style="background: #E65100;">➕ सवाल डेटाबेस में डालें</button>
+    <label>कौन सी क्लास है?</label>
+    <select id="pdf-class">
+        <option value="class6">Class 6</option>
+        <option value="class7">Class 7</option>
+        <option value="class8">Class 8</option>
+        <option value="class9">Class 9</option>
+        <option value="class10">Class 10</option>
+        <option value="class11">Class 11</option>
+        <option value="class12">Class 12</option>
+    </select>
+
+    <label>विषय का नाम (English में लिखें):</label>
+    <input type="text" id="pdf-sub" placeholder="जैसे: Science, Math, Hindi...">
+
+    <label>लेसन (पाठ) नंबर:</label>
+    <input type="number" id="pdf-lesson" placeholder="जैसे: 1, 2, 3...">
+
+    <label>PDF का Google Drive लिंक:</label>
+    <input type="text" id="pdf-link" placeholder="यहाँ अपनी PDF का लिंक पेस्ट करें...">
+
+    <button onclick="addPdfLink()" class="publish-btn" style="background: #1565C0;">🔗 PDF लिंक वेबसाइट पर भेजें</button>
 
     <a href="index.html" class="home-link" target="_blank">🌐 अपनी मेन वेबसाइट देखें</a>
 </div>
@@ -83,22 +97,17 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // पासवर्ड (sonu2026)
     window.checkPassword = () => {
         if(document.getElementById('admin-pass').value === "sonu2026") {
             document.getElementById('login-box').style.display = "none";
             document.getElementById('admin-dashboard').style.display = "block";
-            loadCurrentNews();
+            onValue(ref(db, 'appData/news'), (snapshot) => {
+                if(snapshot.exists()) document.getElementById('news-input').value = snapshot.val();
+            });
         } else {
             document.getElementById('error-msg').style.display = "block";
         }
     };
-
-    function loadCurrentNews() {
-        onValue(ref(db, 'appData/news'), (snapshot) => {
-            if(snapshot.exists()) document.getElementById('news-input').value = snapshot.val();
-        });
-    }
 
     window.updateNews = () => {
         const text = document.getElementById('news-input').value;
@@ -107,24 +116,28 @@
     };
 
     window.addQuizQuestion = () => {
-        const q = document.getElementById('q-text').value;
-        const a = document.getElementById('opt-a').value;
-        const b = document.getElementById('opt-b').value;
-        const c = document.getElementById('opt-c').value;
-        const d = document.getElementById('opt-d').value;
-        const ans = document.getElementById('correct-ans').value;
-
+        const q = document.getElementById('q-text').value, a = document.getElementById('opt-a').value, b = document.getElementById('opt-b').value, c = document.getElementById('opt-c').value, d = document.getElementById('opt-d').value, ans = document.getElementById('correct-ans').value;
         if(!q || !a || !b) return alert("❌ कृपया सवाल और कम से कम 2 ऑप्शन जरूर भरें!");
+        push(ref(db, 'appData/quizzes'), { question: q, optionA: a, optionB: b, optionC: c, optionD: d, answer: ans }).then(() => {
+            alert("🎉 सवाल टेस्ट में जुड़ गया!");
+            document.getElementById('q-text').value = ''; document.getElementById('opt-a').value = ''; document.getElementById('opt-b').value = ''; document.getElementById('opt-c').value = ''; document.getElementById('opt-d').value = '';
+        });
+    };
 
-        const newQRef = push(ref(db, 'appData/quizzes'));
-        set(newQRef, { question: q, optionA: a, optionB: b, optionC: c, optionD: d, answer: ans })
+    // नया PDF अपलोड करने वाला फंक्शन
+    window.addPdfLink = () => {
+        const cls = document.getElementById('pdf-class').value;
+        const sub = document.getElementById('pdf-sub').value.trim().toLowerCase();
+        const les = document.getElementById('pdf-lesson').value.trim();
+        const link = document.getElementById('pdf-link').value.trim();
+
+        if(!sub || !les || !link) return alert("❌ कृपया विषय का नाम, लेसन नंबर और लिंक जरूर डालें!");
+
+        set(ref(db, `appData/notes/${cls}/${sub}/lesson${les}`), link)
         .then(() => {
-            alert("🎉 बहुत बढ़िया! सवाल आपके ऑनलाइन टेस्ट में जुड़ गया है!");
-            document.getElementById('q-text').value = '';
-            document.getElementById('opt-a').value = '';
-            document.getElementById('opt-b').value = '';
-            document.getElementById('opt-c').value = '';
-            document.getElementById('opt-d').value = '';
+            alert(`✅ सक्सेस! ${cls} के ${sub} (Lesson ${les}) का PDF सेव हो गया है!`);
+            document.getElementById('pdf-lesson').value = '';
+            document.getElementById('pdf-link').value = '';
         });
     };
 </script>
