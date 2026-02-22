@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#E65100">
+    <title>Class 12 Commerce - Sonu Classes</title>
+    <style>
+        :root { --primary-green: #2E7D32; --primary-blue: #1976D2; --bg-light: #f4f4f9; --text-color: #333; --box-bg: white; --border-color: #ddd; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); color: var(--text-color); margin: 0; padding: 0; }
+        header { background-color: #E65100; color: white; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        h1 { margin: 0; font-size: 20px; display: flex; align-items: center; gap: 10px; }
+        .back-btn { background: white; color: #E65100; padding: 8px 15px; border: none; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        
+        .container { padding: 20px; max-width: 800px; margin: auto; }
+        
+        .subject-card { background: var(--box-bg); margin-bottom: 15px; border-radius: 10px; border: 1px solid var(--border-color); overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .subject-header { padding: 15px 20px; background: #f8f9fa; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 18px; font-weight: bold; border-bottom: 1px solid transparent; transition: 0.3s; }
+        .subject-header:hover { background: #e9ecef; }
+        .subject-header.active { border-bottom: 1px solid var(--border-color); background: #fff3e0; color: #E65100; }
+        
+        .lesson-list { display: none; padding: 15px; background: white; }
+        .lesson-list.show { display: block; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .lesson-btn { display: block; width: 100%; text-align: left; padding: 15px; margin-bottom: 10px; background: white; border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); text-decoration: none; font-size: 15px; font-weight: 500; transition: 0.2s; box-sizing: border-box; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .lesson-btn:hover { border-color: #E65100; color: #E65100; background: #f8f9fa; transform: translateX(5px); }
+        
+        .icon-acc { color: #E65100; }
+        .icon-bst { color: #1565C0; }
+        .icon-eco { color: #2E7D32; }
+        .icon-eng { color: #C2185B; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>📊 12th Commerce</h1>
+    <a href="class12.html" class="back-btn">⬅ पीछे जाएँ</a>
+</header>
+
+<div class="container">
+    
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-acc">📘</span> लेखाशास्त्र (Accountancy)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <h4 style="margin: 10px 0; color: #E65100;">भाग 1 - अलाभकारी संस्थाएँ एवं साझेदारी</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 1: अलाभकारी संस्थाओं के लिए लेखांकन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: साझेदारी लेखांकन: आधारभूत अवधारणाएँ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: साझेदारी फर्म का पुनर्गठन: साझेदार का प्रवेश</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: साझेदार की सेवानिवृत्ति/मृत्यु</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: साझेदारी फर्म का विघटन</a>
+            <h4 style="margin: 10px 0; color: #E65100;">भाग 2 - कंपनी खाते एवं वित्तीय विवरण</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 6: अंश पूँजी के लिए लेखांकन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: ऋणपत्रों का निर्गम एवं मोचन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: कंपनी के वित्तीय विवरण</a>
+            <a href="#" class="lesson-btn">📄 Lesson 9: वित्तीय विवरणों का विश्लेषण</a>
+            <a href="#" class="lesson-btn">📄 Lesson 10: लेखांकन अनुपात</a>
+            <a href="#" class="lesson-btn">📄 Lesson 11: रोकड़ प्रवाह विवरण</a>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-bst">🏢</span> व्यवसाय अध्ययन (Business Studies)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <h4 style="margin: 10px 0; color: #1565C0;">भाग 1 - प्रबंध के सिद्धांत और कार्य</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 1: प्रबंध की प्रकृति एवं महत्व</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: प्रबंध के सिद्धांत</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: व्यावसायिक पर्यावरण</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: नियोजन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: संगठन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: नियुक्तिकरण</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: निर्देशन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: नियंत्रण</a>
+            <h4 style="margin: 10px 0; color: #1565C0;">भाग 2 - व्यावसायिक वित्त और विपणन</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 9: व्यावसायिक वित्त</a>
+            <a href="#" class="lesson-btn">📄 Lesson 10: वित्तीय बाज़ार</a>
+            <a href="#" class="lesson-btn">📄 Lesson 11: विपणन (Marketing)</a>
+            <a href="#" class="lesson-btn">📄 Lesson 12: उपभोक्ता संरक्षण</a>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-eco">📈</span> अर्थशास्त्र (Economics)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <h4 style="margin: 10px 0; color: #2E7D32;">समष्टि अर्थशास्त्र (Macroeconomics)</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 1: परिचय</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: राष्ट्रीय आय का लेखांकन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: मुद्रा और बैंकिंग</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: आय और रोज़गार का निर्धारण</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: सरकारी बजट और अर्थव्यवस्था</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: खुली अर्थव्यवस्था - समष्टि अर्थशास्त्र</a>
+            <h4 style="margin: 10px 0; color: #2E7D32;">भारतीय अर्थव्यवस्था का विकास</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 1: स्वतंत्रता की पूर्व संध्या पर भारतीय अर्थव्यवस्था</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: भारतीय अर्थव्यवस्था (1950-1990)</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: उदारीकरण, निजीकरण और वैश्वीकरण</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: निर्धनता</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: भारत में मानव पूँजी निर्माण</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: ग्रामीण विकास</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: रोज़गार: संवृद्धि, अनौपचारीकरण एवं अन्य मुद्दे</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: आधारिक संरचना</a>
+            <a href="#" class="lesson-btn">📄 Lesson 9: पर्यावरण और धारणीय विकास</a>
+            <a href="#" class="lesson-btn">📄 Lesson 10: भारत और उसके पड़ोसी देशों के तुलनात्मक विकास अनुभव</a>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-eng">🅰️</span> अंग्रेज़ी (English)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <h4 style="margin: 10px 0; color: #C2185B;">Flamingo</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 1: The Last Lesson</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: Lost Spring</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: Deep Water</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: The Rattrap</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: Indigo</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: Poets and Pancakes</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: The Interview</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: Going Places</a>
+            <h4 style="margin: 10px 0; color: #C2185B;">Vistas</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 1: The Third Level</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: The Tiger King</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: Journey to the end of the Earth</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: The Enemy</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: On the Face of It</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: Memories of Childhood</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function toggleLessons(header) {
+        const content = header.nextElementSibling;
+        const icon = header.querySelector("span:last-child");
+        
+        if (content.classList.contains("show")) {
+            content.classList.remove("show");
+            header.classList.remove("active");
+            icon.innerText = "➕";
+        } else {
+            document.querySelectorAll(".lesson-list").forEach(list => list.classList.remove("show"));
+            document.querySelectorAll(".subject-header").forEach(h => {
+                h.classList.remove("active");
+                h.querySelector("span:last-child").innerText = "➕";
+            });
+            content.classList.add("show");
+            header.classList.add("active");
+            icon.innerText = "➖";
+        }
+    }
+</script>
+</body>
+</html>
