@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1976D2">
+    <title>Class 8 Notes - Sonu Classes</title>
+    <style>
+        :root { --primary-green: #2E7D32; --primary-blue: #1976D2; --bg-light: #f4f4f9; --text-color: #333; --box-bg: white; --border-color: #ddd; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); color: var(--text-color); margin: 0; padding: 0; }
+        header { background-color: var(--primary-blue); color: white; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        h1 { margin: 0; font-size: 20px; display: flex; align-items: center; gap: 10px; }
+        .back-btn { background: white; color: var(--primary-blue); padding: 8px 15px; border: none; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        
+        .container { padding: 20px; max-width: 800px; margin: auto; }
+        
+        .subject-card { background: var(--box-bg); margin-bottom: 15px; border-radius: 10px; border: 1px solid var(--border-color); overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .subject-header { padding: 15px 20px; background: #f8f9fa; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 18px; font-weight: bold; border-bottom: 1px solid transparent; transition: 0.3s; }
+        .subject-header:hover { background: #e9ecef; }
+        .subject-header.active { border-bottom: 1px solid var(--border-color); background: #e3f2fd; color: var(--primary-blue); }
+        
+        .lesson-list { display: none; padding: 15px; background: white; }
+        .lesson-list.show { display: block; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .lesson-btn { display: block; width: 100%; text-align: left; padding: 15px; margin-bottom: 10px; background: white; border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); text-decoration: none; font-size: 15px; font-weight: 500; transition: 0.2s; box-sizing: border-box; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .lesson-btn:hover { border-color: var(--primary-blue); color: var(--primary-blue); background: #f8f9fa; transform: translateX(5px); }
+        
+        /* Icons styling */
+        .icon-math { color: #E65100; }
+        .icon-sci { color: #2E7D32; }
+        .icon-sst { color: #00838F; }
+        .icon-lang { color: #C2185B; }
+        .icon-sans { color: #E91E63; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>📚 Class 8 Notes</h1>
+    <a href="index.html" class="back-btn">⬅ वापस होम</a>
+</header>
+
+<div class="container">
+    
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-lang">📝</span> हिंदी (वसंत भाग 3)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <a href="#" class="lesson-btn">📄 Lesson 1: लाख की चूड़ियाँ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: बस की यात्रा</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: दीवानों की हस्ती</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: भगवान के डाकिए</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: क्या निराश हुआ जाए</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: यह सबसे कठिन समय नहीं</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: कबीर की साखियाँ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: सुदामा चरित</a>
+            <a href="#" class="lesson-btn">📄 Lesson 9: जहाँ पहिया है</a>
+            <a href="#" class="lesson-btn">📄 Lesson 10: अकबरी लोटा</a>
+            <a href="#" class="lesson-btn">📄 Lesson 11: सूर के पद</a>
+            <a href="#" class="lesson-btn">📄 Lesson 12: पानी की कहानी</a>
+            <a href="#" class="lesson-btn">📄 Lesson 13: बाज और साँप</a>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-sci">🔬</span> विज्ञान (Science)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <a href="#" class="lesson-btn">📄 Lesson 1: फसल उत्पादन एवं प्रबंध</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: सूक्ष्मजीव: मित्र एवं शत्रु</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: कोयला और पेट्रोलियम</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: दहन और ज्वाला</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: पौधे एवं जंतुओं का संरक्षण</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: जंतुओं में जनन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: किशोरावस्था की ओर</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: बल तथा दाब</a>
+            <a href="#" class="lesson-btn">📄 Lesson 9: घर्षण</a>
+            <a href="#" class="lesson-btn">📄 Lesson 10: ध्वनि</a>
+            <a href="#" class="lesson-btn">📄 Lesson 11: विधुत धारा के रासानिक प्रभाव</a>
+            <a href="#" class="lesson-btn">📄 Lesson 12: कुछ प्राकृतिक परिघटनाएँ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 13: प्रकाश</a>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-math">📐</span> गणित (Mathematics)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <a href="#" class="lesson-btn">📄 Lesson 1: परिमेय संख्याएँ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: एक चर वाले रैखिक समीकरण</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: चतुर्भुजों को समझना</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: आँकड़ो का प्रबंधन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: वर्ग और वर्गमूल</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: घन और घनमूल</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: राशियों की तुलना</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: बीजीय व्यंजक एवं सर्वसमिकाएँ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 9: क्षेत्रमिति</a>
+            <a href="#" class="lesson-btn">📄 Lesson 10: घातांक और घात</a>
+            <a href="#" class="lesson-btn">📄 Lesson 11: सीधा और प्रतिलोम समानुपात</a>
+            <a href="#" class="lesson-btn">📄 Lesson 12: गुणनखंडन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 13: आलेखों से परिचय</a>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-sst">🌍</span> सामाजिक विज्ञान (SST)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <h4 style="margin: 10px 0; color: #00838F;">इतिहास (हमारे अतीत - 3)</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 1: कैसे, कब और कहाँ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: व्यापार से साम्राज्य तक</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: ग्रामीण क्षेत्र पर शासन चलाना</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: आदिवासी, दीकु और एक स्वर्ण युग की कल्पना</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: जब जनता बगावत करती है</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: देशी जनता को सभ्य बनाना राष्ट्र को शिक्षित करना</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: महिलाएँ, जाति एवं सुधार</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: राष्ट्रीय आंदोलन का संघटन: 1870 के दशक से 1947 तक</a>
+            <h4 style="margin: 10px 0; color: #00838F;">भूगोल (संसाधन एवं विकास)</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 1: संसाधन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: भूमि, मृदा, जल, प्राकृतिक वनस्पति और वन्य जीवन संसाधन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: कृषि</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: उद्योग</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: मानव संसाधन</a>
+            <h4 style="margin: 10px 0; color: #00838F;">नागरिक शास्त्र (सामाजिक एवं राजनीतिक जीवन - 3)</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 1: भारतीय संविधान</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: धर्मनिरपेक्षता की समझ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: हमें संसद क्यों चाहिए?</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: कानूनों की समझ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: न्यायपालिका</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: हमारी आपराधिक न्याय प्रणाली</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: हाशियाकरण की समझ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: हाशियाकरण से निपटना</a>
+            <a href="#" class="lesson-btn">📄 Lesson 9: जनसुविधाएँ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 10: कानून और सामाजिक न्याय</a>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-lang">🅰️</span> अंग्रेज़ी (Honeydew)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <a href="#" class="lesson-btn">📄 Lesson 1: The Best Christmas Present in the World</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: The Tsunami</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: Glimpses of the Past</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: Bepin Choudhury’s Lapse of Memory</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: The Summit Within</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: This is Jody’s Fawn</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: A Visit to Cambridge</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: A Short Monsoon Diary</a>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-sans">🕉️</span> संस्कृत (रुचिरा भाग 3)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <a href="#" class="lesson-btn">📄 Lesson 1: सुभाषितानि</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: बिलस्य वाणी न कदापि मे श्रुता</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: डिजीभारतम्</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: सदैव पुरतो निधेहि चरणम्</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: कण्टकेनैव कण्टकम्</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: गृहं शून्यं सुतां विना</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: भारतजनताऽहम्</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: संसारसागरस्य नायकाः</a>
+            <a href="#" class="lesson-btn">📄 Lesson 9: सप्तभगिन्यः</a>
+            <a href="#" class="lesson-btn">📄 Lesson 10: नीतिनवनीतम्</a>
+            <a href="#" class="lesson-btn">📄 Lesson 11: सावित्री बाई फुले</a>
+            <a href="#" class="lesson-btn">📄 Lesson 12: कः रक्षति कः रक्षितः</a>
+            <a href="#" class="lesson-btn">📄 Lesson 13: क्षितौ राजते भारतस्वर्णभूमिः</a>
+            <a href="#" class="lesson-btn">📄 Lesson 14: आर्यभटः</a>
+            <a href="#" class="lesson-btn">📄 Lesson 15: प्रहेलिकाः</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function toggleLessons(header) {
+        const content = header.nextElementSibling;
+        const icon = header.querySelector("span:last-child");
+        
+        if (content.classList.contains("show")) {
+            content.classList.remove("show");
+            header.classList.remove("active");
+            icon.innerText = "➕";
+        } else {
+            document.querySelectorAll(".lesson-list").forEach(list => list.classList.remove("show"));
+            document.querySelectorAll(".subject-header").forEach(h => {
+                h.classList.remove("active");
+                h.querySelector("span:last-child").innerText = "➕";
+            });
+            content.classList.add("show");
+            header.classList.add("active");
+            icon.innerText = "➖";
+        }
+    }
+</script>
+</body>
+</html>
