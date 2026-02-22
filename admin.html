@@ -3,166 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Sonu Classes</title>
+    <meta name="theme-color" content="#D32F2F">
+    <title>Master Admin - Sonu Classes</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f9; padding: 20px; text-align: center; }
-        .admin-box { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 450px; margin: auto; text-align: left; border-top: 5px solid #1976D2;}
-        h2 { color: #1976D2; text-align: center; margin-top: 0; }
-        label { font-weight: bold; color: #333; display: block; margin-top: 15px; font-size: 15px; }
-        input, textarea, select { width: 100%; padding: 12px; margin-top: 8px; border: 2px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none; transition: 0.3s; font-family: inherit; }
-        input:focus, textarea:focus, select:focus { border-color: #1976D2; }
-        .save-btn { background: #2E7D32; color: white; padding: 12px; border: none; border-radius: 8px; width: 100%; font-weight: bold; margin-top: 10px; cursor: pointer; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.2s; }
-        .save-btn:active { transform: scale(0.95); }
-        .divider { border-top: 2px dashed #ccc; margin: 30px 0; }
-        .del-btn { background:#d32f2f; color:white; border:none; padding:10px; border-radius:8px; margin-bottom:15px; cursor:pointer; width:100%; font-weight:bold; }
-        .del-btn:active { transform: scale(0.95); }
+        body { font-family: 'Segoe UI', sans-serif; background: #eceff1; text-align: center; padding: 20px; margin: 0; }
+        .login-box, .admin-dashboard { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); max-width: 500px; margin: 20px auto; border-top: 5px solid #D32F2F; text-align: left; }
+        .admin-dashboard { display: none; }
+        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0 20px 0; border: 2px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 15px; }
+        input:focus, textarea:focus, select:focus { border-color: #1976D2; outline: none; }
+        button { background: #D32F2F; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.3s; }
+        button:hover { background: #B71C1C; transform: translateY(-2px); }
+        .publish-btn { background: #2E7D32; }
+        .publish-btn:hover { background: #1B5E20; }
+        h2 { color: #D32F2F; margin-top: 0; text-align: center; }
+        .section-title { font-size: 18px; color: #1976D2; border-bottom: 2px solid #1976D2; padding-bottom: 5px; margin-bottom: 15px; margin-top: 30px; }
+        .home-link { display: block; margin-top: 30px; color: #1976D2; text-decoration: none; font-weight: bold; padding: 12px; border: 2px solid #1976D2; border-radius: 8px; text-align: center; transition: 0.3s;}
+        .home-link:hover { background: #1976D2; color: white; }
     </style>
 </head>
 <body>
 
-<div class="admin-box">
-    <h2>🔒 खूफ़िया एडमिन पैनल</h2>
+<div class="login-box" id="login-box" style="text-align: center;">
+    <h2>🔒 मास्टर कंट्रोल रूम</h2>
+    <p style="color: gray; font-size: 14px;">सिर्फ Sonu Sir के लिए</p>
+    <input type="password" id="admin-pass" placeholder="अपना खुफ़िया पासवर्ड डालें...">
+    <button onclick="checkPassword()">अंदर जाएँ ➡️</button>
+    <p id="error-msg" style="color: red; font-weight: bold; display: none; margin-top: 15px;">❌ गलत पासवर्ड!</p>
+</div>
+
+<div class="admin-dashboard" id="admin-dashboard">
+    <h2>🎛️ Sonu Classes - Admin</h2>
+    <p style="text-align: center; color: #2E7D32; font-weight: bold;">वेलकम बॉस! 🫡</p>
     
-    <div style="background: #ffebee; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center;">
-        <h3 style="color:#c62828; margin-top:0;">🏆 लीडरबोर्ड कंट्रोल</h3>
-        <p style="font-size:12px; color:#555;">अगर किसी का नाम अटक गया है, तो यहाँ से पुराना लीडरबोर्ड साफ़ करें।</p>
-        <button class="del-btn" onclick="clearLeaderboard()">🗑️ पूरा लीडरबोर्ड डिलीट करें</button>
-    </div>
-
-    <div style="background: #e3f2fd; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-        <label style="margin-top:0; color:#1976D2;">📢 आज का न्यूज़ बदलें:</label>
-        <textarea id="news_input" rows="3" placeholder="यहाँ आज की ताज़ा न्यूज़ टाइप करें..."></textarea>
-        <button class="save-btn" style="background:#1976D2;" onclick="saveNews()">💾 न्यूज़ अपडेट करें</button>
-    </div>
-
-    <div style="background: #fff3e0; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-        <h3 style="color:#E65100; margin-top:0; text-align:center;">📝 ऑनलाइन टेस्ट बनाएँ</h3>
-        <button class="del-btn" onclick="clearQuiz()">🗑️ पहले पुराना टेस्ट डिलीट करें</button>
-        <label style="margin-top:0;">नया सवाल (Question) टाइप करें:</label>
-        <input type="text" id="quiz_q" placeholder="सवाल...">
-        <input type="text" id="quiz_a" placeholder="ऑप्शन A">
-        <input type="text" id="quiz_b" placeholder="ऑप्शन B">
-        <input type="text" id="quiz_c" placeholder="ऑप्शन C">
-        <input type="text" id="quiz_d" placeholder="ऑप्शन D">
-        <label style="font-size: 13px;">सही जवाब चुनें:</label>
-        <select id="quiz_ans">
-            <option value="A">सही जवाब: Option A</option>
-            <option value="B">सही जवाब: Option B</option>
-            <option value="C">सही जवाब: Option C</option>
-            <option value="D">सही जवाब: Option D</option>
-        </select>
-        <button class="save-btn" style="background:#E65100;" onclick="addQuestion()">➕ यह सवाल टेस्ट में जोड़ें</button>
-        <h4 style="margin-bottom:5px; color:#333;">अभी टेस्ट में जुड़े हुए सवाल:</h4>
-        <ul id="quiz-list" style="font-size:13px; text-align:left; padding-left:20px; color:#555; margin-top:5px;">
-            <li>लोड हो रहा है...</li>
-        </ul>
-    </div>
-
-    <div class="divider"></div>
-
-    <div style="background: #e8f5e9; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-        <h3 style="color:#2E7D32; text-align:center; margin-top:0;">📚 PDF नोट्स अपलोड</h3>
-        <label>विषय और लेसन चुनें:</label>
-        <select id="pdf_chapter_select" onchange="updatePdfInput()">
-            <optgroup label="🔬 विज्ञान (Science)">
-                <option value="sci_ch1">Lesson 1: रासायनिक अभिक्रियाएँ...</option>
-                <option value="sci_ch2">Lesson 2: अम्ल, क्षारक एवं लवण</option>
-            </optgroup>
-            <optgroup label="📜 इतिहास (History)">
-                <option value="hist_ch1">Lesson 1: यूरोप में राष्ट्रवाद</option>
-                <option value="hist_ch2">Lesson 2: समाजवाद एवं साम्यवाद</option>
-            </optgroup>
-            <optgroup label="📐 गणित (Mathematics)">
-                <option value="math_ch1">Lesson 1: वास्तविक संख्याएँ</option>
-            </optgroup>
-        </select>
-        <label>PDF लिंक पेस्ट करें:</label>
-        <input type="text" id="pdf_link_input" placeholder="यहाँ Google Drive का लिंक पेस्ट करें...">
-        <button class="save-btn" onclick="savePdfLink()">💾 लिंक सेव करें</button>
-    </div>
+    <div class="section-title">📢 1. मेन वेबसाइट की न्यूज़ बदलें</div>
+    <label>आज की ताज़ा खबर:</label>
+    <textarea id="news-input" rows="3" placeholder="यहाँ न्यूज़ टाइप करें..."></textarea>
+    <button onclick="updateNews()" class="publish-btn">🚀 न्यूज़ पब्लिश करें</button>
     
-    <a href="index.html" style="display:block; text-align:center; color:#1976D2; text-decoration:none; font-weight:bold; padding: 10px; border: 2px solid #1976D2; border-radius: 8px;">🌐 वेबसाइट के होमपेज पर जाएँ</a>
+    <div class="section-title">📝 2. नया 'ऑनलाइन टेस्ट' का सवाल डालें</div>
+    <label>सवाल (Question):</label>
+    <input type="text" id="q-text" placeholder="जैसे: भारत की राजधानी क्या है?">
+    
+    <label>ऑप्शन A:</label>
+    <input type="text" id="opt-a" placeholder="ऑप्शन A लिखें">
+    <label>ऑप्शन B:</label>
+    <input type="text" id="opt-b" placeholder="ऑप्शन B लिखें">
+    <label>ऑप्शन C:</label>
+    <input type="text" id="opt-c" placeholder="ऑप्शन C लिखें">
+    <label>ऑप्शन D:</label>
+    <input type="text" id="opt-d" placeholder="ऑप्शन D लिखें">
+    
+    <label style="color: #D32F2F; font-weight: bold;">सही जवाब कौन सा है?</label>
+    <select id="correct-ans">
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+    </select>
+    
+    <button onclick="addQuizQuestion()" class="publish-btn" style="background: #E65100;">➕ सवाल डेटाबेस में डालें</button>
+
+    <a href="index.html" class="home-link" target="_blank">🌐 अपनी मेन वेबसाइट देखें</a>
 </div>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-  import { getDatabase, ref, set, get, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
-    authDomain: "sonuclasses-b19db.firebaseapp.com",
-    databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com",
-    projectId: "sonuclasses-b19db",
-    storageBucket: "sonuclasses-b19db.firebasestorage.app",
-    messagingSenderId: "166740602272",
-    appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5"
-  };
+    const firebaseConfig = {
+        apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
+        authDomain: "sonuclasses-b19db.firebaseapp.com",
+        databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com",
+        projectId: "sonuclasses-b19db",
+        storageBucket: "sonuclasses-b19db.firebasestorage.app",
+        messagingSenderId: "166740602272",
+        appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5"
+    };
 
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-  let allPdfData = {};
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
 
-  get(ref(db, 'appData/pdfs')).then((snapshot) => { if (snapshot.exists()) { allPdfData = snapshot.val(); updatePdfInput(); } });
-  get(ref(db, 'appData/news')).then((snapshot) => { if (snapshot.exists()) document.getElementById('news_input').value = snapshot.val(); });
+    // पासवर्ड (sonu2026)
+    window.checkPassword = () => {
+        if(document.getElementById('admin-pass').value === "sonu2026") {
+            document.getElementById('login-box').style.display = "none";
+            document.getElementById('admin-dashboard').style.display = "block";
+            loadCurrentNews();
+        } else {
+            document.getElementById('error-msg').style.display = "block";
+        }
+    };
 
-  const quizRef = ref(db, 'appData/quizzes');
-  onValue(quizRef, (snapshot) => {
-      const list = document.getElementById('quiz-list');
-      list.innerHTML = '';
-      if(snapshot.exists()) {
-          let count = 1;
-          snapshot.forEach((child) => { list.innerHTML += `<li>${count}. ${child.val().question}</li>`; count++; });
-      } else {
-          list.innerHTML = '<li>अभी कोई सवाल नहीं जुड़ा है।</li>';
-      }
-  });
+    function loadCurrentNews() {
+        onValue(ref(db, 'appData/news'), (snapshot) => {
+            if(snapshot.exists()) document.getElementById('news-input').value = snapshot.val();
+        });
+    }
 
-  window.updatePdfInput = () => {
-      const selectedChapter = document.getElementById('pdf_chapter_select').value;
-      document.getElementById('pdf_link_input').value = allPdfData[selectedChapter] || "";
-  };
+    window.updateNews = () => {
+        const text = document.getElementById('news-input').value;
+        if(text.trim() === "") return alert("न्यूज़ खाली है!");
+        set(ref(db, 'appData/news'), text).then(() => alert("✅ न्यूज़ लाइव हो गई!"));
+    };
 
-  window.savePdfLink = () => {
-      const selectedChapter = document.getElementById('pdf_chapter_select').value;
-      const linkValue = document.getElementById('pdf_link_input').value;
-      if(linkValue.trim() === "") { alert("⚠️ पहले लिंक पेस्ट करें!"); return; }
-      set(ref(db, 'appData/pdfs/' + selectedChapter), linkValue).then(() => { alert("🎉 लिंक सेव हो गया!"); allPdfData[selectedChapter] = linkValue; });
-  };
+    window.addQuizQuestion = () => {
+        const q = document.getElementById('q-text').value;
+        const a = document.getElementById('opt-a').value;
+        const b = document.getElementById('opt-b').value;
+        const c = document.getElementById('opt-c').value;
+        const d = document.getElementById('opt-d').value;
+        const ans = document.getElementById('correct-ans').value;
 
-  window.saveNews = () => {
-      const newsText = document.getElementById('news_input').value;
-      if(newsText.trim() === "") { alert("⚠️ पहले न्यूज़ टाइप करें!"); return; }
-      set(ref(db, 'appData/news'), newsText).then(() => alert("🎉 न्यूज़ अपडेट हो गई!"));
-  };
+        if(!q || !a || !b) return alert("❌ कृपया सवाल और कम से कम 2 ऑप्शन जरूर भरें!");
 
-  window.addQuestion = () => {
-      const q = document.getElementById('quiz_q').value;
-      const a = document.getElementById('quiz_a').value;
-      const b = document.getElementById('quiz_b').value;
-      if(q.trim() === "" || a.trim() === "" || b.trim() === "") { alert("⚠️ कृपया सवाल और कम से कम 2 ऑप्शन ज़रूर डालें!"); return; }
-      push(ref(db, 'appData/quizzes'), {
-          question: q, optionA: a, optionB: b, 
-          optionC: document.getElementById('quiz_c').value, 
-          optionD: document.getElementById('quiz_d').value, 
-          answer: document.getElementById('quiz_ans').value
-      }).then(() => {
-          alert("🎉 सवाल सफलतापूर्वक टेस्ट में जुड़ गया!");
-          document.getElementById('quiz_q').value = ''; document.getElementById('quiz_a').value = ''; document.getElementById('quiz_b').value = ''; document.getElementById('quiz_c').value = ''; document.getElementById('quiz_d').value = '';
-      });
-  };
-
-  window.clearQuiz = () => {
-      if(confirm("क्या आप सच में पुराना टेस्ट डिलीट करके नया टेस्ट बनाना चाहते हैं?")) {
-          remove(ref(db, 'appData/quizzes')).then(() => alert("पुराना टेस्ट डिलीट हो गया! अब आप नए सवाल जोड़ सकते हैं।"));
-      }
-  };
-
-  // लीडरबोर्ड साफ़ करने का जादू
-  window.clearLeaderboard = () => {
-      if(confirm("क्या आप सच में पूरा लीडरबोर्ड साफ़ करना चाहते हैं?")) {
-          remove(ref(db, 'leaderboard')).then(() => alert("🎉 लीडरबोर्ड एकदम नया (खाली) हो गया है! अब वेबसाइट पर जाकर नया टेस्ट दें।"));
-      }
-  };
+        const newQRef = push(ref(db, 'appData/quizzes'));
+        set(newQRef, { question: q, optionA: a, optionB: b, optionC: c, optionD: d, answer: ans })
+        .then(() => {
+            alert("🎉 बहुत बढ़िया! सवाल आपके ऑनलाइन टेस्ट में जुड़ गया है!");
+            document.getElementById('q-text').value = '';
+            document.getElementById('opt-a').value = '';
+            document.getElementById('opt-b').value = '';
+            document.getElementById('opt-c').value = '';
+            document.getElementById('opt-d').value = '';
+        });
+    };
 </script>
 </body>
 </html>
