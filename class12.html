@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1976D2">
+    <title>Class 12 Streams - Sonu Classes</title>
+    <style>
+        :root { --primary-green: #2E7D32; --primary-blue: #1976D2; --bg-light: #f4f4f9; --text-color: #333; --box-bg: white; --border-color: #ddd; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); color: var(--text-color); margin: 0; padding: 0; text-align: center; }
+        header { background-color: var(--primary-blue); color: white; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        h1 { margin: 0; font-size: 20px; display: flex; align-items: center; gap: 10px; }
+        .back-btn { background: white; color: var(--primary-blue); padding: 8px 15px; border: none; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        
+        .container { padding: 30px 20px; max-width: 800px; margin: auto; }
+        
+        h2 { color: #555; margin-bottom: 30px; font-size: 22px; }
+
+        .stream-card { display: block; background: var(--box-bg); margin-bottom: 25px; border-radius: 15px; border: 2px solid var(--primary-blue); overflow: hidden; box-shadow: 0 6px 10px rgba(0,0,0,0.1); text-decoration: none; color: var(--text-color); transition: transform 0.3s, box-shadow 0.3s; padding: 30px 20px; }
+        .stream-card:active { transform: scale(0.95); }
+        
+        .stream-icon { font-size: 50px; margin-bottom: 10px; }
+        .stream-title { font-size: 24px; font-weight: bold; color: var(--primary-blue); margin: 0; }
+        .stream-desc { font-size: 15px; color: gray; margin-top: 10px; font-weight: 500;}
+        
+        /* अलग-अलग स्ट्रीम के रंग */
+        .card-science { border-color: #2E7D32; }
+        .card-science .stream-title { color: #2E7D32; }
+        
+        .card-arts { border-color: #C2185B; }
+        .card-arts .stream-title { color: #C2185B; }
+        
+        .card-commerce { border-color: #E65100; }
+        .card-commerce .stream-title { color: #E65100; }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>📚 Class 12</h1>
+    <a href="index.html" class="back-btn">⬅ वापस होम</a>
+</header>
+
+<div class="container">
+    <h2>अपनी 12वीं की स्ट्रीम (Stream) चुनें:</h2>
+    
+    <a href="class12_science.html" class="stream-card card-science">
+        <div class="stream-icon">🔬</div>
+        <h3 class="stream-title">Science (विज्ञान)</h3>
+        <p class="stream-desc">Physics, Chemistry, Math, Biology</p>
+    </a>
+
+    <a href="class12_arts.html" class="stream-card card-arts">
+        <div class="stream-icon">🎨</div>
+        <h3 class="stream-title">Arts / Humanities (कला)</h3>
+        <p class="stream-desc">History, Geography, Political Science, Hindi</p>
+    </a>
+
+    <a href="class12_commerce.html" class="stream-card card-commerce">
+        <div class="stream-icon">📊</div>
+        <h3 class="stream-title">Commerce (वाणिज्य)</h3>
+        <p class="stream-desc">Accountancy, Business Studies, Economics</p>
+    </a>
+
+</div>
+
+</body>
+</html>
