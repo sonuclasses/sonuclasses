@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#C2185B">
+    <title>Class 11 Arts - Sonu Classes</title>
+    <style>
+        :root { --primary-green: #2E7D32; --primary-blue: #1976D2; --bg-light: #f4f4f9; --text-color: #333; --box-bg: white; --border-color: #ddd; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); color: var(--text-color); margin: 0; padding: 0; }
+        header { background-color: #C2185B; color: white; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        h1 { margin: 0; font-size: 20px; display: flex; align-items: center; gap: 10px; }
+        .back-btn { background: white; color: #C2185B; padding: 8px 15px; border: none; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        
+        .container { padding: 20px; max-width: 800px; margin: auto; }
+        
+        .subject-card { background: var(--box-bg); margin-bottom: 15px; border-radius: 10px; border: 1px solid var(--border-color); overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .subject-header { padding: 15px 20px; background: #f8f9fa; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 18px; font-weight: bold; border-bottom: 1px solid transparent; transition: 0.3s; }
+        .subject-header:hover { background: #e9ecef; }
+        .subject-header.active { border-bottom: 1px solid var(--border-color); background: #fce4ec; color: #C2185B; }
+        
+        .lesson-list { display: none; padding: 15px; background: white; }
+        .lesson-list.show { display: block; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .lesson-btn { display: block; width: 100%; text-align: left; padding: 15px; margin-bottom: 10px; background: white; border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); text-decoration: none; font-size: 15px; font-weight: 500; transition: 0.2s; box-sizing: border-box; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .lesson-btn:hover { border-color: #C2185B; color: #C2185B; background: #f8f9fa; transform: translateX(5px); }
+        
+        .icon-hist { color: #795548; }
+        .icon-geo { color: #00838F; }
+        .icon-pol { color: #1565C0; }
+        .icon-hin { color: #D32F2F; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🎨 11th Arts</h1>
+    <a href="class11.html" class="back-btn">⬅ पीछे जाएँ</a>
+</header>
+
+<div class="container">
+    
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-hist">📜</span> इतिहास (History)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <a href="#" class="lesson-btn">📄 Lesson 1: समय की शुरुआत से</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: लेखन कला और शहरी जीवन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: तीन महाद्वीपों में फैला हुआ साम्राज्य</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: इस्लाम का उदय और विस्तार</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: यायावर साम्राज्य</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: तीन वर्ग</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: बदलती हुई सांस्कृतिक परंपराएँ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: संस्कृतियों का टकराव</a>
+            <a href="#" class="lesson-btn">📄 Lesson 9: औद्योगिक क्रांति</a>
+            <a href="#" class="lesson-btn">📄 Lesson 10: मूल निवासियों का विस्थापन</a>
+            <a href="#" class="lesson-btn">📄 Lesson 11: आधुनिकीकरण के रास्ते</a>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-geo">🌍</span> भूगोल (Geography)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <h4 style="margin: 10px 0; color: #00838F;">भौतिक भूगोल के मूल सिद्धांत</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 1: भूगोल एक विषय के रूप में</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: पृथ्वी की उत्पत्ति एवं विकास</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: पृथ्वी की आंतरिक संरचना</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: महासागरों और महाद्वीपों का वितरण</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: भू-आकृतिक प्रक्रियाएँ</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: भू-आकृतियाँ तथा उनका विकास</a>
+            <h4 style="margin: 10px 0; color: #00838F;">भारत: भौतिक पर्यावरण</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 1: भारत - स्थिति</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: संरचना तथा भू-आकृति विज्ञान</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: अपवाह तंत्र</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: जलवायु</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: प्राकृतिक वनस्पति</a>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-pol">⚖️</span> राजनीति विज्ञान (Political Science)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <h4 style="margin: 10px 0; color: #1565C0;">भारत का संविधान सिद्धांत और व्यवहार</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 1: संविधान: क्यों और कैसे?</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: भारतीय संविधान में अधिकार</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: चुनाव और प्रतिनिधित्व</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: कार्यपालिका</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: विधायिका</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: न्यायपालिका</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: संघवाद</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: स्थानीय शासन</a>
+            <h4 style="margin: 10px 0; color: #1565C0;">राजनीतिक सिद्धांत</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 1: राजनीतिक सिद्धांत: एक परिचय</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: स्वतंत्रता</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: समानता</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: सामाजिक न्याय</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: अधिकार</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: नागरिकता</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: राष्ट्रवाद</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: धर्मनिरपेक्षता</a>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-header" onclick="toggleLessons(this)">
+            <span><span class="icon-hin">📝</span> हिंदी (Hindi)</span>
+            <span>➕</span>
+        </div>
+        <div class="lesson-list">
+            <h4 style="margin: 10px 0; color: #D32F2F;">आरोह (गद्य और काव्य)</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 1: नमक का दारोगा (प्रेमचंद)</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: मियाँ नसीरुद्दीन (कृष्णा सोबती)</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: अपू के साथ ढाई साल (सत्यजित राय)</a>
+            <a href="#" class="lesson-btn">📄 Lesson 4: विदाई-संभाषण (बालमुकुंद गुप्त)</a>
+            <a href="#" class="lesson-btn">📄 Lesson 5: कबीर के पद</a>
+            <a href="#" class="lesson-btn">📄 Lesson 6: मीरा के पद</a>
+            <a href="#" class="lesson-btn">📄 Lesson 7: भवानी प्रसाद मिश्र (घर की याद)</a>
+            <a href="#" class="lesson-btn">📄 Lesson 8: दुष्यंत कुमार (गज़ल)</a>
+            <h4 style="margin: 10px 0; color: #D32F2F;">वितान</h4>
+            <a href="#" class="lesson-btn">📄 Lesson 1: भारतीय गायिकाओं में बेजोड़: लता मंगेशकर</a>
+            <a href="#" class="lesson-btn">📄 Lesson 2: राजस्थान की रजत बूँदें</a>
+            <a href="#" class="lesson-btn">📄 Lesson 3: आलो-आँधारि</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function toggleLessons(header) {
+        const content = header.nextElementSibling;
+        const icon = header.querySelector("span:last-child");
+        
+        if (content.classList.contains("show")) {
+            content.classList.remove("show");
+            header.classList.remove("active");
+            icon.innerText = "➕";
+        } else {
+            document.querySelectorAll(".lesson-list").forEach(list => list.classList.remove("show"));
+            document.querySelectorAll(".subject-header").forEach(h => {
+                h.classList.remove("active");
+                h.querySelector("span:last-child").innerText = "➕";
+            });
+            content.classList.add("show");
+            header.classList.add("active");
+            icon.innerText = "➖";
+        }
+    }
+</script>
+</body>
+</html>
