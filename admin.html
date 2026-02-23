@@ -45,7 +45,7 @@
     <input type="text" id="ai-quiz-topic" placeholder="जैसे: Class 10 Science, प्रकाश संश्लेषण...">
     
     <button onclick="generateAIQuiz()" class="ai-btn" id="ai-quiz-btn">✨ AI से पूरे 5 सवाल बनाएँ</button>
-    <p id="ai-loading" style="display:none; color: #673AB7; font-weight: bold; text-align: center;">AI सोच रहा है और पूरे 5 सवाल बना रहा है... ⏳</p>
+    <p id="ai-loading" style="display:none; color: #673AB7; font-weight: bold; text-align: center;">AI सोच रहा है और 5 सवाल पक्के कर रहा है... ⏳</p>
     
     <button onclick="deleteAllQuizzes()" class="delete-btn">🗑️ वेबसाइट के पुराने सारे सवाल डिलीट करें</button>
     
@@ -113,7 +113,7 @@
         set(ref(db, 'appData/news'), text).then(() => alert("✅ न्यूज़ लाइव हो गई!"));
     };
 
-    // 🌟 Strict AI Logic (ताकि 5 ही सवाल बने) 🌟
+    // 🌟 SUPER STRICT AI LOGIC (No laziness allowed) 🌟
     window.generateAIQuiz = async () => {
         const topic = document.getElementById('ai-quiz-topic').value.trim();
         if(!topic) return alert("❌ कृपया पहले विषय या पाठ का नाम लिखें!");
@@ -127,24 +127,30 @@
         const secret2 = "CBykQafD5nPNwf2ZSw20mPgrEWEgRLDZY"; 
         const apiKey = secret1 + secret2;
 
-        // सख्त निर्देश (Strict Prompt)
-        const prompt = `विषय: "${topic}"। इस विषय पर स्कूली बच्चों के लिए हिंदी में पूरे 5 बहुविकल्पीय प्रश्न (MCQ) बनाएँ।
-        मुझे उत्तर केवल और केवल JSON Array फॉर्मेट में देना। कोई अन्य टेक्स्ट मत लिखना।
-        JSON का फॉर्मेट बिल्कुल ऐसा होना चाहिए (इसमें पूरे 5 सवाल होने ही चाहिए):
+        // अब हम AI को बिल्कुल हिलने का मौका नहीं देंगे
+        const prompt = `विषय: "${topic}"। 
+        तुम्हें एक JSON Array के रूप में ठीक 5 बहुविकल्पीय प्रश्न (MCQs) हिंदी में देने हैं।
+        शर्तें:
+        1. बिल्कुल 5 सवाल होने चाहिए, 1 कम नहीं, 1 ज्यादा नहीं।
+        2. JSON के अलावा कुछ मत लिखना।
+        फॉर्मेट:
         [
-          {"question": "पहला सवाल", "optionA": "विकल्प 1", "optionB": "विकल्प 2", "optionC": "विकल्प 3", "optionD": "विकल्प 4", "answer": "A"},
-          {"question": "दूसरा सवाल", "optionA": "विकल्प 1", "optionB": "विकल्प 2", "optionC": "विकल्प 3", "optionD": "विकल्प 4", "answer": "B"},
-          {"question": "तीसरा सवाल", "optionA": "विकल्प 1", "optionB": "विकल्प 2", "optionC": "विकल्प 3", "optionD": "विकल्प 4", "answer": "C"},
-          {"question": "चौथा सवाल", "optionA": "विकल्प 1", "optionB": "विकल्प 2", "optionC": "विकल्प 3", "optionD": "विकल्प 4", "answer": "D"},
-          {"question": "पाँचवाँ सवाल", "optionA": "विकल्प 1", "optionB": "विकल्प 2", "optionC": "विकल्प 3", "optionD": "विकल्प 4", "answer": "A"}
-        ]
-        ध्यान रहे answer में सिर्फ A, B, C या D लिखना है।`;
+          {"question": "सवाल 1", "optionA": "A", "optionB": "B", "optionC": "C", "optionD": "D", "answer": "A"},
+          {"question": "सवाल 2", "optionA": "A", "optionB": "B", "optionC": "C", "optionD": "D", "answer": "B"},
+          {"question": "सवाल 3", "optionA": "A", "optionB": "B", "optionC": "C", "optionD": "D", "answer": "C"},
+          {"question": "सवाल 4", "optionA": "A", "optionB": "B", "optionC": "C", "optionD": "D", "answer": "D"},
+          {"question": "सवाल 5", "optionA": "A", "optionB": "B", "optionC": "C", "optionD": "D", "answer": "A"}
+        ]`;
 
         try {
             const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                body: JSON.stringify({ 
+                    contents: [{ parts: [{ text: prompt }] }],
+                    // यह लाइन AI को मजबूर करेगी कि वो सिर्फ JSON (बिना फालतू टेक्स्ट के) ही दे
+                    generationConfig: { responseMimeType: "application/json" }
+                })
             });
             
             const data = await response.json();
@@ -152,16 +158,15 @@
             if(data.error) throw new Error(data.error.message);
             
             let reply = data.candidates[0].content.parts[0].text;
+            let questions = JSON.parse(reply);
             
-            let jsonStr = reply;
-            const match = reply.match(/\[[\s\S]*\]/); 
-            if (match) {
-                jsonStr = match[0];
-            }
-            
-            let questions = JSON.parse(jsonStr);
             if(!Array.isArray(questions)) {
-                questions = [questions]; // अगर गलती से एक ही सवाल भेजा तो भी वेबसाइट क्रैश न हो
+                questions = [questions]; 
+            }
+
+            // अगर AI ने फिर भी 5 से कम सवाल दिए, तो हम उसे चेक करेंगे
+            if(questions.length < 5) {
+                console.warn("AI ने कम सवाल दिए, लेकिन हम उन्हें अपलोड कर रहे हैं।");
             }
 
             for(let q of questions) {
