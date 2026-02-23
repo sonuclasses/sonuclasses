@@ -58,14 +58,21 @@
         .ai-chat-box { display: none; position: fixed; bottom: 85px; left: 20px; width: 90%; max-width: 350px; height: 400px; background: var(--box-bg); border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1000; flex-direction: column; overflow: hidden; border: 2px solid #1976D2; }
         .ai-chat-header { background: #1976D2; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; font-size: 16px; }
         .ai-chat-body { flex: 1; padding: 15px; overflow-y: auto; background: var(--bg-light); display: flex; flex-direction: column; gap: 10px; }
-        .ai-msg, .user-msg { padding: 10px 15px; border-radius: 15px; max-width: 85%; font-size: 14px; line-height: 1.4; word-wrap: break-word; }
+        .ai-msg, .user-msg { padding: 10px 15px; border-radius: 15px; max-width: 85%; font-size: 14px; line-height: 1.4; word-wrap: break-word; position: relative; }
         .ai-msg { background: #e3f2fd; align-self: flex-start; border-bottom-left-radius: 0; color: #000; border: 1px solid #bbdefb; }
         .user-msg { background: #2E7D32; color: white; align-self: flex-end; border-bottom-right-radius: 0; }
         .error-msg { background: #ffebee; color: #d32f2f; border-color: #ffcdd2; }
+        
         .ai-chat-input { display: flex; border-top: 1px solid var(--border-color); background: var(--box-bg); }
         .ai-chat-input input { flex: 1; padding: 12px; border: none; outline: none; background: transparent; color: var(--text-color); font-size: 15px; }
-        .ai-chat-input button { background: #1976D2; color: white; border: none; padding: 0 20px; cursor: pointer; font-weight: bold; font-size: 16px; }
-
+        .ai-chat-input button { background: #1976D2; color: white; border: none; padding: 0 15px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; }
+        
+        /* Mic & Speaker Button Styles */
+        .mic-btn { background: #E65100 !important; border-right: 1px solid white !important; font-size: 18px !important; }
+        .mic-btn:active { background: #D84315 !important; }
+        .speak-btn { background: none; border: none; font-size: 20px; cursor: pointer; float: right; margin-left: 10px; padding: 0; }
+        .speak-btn:hover { transform: scale(1.1); }
+        
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; }
         .modal-content { background: var(--box-bg); color: var(--text-color); padding: 25px; border-radius: 20px; width: 90%; max-width: 400px; max-height: 85vh; overflow-y: auto; position: relative; text-align: left; border: 1px solid var(--border-color); }
         .close-btn { background: #333; color: white; border: none; padding: 12px 20px; border-radius: 5px; margin-top: 20px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; text-align: center; }
@@ -143,10 +150,14 @@
             <button onclick="toggleAIChat()" style="background:none;border:none;color:white;font-size:20px;cursor:pointer;">✖</button>
         </div>
         <div class="ai-chat-body" id="aiChatBody">
-            <div class="ai-msg">नमस्ते! मैं <b>Sonu AI</b> हूँ। 🤖<br>आप मुझसे पढ़ाई से जुड़ा कोई भी डाउट पूछ सकते हैं। बताइए मैं आपकी क्या मदद करूँ?</div>
+            <div class="ai-msg">
+                <button class="speak-btn" onclick="speakAnswer(this.nextElementSibling.innerHTML)" title="सुनें">🔊</button>
+                <span>नमस्ते प्यारे बच्चों! मैं <b>Sonu AI</b> हूँ। 🤖<br>आप मुझसे पढ़ाई से जुड़ा कोई भी डाउट पूछ सकते हैं। बताइए मैं आपकी क्या मदद करूँ?</span>
+            </div>
         </div>
         <div class="ai-chat-input">
             <input type="text" id="aiInput" placeholder="अपना सवाल यहाँ टाइप करें..." onkeypress="if(event.key === 'Enter') sendAIMessage()">
+            <button class="mic-btn" onclick="startVoiceInput()" title="बोलकर पूछें">🎤</button>
             <button onclick="sendAIMessage()">➤</button>
         </div>
     </div>
@@ -289,10 +300,57 @@
 
   window.onload = () => { if(localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-mode'); document.getElementById('theme-btn').innerText = '☀️'; } };
 
-  // 🌟 AI CHATBOT LOGIC (SECRET HIDDEN KEY) 🌟
+  // 🌟 AI CHATBOT LOGIC (VOICE INPUT & OUTPUT) 🌟
   window.toggleAIChat = () => {
       const box = document.getElementById('aiChatBox');
       box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+  };
+
+  // 🎤 बोलकर टाइप करने वाला फीचर
+  window.startVoiceInput = () => {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+          alert("माफ़ करें, आपका ब्राउज़र आवाज़ नहीं सपोर्ट करता। कृपया Chrome का इस्तेमाल करें!");
+          return;
+      }
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'hi-IN'; // हिंदी भाषा सेट
+      
+      const inputField = document.getElementById('aiInput');
+      inputField.placeholder = "सुन रहा हूँ... बोलिए 🎤";
+      
+      recognition.start();
+
+      recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript;
+          inputField.value = transcript;
+          inputField.placeholder = "अपना सवाल यहाँ टाइप करें...";
+          sendAIMessage(); // बोलते ही अपने आप सेंड हो जाएगा
+      };
+
+      recognition.onspeechend = () => {
+          recognition.stop();
+          inputField.placeholder = "अपना सवाल यहाँ टाइप करें...";
+      };
+
+      recognition.onerror = (event) => {
+          inputField.placeholder = "अपना सवाल यहाँ टाइप करें...";
+      };
+  };
+
+  // 🔊 AI का जवाब पढ़कर सुनाने वाला फीचर
+  window.speakAnswer = (htmlText) => {
+      // अगर पहले से कुछ बोल रहा है, तो उसे चुप कराओ
+      window.speechSynthesis.cancel(); 
+      
+      // HTML टैग्स (जैसे <b>, <br>) को हटाकर साफ़ टेक्स्ट निकालना
+      const plainText = htmlText.replace(/<[^>]*>?/gm, ''); 
+      
+      const speech = new SpeechSynthesisUtterance(plainText);
+      speech.lang = 'hi-IN'; // हिंदी में बोलेगा
+      speech.rate = 0.9; // बोलने की स्पीड (थोड़ी आराम से)
+      
+      window.speechSynthesis.speak(speech);
   };
 
   window.sendAIMessage = async () => {
@@ -305,7 +363,7 @@
       input.value = '';
       body.scrollTop = body.scrollHeight;
 
-      // 🌟 चाबी को छुपाने का स्मार्ट तरीका 🌟
+      // आपकी चाबी (सुरक्षित तरीके से)
       const secret1 = "AIzaSy"; 
       const secret2 = "CBykQafD5nPNwf2ZSw20mPgrEWEgRLDZY"; 
       const apiKey = secret1 + secret2;
@@ -328,8 +386,16 @@
               body.innerHTML += `<div class="ai-msg error-msg">❌ Google AI Error: ${data.error.message}</div>`;
           } else if (data.candidates && data.candidates.length > 0) {
               let reply = data.candidates[0].content.parts[0].text;
-              reply = reply.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*/g, '<br>•');
-              body.innerHTML += `<div class="ai-msg">${reply}</div>`;
+              
+              // टेक्स्ट को डिज़ाइन करना (Bold और Bullet points)
+              let formattedReply = reply.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*/g, '<br>•');
+              
+              // नया डिज़ाइन: जवाब के साथ 🔊 का बटन जोड़ना
+              body.innerHTML += `
+                  <div class="ai-msg">
+                      <button class="speak-btn" onclick="speakAnswer(this.nextElementSibling.innerHTML)" title="सुनें">🔊</button>
+                      <span>${formattedReply}</span>
+                  </div>`;
           } else {
               body.innerHTML += `<div class="ai-msg error-msg">❌ कुछ गड़बड़ है, जवाब नहीं आया!</div>`;
           }
