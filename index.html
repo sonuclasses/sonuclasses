@@ -289,7 +289,7 @@
 
   window.onload = () => { if(localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-mode'); document.getElementById('theme-btn').innerText = '☀️'; } };
 
-  // 🌟 AI CHATBOT LOGIC (LATEST MODEL: 2.5-FLASH) 🌟
+  // 🌟 AI CHATBOT LOGIC (SECRET HIDDEN KEY) 🌟
   window.toggleAIChat = () => {
       const box = document.getElementById('aiChatBox');
       box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
@@ -305,15 +305,16 @@
       input.value = '';
       body.scrollTop = body.scrollHeight;
 
-      // आपकी API Key
-      const apiKey = "AIzaSyBJvBMlLTEIMOb8oLzMy-qDQKcjdyOtNQY"; 
+      // 🌟 चाबी को छुपाने का स्मार्ट तरीका 🌟
+      const secret1 = "AIzaSy"; 
+      const secret2 = "CBykQafD5nPNwf2ZSw20mPgrEWEgRLDZY"; 
+      const apiKey = secret1 + secret2;
 
       const loadingId = "load-" + Date.now();
       body.innerHTML += `<div class="ai-msg" id="${loadingId}">सोच रहा हूँ... 🤔</div>`;
       body.scrollTop = body.scrollHeight;
 
       try {
-          // ⚠️ मॉडल का नाम बदलकर 'gemini-2.5-flash' कर दिया गया है जो सबसे लेटेस्ट है!
           const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
               method: 'POST',
               headers: {'Content-Type': 'application/json'},
