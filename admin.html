@@ -19,6 +19,9 @@
         .section-title { font-size: 18px; color: #1976D2; border-bottom: 2px solid #1976D2; padding-bottom: 5px; margin-bottom: 15px; margin-top: 30px; }
         .home-link { display: block; margin-top: 30px; color: #1976D2; text-decoration: none; font-weight: bold; padding: 12px; border: 2px solid #1976D2; border-radius: 8px; text-align: center; transition: 0.3s;}
         .home-link:hover { background: #1976D2; color: white; }
+        
+        /* नया: लेसन का नाम दिखाने वाला डब्बा */
+        #lesson-name-display { margin-top: -15px; margin-bottom: 20px; padding: 10px; background: #E8F5E9; border-left: 4px solid #2E7D32; color: #2E7D32; font-weight: bold; font-size: 14px; border-radius: 4px; display: none; }
     </style>
 </head>
 <body>
@@ -56,21 +59,23 @@
     <div class="section-title">📚 3. लेसन का PDF/Notes लिंक डालें</div>
     
     <label>कौन सी क्लास है?</label>
-    <select id="pdf-class">
+    <select id="pdf-class" onchange="showLessonName()">
+        <option value="class10">Class 10</option>
         <option value="class6">Class 6</option>
         <option value="class7">Class 7</option>
         <option value="class8">Class 8</option>
         <option value="class9">Class 9</option>
-        <option value="class10">Class 10</option>
         <option value="class11">Class 11</option>
         <option value="class12">Class 12</option>
     </select>
 
     <label>विषय का नाम (English में लिखें):</label>
-    <input type="text" id="pdf-sub" placeholder="जैसे: Science, Math, Hindi...">
+    <input type="text" id="pdf-sub" placeholder="जैसे: science, math, history..." oninput="showLessonName()">
 
     <label>लेसन (पाठ) नंबर:</label>
-    <input type="number" id="pdf-lesson" placeholder="जैसे: 1, 2, 3...">
+    <input type="number" id="pdf-lesson" placeholder="जैसे: 1, 2, 3..." oninput="showLessonName()">
+    
+    <div id="lesson-name-display"></div>
 
     <label>PDF का Google Drive लिंक:</label>
     <input type="text" id="pdf-link" placeholder="यहाँ अपनी PDF का लिंक पेस्ट करें...">
@@ -96,6 +101,18 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
+
+    // 🌟 स्मार्ट डिक्शनरी: इसमें लेसन के नाम सेव हैं 🌟
+    const syllabusData = {
+        "class10": {
+            "science": { 1: "रासायनिक अभिक्रियाएँ एवं समीकरण", 2: "अम्ल, क्षारक एवं लवण", 3: "धातु एवं अधातु", 4: "कार्बन एवं उसके यौगिक", 5: "जैव प्रक्रम", 6: "नियंत्रण एवं समन्वय", 7: "जीव जनन कैसे करते हैं?", 8: "आनुवंशिकता", 9: "प्रकाश – परावर्तन तथा अपवर्तन", 10: "मानव नेत्र तथा रंगबिरंगा संसार", 11: "विद्युत्", 12: "विद्युत् धारा के चुंबकीय प्रभाव", 13: "हमारा पर्यावरण" },
+            "math": { 1: "वास्तविक संख्याएँ", 2: "बहुपद", 3: "दो चर वाले रैखिक समीकरण युग्म", 4: "द्विघात समीकरण", 5: "समांतर श्रेढ़ियाँ (A.P.)", 6: "त्रिभुज", 7: "निर्देशांक ज्यामिति", 8: "त्रिकोणमिति का परिचय", 9: "त्रिकोणमिति के कुछ अनुप्रयोग", 10: "वृत्त", 11: "वृत्तों से संबंधित क्षेत्रफल", 12: "पृष्ठीय क्षेत्रफल और आयतन", 13: "सांख्यिकी", 14: "प्रायिकता" },
+            "history": { 1: "यूरोप में राष्ट्रवाद का उदय", 2: "भारत में राष्ट्रवाद", 3: "भूमंडलीकृत विश्व का बनना", 4: "औद्योगीकरण का युग", 5: "मुद्रण संस्कृति और आधुनिक दुनिया" },
+            "geography": { 1: "संसाधन और विकास", 2: "वन और वन्य जीव संसाधन", 3: "जल संसाधन", 4: "कृषि", 5: "खनिज तथा ऊर्जा संसाधन", 6: "विनिर्माण उद्योग", 7: "राष्ट्रीय अर्थव्यवस्था की जीवन रेखाएँ" },
+            "civics": { 1: "सत्ता की साझेदारी", 2: "संघवाद", 3: "जाति, धर्म और लैंगिक मसले", 4: "राजनीतिक दल", 5: "लोकतंत्र के परिणाम" },
+            "economics": { 1: "विकास", 2: "भारतीय अर्थव्यवस्था के क्षेत्रक", 3: "मुद्रा और साख", 4: "वैश्वीकरण और भारतीय अर्थव्यवस्था", 5: "उपभोक्ता अधिकार" }
+        }
+    };
 
     window.checkPassword = () => {
         if(document.getElementById('admin-pass').value === "sonu2026") {
@@ -124,7 +141,31 @@
         });
     };
 
-    // नया PDF अपलोड करने वाला फंक्शन
+    // 🌟 जादुई फंक्शन: जो लेसन का नाम दिखाएगा 🌟
+    window.showLessonName = () => {
+        const cls = document.getElementById('pdf-class').value;
+        const sub = document.getElementById('pdf-sub').value.trim().toLowerCase();
+        const les = document.getElementById('pdf-lesson').value.trim();
+        const displayBox = document.getElementById('lesson-name-display');
+
+        if(cls && sub && les) {
+            // चेक करो कि क्या हमारी डिक्शनरी में ये नाम है
+            if(syllabusData[cls] && syllabusData[cls][sub] && syllabusData[cls][sub][les]) {
+                displayBox.innerHTML = `✅ पाठ का नाम: <b>${syllabusData[cls][sub][les]}</b>`;
+                displayBox.style.display = "block";
+                displayBox.style.borderColor = "#2E7D32";
+                displayBox.style.color = "#2E7D32";
+            } else {
+                displayBox.innerHTML = `⚠️ इस पाठ का नाम डिक्शनरी में नहीं है, लेकिन आप लिंक अपलोड कर सकते हैं।`;
+                displayBox.style.display = "block";
+                displayBox.style.borderColor = "#E65100";
+                displayBox.style.color = "#E65100";
+            }
+        } else {
+            displayBox.style.display = "none";
+        }
+    };
+
     window.addPdfLink = () => {
         const cls = document.getElementById('pdf-class').value;
         const sub = document.getElementById('pdf-sub').value.trim().toLowerCase();
@@ -135,9 +176,10 @@
 
         set(ref(db, `appData/notes/${cls}/${sub}/lesson${les}`), link)
         .then(() => {
-            alert(`✅ सक्सेस! ${cls} के ${sub} (Lesson ${les}) का PDF सेव हो गया है!`);
+            alert(`✅ सक्सेस! PDF अपलोड हो गया।`);
             document.getElementById('pdf-lesson').value = '';
             document.getElementById('pdf-link').value = '';
+            document.getElementById('lesson-name-display').style.display = "none";
         });
     };
 </script>
