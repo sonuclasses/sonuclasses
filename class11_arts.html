@@ -26,6 +26,10 @@
         .lesson-btn { display: block; width: 100%; text-align: left; padding: 15px; margin-bottom: 10px; background: white; border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); text-decoration: none; font-size: 15px; font-weight: 500; transition: 0.2s; box-sizing: border-box; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         .lesson-btn:hover { border-color: #C2185B; color: #C2185B; background: #f8f9fa; transform: translateX(5px); }
         
+        /* PDF वाली बटन का डिज़ाइन */
+        .pdf-ready { background-color: #fce4ec !important; border-color: #C2185B !important; color: #C2185B !important; font-weight: bold; box-shadow: 0 2px 5px rgba(194, 24, 91, 0.2); }
+        .pdf-ready::after { content: " (PDF उपलब्ध ✅)"; font-size: 13px; color: #2E7D32; float: right; }
+
         .icon-hist { color: #795548; }
         .icon-geo { color: #00838F; }
         .icon-pol { color: #1565C0; }
@@ -47,17 +51,17 @@
             <span>➕</span>
         </div>
         <div class="lesson-list">
-            <a href="#" class="lesson-btn">📄 Lesson 1: समय की शुरुआत से</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: लेखन कला और शहरी जीवन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: तीन महाद्वीपों में फैला हुआ साम्राज्य</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: इस्लाम का उदय और विस्तार</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: यायावर साम्राज्य</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: तीन वर्ग</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: बदलती हुई सांस्कृतिक परंपराएँ</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: संस्कृतियों का टकराव</a>
-            <a href="#" class="lesson-btn">📄 Lesson 9: औद्योगिक क्रांति</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: मूल निवासियों का विस्थापन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 11: आधुनिकीकरण के रास्ते</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="1">📄 Lesson 1: समय की शुरुआत से</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="2">📄 Lesson 2: लेखन कला और शहरी जीवन</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="3">📄 Lesson 3: तीन महाद्वीपों में फैला हुआ साम्राज्य</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="4">📄 Lesson 4: इस्लाम का उदय और विस्तार</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="5">📄 Lesson 5: यायावर साम्राज्य</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="6">📄 Lesson 6: तीन वर्ग</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="7">📄 Lesson 7: बदलती हुई सांस्कृतिक परंपराएँ</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="8">📄 Lesson 8: संस्कृतियों का टकराव</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="9">📄 Lesson 9: औद्योगिक क्रांति</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="10">📄 Lesson 10: मूल निवासियों का विस्थापन</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="11">📄 Lesson 11: आधुनिकीकरण के रास्ते</a>
         </div>
     </div>
 
@@ -68,18 +72,18 @@
         </div>
         <div class="lesson-list">
             <h4 style="margin: 10px 0; color: #00838F;">भौतिक भूगोल के मूल सिद्धांत</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 1: भूगोल एक विषय के रूप में</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: पृथ्वी की उत्पत्ति एवं विकास</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: पृथ्वी की आंतरिक संरचना</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: महासागरों और महाद्वीपों का वितरण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: भू-आकृतिक प्रक्रियाएँ</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: भू-आकृतियाँ तथा उनका विकास</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="1">📄 Lesson 1: भूगोल एक विषय के रूप में</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="2">📄 Lesson 2: पृथ्वी की उत्पत्ति एवं विकास</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="3">📄 Lesson 3: पृथ्वी की आंतरिक संरचना</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="4">📄 Lesson 4: महासागरों और महाद्वीपों का वितरण</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="5">📄 Lesson 5: भू-आकृतिक प्रक्रियाएँ</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="6">📄 Lesson 6: भू-आकृतियाँ तथा उनका विकास</a>
             <h4 style="margin: 10px 0; color: #00838F;">भारत: भौतिक पर्यावरण</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 1: भारत - स्थिति</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: संरचना तथा भू-आकृति विज्ञान</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: अपवाह तंत्र</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: जलवायु</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: प्राकृतिक वनस्पति</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="7">📄 Lesson 7: भारत - स्थिति</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="8">📄 Lesson 8: संरचना तथा भू-आकृति विज्ञान</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="9">📄 Lesson 9: अपवाह तंत्र</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="10">📄 Lesson 10: जलवायु</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="11">📄 Lesson 11: प्राकृतिक वनस्पति</a>
         </div>
     </div>
 
@@ -90,23 +94,23 @@
         </div>
         <div class="lesson-list">
             <h4 style="margin: 10px 0; color: #1565C0;">भारत का संविधान सिद्धांत और व्यवहार</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 1: संविधान: क्यों और कैसे?</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: भारतीय संविधान में अधिकार</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: चुनाव और प्रतिनिधित्व</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: कार्यपालिका</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: विधायिका</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: न्यायपालिका</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: संघवाद</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: स्थानीय शासन</a>
+            <a href="#" class="lesson-btn" data-sub="politicalscience" data-lesson="1">📄 Lesson 1: संविधान: क्यों और कैसे?</a>
+            <a href="#" class="lesson-btn" data-sub="politicalscience" data-lesson="2">📄 Lesson 2: भारतीय संविधान में अधिकार</a>
+            <a href="#" class="lesson-btn" data-sub="politicalscience" data-lesson="3">📄 Lesson 3: चुनाव और प्रतिनिधित्व</a>
+            <a href="#" class="lesson-btn" data-sub="politicalscience" data-lesson="4">📄 Lesson 4: कार्यपालिका</a>
+            <a href="#" class="lesson-btn" data-sub="politicalscience" data-lesson="5">📄 Lesson 5: विधायिका</a>
+            <a href="#" class="lesson-btn" data-sub="politicalscience" data-lesson="6">📄 Lesson 6: न्यायपालिका</a>
+            <a href="#" class="lesson-btn" data-sub="politicalscience" data-lesson="7">📄 Lesson 7: संघवाद</a>
+            <a href="#" class="lesson-btn" data-sub="politicalscience" data-lesson="8">📄 Lesson 8: स्थानीय शासन</a>
             <h4 style="margin: 10px 0; color: #1565C0;">राजनीतिक सिद्धांत</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 1: राजनीतिक सिद्धांत: एक परिचय</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: स्वतंत्रता</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: समानता</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: सामाजिक न्याय</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: अधिकार</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: नागरिकता</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: राष्ट्रवाद</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: धर्मनिरपेक्षता</a>
+            <a href="#" class="lesson-btn" data-sub="politicalscience" data-lesson="9">📄 Lesson 9: राजनीतिक सिद्धांत: एक परिचय</a>
+            <a href="#" class="lesson-btn" data-sub="politicalscience" data-lesson="10">📄 Lesson 10: स्वतंत्रता</a>
+            <a href="#" class="lesson-btn" data-sub="politicalscience" data-lesson="11">📄 Lesson 11: समानता</a>
+            <a href="#" class="lesson-btn" data-sub="politicalscience" data-lesson="12">📄 Lesson 12: सामाजिक न्याय</a>
+            <a href="#" class="lesson-btn" data-sub="politicalscience" data-lesson="13">📄 Lesson 13: अधिकार</a>
+            <a href="#" class="lesson-btn" data-sub="politicalscience" data-lesson="14">📄 Lesson 14: नागरिकता</a>
+            <a href="#" class="lesson-btn" data-sub="politicalscience" data-lesson="15">📄 Lesson 15: राष्ट्रवाद</a>
+            <a href="#" class="lesson-btn" data-sub="politicalscience" data-lesson="16">📄 Lesson 16: धर्मनिरपेक्षता</a>
         </div>
     </div>
 
@@ -116,42 +120,69 @@
             <span>➕</span>
         </div>
         <div class="lesson-list">
-            <h4 style="margin: 10px 0; color: #D32F2F;">आरोह (गद्य और काव्य)</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 1: नमक का दारोगा (प्रेमचंद)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: मियाँ नसीरुद्दीन (कृष्णा सोबती)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: अपू के साथ ढाई साल (सत्यजित राय)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: विदाई-संभाषण (बालमुकुंद गुप्त)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: कबीर के पद</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: मीरा के पद</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: भवानी प्रसाद मिश्र (घर की याद)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: दुष्यंत कुमार (गज़ल)</a>
+            <h4 style="margin: 10px 0; color: #D32F2F;">आरोह</h4>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="1">📄 Lesson 1: नमक का दारोगा</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="2">📄 Lesson 2: मियाँ नसीरुद्दीन</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="3">📄 Lesson 3: अपू के साथ ढाई साल</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="4">📄 Lesson 4: विदाई-संभाषण</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="5">📄 Lesson 5: कबीर के पद</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="6">📄 Lesson 6: मीरा के पद</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="7">📄 Lesson 7: घर की याद</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="8">📄 Lesson 8: गज़ल</a>
             <h4 style="margin: 10px 0; color: #D32F2F;">वितान</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 1: भारतीय गायिकाओं में बेजोड़: लता मंगेशकर</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: राजस्थान की रजत बूँदें</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: आलो-आँधारि</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="9">📄 Lesson 9: भारतीय गायिकाओं में बेजोड़: लता मंगेशकर</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="10">📄 Lesson 10: राजस्थान की रजत बूँदें</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="11">📄 Lesson 11: आलो-आँधारि</a>
         </div>
     </div>
 
 </div>
 
-<script>
-    function toggleLessons(header) {
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
+        authDomain: "sonuclasses-b19db.firebaseapp.com",
+        databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com",
+        projectId: "sonuclasses-b19db",
+        storageBucket: "sonuclasses-b19db.firebasestorage.app",
+        messagingSenderId: "166740602272",
+        appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // यह कोड एडमिन पैनल से भेजे गए PDF लिंक को पकड़ता है (Class 11 के लिए)
+    onValue(ref(db, 'appData/notes/class11'), (snapshot) => {
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            for (const subject in data) {
+                for (const lessonKey in data[subject]) {
+                    const lessonNum = lessonKey.replace('lesson', '');
+                    const btn = document.querySelector(`a[data-sub="${subject}"][data-lesson="${lessonNum}"]`);
+                    
+                    if (btn) {
+                        btn.href = data[subject][lessonKey]; 
+                        btn.target = "_blank"; 
+                        btn.classList.add("pdf-ready"); 
+                    }
+                }
+            }
+        }
+    });
+
+    window.toggleLessons = function(header) {
         const content = header.nextElementSibling;
         const icon = header.querySelector("span:last-child");
-        
         if (content.classList.contains("show")) {
-            content.classList.remove("show");
-            header.classList.remove("active");
-            icon.innerText = "➕";
+            content.classList.remove("show"); header.classList.remove("active"); icon.innerText = "➕";
         } else {
             document.querySelectorAll(".lesson-list").forEach(list => list.classList.remove("show"));
-            document.querySelectorAll(".subject-header").forEach(h => {
-                h.classList.remove("active");
-                h.querySelector("span:last-child").innerText = "➕";
-            });
-            content.classList.add("show");
-            header.classList.add("active");
-            icon.innerText = "➖";
+            document.querySelectorAll(".subject-header").forEach(h => { h.classList.remove("active"); h.querySelector("span:last-child").innerText = "➕"; });
+            content.classList.add("show"); header.classList.add("active"); icon.innerText = "➖";
         }
     }
 </script>
