@@ -62,12 +62,12 @@
         .ai-msg { background: #e3f2fd; align-self: flex-start; border-bottom-left-radius: 0; color: #000; border: 1px solid #bbdefb; }
         .user-msg { background: #2E7D32; color: white; align-self: flex-end; border-bottom-right-radius: 0; }
         .error-msg { background: #ffebee; color: #d32f2f; border-color: #ffcdd2; }
+        .warning-msg { background: #FFF3E0; color: #E65100; border: 1px solid #FFE0B2; } /* नया वार्निंग डिज़ाइन */
         
         .ai-chat-input { display: flex; border-top: 1px solid var(--border-color); background: var(--box-bg); }
         .ai-chat-input input { flex: 1; padding: 12px; border: none; outline: none; background: transparent; color: var(--text-color); font-size: 15px; }
         .ai-chat-input button { background: #1976D2; color: white; border: none; padding: 0 15px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; }
         
-        /* Mic & Speaker Button Styles */
         .mic-btn { background: #E65100 !important; border-right: 1px solid white !important; font-size: 18px !important; }
         .mic-btn:active { background: #D84315 !important; }
         .speak-btn { background: none; border: none; font-size: 20px; cursor: pointer; float: right; margin-left: 10px; padding: 0; }
@@ -189,7 +189,7 @@
         <div class="modal-content">
             <h2 style="color: #FF9800; text-align: center; margin-top: 0;">🏆 टॉप स्कोरर्स</h2>
             <ul id="leaderboard-list" class="leaderboard-list">
-                <li style="justify-content: center; color: gray;">स्कोर लोड हो रहा है...</li>
+                <li style="justify-content: center; color: gray;">कोई डाटा नहीं! अभी टेस्ट दें।</li>
             </ul>
             <button class="close-btn" onclick="hideModal('leaderboard-modal')">🚪 बाहर निकलें</button>
         </div>
@@ -257,102 +257,144 @@
       if(snapshot.val()) { document.getElementById('news-text-display').innerText = "📢 " + snapshot.val().replace(/\n/g, " | ") + " 📢"; document.getElementById('news-modal-text').innerText = snapshot.val(); }
   });
 
-  onValue(ref(db, 'appData/quizzes'), (snapshot) => { questionsList = []; if(snapshot.exists()) snapshot.forEach((child) => questionsList.push(child.val())); });
+  // 🌟 सवालो को डेटाबेस से खींचना 🌟
+  onValue(ref(db, 'appData/quizzes'), (snapshot) => { 
+      questionsList = []; 
+      if(snapshot.exists()) {
+          snapshot.forEach((child) => questionsList.push(child.val())); 
+      }
+  });
 
-  window.startQuiz = () => { myScore = 0; currentQIndex = 0; document.getElementById('quiz-area').style.display = 'block'; document.getElementById('quiz-result-area').style.display = 'none'; showModal('quiz-modal'); loadQuestion(); };
+  window.startQuiz = () => { 
+      myScore = 0; currentQIndex = 0; 
+      document.getElementById('quiz-area').style.display = 'block'; 
+      document.getElementById('quiz-result-area').style.display = 'none'; 
+      showModal('quiz-modal'); 
+      loadQuestion(); 
+  };
 
   window.loadQuestion = () => {
       if(questionsList.length === 0) {
-          document.getElementById('quiz-q').innerText = "🚧 अभी कोई टेस्ट नहीं है।";
-          ['btn-opt-a', 'btn-opt-b', 'btn-opt-c', 'btn-opt-d'].forEach(id => document.getElementById(id).style.display = 'none'); return;
+          document.getElementById('quiz-q').innerText = "🚧 अभी कोई टेस्ट नहीं है। सोनू सर जल्द ही सवाल डालेंगे!";
+          ['btn-opt-a', 'btn-opt-b', 'btn-opt-c', 'btn-opt-d'].forEach(id => document.getElementById(id).style.display = 'none'); 
+          return;
       }
       const data = questionsList[currentQIndex];
       document.getElementById('quiz-q').innerText = `सवाल ${currentQIndex + 1}/${questionsList.length}: ${data.question}`;
+      
       const btnA = document.getElementById('btn-opt-a'), btnB = document.getElementById('btn-opt-b'), btnC = document.getElementById('btn-opt-c'), btnD = document.getElementById('btn-opt-d');
-      btnA.innerText = "A. " + data.optionA; btnB.innerText = "B. " + data.optionB;
+      btnA.innerText = "A. " + data.optionA; 
+      btnB.innerText = "B. " + data.optionB;
+      
       if(data.optionC) { btnC.innerText = "C. " + data.optionC; btnC.style.display = 'block'; } else btnC.style.display = 'none';
       if(data.optionD) { btnD.innerText = "D. " + data.optionD; btnD.style.display = 'block'; } else btnD.style.display = 'none';
-      [btnA, btnB, btnC, btnD].forEach(b => { b.className = "option-btn"; b.disabled = false; if(b.innerText !== "C." && b.innerText !== "D.") b.style.display = 'block'; });
-      currentCorrectAnswer = data.answer; document.getElementById('next-btn').style.display = 'none';
+      
+      [btnA, btnB, btnC, btnD].forEach(b => { 
+          b.className = "option-btn"; 
+          b.disabled = false; 
+          if(b.innerText !== "C." && b.innerText !== "D.") b.style.display = 'block'; 
+      });
+      
+      currentCorrectAnswer = data.answer; 
+      document.getElementById('next-btn').style.display = 'none';
   };
 
   window.checkAnswer = (selectedOption) => {
       let btn = document.getElementById('btn-opt-' + selectedOption.toLowerCase());
-      if(selectedOption === currentCorrectAnswer) { btn.classList.add('correct'); myScore += 10; } 
-      else { btn.classList.add('wrong'); document.getElementById('btn-opt-' + currentCorrectAnswer.toLowerCase()).classList.add('correct'); }
+      if(selectedOption === currentCorrectAnswer) { 
+          btn.classList.add('correct'); 
+          myScore += 10; 
+      } else { 
+          btn.classList.add('wrong'); 
+          document.getElementById('btn-opt-' + currentCorrectAnswer.toLowerCase()).classList.add('correct'); 
+      }
       ['btn-opt-a', 'btn-opt-b', 'btn-opt-c', 'btn-opt-d'].forEach(id => document.getElementById(id).disabled = true);
-      const nextBtn = document.getElementById('next-btn'); nextBtn.style.display = 'inline-block'; nextBtn.innerText = (currentQIndex === questionsList.length - 1) ? "रिजल्ट देखें 🏆" : "अगला सवाल ➡️";
+      const nextBtn = document.getElementById('next-btn'); 
+      nextBtn.style.display = 'inline-block'; 
+      nextBtn.innerText = (currentQIndex === questionsList.length - 1) ? "रिजल्ट देखें 🏆" : "अगला सवाल ➡️";
   };
 
-  window.nextQuestion = () => { if(currentQIndex < questionsList.length - 1) { currentQIndex++; loadQuestion(); } else { document.getElementById('quiz-area').style.display = 'none'; document.getElementById('final-score-text').innerText = myScore; document.getElementById('quiz-result-area').style.display = 'block'; } };
+  window.nextQuestion = () => { 
+      if(currentQIndex < questionsList.length - 1) { 
+          currentQIndex++; loadQuestion(); 
+      } else { 
+          document.getElementById('quiz-area').style.display = 'none'; 
+          document.getElementById('final-score-text').innerText = myScore; 
+          document.getElementById('quiz-result-area').style.display = 'block'; 
+      } 
+  };
 
-  window.submitQuiz = () => { if(auth.currentUser) set(ref(db, 'leaderboard/' + auth.currentUser.uid), { name: currentStudentName, score: myScore }).then(() => { alert("🎉 स्कोर सेव हो गया!"); hideModal('quiz-modal'); showModal('leaderboard-modal'); }); };
+  // 🌟 स्कोर को डेटाबेस में सेव करना 🌟
+  window.submitQuiz = () => { 
+      if(auth.currentUser) {
+          set(ref(db, 'leaderboard/' + auth.currentUser.uid), { 
+              name: currentStudentName, 
+              score: myScore 
+          }).then(() => { 
+              alert("🎉 आपका स्कोर लीडरबोर्ड में सेव हो गया!"); 
+              hideModal('quiz-modal'); 
+              showModal('leaderboard-modal'); 
+          }); 
+      }
+  };
 
+  // 🌟 लीडरबोर्ड को दिखाना 🌟
   onValue(query(ref(db, 'leaderboard'), orderByChild('score'), limitToLast(10)), (snapshot) => {
-      const list = document.getElementById('leaderboard-list'); list.innerHTML = ''; let scores = []; snapshot.forEach((childSnapshot) => scores.push(childSnapshot.val())); scores.reverse(); 
-      if(scores.length === 0) list.innerHTML = '<li style="justify-content: center; color: gray;">कोई डाटा नहीं!</li>'; 
-      else scores.forEach((data, index) => { let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🏅'; list.innerHTML += `<li><span>${medal} ${data.name}</span> <span style="color: var(--primary-green);">${data.score} अंक</span></li>`; });
+      const list = document.getElementById('leaderboard-list'); 
+      list.innerHTML = ''; 
+      let scores = []; 
+      
+      snapshot.forEach((childSnapshot) => {
+          scores.push(childSnapshot.val()); 
+      }); 
+      scores.reverse(); 
+      
+      if(scores.length === 0) {
+          list.innerHTML = '<li style="justify-content: center; color: gray;">कोई डाटा नहीं! अभी टेस्ट दें।</li>'; 
+      } else {
+          scores.forEach((data, index) => { 
+              let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🏅'; 
+              list.innerHTML += `<li><span>${medal} ${data.name}</span> <span style="color: var(--primary-green);">${data.score} अंक</span></li>`; 
+          });
+      }
   });
 
   window.changePhoto = (event) => { const file = event.target.files[0]; if(file) { const reader = new FileReader(); reader.onload = (e) => { document.getElementById('user-photo').src = e.target.result; alert("फोटो अपडेट हो गई है!"); }; reader.readAsDataURL(file); } };
-
   window.toggleTheme = () => { document.body.classList.toggle('dark-mode'); const btn = document.getElementById('theme-btn'); if(document.body.classList.contains('dark-mode')) { btn.innerText = '☀️'; localStorage.setItem('theme', 'dark'); } else { btn.innerText = '🌙'; localStorage.setItem('theme', 'light'); } };
-
   window.onload = () => { if(localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-mode'); document.getElementById('theme-btn').innerText = '☀️'; } };
 
-  // 🌟 AI CHATBOT LOGIC 🌟
   window.toggleAIChat = () => {
       const box = document.getElementById('aiChatBox');
       box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
   };
 
-  // 🎤 बोलकर टाइप करने वाला फीचर
   window.startVoiceInput = () => {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-          alert("माफ़ करें, आपका ब्राउज़र आवाज़ नहीं सपोर्ट करता। कृपया Chrome का इस्तेमाल करें!");
-          return;
-      }
+      if (!SpeechRecognition) return alert("माफ़ करें, आपका ब्राउज़र आवाज़ नहीं सपोर्ट करता।");
       const recognition = new SpeechRecognition();
       recognition.lang = 'hi-IN'; 
-      
       const inputField = document.getElementById('aiInput');
       inputField.placeholder = "सुन रहा हूँ... बोलिए 🎤";
-      
       recognition.start();
-
       recognition.onresult = (event) => {
-          const transcript = event.results[0][0].transcript;
-          inputField.value = transcript;
+          inputField.value = event.results[0][0].transcript;
           inputField.placeholder = "अपना सवाल यहाँ टाइप करें...";
           sendAIMessage(); 
       };
-
-      recognition.onspeechend = () => {
-          recognition.stop();
-          inputField.placeholder = "अपना सवाल यहाँ टाइप करें...";
-      };
-
-      recognition.onerror = (event) => {
-          inputField.placeholder = "अपना सवाल यहाँ टाइप करें...";
-      };
+      recognition.onspeechend = () => { recognition.stop(); inputField.placeholder = "अपना सवाल यहाँ टाइप करें..."; };
+      recognition.onerror = () => { inputField.placeholder = "अपना सवाल यहाँ टाइप करें..."; };
   };
 
-  // 🔊 AI का जवाब बिना रुके पूरा पढ़कर सुनाने वाला फीचर (Chrome Bug Fix)
   window.speakAnswer = (htmlText) => {
-      window.speechSynthesis.cancel(); // अगर पहले से कुछ बोल रहा है, तो चुप कराओ
-      
-      let plainText = htmlText.replace(/<[^>]*>?/gm, ''); // HTML टैग्स हटाओ
-      
-      // 🌟 जादू: पूरे पैराग्राफ को जहाँ भी '.' '?' '!' या '।' आए, वहाँ से छोटे वाक्यों में तोड़ दो 
+      window.speechSynthesis.cancel(); 
+      let plainText = htmlText.replace(/<[^>]*>?/gm, ''); 
       let sentences = plainText.replace(/([\.!\?।])/g, "$1|").split("|");
-      
       sentences.forEach(sentence => {
           if(sentence.trim() !== "") {
               let speech = new SpeechSynthesisUtterance(sentence.trim());
-              speech.lang = 'hi-IN'; // हिंदी में बोलेगा
-              speech.rate = 0.9; // बोलने की स्पीड
-              window.speechSynthesis.speak(speech); // एक-एक करके पूरा पढ़ेगा
+              speech.lang = 'hi-IN'; 
+              speech.rate = 0.9; 
+              window.speechSynthesis.speak(speech); 
           }
       });
   };
@@ -367,7 +409,6 @@
       input.value = '';
       body.scrollTop = body.scrollHeight;
 
-      // सुरक्षित चाबी
       const secret1 = "AIzaSy"; 
       const secret2 = "CBykQafD5nPNwf2ZSw20mPgrEWEgRLDZY"; 
       const apiKey = secret1 + secret2;
@@ -386,11 +427,15 @@
           const data = await response.json();
           document.getElementById(loadingId).remove();
           
+          // 🌟 नया: लिमिट पार होने पर प्यारा सा हिंदी मैसेज 🌟
           if (data.error) {
-              body.innerHTML += `<div class="ai-msg error-msg">❌ Google AI Error: ${data.error.message}</div>`;
+              if(data.error.message.includes("quota") || data.error.message.includes("exceeded")) {
+                  body.innerHTML += `<div class="ai-msg warning-msg">⚠️ <b>सोनू सर का AI अभी बहुत सारे बच्चों के साथ बिज़ी है!</b><br>कृपया 15 सेकंड बाद अपना सवाल फिर से पूछें। 🙏</div>`;
+              } else {
+                  body.innerHTML += `<div class="ai-msg error-msg">❌ Google AI Error: ${data.error.message}</div>`;
+              }
           } else if (data.candidates && data.candidates.length > 0) {
               let reply = data.candidates[0].content.parts[0].text;
-              
               let formattedReply = reply.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*/g, '<br>•');
               
               body.innerHTML += `
