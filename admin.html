@@ -21,7 +21,6 @@
         .home-link:hover { background: #1976D2; color: white; }
         #lesson-name-display { margin-top: -15px; margin-bottom: 20px; padding: 10px; background: #E8F5E9; border-left: 4px solid #2E7D32; color: #2E7D32; font-weight: bold; font-size: 14px; border-radius: 4px; display: none; }
         
-        /* AI Quiz Maker Button */
         .ai-btn { background: #673AB7; margin-bottom: 10px; }
         .ai-btn:hover { background: #512DA8; }
         .delete-btn { background: #D32F2F; margin-bottom: 10px; }
@@ -45,8 +44,8 @@
     <label>किस विषय या पाठ का टेस्ट बनाना है?</label>
     <input type="text" id="ai-quiz-topic" placeholder="जैसे: Class 10 Science, प्रकाश संश्लेषण...">
     
-    <button onclick="generateAIQuiz()" class="ai-btn" id="ai-quiz-btn">✨ AI से 5 सवाल बनाएँ और वेबसाइट पर डालें</button>
-    <p id="ai-loading" style="display:none; color: #673AB7; font-weight: bold; text-align: center;">AI सोच रहा है और सवाल बना रहा है... ⏳</p>
+    <button onclick="generateAIQuiz()" class="ai-btn" id="ai-quiz-btn">✨ AI से पूरे 5 सवाल बनाएँ</button>
+    <p id="ai-loading" style="display:none; color: #673AB7; font-weight: bold; text-align: center;">AI सोच रहा है और पूरे 5 सवाल बना रहा है... ⏳</p>
     
     <button onclick="deleteAllQuizzes()" class="delete-btn">🗑️ वेबसाइट के पुराने सारे सवाल डिलीट करें</button>
     
@@ -69,7 +68,7 @@
     </select>
 
     <label>विषय का नाम (English में लिखें):</label>
-    <input type="text" id="pdf-sub" placeholder="जैसे: science, hindi, math, physics, history..." oninput="showLessonName()">
+    <input type="text" id="pdf-sub" placeholder="जैसे: science, hindi, math..." oninput="showLessonName()">
 
     <label>लेसन (पाठ) नंबर:</label>
     <input type="number" id="pdf-lesson" placeholder="जैसे: 1, 2, 3..." oninput="showLessonName()">
@@ -101,11 +100,6 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // डिक्शनरी
-    const syllabusData = {
-        "class10": { "science": { 1:"रासायनिक अभिक्रियाएँ एवं समीकरण", 2:"अम्ल, क्षारक एवं लवण" } }
-    };
-
     window.checkPassword = () => {
         if(document.getElementById('admin-pass').value === "sonu2026") {
             document.getElementById('login-box').style.display = "none";
@@ -119,7 +113,7 @@
         set(ref(db, 'appData/news'), text).then(() => alert("✅ न्यूज़ लाइव हो गई!"));
     };
 
-    // 🌟 AI AUTO QUIZ MAKER LOGIC (सुपर-फिल्टर के साथ) 🌟
+    // 🌟 Strict AI Logic (ताकि 5 ही सवाल बने) 🌟
     window.generateAIQuiz = async () => {
         const topic = document.getElementById('ai-quiz-topic').value.trim();
         if(!topic) return alert("❌ कृपया पहले विषय या पाठ का नाम लिखें!");
@@ -129,16 +123,20 @@
         btn.style.display = 'none';
         loading.style.display = 'block';
 
-        // आपकी सुरक्षित चाबी
         const secret1 = "AIzaSy"; 
         const secret2 = "CBykQafD5nPNwf2ZSw20mPgrEWEgRLDZY"; 
         const apiKey = secret1 + secret2;
 
-        const prompt = `विषय: "${topic}"। इस विषय पर स्कूली बच्चों के लिए हिंदी में 5 बहुविकल्पीय प्रश्न (MCQ) बनाएँ। 
-        मुझे उत्तर केवल और केवल JSON Array फॉर्मेट में देना। कोई अन्य टेक्स्ट, ग्रीटिंग या स्पष्टीकरण मत लिखना।
-        JSON का फॉर्मेट बिल्कुल ऐसा होना चाहिए:
+        // सख्त निर्देश (Strict Prompt)
+        const prompt = `विषय: "${topic}"। इस विषय पर स्कूली बच्चों के लिए हिंदी में पूरे 5 बहुविकल्पीय प्रश्न (MCQ) बनाएँ।
+        मुझे उत्तर केवल और केवल JSON Array फॉर्मेट में देना। कोई अन्य टेक्स्ट मत लिखना।
+        JSON का फॉर्मेट बिल्कुल ऐसा होना चाहिए (इसमें पूरे 5 सवाल होने ही चाहिए):
         [
-          {"question": "यहाँ सवाल लिखें", "optionA": "पहला विकल्प", "optionB": "दूसरा विकल्प", "optionC": "तीसरा विकल्प", "optionD": "चौथा विकल्प", "answer": "A"}
+          {"question": "पहला सवाल", "optionA": "विकल्प 1", "optionB": "विकल्प 2", "optionC": "विकल्प 3", "optionD": "विकल्प 4", "answer": "A"},
+          {"question": "दूसरा सवाल", "optionA": "विकल्प 1", "optionB": "विकल्प 2", "optionC": "विकल्प 3", "optionD": "विकल्प 4", "answer": "B"},
+          {"question": "तीसरा सवाल", "optionA": "विकल्प 1", "optionB": "विकल्प 2", "optionC": "विकल्प 3", "optionD": "विकल्प 4", "answer": "C"},
+          {"question": "चौथा सवाल", "optionA": "विकल्प 1", "optionB": "विकल्प 2", "optionC": "विकल्प 3", "optionD": "विकल्प 4", "answer": "D"},
+          {"question": "पाँचवाँ सवाल", "optionA": "विकल्प 1", "optionB": "विकल्प 2", "optionC": "विकल्प 3", "optionD": "विकल्प 4", "answer": "A"}
         ]
         ध्यान रहे answer में सिर्फ A, B, C या D लिखना है।`;
 
@@ -155,51 +153,36 @@
             
             let reply = data.candidates[0].content.parts[0].text;
             
-            // 🌟 जादुई सुपर-फिल्टर (जो सिर्फ काम की चीज़ निकालेगा) 🌟
             let jsonStr = reply;
-            const match = reply.match(/\[[\s\S]*\]/); // यह सिर्फ [ ] के अंदर का डेटा ढूंढेगा
+            const match = reply.match(/\[[\s\S]*\]/); 
             if (match) {
                 jsonStr = match[0];
             }
             
-            // JSON को ऑब्जेक्ट में बदलना
-            const questions = JSON.parse(jsonStr);
-            
-            if(!questions || questions.length === 0) throw new Error("सवालों का फॉर्मेट गलत था।");
+            let questions = JSON.parse(jsonStr);
+            if(!Array.isArray(questions)) {
+                questions = [questions]; // अगर गलती से एक ही सवाल भेजा तो भी वेबसाइट क्रैश न हो
+            }
 
-            // Firebase में एक-एक करके 5 सवाल डालना
             for(let q of questions) {
                 await push(ref(db, 'appData/quizzes'), q);
             }
             
-            alert("🎉 कमाल हो गया बॉस! AI ने 5 सवाल बनाकर आपकी मेन वेबसाइट पर लाइव कर दिए हैं!");
+            alert(`🎉 कमाल हो गया बॉस! AI ने ${questions.length} सवाल बनाकर आपकी मेन वेबसाइट पर लाइव कर दिए हैं!`);
             document.getElementById('ai-quiz-topic').value = '';
             
         } catch(e) {
-            alert("❌ कुछ गड़बड़ हो गई (शायद AI ने गलत फॉर्मेट दिया)। एक बार फिर से बटन दबाइए!\nएरर: " + e.message);
+            alert("❌ कुछ गड़बड़ हो गई: " + e.message);
         } finally {
             btn.style.display = 'block';
             loading.style.display = 'none';
         }
     };
 
-    // पुराने सवाल डिलीट करने का बटन
     window.deleteAllQuizzes = () => {
         if(confirm("⚠️ क्या आप सच में वेबसाइट के सारे पुराने सवाल डिलीट करना चाहते हैं?")) {
             remove(ref(db, 'appData/quizzes')).then(() => alert("✅ सारे पुराने सवाल डिलीट हो गए! अब आप AI से नए सवाल बना सकते हैं।"));
         }
-    };
-
-    window.showLessonName = () => {
-        const cls = document.getElementById('pdf-class').value;
-        const sub = document.getElementById('pdf-sub').value.trim().toLowerCase();
-        const les = document.getElementById('pdf-lesson').value.trim();
-        const displayBox = document.getElementById('lesson-name-display');
-
-        if(cls && sub && les) {
-            displayBox.innerHTML = `✅ लिंक अपलोड करने के लिए तैयार है।`;
-            displayBox.style.display = "block"; displayBox.style.borderColor = "#2E7D32"; displayBox.style.color = "#2E7D32"; displayBox.style.backgroundColor = "#E8F5E9";
-        } else { displayBox.style.display = "none"; }
     };
 
     window.addPdfLink = () => {
@@ -207,15 +190,8 @@
         const sub = document.getElementById('pdf-sub').value.trim().toLowerCase();
         const les = document.getElementById('pdf-lesson').value.trim();
         const link = document.getElementById('pdf-link').value.trim();
-
-        if(!sub || !les || !link) return alert("❌ कृपया विषय का नाम, लेसन नंबर और लिंक जरूर डालें!");
-
-        set(ref(db, `appData/notes/${cls}/${sub}/lesson${les}`), link)
-        .then(() => {
-            alert(`✅ सक्सेस! PDF वेबसाइट पर अपलोड हो गया।`);
-            document.getElementById('pdf-lesson').value = ''; document.getElementById('pdf-link').value = '';
-            document.getElementById('lesson-name-display').style.display = "none";
-        });
+        if(!sub || !les || !link) return alert("❌ कृपया लिंक जरूर डालें!");
+        set(ref(db, `appData/notes/${cls}/${sub}/lesson${les}`), link).then(() => alert(`✅ PDF अपलोड हो गया।`));
     };
 </script>
 </body>
