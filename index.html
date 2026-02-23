@@ -11,11 +11,10 @@
         body.dark-mode { --bg-light: #121212; --text-color: #f1f1f1; --box-bg: #1e1e1e; --border-color: #444; }
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); color: var(--text-color); margin: 0; padding: 0; text-align: center; transition: background-color 0.3s, color 0.3s; }
         
-        /* लोडिंग एनीमेशन का डिज़ाइन */
         #loader-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-light); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         .spinner { width: 50px; height: 50px; border: 5px solid #ccc; border-top: 5px solid var(--primary-green); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        #main-content { display: none; } /* जब तक लोड न हो, बाकी सब छिपा रहे */
+        #main-content { display: none; }
 
         header { background-color: var(--primary-green); color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         h1 { margin: 0; font-size: 20px; }
@@ -54,7 +53,19 @@
         .btn-quiz { background: #FFD600; color: #333; }
         .btn-leaderboard { background: #FF9800; color: white; }
         
-        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 35px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.3s; }
+        .whatsapp-float { position: fixed; width: 55px; height: 55px; bottom: 20px; right: 20px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.3s; }
+
+        /* 🌟 नया AI Chatbot डिज़ाइन 🌟 */
+        .ai-chat-btn { position: fixed; width: 55px; height: 55px; bottom: 20px; left: 20px; background-color: #1976D2; color: #FFF; border-radius: 50%; border: none; text-align: center; font-size: 30px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; animation: pulse 2s infinite; }
+        .ai-chat-box { display: none; position: fixed; bottom: 85px; left: 20px; width: 90%; max-width: 350px; height: 400px; background: var(--box-bg); border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1000; flex-direction: column; overflow: hidden; border: 2px solid #1976D2; }
+        .ai-chat-header { background: #1976D2; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; font-size: 16px; }
+        .ai-chat-body { flex: 1; padding: 15px; overflow-y: auto; background: var(--bg-light); display: flex; flex-direction: column; gap: 10px; }
+        .ai-msg, .user-msg { padding: 10px 15px; border-radius: 15px; max-width: 85%; font-size: 14px; line-height: 1.4; word-wrap: break-word; }
+        .ai-msg { background: #e3f2fd; align-self: flex-start; border-bottom-left-radius: 0; color: #000; border: 1px solid #bbdefb; }
+        .user-msg { background: #2E7D32; color: white; align-self: flex-end; border-bottom-right-radius: 0; }
+        .ai-chat-input { display: flex; border-top: 1px solid var(--border-color); background: var(--box-bg); }
+        .ai-chat-input input { flex: 1; padding: 12px; border: none; outline: none; background: transparent; color: var(--text-color); font-size: 15px; }
+        .ai-chat-input button { background: #1976D2; color: white; border: none; padding: 0 20px; cursor: pointer; font-weight: bold; font-size: 16px; }
 
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; }
         .modal-content { background: var(--box-bg); color: var(--text-color); padding: 25px; border-radius: 20px; width: 90%; max-width: 400px; max-height: 85vh; overflow-y: auto; position: relative; text-align: left; border: 1px solid var(--border-color); }
@@ -132,6 +143,21 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 35px; height: 35px;">
     </a>
 
+    <button class="ai-chat-btn" onclick="toggleAIChat()">🤖</button>
+    <div class="ai-chat-box" id="aiChatBox">
+        <div class="ai-chat-header">
+            <span>✨ Sonu AI (Doubt Solver)</span>
+            <button onclick="toggleAIChat()" style="background:none;border:none;color:white;font-size:20px;cursor:pointer;">✖</button>
+        </div>
+        <div class="ai-chat-body" id="aiChatBody">
+            <div class="ai-msg">नमस्ते! मैं <b>Sonu AI</b> हूँ। 🤖<br>आप मुझसे पढ़ाई से जुड़ा कोई भी डाउट पूछ सकते हैं। बताइए मैं आपकी क्या मदद करूँ?</div>
+        </div>
+        <div class="ai-chat-input">
+            <input type="text" id="aiInput" placeholder="अपना सवाल यहाँ टाइप करें...">
+            <button onclick="sendAIMessage()">➤</button>
+        </div>
+    </div>
+
     <div id="quiz-modal" class="modal">
         <div class="modal-content" id="quiz-container">
             <h2 style="color: #E65100; text-align: center; margin-top: 0;">📝 ऑनलाइन टेस्ट</h2>
@@ -191,7 +217,6 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
   import { getDatabase, ref, set, onValue, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
-  import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-messaging.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
@@ -206,7 +231,6 @@
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getDatabase(app);
-  const messaging = getMessaging(app);
 
   let currentStudentName = "Student";
   let myScore = 0;
@@ -214,72 +238,26 @@
   let currentQIndex = 0;
   let currentCorrectAnswer = "A"; 
 
-  // जैसे ही यूज़र चेक हो जाएगा, लोडिंग स्क्रीन गायब और वेबसाइट चालू!
   onAuthStateChanged(auth, (user) => {
     if (user) {
       document.getElementById('loader-screen').style.display = "none";
       document.getElementById('main-content').style.display = "block";
-      
       currentStudentName = user.displayName || user.email.split('@')[0];
       document.getElementById('student-name').innerText = currentStudentName;
       if(user.photoURL) document.getElementById('user-photo').src = user.photoURL;
-      
-      if (Notification.permission === 'granted') {
-          navigator.serviceWorker.register('./firebase-messaging-sw.js').then((registration) => {
-              getToken(messaging, { vapidKey: 'BDyAN1nRFqGA7lqM7rs93-AykFTsvE-d1ocxmE6IYPqfWT2839QucicsJ43LgiGdUBGi-CaJtZOcmDHuW7FR1Ow', serviceWorkerRegistration: registration })
-              .then((currentToken) => { if (currentToken) set(ref(db, 'fcmTokens/' + user.uid), currentToken); });
-          });
-      } else if (Notification.permission !== 'denied') {
-          document.getElementById('notifyBtn').style.display = 'block';
-      }
-    } else {
-      window.location.replace("login.html");
-    }
+    } else { window.location.replace("login.html"); }
   });
-
-  window.enableNotifications = () => {
-      Notification.requestPermission().then((permission) => {
-          if (permission === 'granted') {
-              navigator.serviceWorker.register('./firebase-messaging-sw.js').then((registration) => {
-                  getToken(messaging, { vapidKey: 'BDyAN1nRFqGA7lqM7rs93-AykFTsvE-d1ocxmE6IYPqfWT2839QucicsJ43LgiGdUBGi-CaJtZOcmDHuW7FR1Ow', serviceWorkerRegistration: registration })
-                  .then((currentToken) => {
-                      if (currentToken) {
-                          if(auth.currentUser) set(ref(db, 'fcmTokens/' + auth.currentUser.uid), currentToken);
-                          alert("🔔 बहुत बढ़िया! टोकन सेट हो गया। अब आपको नए टेस्ट के नोटिफिकेशन मिला करेंगे!");
-                          document.getElementById('notifyBtn').style.display = 'none';
-                      }
-                  });
-              });
-          } else { alert("⚠️ आपने नोटिफिकेशन ब्लॉक कर दिया है।"); }
-      });
-  };
-
-  onMessage(messaging, (payload) => { alert("🔔 नई सूचना: \n" + payload.notification.title + "\n" + payload.notification.body); });
 
   window.toggleDropdown = () => document.getElementById('dropdown-menu').classList.toggle('show');
   window.showModal = (id) => document.getElementById(id).classList.add('show');
   window.hideModal = (id) => document.getElementById(id).classList.remove('show');
   window.confirmLogout = () => { if(confirm("लॉगआउट करना चाहते हैं?")) { signOut(auth).then(() => window.location.replace("login.html")); } };
 
-  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
-
-  let deferredPrompt;
-  window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; document.getElementById('installAppBtn').style.display = 'block'; });
-
-  document.getElementById('installAppBtn').addEventListener('click', async () => {
-      if (deferredPrompt) { deferredPrompt.prompt(); const { outcome } = await deferredPrompt.userChoice; if (outcome === 'accepted') { document.getElementById('installAppBtn').style.display = 'none'; } deferredPrompt = null; }
-  });
-
   onValue(ref(db, 'appData/news'), (snapshot) => {
-      if(snapshot.val()) {
-          document.getElementById('news-text-display').innerText = "📢 " + snapshot.val().replace(/\n/g, " | ") + " 📢";
-          document.getElementById('news-modal-text').innerText = snapshot.val();
-      }
+      if(snapshot.val()) { document.getElementById('news-text-display').innerText = "📢 " + snapshot.val().replace(/\n/g, " | ") + " 📢"; document.getElementById('news-modal-text').innerText = snapshot.val(); }
   });
 
-  onValue(ref(db, 'appData/quizzes'), (snapshot) => {
-      questionsList = []; if(snapshot.exists()) snapshot.forEach((child) => questionsList.push(child.val()));
-  });
+  onValue(ref(db, 'appData/quizzes'), (snapshot) => { questionsList = []; if(snapshot.exists()) snapshot.forEach((child) => questionsList.push(child.val())); });
 
   window.startQuiz = () => { myScore = 0; currentQIndex = 0; document.getElementById('quiz-area').style.display = 'block'; document.getElementById('quiz-result-area').style.display = 'none'; showModal('quiz-modal'); loadQuestion(); };
 
@@ -306,14 +284,9 @@
       const nextBtn = document.getElementById('next-btn'); nextBtn.style.display = 'inline-block'; nextBtn.innerText = (currentQIndex === questionsList.length - 1) ? "रिजल्ट देखें 🏆" : "अगला सवाल ➡️";
   };
 
-  window.nextQuestion = () => {
-      if(currentQIndex < questionsList.length - 1) { currentQIndex++; loadQuestion(); } 
-      else { document.getElementById('quiz-area').style.display = 'none'; document.getElementById('final-score-text').innerText = myScore; document.getElementById('quiz-result-area').style.display = 'block'; }
-  };
+  window.nextQuestion = () => { if(currentQIndex < questionsList.length - 1) { currentQIndex++; loadQuestion(); } else { document.getElementById('quiz-area').style.display = 'none'; document.getElementById('final-score-text').innerText = myScore; document.getElementById('quiz-result-area').style.display = 'block'; } };
 
-  window.submitQuiz = () => {
-      if(auth.currentUser) set(ref(db, 'leaderboard/' + auth.currentUser.uid), { name: currentStudentName, score: myScore }).then(() => { alert("🎉 स्कोर सेव हो गया!"); hideModal('quiz-modal'); showModal('leaderboard-modal'); });
-  };
+  window.submitQuiz = () => { if(auth.currentUser) set(ref(db, 'leaderboard/' + auth.currentUser.uid), { name: currentStudentName, score: myScore }).then(() => { alert("🎉 स्कोर सेव हो गया!"); hideModal('quiz-modal'); showModal('leaderboard-modal'); }); };
 
   onValue(query(ref(db, 'leaderboard'), orderByChild('score'), limitToLast(10)), (snapshot) => {
       const list = document.getElementById('leaderboard-list'); list.innerHTML = ''; let scores = []; snapshot.forEach((childSnapshot) => scores.push(childSnapshot.val())); scores.reverse(); 
@@ -321,20 +294,55 @@
       else scores.forEach((data, index) => { let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🏅'; list.innerHTML += `<li><span>${medal} ${data.name}</span> <span style="color: var(--primary-green);">${data.score} अंक</span></li>`; });
   });
 
-  window.changePhoto = (event) => {
-    const file = event.target.files[0];
-    if(file) { const reader = new FileReader(); reader.onload = (e) => { document.getElementById('user-photo').src = e.target.result; alert("फोटो अपडेट हो गई है!"); }; reader.readAsDataURL(file); }
-  };
+  window.changePhoto = (event) => { const file = event.target.files[0]; if(file) { const reader = new FileReader(); reader.onload = (e) => { document.getElementById('user-photo').src = e.target.result; alert("फोटो अपडेट हो गई है!"); }; reader.readAsDataURL(file); } };
 
-  window.onclick = (event) => { if (!event.target.matches('.profile-img')) document.getElementById('dropdown-menu').classList.remove('show'); };
-
-  window.toggleTheme = () => {
-      document.body.classList.toggle('dark-mode'); const btn = document.getElementById('theme-btn');
-      if(document.body.classList.contains('dark-mode')) { btn.innerText = '☀️'; localStorage.setItem('theme', 'dark'); } 
-      else { btn.innerText = '🌙'; localStorage.setItem('theme', 'light'); }
-  };
+  window.toggleTheme = () => { document.body.classList.toggle('dark-mode'); const btn = document.getElementById('theme-btn'); if(document.body.classList.contains('dark-mode')) { btn.innerText = '☀️'; localStorage.setItem('theme', 'dark'); } else { btn.innerText = '🌙'; localStorage.setItem('theme', 'light'); } };
 
   window.onload = () => { if(localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-mode'); document.getElementById('theme-btn').innerText = '☀️'; } };
+
+  // 🌟 AI CHATBOT LOGIC (अब दिमाग एक्टिव है!) 🌟
+  window.toggleAIChat = () => {
+      const box = document.getElementById('aiChatBox');
+      box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+  };
+
+  window.sendAIMessage = async () => {
+      const input = document.getElementById('aiInput');
+      const text = input.value.trim();
+      if(!text) return;
+      const body = document.getElementById('aiChatBody');
+      
+      body.innerHTML += `<div class="user-msg">${text}</div>`;
+      input.value = '';
+      body.scrollTop = body.scrollHeight;
+
+      // 🌟 ये रही आपकी असली चाबी जो मैंने खुद लगा दी है! 🌟
+      const apiKey = "AIzaSyBJvBMlLTEIMOb8oLzMy-qDQKcjdyOtNQY"; 
+
+      const loadingId = "load-" + Date.now();
+      body.innerHTML += `<div class="ai-msg" id="${loadingId}">सोच रहा हूँ... 🤔</div>`;
+      body.scrollTop = body.scrollHeight;
+
+      try {
+          const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({ contents: [{ parts: [{ text: "तुम 'Sonu AI' हो, जो Sonu Classes वेबसाइट का असिस्टेंट है। इस सवाल का जवाब हिंदी में और बहुत सरल भाषा में दो (ताकि स्कूली बच्चे समझ सकें): " + text }] }] })
+          });
+          
+          const data = await response.json();
+          document.getElementById(loadingId).remove();
+          
+          let reply = data.candidates[0].content.parts[0].text;
+          reply = reply.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*/g, '<br>•');
+          
+          body.innerHTML += `<div class="ai-msg">${reply}</div>`;
+          body.scrollTop = body.scrollHeight;
+      } catch(e) {
+          document.getElementById(loadingId).remove();
+          body.innerHTML += `<div class="ai-msg">❌ इंटरनेट में दिक्कत है। कृपया बाद में पूछें।</div>`;
+      }
+  };
 </script>
 </body>
 </html>
