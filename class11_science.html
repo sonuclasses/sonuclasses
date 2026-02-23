@@ -26,6 +26,10 @@
         .lesson-btn { display: block; width: 100%; text-align: left; padding: 15px; margin-bottom: 10px; background: white; border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); text-decoration: none; font-size: 15px; font-weight: 500; transition: 0.2s; box-sizing: border-box; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         .lesson-btn:hover { border-color: var(--primary-blue); color: var(--primary-blue); background: #f8f9fa; transform: translateX(5px); }
         
+        /* PDF वाली बटन का डिज़ाइन */
+        .pdf-ready { background-color: #E8F5E9 !important; border-color: #2E7D32 !important; color: #2E7D32 !important; font-weight: bold; box-shadow: 0 2px 5px rgba(46, 125, 50, 0.2); }
+        .pdf-ready::after { content: " (PDF उपलब्ध ✅)"; font-size: 13px; color: #E65100; float: right; }
+
         .icon-phy { color: #1976D2; }
         .icon-chem { color: #E65100; }
         .icon-math { color: #D32F2F; }
@@ -47,16 +51,16 @@
             <span>➕</span>
         </div>
         <div class="lesson-list">
-            <a href="#" class="lesson-btn">📄 Lesson 1: मात्रक और मापन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: सरल रेखा में गति</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: समतल में गति</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: गति के नियम</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: कार्य, ऊर्जा और शक्ति</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: कणों के निकाय तथा घूर्णी गति</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: गुरुत्वाकर्षण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: ठोसों के यांत्रिक गुण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 9: तरलों के यांत्रिकी गुण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: द्रव्य के तापीय गुण</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="1">📄 Lesson 1: मात्रक और मापन</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="2">📄 Lesson 2: सरल रेखा में गति</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="3">📄 Lesson 3: समतल में गति</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="4">📄 Lesson 4: गति के नियम</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="5">📄 Lesson 5: कार्य, ऊर्जा और शक्ति</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="6">📄 Lesson 6: कणों के निकाय तथा घूर्णी गति</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="7">📄 Lesson 7: गुरुत्वाकर्षण</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="8">📄 Lesson 8: ठोसों के यांत्रिक गुण</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="9">📄 Lesson 9: तरलों के यांत्रिकी गुण</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="10">📄 Lesson 10: द्रव्य के तापीय गुण</a>
         </div>
     </div>
 
@@ -66,15 +70,15 @@
             <span>➕</span>
         </div>
         <div class="lesson-list">
-            <a href="#" class="lesson-btn">📄 Lesson 1: रसायन विज्ञान की कुछ मूल अवधारणाएँ</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: परमाणु की संरचना</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: तत्त्वों का वर्गीकरण एवं गुणधर्मों में आवर्तिता</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: रासायनिक आबंधन तथा आण्विक संरचना</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: ऊष्मागतिकी</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: साम्यावस्था</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: अपचयोपचय अभिक्रियाएँ (Redox)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: कार्बनिक रसायन: कुछ आधारभूत सिद्धांत</a>
-            <a href="#" class="lesson-btn">📄 Lesson 9: हाइड्रोकार्बन</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="1">📄 Lesson 1: रसायन विज्ञान की कुछ मूल अवधारणाएँ</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="2">📄 Lesson 2: परमाणु की संरचना</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="3">📄 Lesson 3: तत्त्वों का वर्गीकरण एवं गुणधर्मों में आवर्तिता</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="4">📄 Lesson 4: रासायनिक आबंधन तथा आण्विक संरचना</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="5">📄 Lesson 5: ऊष्मागतिकी</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="6">📄 Lesson 6: साम्यावस्था</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="7">📄 Lesson 7: अपचयोपचय अभिक्रियाएँ (Redox)</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="8">📄 Lesson 8: कार्बनिक रसायन: कुछ आधारभूत सिद्धांत</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="9">📄 Lesson 9: हाइड्रोकार्बन</a>
         </div>
     </div>
 
@@ -84,16 +88,16 @@
             <span>➕</span>
         </div>
         <div class="lesson-list">
-            <a href="#" class="lesson-btn">📄 Lesson 1: समुच्चय (Sets)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: संबंध एवं फलन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: त्रिकोणमितीय फलन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: सम्मिश्र संख्याएँ और द्विघातीय समीकरण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: रैखिक असमिकाएँ</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: क्रमचय और संचय</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: द्विपद प्रमेय</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: अनुक्रम तथा श्रेणी</a>
-            <a href="#" class="lesson-btn">📄 Lesson 9: सरल रेखाएँ</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: शंकु परिच्छेद</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="1">📄 Lesson 1: समुच्चय (Sets)</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="2">📄 Lesson 2: संबंध एवं फलन</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="3">📄 Lesson 3: त्रिकोणमितीय फलन</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="4">📄 Lesson 4: सम्मिश्र संख्याएँ और द्विघातीय समीकरण</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="5">📄 Lesson 5: रैखिक असमिकाएँ</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="6">📄 Lesson 6: क्रमचय और संचय</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="7">📄 Lesson 7: द्विपद प्रमेय</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="8">📄 Lesson 8: अनुक्रम तथा श्रेणी</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="9">📄 Lesson 9: सरल रेखाएँ</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="10">📄 Lesson 10: शंकु परिच्छेद</a>
         </div>
     </div>
 
@@ -103,39 +107,66 @@
             <span>➕</span>
         </div>
         <div class="lesson-list">
-            <a href="#" class="lesson-btn">📄 Lesson 1: जीव जगत्</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: जीव जगत् का वर्गीकरण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: वनस्पति जगत्</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: प्राणि जगत्</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: पुष्पी पादपों की आकारिकी</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: पुष्पी पादपों का शारीर</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: प्राणियों में संरचनात्मक संगठन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: कोशिका: जीवन की इकाई</a>
-            <a href="#" class="lesson-btn">📄 Lesson 9: जैव अणु</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: कोशिका चक्र और कोशिका विभाजन</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="1">📄 Lesson 1: जीव जगत्</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="2">📄 Lesson 2: जीव जगत् का वर्गीकरण</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="3">📄 Lesson 3: वनस्पति जगत्</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="4">📄 Lesson 4: प्राणि जगत्</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="5">📄 Lesson 5: पुष्पी पादपों की आकारिकी</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="6">📄 Lesson 6: पुष्पी पादपों का शारीर</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="7">📄 Lesson 7: प्राणियों में संरचनात्मक संगठन</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="8">📄 Lesson 8: कोशिका: जीवन की इकाई</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="9">📄 Lesson 9: जैव अणु</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="10">📄 Lesson 10: कोशिका चक्र और कोशिका विभाजन</a>
         </div>
     </div>
 
 </div>
 
-<script>
-    function toggleLessons(header) {
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
+        authDomain: "sonuclasses-b19db.firebaseapp.com",
+        databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com",
+        projectId: "sonuclasses-b19db",
+        storageBucket: "sonuclasses-b19db.firebasestorage.app",
+        messagingSenderId: "166740602272",
+        appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // यह कोड एडमिन पैनल से भेजे गए PDF लिंक को पकड़ता है (Class 11 के लिए)
+    onValue(ref(db, 'appData/notes/class11'), (snapshot) => {
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            for (const subject in data) {
+                for (const lessonKey in data[subject]) {
+                    const lessonNum = lessonKey.replace('lesson', '');
+                    const btn = document.querySelector(`a[data-sub="${subject}"][data-lesson="${lessonNum}"]`);
+                    
+                    if (btn) {
+                        btn.href = data[subject][lessonKey]; 
+                        btn.target = "_blank"; 
+                        btn.classList.add("pdf-ready"); 
+                    }
+                }
+            }
+        }
+    });
+
+    window.toggleLessons = function(header) {
         const content = header.nextElementSibling;
         const icon = header.querySelector("span:last-child");
-        
         if (content.classList.contains("show")) {
-            content.classList.remove("show");
-            header.classList.remove("active");
-            icon.innerText = "➕";
+            content.classList.remove("show"); header.classList.remove("active"); icon.innerText = "➕";
         } else {
             document.querySelectorAll(".lesson-list").forEach(list => list.classList.remove("show"));
-            document.querySelectorAll(".subject-header").forEach(h => {
-                h.classList.remove("active");
-                h.querySelector("span:last-child").innerText = "➕";
-            });
-            content.classList.add("show");
-            header.classList.add("active");
-            icon.innerText = "➖";
+            document.querySelectorAll(".subject-header").forEach(h => { h.classList.remove("active"); h.querySelector("span:last-child").innerText = "➕"; });
+            content.classList.add("show"); header.classList.add("active"); icon.innerText = "➖";
         }
     }
 </script>
