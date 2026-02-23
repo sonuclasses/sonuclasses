@@ -26,6 +26,10 @@
         .lesson-btn { display: block; width: 100%; text-align: left; padding: 15px; margin-bottom: 10px; background: white; border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); text-decoration: none; font-size: 15px; font-weight: 500; transition: 0.2s; box-sizing: border-box; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         .lesson-btn:hover { border-color: #2E7D32; color: #2E7D32; background: #f8f9fa; transform: translateX(5px); }
         
+        /* PDF वाली बटन का डिज़ाइन */
+        .pdf-ready { background-color: #E8F5E9 !important; border-color: #2E7D32 !important; color: #2E7D32 !important; font-weight: bold; box-shadow: 0 2px 5px rgba(46, 125, 50, 0.2); }
+        .pdf-ready::after { content: " (PDF उपलब्ध ✅)"; font-size: 13px; color: #E65100; float: right; }
+
         .icon-phy { color: #1976D2; }
         .icon-chem { color: #E65100; }
         .icon-math { color: #D32F2F; }
@@ -48,21 +52,21 @@
         </div>
         <div class="lesson-list">
             <h4 style="margin: 10px 0; color: #1976D2;">भाग 1</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 1: वैद्युत आवेश तथा क्षेत्र</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: स्थिरवैद्युत विभव तथा धारिता</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: विद्युत् धारा</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: गतिमान आवेश और चुंबकत्व</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: चुंबकत्व एवं द्रव्य</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: वैद्युतचुंबकीय प्रेरण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: प्रत्यावर्ती धारा</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: वैद्युतचुंबकीय तरंगें</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="1">📄 Lesson 1: वैद्युत आवेश तथा क्षेत्र</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="2">📄 Lesson 2: स्थिरवैद्युत विभव तथा धारिता</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="3">📄 Lesson 3: विद्युत् धारा</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="4">📄 Lesson 4: गतिमान आवेश और चुंबकत्व</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="5">📄 Lesson 5: चुंबकत्व एवं द्रव्य</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="6">📄 Lesson 6: वैद्युतचुंबकीय प्रेरण</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="7">📄 Lesson 7: प्रत्यावर्ती धारा</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="8">📄 Lesson 8: वैद्युतचुंबकीय तरंगें</a>
             <h4 style="margin: 10px 0; color: #1976D2;">भाग 2</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 9: किरण प्रकाशिकी एवं प्रकाशिक यंत्र</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: तरंग-प्रकाशिकी</a>
-            <a href="#" class="lesson-btn">📄 Lesson 11: विकिरण तथा द्रव्य की द्वैत प्रकृति</a>
-            <a href="#" class="lesson-btn">📄 Lesson 12: परमाणु</a>
-            <a href="#" class="lesson-btn">📄 Lesson 13: नाभिक</a>
-            <a href="#" class="lesson-btn">📄 Lesson 14: अर्धचालक इलेक्ट्रॉनिकी: पदार्थ, युक्तियाँ तथा सरल परिपथ</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="9">📄 Lesson 9: किरण प्रकाशिकी एवं प्रकाशिक यंत्र</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="10">📄 Lesson 10: तरंग-प्रकाशिकी</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="11">📄 Lesson 11: विकिरण तथा द्रव्य की द्वैत प्रकृति</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="12">📄 Lesson 12: परमाणु</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="13">📄 Lesson 13: नाभिक</a>
+            <a href="#" class="lesson-btn" data-sub="physics" data-lesson="14">📄 Lesson 14: अर्धचालक इलेक्ट्रॉनिकी: पदार्थ, युक्तियाँ...</a>
         </div>
     </div>
 
@@ -73,17 +77,17 @@
         </div>
         <div class="lesson-list">
             <h4 style="margin: 10px 0; color: #E65100;">भाग 1</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 1: विलयन (Solutions)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: वैद्युतरसायन (Electrochemistry)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: रासायनिक बलगतिकी (Chemical Kinetics)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: d- एवं f- ब्लॉक के तत्व</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: उपसहसंयोजन यौगिक</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="1">📄 Lesson 1: विलयन (Solutions)</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="2">📄 Lesson 2: वैद्युतरसायन (Electrochemistry)</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="3">📄 Lesson 3: रासायनिक बलगतिकी (Chemical Kinetics)</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="4">📄 Lesson 4: d- एवं f- ब्लॉक के तत्व</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="5">📄 Lesson 5: उपसहसंयोजन यौगिक</a>
             <h4 style="margin: 10px 0; color: #E65100;">भाग 2</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 6: हैलोऐल्केन तथा हैलोऐरीन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: ऐल्कोहॉल, फ़ीनॉल एवं ईथर</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: ऐल्डिहाइड, कीटोन एवं कार्बोक्सिलिक अम्ल</a>
-            <a href="#" class="lesson-btn">📄 Lesson 9: ऐमीन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: जैव-अणु (Biomolecules)</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="6">📄 Lesson 6: हैलोऐल्केन तथा हैलोऐरीन</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="7">📄 Lesson 7: ऐल्कोहॉल, फ़ीनॉल एवं ईथर</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="8">📄 Lesson 8: ऐल्डिहाइड, कीटोन एवं कार्बोक्सिलिक अम्ल</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="9">📄 Lesson 9: ऐमीन</a>
+            <a href="#" class="lesson-btn" data-sub="chemistry" data-lesson="10">📄 Lesson 10: जैव-अणु (Biomolecules)</a>
         </div>
     </div>
 
@@ -94,20 +98,20 @@
         </div>
         <div class="lesson-list">
             <h4 style="margin: 10px 0; color: #D32F2F;">भाग 1</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 1: संबंध एवं फलन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: प्रतिलोम त्रिकोणमितीय फलन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: आव्यूह (Matrices)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: सारणिक (Determinants)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: सांतत्य तथा अवकलनीयता</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: अवकलज के अनुप्रयोग</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="1">📄 Lesson 1: संबंध एवं फलन</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="2">📄 Lesson 2: प्रतिलोम त्रिकोणमितीय फलन</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="3">📄 Lesson 3: आव्यूह (Matrices)</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="4">📄 Lesson 4: सारणिक (Determinants)</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="5">📄 Lesson 5: सांतत्य तथा अवकलनीयता</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="6">📄 Lesson 6: अवकलज के अनुप्रयोग</a>
             <h4 style="margin: 10px 0; color: #D32F2F;">भाग 2</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 7: समाकलन (Integrals)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: समाकलनों के अनुप्रयोग</a>
-            <a href="#" class="lesson-btn">📄 Lesson 9: अवकल समीकरण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: सदिश बीजगणित (Vector Algebra)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 11: त्रि-विमीय ज्यामिति (3D Geometry)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 12: रैखिक प्रोग्रामन (Linear Programming)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 13: प्रायिकता (Probability)</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="7">📄 Lesson 7: समाकलन (Integrals)</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="8">📄 Lesson 8: समाकलनों के अनुप्रयोग</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="9">📄 Lesson 9: अवकल समीकरण</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="10">📄 Lesson 10: सदिश बीजगणित (Vector Algebra)</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="11">📄 Lesson 11: त्रि-विमीय ज्यामिति (3D Geometry)</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="12">📄 Lesson 12: रैखिक प्रोग्रामन (Linear Programming)</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="13">📄 Lesson 13: प्रायिकता (Probability)</a>
         </div>
     </div>
 
@@ -117,42 +121,69 @@
             <span>➕</span>
         </div>
         <div class="lesson-list">
-            <a href="#" class="lesson-btn">📄 Lesson 1: पुष्पी पादपों में लैंगिक जनन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: मानव जनन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: जनन स्वास्थ्य</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: वंशागति तथा विविधता के सिद्धांत</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: वंशागति के आणविक आधार</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: विकास (Evolution)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: मानव स्वास्थ्य तथा रोग</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: मानव कल्याण में सूक्ष्म जीव</a>
-            <a href="#" class="lesson-btn">📄 Lesson 9: जैव प्रौद्योगिकी - सिद्धांत व प्रक्रम</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: जैव प्रौद्योगिकी एवं उसके उपयोग</a>
-            <a href="#" class="lesson-btn">📄 Lesson 11: जीव और समष्टियाँ</a>
-            <a href="#" class="lesson-btn">📄 Lesson 12: पारितंत्र (Ecosystem)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 13: जैव-विविधता एवं संरक्षण</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="1">📄 Lesson 1: पुष्पी पादपों में लैंगिक जनन</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="2">📄 Lesson 2: मानव जनन</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="3">📄 Lesson 3: जनन स्वास्थ्य</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="4">📄 Lesson 4: वंशागति तथा विविधता के सिद्धांत</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="5">📄 Lesson 5: वंशागति के आणविक आधार</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="6">📄 Lesson 6: विकास (Evolution)</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="7">📄 Lesson 7: मानव स्वास्थ्य तथा रोग</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="8">📄 Lesson 8: मानव कल्याण में सूक्ष्म जीव</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="9">📄 Lesson 9: जैव प्रौद्योगिकी - सिद्धांत व प्रक्रम</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="10">📄 Lesson 10: जैव प्रौद्योगिकी एवं उसके उपयोग</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="11">📄 Lesson 11: जीव और समष्टियाँ</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="12">📄 Lesson 12: पारितंत्र (Ecosystem)</a>
+            <a href="#" class="lesson-btn" data-sub="biology" data-lesson="13">📄 Lesson 13: जैव-विविधता एवं संरक्षण</a>
         </div>
     </div>
 
 </div>
 
-<script>
-    function toggleLessons(header) {
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
+        authDomain: "sonuclasses-b19db.firebaseapp.com",
+        databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com",
+        projectId: "sonuclasses-b19db",
+        storageBucket: "sonuclasses-b19db.firebasestorage.app",
+        messagingSenderId: "166740602272",
+        appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // यह कोड एडमिन पैनल से भेजे गए PDF लिंक को पकड़ता है (Class 12 के लिए)
+    onValue(ref(db, 'appData/notes/class12'), (snapshot) => {
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            for (const subject in data) {
+                for (const lessonKey in data[subject]) {
+                    const lessonNum = lessonKey.replace('lesson', '');
+                    const btn = document.querySelector(`a[data-sub="${subject}"][data-lesson="${lessonNum}"]`);
+                    
+                    if (btn) {
+                        btn.href = data[subject][lessonKey]; 
+                        btn.target = "_blank"; 
+                        btn.classList.add("pdf-ready"); 
+                    }
+                }
+            }
+        }
+    });
+
+    window.toggleLessons = function(header) {
         const content = header.nextElementSibling;
         const icon = header.querySelector("span:last-child");
-        
         if (content.classList.contains("show")) {
-            content.classList.remove("show");
-            header.classList.remove("active");
-            icon.innerText = "➕";
+            content.classList.remove("show"); header.classList.remove("active"); icon.innerText = "➕";
         } else {
             document.querySelectorAll(".lesson-list").forEach(list => list.classList.remove("show"));
-            document.querySelectorAll(".subject-header").forEach(h => {
-                h.classList.remove("active");
-                h.querySelector("span:last-child").innerText = "➕";
-            });
-            content.classList.add("show");
-            header.classList.add("active");
-            icon.innerText = "➖";
+            document.querySelectorAll(".subject-header").forEach(h => { h.classList.remove("active"); h.querySelector("span:last-child").innerText = "➕"; });
+            content.classList.add("show"); header.classList.add("active"); icon.innerText = "➖";
         }
     }
 </script>
