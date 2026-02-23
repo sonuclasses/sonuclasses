@@ -26,6 +26,10 @@
         .lesson-btn { display: block; width: 100%; text-align: left; padding: 15px; margin-bottom: 10px; background: white; border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); text-decoration: none; font-size: 15px; font-weight: 500; transition: 0.2s; box-sizing: border-box; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         .lesson-btn:hover { border-color: var(--primary-blue); color: var(--primary-blue); background: #f8f9fa; transform: translateX(5px); }
         
+        /* PDF वाली बटन का डिज़ाइन */
+        .pdf-ready { background-color: #E8F5E9 !important; border-color: #2E7D32 !important; color: #2E7D32 !important; font-weight: bold; box-shadow: 0 2px 5px rgba(46, 125, 50, 0.2); }
+        .pdf-ready::after { content: " (PDF उपलब्ध ✅)"; font-size: 13px; color: #E65100; float: right; }
+
         /* Icons styling */
         .icon-math { color: #E65100; }
         .icon-sci { color: #2E7D32; }
@@ -45,143 +49,191 @@
     
     <div class="subject-card">
         <div class="subject-header" onclick="toggleLessons(this)">
-            <span><span class="icon-lang">📝</span> हिंदी (मल्हार)</span>
+            <span><span class="icon-sci">🔬</span> विज्ञान (Science)</span>
             <span>➕</span>
         </div>
         <div class="lesson-list">
-            <a href="#" class="lesson-btn">📄 Lesson 1: मातृभूमि (कविता)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: गोल (संस्मरण)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: पहली बूँद (कविता)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: हार की जीत (कहानी)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: रहीम के दोहे</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: मेरी माँ (आत्मकथा)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: जलाते चलो (कविता)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: सत्रिया और बिहू नृत्य</a>
-            <a href="#" class="lesson-btn">📄 Lesson 9: मैया मैं नहिं माखन खायो</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: परीक्षा (कहानी)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 11: चेतक की वीरता</a>
-            <a href="#" class="lesson-btn">📄 Lesson 12: हिंद महासागर में छोटा-सा हिंदुस्तान</a>
-            <a href="#" class="lesson-btn">📄 Lesson 13: पेड़ की बात</a>
+            <a href="#" class="lesson-btn" data-sub="science" data-lesson="1">📄 Lesson 1: भोजन के घटक</a>
+            <a href="#" class="lesson-btn" data-sub="science" data-lesson="2">📄 Lesson 2: वस्तुओं के समूह बनाना</a>
+            <a href="#" class="lesson-btn" data-sub="science" data-lesson="3">📄 Lesson 3: पदार्थों का पृथक्करण</a>
+            <a href="#" class="lesson-btn" data-sub="science" data-lesson="4">📄 Lesson 4: पौधों को जानिए</a>
+            <a href="#" class="lesson-btn" data-sub="science" data-lesson="5">📄 Lesson 5: शरीर में गति</a>
+            <a href="#" class="lesson-btn" data-sub="science" data-lesson="6">📄 Lesson 6: सजीव - विशेषताएँ एवं आवास</a>
+            <a href="#" class="lesson-btn" data-sub="science" data-lesson="7">📄 Lesson 7: गति एवं दूरियों का मापन</a>
+            <a href="#" class="lesson-btn" data-sub="science" data-lesson="8">📄 Lesson 8: प्रकाश - छायाएँ एवं परावर्तन</a>
+            <a href="#" class="lesson-btn" data-sub="science" data-lesson="9">📄 Lesson 9: विद्युत् तथा परिपथ</a>
+            <a href="#" class="lesson-btn" data-sub="science" data-lesson="10">📄 Lesson 10: चुंबकों द्वारा मनोरंजन</a>
+            <a href="#" class="lesson-btn" data-sub="science" data-lesson="11">📄 Lesson 11: हमारे चारों ओर वायु</a>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-header" onclick="toggleLessons(this)">
-            <span><span class="icon-sci">🔬</span> विज्ञान (जिज्ञासा)</span>
+            <span><span class="icon-math">📐</span> गणित (Mathematics)</span>
             <span>➕</span>
         </div>
         <div class="lesson-list">
-            <a href="#" class="lesson-btn">📄 Lesson 1: विज्ञान का अनूठा संसार</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: सजीव जगत में विविधता</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: उचित आहार – स्वस्थ शरीर का आधार</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: चुंबकों को जानें</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: लंबाई एवं गति का मापन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: हमारे आस-पास की सामग्री</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: ताप एवं उसका मापन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: जल की विविध अवस्थाओं की यात्रा</a>
-            <a href="#" class="lesson-btn">📄 Lesson 9: दैनिक जीवन में पृथक्करण विधियाँ</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: सजीव विशेषताओं का अन्वेषण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 11: प्रकृति की अमूल्य संपदा</a>
-            <a href="#" class="lesson-btn">📄 Lesson 12: पृथ्वी से परे</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="1">📄 Lesson 1: अपनी संख्याओं की जानकारी</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="2">📄 Lesson 2: पूर्ण संख्याएँ</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="3">📄 Lesson 3: संख्याओं के साथ खेलना</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="4">📄 Lesson 4: आधारभूत ज्यामितीय अवधारणाएँ</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="5">📄 Lesson 5: प्रारंभिक आकारों को समझना</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="6">📄 Lesson 6: पूर्णांक</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="7">📄 Lesson 7: भिन्न</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="8">📄 Lesson 8: दशमलव</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="9">📄 Lesson 9: आँकड़ों का प्रबंधन</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="10">📄 Lesson 10: क्षेत्रमिति</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="11">📄 Lesson 11: बीजगणित</a>
+            <a href="#" class="lesson-btn" data-sub="math" data-lesson="12">📄 Lesson 12: अनुपात और समानुपात</a>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-header" onclick="toggleLessons(this)">
-            <span><span class="icon-math">📐</span> गणित (गणित प्रकाश)</span>
+            <span><span class="icon-sst">🌍</span> सामाजिक विज्ञान (SST)</span>
             <span>➕</span>
         </div>
         <div class="lesson-list">
-            <a href="#" class="lesson-btn">📄 Lesson 1: गणित में पैटर्न</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: रेखाएँ और कोण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: संख्या का खेल</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: आँकड़ों का प्रबंधन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: भिन्न और दशमलव</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: बीजगणित की शुरुआत</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: क्षेत्रमिति</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: अनुपात और समानुपात</a>
-            <a href="#" class="lesson-btn">📄 Lesson 9: ज्यामिति के मूल विचार</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: पूर्णांक</a>
+            <h4 style="margin: 10px 0; color: #00838F;">इतिहास (हमारे अतीत - I)</h4>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="1">📄 Lesson 1: क्या, कब, कहाँ और कैसे?</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="2">📄 Lesson 2: आखेट-खाद्य संग्रह से भोजन उत्पादन तक</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="3">📄 Lesson 3: आरंभिक नगर</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="4">📄 Lesson 4: क्या बताती हैं हमें किताबें और कब्रें</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="5">📄 Lesson 5: राज्य, राजा और एक प्राचीन गणराज्य</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="6">📄 Lesson 6: नए प्रश्न नए विचार</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="7">📄 Lesson 7: अशोक: एक अनोखा सम्राट जिसने युद्ध का त्याग किया</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="8">📄 Lesson 8: खुशहाल गाँव और समृद्ध शहर</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="9">📄 Lesson 9: व्यापारी, राजा और तीर्थयात्री</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="10">📄 Lesson 10: नए साम्राज्य और राज्य</a>
+            <a href="#" class="lesson-btn" data-sub="history" data-lesson="11">📄 Lesson 11: इमारतें, चित्र तथा किताबें</a>
+            
+            <h4 style="margin: 10px 0; color: #00838F;">भूगोल (पृथ्वी: हमारा आवास)</h4>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="1">📄 Lesson 1: सौरमंडल में पृथ्वी</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="2">📄 Lesson 2: ग्लोब: अक्षांश एवं देशांतर</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="3">📄 Lesson 3: पृथ्वी की गतियाँ</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="4">📄 Lesson 4: मानचित्र</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="5">📄 Lesson 5: पृथ्वी के प्रमुख परिमंडल</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="6">📄 Lesson 6: पृथ्वी के प्रमुख स्थलरूप</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="7">📄 Lesson 7: हमारा देश: भारत</a>
+            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="8">📄 Lesson 8: भारत: जलवायु, वनस्पति तथा वन्य प्राणी</a>
+            
+            <h4 style="margin: 10px 0; color: #00838F;">नागरिक शास्त्र</h4>
+            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="1">📄 Lesson 1: विविधता की समझ</a>
+            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="2">📄 Lesson 2: विविधता एवं भेदभाव</a>
+            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="3">📄 Lesson 3: सरकार क्या है?</a>
+            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="4">📄 Lesson 4: लोकतांत्रिक सरकार के मुख्य तत्त्व</a>
+            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="5">📄 Lesson 5: पंचायती राज</a>
+            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="6">📄 Lesson 6: गाँव का प्रशासन</a>
+            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="7">📄 Lesson 7: नगर प्रशासन</a>
+            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="8">📄 Lesson 8: ग्रामीण क्षेत्र में आजीविका</a>
+            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="9">📄 Lesson 9: शहरी क्षेत्र में आजीविका</a>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-header" onclick="toggleLessons(this)">
-            <span><span class="icon-sst">🌍</span> सामाजिक विज्ञान (समाज का अन्वेषण)</span>
+            <span><span class="icon-lang">📚</span> हिंदी एवं अंग्रेज़ी</span>
             <span>➕</span>
         </div>
         <div class="lesson-list">
-            <a href="#" class="lesson-btn">📄 Lesson 1: पृथ्वी पर स्थानों की स्थिति</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: महासागर एवं महाद्वीप</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: स्थलरूप एवं जीवन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: इतिहास की समय-रेखा एवं उसके स्रोत</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: इंडिया, अर्थात भारत</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: भारतीय सभ्यता का प्रारंभ</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: परिवार और समुदाय</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: विविधता की समझ</a>
-            <a href="#" class="lesson-btn">📄 Lesson 9: लोकतंत्र और सरकार</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: स्थानीय शासन</a>
+            <h4 style="margin: 10px 0; color: #C2185B;">हिंदी (वसंत भाग 1)</h4>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="1">📄 Lesson 1: वह चिड़िया जो</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="2">📄 Lesson 2: बचपन</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="3">📄 Lesson 3: नादान दोस्त</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="4">📄 Lesson 4: चाँद से थोड़ी-सी गप्पें</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="5">📄 Lesson 5: अक्षरों का महत्व</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="6">📄 Lesson 6: पार नज़र के</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="7">📄 Lesson 7: साथी हाथ बढ़ाना</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="8">📄 Lesson 8: ऐसे-ऐसे</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="9">📄 Lesson 9: टिकट अलबम</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="10">📄 Lesson 10: झाँसी की रानी</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="11">📄 Lesson 11: जो देखकर भी नहीं देखते</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="12">📄 Lesson 12: संसार पुस्तक है</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="13">📄 Lesson 13: मैं सबसे छोटी होऊं</a>
+            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="14">📄 Lesson 14: लोकगीत</a>
+            
+            <h4 style="margin: 10px 0; color: #C2185B;">अंग्रेज़ी (Honeysuckle)</h4>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="1">📄 Lesson 1: Who Did Patrick's Homework?</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="2">📄 Lesson 2: How the Dog Found Himself a New Master!</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="3">📄 Lesson 3: Taro's Reward</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="4">📄 Lesson 4: An Indian-American Woman in Space</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="5">📄 Lesson 5: A Different Kind of School</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="6">📄 Lesson 6: Who I Am</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="7">📄 Lesson 7: Fair Play</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="8">📄 Lesson 8: A Game of Chance</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="9">📄 Lesson 9: Desert Animals</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="10">📄 Lesson 10: The Banyan Tree</a>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-header" onclick="toggleLessons(this)">
-            <span><span class="icon-lang">🅰️</span> अंग्रेज़ी (Poorvi)</span>
+            <span><span class="icon-sans">🕉️</span> संस्कृत (रुचिरा भाग 1)</span>
             <span>➕</span>
         </div>
         <div class="lesson-list">
-            <a href="#" class="lesson-btn">📄 Lesson 1: Fables and Stories</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: The Raven and the Fox</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: The Ant and the Grasshopper</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: A Bottle of Dew</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: The King and the Fiery Dragon</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: Myths and Legends</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: The Banyan Tree</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: A Childhood in Malabar</a>
-            <a href="#" class="lesson-btn">📄 Lesson 9: The Boy Who Drew Cats</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: Poems and Rhymes</a>
-        </div>
-    </div>
-
-    <div class="subject-card">
-        <div class="subject-header" onclick="toggleLessons(this)">
-            <span><span class="icon-sans">🕉️</span> संस्कृत (दीपकम)</span>
-            <span>➕</span>
-        </div>
-        <div class="lesson-list">
-            <a href="#" class="lesson-btn">📄 Lesson 1: शब्दपरिचयः I</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: शब्दपरिचयः II</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: शब्दपरिचयः III</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: विद्यालयः</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: वृक्षाः</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: समुद्रतटः</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: बकस्य प्रतीकारः</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: सूक्तिस्तबकः</a>
-            <a href="#" class="lesson-btn">📄 Lesson 9: क्रीडास्पर्धा</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: कृषिकाः कर्मवीराः</a>
+            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="1">📄 Lesson 1: शब्दपरिचयः - I</a>
+            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="2">📄 Lesson 2: शब्दपरिचयः - II</a>
+            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="3">📄 Lesson 3: शब्दपरिचयः - III</a>
+            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="4">📄 Lesson 4: विद्यालयः</a>
+            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="5">📄 Lesson 5: वृक्षाः</a>
+            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="6">📄 Lesson 6: समुद्रतटः</a>
+            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="7">📄 Lesson 7: बकस्य प्रतीकारः</a>
+            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="8">📄 Lesson 8: सूक्तिस्तबकः</a>
+            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="9">📄 Lesson 9: क्रीडास्पर्धा</a>
+            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="10">📄 Lesson 10: कृषिकाः कर्मवीराः</a>
+            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="11">📄 Lesson 11: दशमः त्वम् असि</a>
+            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="12">📄 Lesson 12: विमानयानं रचयाम</a>
         </div>
     </div>
 
 </div>
 
-<script>
-    function toggleLessons(header) {
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
+        authDomain: "sonuclasses-b19db.firebaseapp.com",
+        databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com",
+        projectId: "sonuclasses-b19db",
+        storageBucket: "sonuclasses-b19db.firebasestorage.app",
+        messagingSenderId: "166740602272",
+        appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // यह कोड एडमिन पैनल से भेजे गए PDF लिंक को पकड़ता है (Class 6 के लिए)
+    onValue(ref(db, 'appData/notes/class6'), (snapshot) => {
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            for (const subject in data) {
+                for (const lessonKey in data[subject]) {
+                    const lessonNum = lessonKey.replace('lesson', '');
+                    const btn = document.querySelector(`a[data-sub="${subject}"][data-lesson="${lessonNum}"]`);
+                    
+                    if (btn) {
+                        btn.href = data[subject][lessonKey]; 
+                        btn.target = "_blank"; 
+                        btn.classList.add("pdf-ready"); 
+                    }
+                }
+            }
+        }
+    });
+
+    window.toggleLessons = function(header) {
         const content = header.nextElementSibling;
         const icon = header.querySelector("span:last-child");
-        
         if (content.classList.contains("show")) {
-            content.classList.remove("show");
-            header.classList.remove("active");
-            icon.innerText = "➕";
+            content.classList.remove("show"); header.classList.remove("active"); icon.innerText = "➕";
         } else {
             document.querySelectorAll(".lesson-list").forEach(list => list.classList.remove("show"));
-            document.querySelectorAll(".subject-header").forEach(h => {
-                h.classList.remove("active");
-                h.querySelector("span:last-child").innerText = "➕";
-            });
-            content.classList.add("show");
-            header.classList.add("active");
-            icon.innerText = "➖";
+            document.querySelectorAll(".subject-header").forEach(h => { h.classList.remove("active"); h.querySelector("span:last-child").innerText = "➕"; });
+            content.classList.add("show"); header.classList.add("active"); icon.innerText = "➖";
         }
     }
 </script>
