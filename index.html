@@ -300,7 +300,7 @@
 
   window.onload = () => { if(localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-mode'); document.getElementById('theme-btn').innerText = '☀️'; } };
 
-  // 🌟 AI CHATBOT LOGIC (VOICE INPUT & OUTPUT) 🌟
+  // 🌟 AI CHATBOT LOGIC 🌟
   window.toggleAIChat = () => {
       const box = document.getElementById('aiChatBox');
       box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
@@ -314,7 +314,7 @@
           return;
       }
       const recognition = new SpeechRecognition();
-      recognition.lang = 'hi-IN'; // हिंदी भाषा सेट
+      recognition.lang = 'hi-IN'; 
       
       const inputField = document.getElementById('aiInput');
       inputField.placeholder = "सुन रहा हूँ... बोलिए 🎤";
@@ -325,7 +325,7 @@
           const transcript = event.results[0][0].transcript;
           inputField.value = transcript;
           inputField.placeholder = "अपना सवाल यहाँ टाइप करें...";
-          sendAIMessage(); // बोलते ही अपने आप सेंड हो जाएगा
+          sendAIMessage(); 
       };
 
       recognition.onspeechend = () => {
@@ -338,19 +338,23 @@
       };
   };
 
-  // 🔊 AI का जवाब पढ़कर सुनाने वाला फीचर
+  // 🔊 AI का जवाब बिना रुके पूरा पढ़कर सुनाने वाला फीचर (Chrome Bug Fix)
   window.speakAnswer = (htmlText) => {
-      // अगर पहले से कुछ बोल रहा है, तो उसे चुप कराओ
-      window.speechSynthesis.cancel(); 
+      window.speechSynthesis.cancel(); // अगर पहले से कुछ बोल रहा है, तो चुप कराओ
       
-      // HTML टैग्स (जैसे <b>, <br>) को हटाकर साफ़ टेक्स्ट निकालना
-      const plainText = htmlText.replace(/<[^>]*>?/gm, ''); 
+      let plainText = htmlText.replace(/<[^>]*>?/gm, ''); // HTML टैग्स हटाओ
       
-      const speech = new SpeechSynthesisUtterance(plainText);
-      speech.lang = 'hi-IN'; // हिंदी में बोलेगा
-      speech.rate = 0.9; // बोलने की स्पीड (थोड़ी आराम से)
+      // 🌟 जादू: पूरे पैराग्राफ को जहाँ भी '.' '?' '!' या '।' आए, वहाँ से छोटे वाक्यों में तोड़ दो 
+      let sentences = plainText.replace(/([\.!\?।])/g, "$1|").split("|");
       
-      window.speechSynthesis.speak(speech);
+      sentences.forEach(sentence => {
+          if(sentence.trim() !== "") {
+              let speech = new SpeechSynthesisUtterance(sentence.trim());
+              speech.lang = 'hi-IN'; // हिंदी में बोलेगा
+              speech.rate = 0.9; // बोलने की स्पीड
+              window.speechSynthesis.speak(speech); // एक-एक करके पूरा पढ़ेगा
+          }
+      });
   };
 
   window.sendAIMessage = async () => {
@@ -363,7 +367,7 @@
       input.value = '';
       body.scrollTop = body.scrollHeight;
 
-      // आपकी चाबी (सुरक्षित तरीके से)
+      // सुरक्षित चाबी
       const secret1 = "AIzaSy"; 
       const secret2 = "CBykQafD5nPNwf2ZSw20mPgrEWEgRLDZY"; 
       const apiKey = secret1 + secret2;
@@ -387,10 +391,8 @@
           } else if (data.candidates && data.candidates.length > 0) {
               let reply = data.candidates[0].content.parts[0].text;
               
-              // टेक्स्ट को डिज़ाइन करना (Bold और Bullet points)
               let formattedReply = reply.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*/g, '<br>•');
               
-              // नया डिज़ाइन: जवाब के साथ 🔊 का बटन जोड़ना
               body.innerHTML += `
                   <div class="ai-msg">
                       <button class="speak-btn" onclick="speakAnswer(this.nextElementSibling.innerHTML)" title="सुनें">🔊</button>
