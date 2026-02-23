@@ -10,6 +10,13 @@
         :root { --primary-green: #2E7D32; --primary-blue: #1976D2; --bg-light: #f4f4f9; --text-color: #333; --box-bg: white; --border-color: #ddd; }
         body.dark-mode { --bg-light: #121212; --text-color: #f1f1f1; --box-bg: #1e1e1e; --border-color: #444; }
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); color: var(--text-color); margin: 0; padding: 0; text-align: center; transition: background-color 0.3s, color 0.3s; }
+        
+        /* लोडिंग एनीमेशन का डिज़ाइन */
+        #loader-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-light); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .spinner { width: 50px; height: 50px; border: 5px solid #ccc; border-top: 5px solid var(--primary-green); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #main-content { display: none; } /* जब तक लोड न हो, बाकी सब छिपा रहे */
+
         header { background-color: var(--primary-green); color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         h1 { margin: 0; font-size: 20px; }
         .header-right { display: flex; align-items: center; gap: 15px; }
@@ -65,112 +72,120 @@
         footer { margin-top: 30px; padding: 15px; background: var(--box-bg); border-top: 1px solid var(--border-color); font-size: 14px; color: #666; }
     </style>
 </head>
-<body style="display: none;" id="main-body">
+<body>
 
-<header>
-    <h1>Sonu Classes</h1>
-    <div class="header-right">
-        <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">🌙</button>
-        <div class="profile-section">
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" id="user-photo" class="profile-img" onclick="toggleDropdown()">
-            <div id="dropdown-menu" class="dropdown">
-                <button onclick="document.getElementById('photo-input').click()">📷 फोटो बदलें</button>
-                <button onclick="confirmLogout()" class="btn-logout">🚪 लॉगआउट</button>
-                <input type="file" id="photo-input" style="display:none" accept="image/*" onchange="changePhoto(event)">
+<div id="loader-screen">
+    <div class="spinner"></div>
+    <h2 style="color: var(--primary-blue); margin: 0;">Sonu Classes</h2>
+    <p style="color: gray; font-size: 14px; font-weight: bold;">लोड हो रहा है...</p>
+</div>
+
+<div id="main-content">
+    <header>
+        <h1>Sonu Classes</h1>
+        <div class="header-right">
+            <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">🌙</button>
+            <div class="profile-section">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" id="user-photo" class="profile-img" onclick="toggleDropdown()">
+                <div id="dropdown-menu" class="dropdown">
+                    <button onclick="document.getElementById('photo-input').click()">📷 फोटो बदलें</button>
+                    <button onclick="confirmLogout()" class="btn-logout">🚪 लॉगआउट</button>
+                    <input type="file" id="photo-input" style="display:none" accept="image/*" onchange="changePhoto(event)">
+                </div>
             </div>
         </div>
+    </header>
+
+    <div class="news-ticker" onclick="showModal('news-modal')">
+        <span id="news-text-display">📢 न्यूज़ लोड हो रही है... 📢</span>
     </div>
-</header>
 
-<div class="news-ticker" onclick="showModal('news-modal')">
-    <span id="news-text-display">📢 न्यूज़ लोड हो रही है... 📢</span>
-</div>
-
-<div class="hero-section">
-    <div class="hero-text">
-        <p class="welcome-msg">आपका स्वागत है, <span id="student-name" style="color: var(--primary-green);">लोडिंग...</span></p>
-        <h2>Welcome to <br><span style="color: var(--primary-blue);">Sonu Classes</span></h2>
-        <p class="sub-text">बोर्ड परीक्षा 2027 और IAS की तैयारी के लिए फ्री नोट्स एवं सर्वश्रेष्ठ क्विज़।</p>
-        <button class="hero-btn" onclick="showModal('notes-modal')">📚 पढ़ना शुरू करें</button>
+    <div class="hero-section">
+        <div class="hero-text">
+            <p class="welcome-msg">आपका स्वागत है, <span id="student-name" style="color: var(--primary-green);">लोडिंग...</span></p>
+            <h2>Welcome to <br><span style="color: var(--primary-blue);">Sonu Classes</span></h2>
+            <p class="sub-text">बोर्ड परीक्षा 2027 और IAS की तैयारी के लिए फ्री नोट्स एवं सर्वश्रेष्ठ क्विज़।</p>
+            <button class="hero-btn" onclick="showModal('notes-modal')">📚 पढ़ना शुरू करें</button>
+        </div>
+        <div class="hero-image">
+            <img src="Screenshot_2026-02-20-17-10-57-613_com.google.android.googlequicksearchbox.jpg" alt="Sonu Classes Logo" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.2); animation: float 3s ease-in-out infinite;">
+        </div>
     </div>
-    <div class="hero-image">
-        <img src="Screenshot_2026-02-20-17-10-57-613_com.google.android.googlequicksearchbox.jpg" alt="Sonu Classes Logo" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.2); animation: float 3s ease-in-out infinite;">
+
+    <button id="notifyBtn" onclick="enableNotifications()">🔔 नोटिफिकेशन चालू करें</button>
+    <button id="installAppBtn">📲 App इंस्टॉल करें</button>
+
+    <div class="container" style="margin-bottom: 20px;">
+        <a href="class6.html" class="class-btn">Class 6</a>
+        <a href="class7.html" class="class-btn">Class 7</a>
+        <a href="class8.html" class="class-btn">Class 8</a>
+        <a href="class9.html" class="class-btn">Class 9</a>
+        <a href="class10.html" class="class-btn">Class 10</a>
+        <a href="class11.html" class="class-btn">Class 11</a>
+        <a href="class12.html" class="class-btn">Class 12</a>
     </div>
-</div>
 
-<button id="notifyBtn" onclick="enableNotifications()">🔔 नोटिफिकेशन चालू करें</button>
-<button id="installAppBtn">📲 App इंस्टॉल करें</button>
+    <button class="action-btn btn-quiz" onclick="startQuiz()">📝 ऑनलाइन टेस्ट दें</button>
+    <button class="action-btn btn-leaderboard" onclick="showModal('leaderboard-modal')">🏆 लीडरबोर्ड देखें</button>
 
-<div class="container" style="margin-bottom: 20px;">
-    <a href="class6.html" class="class-btn">Class 6</a>
-    <a href="class7.html" class="class-btn">Class 7</a>
-    <a href="class8.html" class="class-btn">Class 8</a>
-    <a href="class9.html" class="class-btn">Class 9</a>
-    <a href="class10.html" class="class-btn">Class 10</a>
-    <a href="class11.html" class="class-btn">Class 11</a>
-    <a href="class12.html" class="class-btn">Class 12</a>
-</div>
+    <a href="https://wa.me/918521057039?text=नमस्ते सोनू सर, मुझे आपकी वेबसाइट से मदद चाहिए।" target="_blank" class="whatsapp-float">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 35px; height: 35px;">
+    </a>
 
-<button class="action-btn btn-quiz" onclick="startQuiz()">📝 ऑनलाइन टेस्ट दें</button>
-<button class="action-btn btn-leaderboard" onclick="showModal('leaderboard-modal')">🏆 लीडरबोर्ड देखें</button>
-
-<a href="https://wa.me/918521057039?text=नमस्ते सोनू सर, मुझे आपकी वेबसाइट से मदद चाहिए।" target="_blank" class="whatsapp-float">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 35px; height: 35px;">
-</a>
-
-<div id="quiz-modal" class="modal">
-    <div class="modal-content" id="quiz-container">
-        <h2 style="color: #E65100; text-align: center; margin-top: 0;">📝 ऑनलाइन टेस्ट</h2>
-        <div id="quiz-area" class="q-block">
-            <h4 id="quiz-q">प्रश्न लोड हो रहा है...</h4>
-            <button class="option-btn" id="btn-opt-a" onclick="checkAnswer('A')">A.</button>
-            <button class="option-btn" id="btn-opt-b" onclick="checkAnswer('B')">B.</button>
-            <button class="option-btn" id="btn-opt-c" onclick="checkAnswer('C')">C.</button>
-            <button class="option-btn" id="btn-opt-d" onclick="checkAnswer('D')">D.</button>
-            <div style="text-align: right; margin-top: 15px;">
-                <button id="next-btn" style="display:none; background: #1976D2; color: white; padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 15px;" onclick="nextQuestion()">अगला सवाल ➡️</button>
+    <div id="quiz-modal" class="modal">
+        <div class="modal-content" id="quiz-container">
+            <h2 style="color: #E65100; text-align: center; margin-top: 0;">📝 ऑनलाइन टेस्ट</h2>
+            <div id="quiz-area" class="q-block">
+                <h4 id="quiz-q">प्रश्न लोड हो रहा है...</h4>
+                <button class="option-btn" id="btn-opt-a" onclick="checkAnswer('A')">A.</button>
+                <button class="option-btn" id="btn-opt-b" onclick="checkAnswer('B')">B.</button>
+                <button class="option-btn" id="btn-opt-c" onclick="checkAnswer('C')">C.</button>
+                <button class="option-btn" id="btn-opt-d" onclick="checkAnswer('D')">D.</button>
+                <div style="text-align: right; margin-top: 15px;">
+                    <button id="next-btn" style="display:none; background: #1976D2; color: white; padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 15px;" onclick="nextQuestion()">अगला सवाल ➡️</button>
+                </div>
             </div>
+            <div id="quiz-result-area" style="display: none; text-align: center; padding: 20px 0;">
+                <h3 style="color: #2E7D32; font-size: 24px; margin-top: 0;">🎉 टेस्ट पूरा हुआ!</h3>
+                <p style="font-size: 18px; font-weight: bold;">आपका कुल स्कोर:</p>
+                <div style="font-size: 40px; font-weight: bold; color: #E65100; margin: 10px 0;"><span id="final-score-text">0</span> अंक</div>
+                <button class="submit-quiz-btn" onclick="submitQuiz()">✅ स्कोर लीडरबोर्ड में सेव करें</button>
+            </div>
+            <button class="close-btn" onclick="hideModal('quiz-modal')">🚪 बाहर निकलें</button>
         </div>
-        <div id="quiz-result-area" style="display: none; text-align: center; padding: 20px 0;">
-            <h3 style="color: #2E7D32; font-size: 24px; margin-top: 0;">🎉 टेस्ट पूरा हुआ!</h3>
-            <p style="font-size: 18px; font-weight: bold;">आपका कुल स्कोर:</p>
-            <div style="font-size: 40px; font-weight: bold; color: #E65100; margin: 10px 0;"><span id="final-score-text">0</span> अंक</div>
-            <button class="submit-quiz-btn" onclick="submitQuiz()">✅ स्कोर लीडरबोर्ड में सेव करें</button>
+    </div>
+
+    <div id="leaderboard-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: #FF9800; text-align: center; margin-top: 0;">🏆 टॉप स्कोरर्स</h2>
+            <ul id="leaderboard-list" class="leaderboard-list">
+                <li style="justify-content: center; color: gray;">स्कोर लोड हो रहा है...</li>
+            </ul>
+            <button class="close-btn" onclick="hideModal('leaderboard-modal')">🚪 बाहर निकलें</button>
         </div>
-        <button class="close-btn" onclick="hideModal('quiz-modal')">🚪 बाहर निकलें</button>
     </div>
-</div>
 
-<div id="leaderboard-modal" class="modal">
-    <div class="modal-content">
-        <h2 style="color: #FF9800; text-align: center; margin-top: 0;">🏆 टॉप स्कोरर्स</h2>
-        <ul id="leaderboard-list" class="leaderboard-list">
-            <li style="justify-content: center; color: gray;">स्कोर लोड हो रहा है...</li>
-        </ul>
-        <button class="close-btn" onclick="hideModal('leaderboard-modal')">🚪 बाहर निकलें</button>
+    <div id="news-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: var(--primary-blue); text-align: center;">आज की बड़ी खबरें</h2>
+            <p id="news-modal-text" style="line-height: 1.8; font-size: 15px;">यहाँ आपकी न्यूज़ दिखेगी...</p>
+            <button class="close-btn" onclick="hideModal('news-modal')">🚪 बाहर निकलें</button>
+        </div>
     </div>
-</div>
 
-<div id="news-modal" class="modal">
-    <div class="modal-content">
-        <h2 style="color: var(--primary-blue); text-align: center;">आज की बड़ी खबरें</h2>
-        <p id="news-modal-text" style="line-height: 1.8; font-size: 15px;">यहाँ आपकी न्यूज़ दिखेगी...</p>
-        <button class="close-btn" onclick="hideModal('news-modal')">🚪 बाहर निकलें</button>
+    <div id="notes-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: #4CAF50; text-align: center; margin-top: 0;">📚 स्टडी नोट्स</h2>
+            <p>असली नोट्स पढ़ने के लिए किसी भी क्लास के बटन पर क्लिक करें!</p>
+            <button class="close-btn" onclick="hideModal('notes-modal')">🚪 बाहर निकलें</button>
+        </div>
     </div>
-</div>
 
-<div id="notes-modal" class="modal">
-    <div class="modal-content">
-        <h2 style="color: #4CAF50; text-align: center; margin-top: 0;">📚 स्टडी नोट्स</h2>
-        <p>असली नोट्स पढ़ने के लिए किसी भी क्लास के बटन पर क्लिक करें!</p>
-        <button class="close-btn" onclick="hideModal('notes-modal')">🚪 बाहर निकलें</button>
-    </div>
+    <footer>
+        <strong>Owner & Founder: Sonu Kumar</strong><br>
+        Mission: Education for All | Target: IAS
+    </footer>
 </div>
-
-<footer>
-    <strong>Owner & Founder: Sonu Kumar</strong><br>
-    Mission: Education for All | Target: IAS
-</footer>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
@@ -199,26 +214,21 @@
   let currentQIndex = 0;
   let currentCorrectAnswer = "A"; 
 
+  // जैसे ही यूज़र चेक हो जाएगा, लोडिंग स्क्रीन गायब और वेबसाइट चालू!
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      document.getElementById('main-body').style.display = "block";
+      document.getElementById('loader-screen').style.display = "none";
+      document.getElementById('main-content').style.display = "block";
+      
       currentStudentName = user.displayName || user.email.split('@')[0];
       document.getElementById('student-name').innerText = currentStudentName;
       if(user.photoURL) document.getElementById('user-photo').src = user.photoURL;
       
       if (Notification.permission === 'granted') {
-          navigator.serviceWorker.register('./firebase-messaging-sw.js')
-          .then((registration) => {
-              getToken(messaging, { 
-                  vapidKey: 'BDyAN1nRFqGA7lqM7rs93-AykFTsvE-d1ocxmE6IYPqfWT2839QucicsJ43LgiGdUBGi-CaJtZOcmDHuW7FR1Ow',
-                  serviceWorkerRegistration: registration
-              })
-              .then((currentToken) => {
-                  if (currentToken) {
-                      set(ref(db, 'fcmTokens/' + user.uid), currentToken);
-                  }
-              }).catch((err) => console.log('Token Error: ' + err.message));
-          }).catch((err) => console.log('SW Error: ' + err.message));
+          navigator.serviceWorker.register('./firebase-messaging-sw.js').then((registration) => {
+              getToken(messaging, { vapidKey: 'BDyAN1nRFqGA7lqM7rs93-AykFTsvE-d1ocxmE6IYPqfWT2839QucicsJ43LgiGdUBGi-CaJtZOcmDHuW7FR1Ow', serviceWorkerRegistration: registration })
+              .then((currentToken) => { if (currentToken) set(ref(db, 'fcmTokens/' + user.uid), currentToken); });
+          });
       } else if (Notification.permission !== 'denied') {
           document.getElementById('notifyBtn').style.display = 'block';
       }
@@ -230,91 +240,60 @@
   window.enableNotifications = () => {
       Notification.requestPermission().then((permission) => {
           if (permission === 'granted') {
-              navigator.serviceWorker.register('./firebase-messaging-sw.js')
-              .then((registration) => {
-                  getToken(messaging, { 
-                      vapidKey: 'BDyAN1nRFqGA7lqM7rs93-AykFTsvE-d1ocxmE6IYPqfWT2839QucicsJ43LgiGdUBGi-CaJtZOcmDHuW7FR1Ow',
-                      serviceWorkerRegistration: registration
-                  })
+              navigator.serviceWorker.register('./firebase-messaging-sw.js').then((registration) => {
+                  getToken(messaging, { vapidKey: 'BDyAN1nRFqGA7lqM7rs93-AykFTsvE-d1ocxmE6IYPqfWT2839QucicsJ43LgiGdUBGi-CaJtZOcmDHuW7FR1Ow', serviceWorkerRegistration: registration })
                   .then((currentToken) => {
                       if (currentToken) {
-                          const user = auth.currentUser;
-                          if(user) set(ref(db, 'fcmTokens/' + user.uid), currentToken);
+                          if(auth.currentUser) set(ref(db, 'fcmTokens/' + auth.currentUser.uid), currentToken);
                           alert("🔔 बहुत बढ़िया! टोकन सेट हो गया। अब आपको नए टेस्ट के नोटिफिकेशन मिला करेंगे!");
                           document.getElementById('notifyBtn').style.display = 'none';
                       }
-                  }).catch((err) => alert('टोकन एरर: ' + err.message));
+                  });
               });
-          } else {
-              alert("⚠️ आपने नोटिफिकेशन ब्लॉक कर दिया है।");
-          }
+          } else { alert("⚠️ आपने नोटिफिकेशन ब्लॉक कर दिया है।"); }
       });
   };
 
-  onMessage(messaging, (payload) => {
-      alert("🔔 नई सूचना: \n" + payload.notification.title + "\n" + payload.notification.body);
-  });
+  onMessage(messaging, (payload) => { alert("🔔 नई सूचना: \n" + payload.notification.title + "\n" + payload.notification.body); });
 
   window.toggleDropdown = () => document.getElementById('dropdown-menu').classList.toggle('show');
   window.showModal = (id) => document.getElementById(id).classList.add('show');
   window.hideModal = (id) => document.getElementById(id).classList.remove('show');
   window.confirmLogout = () => { if(confirm("लॉगआउट करना चाहते हैं?")) { signOut(auth).then(() => window.location.replace("login.html")); } };
 
-  if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').then(() => console.log("Service Worker Registered"));
-  }
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 
   let deferredPrompt;
-  window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault(); deferredPrompt = e; document.getElementById('installAppBtn').style.display = 'block';
-  });
+  window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; document.getElementById('installAppBtn').style.display = 'block'; });
 
   document.getElementById('installAppBtn').addEventListener('click', async () => {
-      if (deferredPrompt) {
-          deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userChoice;
-          if (outcome === 'accepted') { document.getElementById('installAppBtn').style.display = 'none'; }
-          deferredPrompt = null;
-      }
+      if (deferredPrompt) { deferredPrompt.prompt(); const { outcome } = await deferredPrompt.userChoice; if (outcome === 'accepted') { document.getElementById('installAppBtn').style.display = 'none'; } deferredPrompt = null; }
   });
 
-  const newsRef = ref(db, 'appData/news');
-  onValue(newsRef, (snapshot) => {
+  onValue(ref(db, 'appData/news'), (snapshot) => {
       if(snapshot.val()) {
           document.getElementById('news-text-display').innerText = "📢 " + snapshot.val().replace(/\n/g, " | ") + " 📢";
           document.getElementById('news-modal-text').innerText = snapshot.val();
       }
   });
 
-  const quizRef = ref(db, 'appData/quizzes');
-  onValue(quizRef, (snapshot) => {
-      questionsList = [];
-      if(snapshot.exists()) { snapshot.forEach((child) => questionsList.push(child.val())); }
+  onValue(ref(db, 'appData/quizzes'), (snapshot) => {
+      questionsList = []; if(snapshot.exists()) snapshot.forEach((child) => questionsList.push(child.val()));
   });
 
-  window.startQuiz = () => {
-      myScore = 0; currentQIndex = 0;
-      document.getElementById('quiz-area').style.display = 'block';
-      document.getElementById('quiz-result-area').style.display = 'none';
-      showModal('quiz-modal'); loadQuestion();
-  };
+  window.startQuiz = () => { myScore = 0; currentQIndex = 0; document.getElementById('quiz-area').style.display = 'block'; document.getElementById('quiz-result-area').style.display = 'none'; showModal('quiz-modal'); loadQuestion(); };
 
   window.loadQuestion = () => {
       if(questionsList.length === 0) {
           document.getElementById('quiz-q').innerText = "🚧 अभी कोई टेस्ट नहीं है।";
-          ['btn-opt-a', 'btn-opt-b', 'btn-opt-c', 'btn-opt-d'].forEach(id => document.getElementById(id).style.display = 'none');
-          return;
+          ['btn-opt-a', 'btn-opt-b', 'btn-opt-c', 'btn-opt-d'].forEach(id => document.getElementById(id).style.display = 'none'); return;
       }
       const data = questionsList[currentQIndex];
       document.getElementById('quiz-q').innerText = `सवाल ${currentQIndex + 1}/${questionsList.length}: ${data.question}`;
-      
-      const btnA = document.getElementById('btn-opt-a'); const btnB = document.getElementById('btn-opt-b');
-      const btnC = document.getElementById('btn-opt-c'); const btnD = document.getElementById('btn-opt-d');
-
+      const btnA = document.getElementById('btn-opt-a'), btnB = document.getElementById('btn-opt-b'), btnC = document.getElementById('btn-opt-c'), btnD = document.getElementById('btn-opt-d');
       btnA.innerText = "A. " + data.optionA; btnB.innerText = "B. " + data.optionB;
-      if(data.optionC) { btnC.innerText = "C. " + data.optionC; btnC.style.display = 'block'; } else { btnC.style.display = 'none'; }
-      if(data.optionD) { btnD.innerText = "D. " + data.optionD; btnD.style.display = 'block'; } else { btnD.style.display = 'none'; }
-
+      if(data.optionC) { btnC.innerText = "C. " + data.optionC; btnC.style.display = 'block'; } else btnC.style.display = 'none';
+      if(data.optionD) { btnD.innerText = "D. " + data.optionD; btnD.style.display = 'block'; } else btnD.style.display = 'none';
       [btnA, btnB, btnC, btnD].forEach(b => { b.className = "option-btn"; b.disabled = false; if(b.innerText !== "C." && b.innerText !== "D.") b.style.display = 'block'; });
       currentCorrectAnswer = data.answer; document.getElementById('next-btn').style.display = 'none';
   };
@@ -323,11 +302,8 @@
       let btn = document.getElementById('btn-opt-' + selectedOption.toLowerCase());
       if(selectedOption === currentCorrectAnswer) { btn.classList.add('correct'); myScore += 10; } 
       else { btn.classList.add('wrong'); document.getElementById('btn-opt-' + currentCorrectAnswer.toLowerCase()).classList.add('correct'); }
-      
       ['btn-opt-a', 'btn-opt-b', 'btn-opt-c', 'btn-opt-d'].forEach(id => document.getElementById(id).disabled = true);
-      const nextBtn = document.getElementById('next-btn');
-      nextBtn.style.display = 'inline-block';
-      nextBtn.innerText = (currentQIndex === questionsList.length - 1) ? "रिजल्ट देखें 🏆" : "अगला सवाल ➡️";
+      const nextBtn = document.getElementById('next-btn'); nextBtn.style.display = 'inline-block'; nextBtn.innerText = (currentQIndex === questionsList.length - 1) ? "रिजल्ट देखें 🏆" : "अगला सवाल ➡️";
   };
 
   window.nextQuestion = () => {
@@ -336,35 +312,24 @@
   };
 
   window.submitQuiz = () => {
-      const user = auth.currentUser;
-      if(user) {
-          set(ref(db, 'leaderboard/' + user.uid), { name: currentStudentName, score: myScore })
-          .then(() => { alert("🎉 स्कोर सेव हो गया!"); hideModal('quiz-modal'); showModal('leaderboard-modal'); });
-      }
+      if(auth.currentUser) set(ref(db, 'leaderboard/' + auth.currentUser.uid), { name: currentStudentName, score: myScore }).then(() => { alert("🎉 स्कोर सेव हो गया!"); hideModal('quiz-modal'); showModal('leaderboard-modal'); });
   };
 
-  const topScoresRef = query(ref(db, 'leaderboard'), orderByChild('score'), limitToLast(10));
-  onValue(topScoresRef, (snapshot) => {
-      const list = document.getElementById('leaderboard-list'); list.innerHTML = ''; 
-      let scores = []; snapshot.forEach((childSnapshot) => scores.push(childSnapshot.val())); scores.reverse(); 
-      if(scores.length === 0) { list.innerHTML = '<li style="justify-content: center; color: gray;">कोई डाटा नहीं!</li>'; } 
-      else { scores.forEach((data, index) => { let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🏅'; list.innerHTML += `<li><span>${medal} ${data.name}</span> <span style="color: var(--primary-green);">${data.score} अंक</span></li>`; }); }
+  onValue(query(ref(db, 'leaderboard'), orderByChild('score'), limitToLast(10)), (snapshot) => {
+      const list = document.getElementById('leaderboard-list'); list.innerHTML = ''; let scores = []; snapshot.forEach((childSnapshot) => scores.push(childSnapshot.val())); scores.reverse(); 
+      if(scores.length === 0) list.innerHTML = '<li style="justify-content: center; color: gray;">कोई डाटा नहीं!</li>'; 
+      else scores.forEach((data, index) => { let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🏅'; list.innerHTML += `<li><span>${medal} ${data.name}</span> <span style="color: var(--primary-green);">${data.score} अंक</span></li>`; });
   });
 
   window.changePhoto = (event) => {
     const file = event.target.files[0];
-    if(file) {
-      const reader = new FileReader();
-      reader.onload = (e) => { document.getElementById('user-photo').src = e.target.result; alert("फोटो अपडेट हो गई है!"); };
-      reader.readAsDataURL(file);
-    }
+    if(file) { const reader = new FileReader(); reader.onload = (e) => { document.getElementById('user-photo').src = e.target.result; alert("फोटो अपडेट हो गई है!"); }; reader.readAsDataURL(file); }
   };
 
-  window.onclick = (event) => { if (!event.target.matches('.profile-img')) { document.getElementById('dropdown-menu').classList.remove('show'); } };
+  window.onclick = (event) => { if (!event.target.matches('.profile-img')) document.getElementById('dropdown-menu').classList.remove('show'); };
 
   window.toggleTheme = () => {
-      document.body.classList.toggle('dark-mode');
-      const btn = document.getElementById('theme-btn');
+      document.body.classList.toggle('dark-mode'); const btn = document.getElementById('theme-btn');
       if(document.body.classList.contains('dark-mode')) { btn.innerText = '☀️'; localStorage.setItem('theme', 'dark'); } 
       else { btn.innerText = '🌙'; localStorage.setItem('theme', 'light'); }
   };
