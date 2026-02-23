@@ -26,6 +26,10 @@
         .lesson-btn { display: block; width: 100%; text-align: left; padding: 15px; margin-bottom: 10px; background: white; border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); text-decoration: none; font-size: 15px; font-weight: 500; transition: 0.2s; box-sizing: border-box; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         .lesson-btn:hover { border-color: #E65100; color: #E65100; background: #f8f9fa; transform: translateX(5px); }
         
+        /* PDF वाली बटन का डिज़ाइन */
+        .pdf-ready { background-color: #fff3e0 !important; border-color: #E65100 !important; color: #E65100 !important; font-weight: bold; box-shadow: 0 2px 5px rgba(230, 81, 0, 0.2); }
+        .pdf-ready::after { content: " (PDF उपलब्ध ✅)"; font-size: 13px; color: #2E7D32; float: right; }
+
         .icon-acc { color: #E65100; }
         .icon-bst { color: #1565C0; }
         .icon-eco { color: #2E7D32; }
@@ -48,18 +52,18 @@
         </div>
         <div class="lesson-list">
             <h4 style="margin: 10px 0; color: #E65100;">भाग 1 - अलाभकारी संस्थाएँ एवं साझेदारी</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 1: अलाभकारी संस्थाओं के लिए लेखांकन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: साझेदारी लेखांकन: आधारभूत अवधारणाएँ</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: साझेदारी फर्म का पुनर्गठन: साझेदार का प्रवेश</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: साझेदार की सेवानिवृत्ति/मृत्यु</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: साझेदारी फर्म का विघटन</a>
+            <a href="#" class="lesson-btn" data-sub="accountancy" data-lesson="1">📄 Lesson 1: अलाभकारी संस्थाओं के लिए लेखांकन</a>
+            <a href="#" class="lesson-btn" data-sub="accountancy" data-lesson="2">📄 Lesson 2: साझेदारी लेखांकन: आधारभूत अवधारणाएँ</a>
+            <a href="#" class="lesson-btn" data-sub="accountancy" data-lesson="3">📄 Lesson 3: साझेदारी फर्म का पुनर्गठन</a>
+            <a href="#" class="lesson-btn" data-sub="accountancy" data-lesson="4">📄 Lesson 4: साझेदार की सेवानिवृत्ति/मृत्यु</a>
+            <a href="#" class="lesson-btn" data-sub="accountancy" data-lesson="5">📄 Lesson 5: साझेदारी फर्म का विघटन</a>
             <h4 style="margin: 10px 0; color: #E65100;">भाग 2 - कंपनी खाते एवं वित्तीय विवरण</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 6: अंश पूँजी के लिए लेखांकन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: ऋणपत्रों का निर्गम एवं मोचन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: कंपनी के वित्तीय विवरण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 9: वित्तीय विवरणों का विश्लेषण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: लेखांकन अनुपात</a>
-            <a href="#" class="lesson-btn">📄 Lesson 11: रोकड़ प्रवाह विवरण</a>
+            <a href="#" class="lesson-btn" data-sub="accountancy" data-lesson="6">📄 Lesson 6: अंश पूँजी के लिए लेखांकन</a>
+            <a href="#" class="lesson-btn" data-sub="accountancy" data-lesson="7">📄 Lesson 7: ऋणपत्रों का निर्गम एवं मोचन</a>
+            <a href="#" class="lesson-btn" data-sub="accountancy" data-lesson="8">📄 Lesson 8: कंपनी के वित्तीय विवरण</a>
+            <a href="#" class="lesson-btn" data-sub="accountancy" data-lesson="9">📄 Lesson 9: वित्तीय विवरणों का विश्लेषण</a>
+            <a href="#" class="lesson-btn" data-sub="accountancy" data-lesson="10">📄 Lesson 10: लेखांकन अनुपात</a>
+            <a href="#" class="lesson-btn" data-sub="accountancy" data-lesson="11">📄 Lesson 11: रोकड़ प्रवाह विवरण</a>
         </div>
     </div>
 
@@ -70,19 +74,19 @@
         </div>
         <div class="lesson-list">
             <h4 style="margin: 10px 0; color: #1565C0;">भाग 1 - प्रबंध के सिद्धांत और कार्य</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 1: प्रबंध की प्रकृति एवं महत्व</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: प्रबंध के सिद्धांत</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: व्यावसायिक पर्यावरण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: नियोजन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: संगठन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: नियुक्तिकरण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: निर्देशन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: नियंत्रण</a>
+            <a href="#" class="lesson-btn" data-sub="businessstudies" data-lesson="1">📄 Lesson 1: प्रबंध की प्रकृति एवं महत्व</a>
+            <a href="#" class="lesson-btn" data-sub="businessstudies" data-lesson="2">📄 Lesson 2: प्रबंध के सिद्धांत</a>
+            <a href="#" class="lesson-btn" data-sub="businessstudies" data-lesson="3">📄 Lesson 3: व्यावसायिक पर्यावरण</a>
+            <a href="#" class="lesson-btn" data-sub="businessstudies" data-lesson="4">📄 Lesson 4: नियोजन</a>
+            <a href="#" class="lesson-btn" data-sub="businessstudies" data-lesson="5">📄 Lesson 5: संगठन</a>
+            <a href="#" class="lesson-btn" data-sub="businessstudies" data-lesson="6">📄 Lesson 6: नियुक्तिकरण</a>
+            <a href="#" class="lesson-btn" data-sub="businessstudies" data-lesson="7">📄 Lesson 7: निर्देशन</a>
+            <a href="#" class="lesson-btn" data-sub="businessstudies" data-lesson="8">📄 Lesson 8: नियंत्रण</a>
             <h4 style="margin: 10px 0; color: #1565C0;">भाग 2 - व्यावसायिक वित्त और विपणन</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 9: व्यावसायिक वित्त</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: वित्तीय बाज़ार</a>
-            <a href="#" class="lesson-btn">📄 Lesson 11: विपणन (Marketing)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 12: उपभोक्ता संरक्षण</a>
+            <a href="#" class="lesson-btn" data-sub="businessstudies" data-lesson="9">📄 Lesson 9: व्यावसायिक वित्त</a>
+            <a href="#" class="lesson-btn" data-sub="businessstudies" data-lesson="10">📄 Lesson 10: वित्तीय बाज़ार</a>
+            <a href="#" class="lesson-btn" data-sub="businessstudies" data-lesson="11">📄 Lesson 11: विपणन (Marketing)</a>
+            <a href="#" class="lesson-btn" data-sub="businessstudies" data-lesson="12">📄 Lesson 12: उपभोक्ता संरक्षण</a>
         </div>
     </div>
 
@@ -93,23 +97,23 @@
         </div>
         <div class="lesson-list">
             <h4 style="margin: 10px 0; color: #2E7D32;">समष्टि अर्थशास्त्र (Macroeconomics)</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 1: परिचय</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: राष्ट्रीय आय का लेखांकन</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: मुद्रा और बैंकिंग</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: आय और रोज़गार का निर्धारण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: सरकारी बजट और अर्थव्यवस्था</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: खुली अर्थव्यवस्था - समष्टि अर्थशास्त्र</a>
+            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="1">📄 Lesson 1: परिचय</a>
+            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="2">📄 Lesson 2: राष्ट्रीय आय का लेखांकन</a>
+            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="3">📄 Lesson 3: मुद्रा और बैंकिंग</a>
+            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="4">📄 Lesson 4: आय और रोज़गार का निर्धारण</a>
+            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="5">📄 Lesson 5: सरकारी बजट और अर्थव्यवस्था</a>
+            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="6">📄 Lesson 6: खुली अर्थव्यवस्था - समष्टि अर्थशास्त्र</a>
             <h4 style="margin: 10px 0; color: #2E7D32;">भारतीय अर्थव्यवस्था का विकास</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 1: स्वतंत्रता की पूर्व संध्या पर भारतीय अर्थव्यवस्था</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: भारतीय अर्थव्यवस्था (1950-1990)</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: उदारीकरण, निजीकरण और वैश्वीकरण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: निर्धनता</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: भारत में मानव पूँजी निर्माण</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: ग्रामीण विकास</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: रोज़गार: संवृद्धि, अनौपचारीकरण एवं अन्य मुद्दे</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: आधारिक संरचना</a>
-            <a href="#" class="lesson-btn">📄 Lesson 9: पर्यावरण और धारणीय विकास</a>
-            <a href="#" class="lesson-btn">📄 Lesson 10: भारत और उसके पड़ोसी देशों के तुलनात्मक विकास अनुभव</a>
+            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="7">📄 Lesson 7: स्वतंत्रता की पूर्व संध्या पर...</a>
+            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="8">📄 Lesson 8: भारतीय अर्थव्यवस्था (1950-1990)</a>
+            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="9">📄 Lesson 9: उदारीकरण, निजीकरण और वैश्वीकरण</a>
+            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="10">📄 Lesson 10: निर्धनता</a>
+            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="11">📄 Lesson 11: भारत में मानव पूँजी निर्माण</a>
+            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="12">📄 Lesson 12: ग्रामीण विकास</a>
+            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="13">📄 Lesson 13: रोज़गार: संवृद्धि, अनौपचारीकरण...</a>
+            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="14">📄 Lesson 14: आधारिक संरचना</a>
+            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="15">📄 Lesson 15: पर्यावरण और धारणीय विकास</a>
+            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="16">📄 Lesson 16: भारत और उसके पड़ोसी देशों के...</a>
         </div>
     </div>
 
@@ -120,44 +124,71 @@
         </div>
         <div class="lesson-list">
             <h4 style="margin: 10px 0; color: #C2185B;">Flamingo</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 1: The Last Lesson</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: Lost Spring</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: Deep Water</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: The Rattrap</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: Indigo</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: Poets and Pancakes</a>
-            <a href="#" class="lesson-btn">📄 Lesson 7: The Interview</a>
-            <a href="#" class="lesson-btn">📄 Lesson 8: Going Places</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="1">📄 Lesson 1: The Last Lesson</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="2">📄 Lesson 2: Lost Spring</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="3">📄 Lesson 3: Deep Water</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="4">📄 Lesson 4: The Rattrap</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="5">📄 Lesson 5: Indigo</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="6">📄 Lesson 6: Poets and Pancakes</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="7">📄 Lesson 7: The Interview</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="8">📄 Lesson 8: Going Places</a>
             <h4 style="margin: 10px 0; color: #C2185B;">Vistas</h4>
-            <a href="#" class="lesson-btn">📄 Lesson 1: The Third Level</a>
-            <a href="#" class="lesson-btn">📄 Lesson 2: The Tiger King</a>
-            <a href="#" class="lesson-btn">📄 Lesson 3: Journey to the end of the Earth</a>
-            <a href="#" class="lesson-btn">📄 Lesson 4: The Enemy</a>
-            <a href="#" class="lesson-btn">📄 Lesson 5: On the Face of It</a>
-            <a href="#" class="lesson-btn">📄 Lesson 6: Memories of Childhood</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="9">📄 Lesson 9: The Third Level</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="10">📄 Lesson 10: The Tiger King</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="11">📄 Lesson 11: Journey to the end of the Earth</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="12">📄 Lesson 12: The Enemy</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="13">📄 Lesson 13: On the Face of It</a>
+            <a href="#" class="lesson-btn" data-sub="english" data-lesson="14">📄 Lesson 14: Memories of Childhood</a>
         </div>
     </div>
 
 </div>
 
-<script>
-    function toggleLessons(header) {
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
+        authDomain: "sonuclasses-b19db.firebaseapp.com",
+        databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com",
+        projectId: "sonuclasses-b19db",
+        storageBucket: "sonuclasses-b19db.firebasestorage.app",
+        messagingSenderId: "166740602272",
+        appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // यह कोड एडमिन पैनल से भेजे गए PDF लिंक को पकड़ता है (Class 12 के लिए)
+    onValue(ref(db, 'appData/notes/class12'), (snapshot) => {
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            for (const subject in data) {
+                for (const lessonKey in data[subject]) {
+                    const lessonNum = lessonKey.replace('lesson', '');
+                    const btn = document.querySelector(`a[data-sub="${subject}"][data-lesson="${lessonNum}"]`);
+                    
+                    if (btn) {
+                        btn.href = data[subject][lessonKey]; 
+                        btn.target = "_blank"; 
+                        btn.classList.add("pdf-ready"); 
+                    }
+                }
+            }
+        }
+    });
+
+    window.toggleLessons = function(header) {
         const content = header.nextElementSibling;
         const icon = header.querySelector("span:last-child");
-        
         if (content.classList.contains("show")) {
-            content.classList.remove("show");
-            header.classList.remove("active");
-            icon.innerText = "➕";
+            content.classList.remove("show"); header.classList.remove("active"); icon.innerText = "➕";
         } else {
             document.querySelectorAll(".lesson-list").forEach(list => list.classList.remove("show"));
-            document.querySelectorAll(".subject-header").forEach(h => {
-                h.classList.remove("active");
-                h.querySelector("span:last-child").innerText = "➕";
-            });
-            content.classList.add("show");
-            header.classList.add("active");
-            icon.innerText = "➖";
+            document.querySelectorAll(".subject-header").forEach(h => { h.classList.remove("active"); h.querySelector("span:last-child").innerText = "➕"; });
+            content.classList.add("show"); header.classList.add("active"); icon.innerText = "➖";
         }
     }
 </script>
