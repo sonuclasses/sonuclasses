@@ -5,21 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sonu Classes - खुफिया एडमिन पैनल</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 20px; }
-        .admin-container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        h2 { color: #D32F2F; text-align: center; }
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 20px; text-align: center; }
+        
+        /* लॉगिन स्क्रीन का डिज़ाइन */
+        .login-container { max-width: 350px; margin: 100px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .login-container h2 { color: #D32F2F; margin-bottom: 20px; }
+        .login-container input { width: 100%; padding: 12px; margin-bottom: 15px; border: 2px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 16px; text-align: center; }
+        .login-container button { width: 100%; padding: 12px; background-color: #D32F2F; color: white; border: none; border-radius: 5px; font-size: 18px; font-weight: bold; cursor: pointer; }
+        
+        /* एडमिन पैनल का डिज़ाइन (शुरुआत में छुपा रहेगा) */
+        .admin-container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: none; text-align: left; }
+        h2.admin-title { color: #1976D2; text-align: center; }
         .form-group { margin-bottom: 15px; }
-        label { font-weight: bold; display: block; margin-bottom: 5px; }
+        label { font-weight: bold; display: block; margin-bottom: 5px; color: #333; }
         select, input, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background-color: #1976D2; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        button:hover { background-color: #1565C0; }
+        button.action-btn { width: 100%; padding: 12px; background-color: #1976D2; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        button.action-btn:hover { background-color: #1565C0; }
         .section-title { background-color: #4CAF50; color: white; padding: 10px; border-radius: 5px; margin-top: 30px; text-align: center; }
     </style>
 </head>
 <body>
 
-<div class="admin-container">
-    <h2>🔒 खुफिया एडमिन पैनल (Sonu Sir)</h2>
+<div class="login-container" id="login-screen">
+    <h2>🔒 Admin Login</h2>
+    <p style="color: gray; font-size: 14px; margin-bottom: 20px;">सिर्फ सोनू सर के लिए</p>
+    <input type="password" id="admin-pass" placeholder="पासवर्ड डालें...">
+    <button onclick="checkPassword()">अंदर जाएँ 🚀</button>
+</div>
+
+<div class="admin-container" id="admin-panel">
+    <h2 class="admin-title">👑 स्वागत है सोनू बॉस!</h2>
+    <p style="text-align: center; color: green; font-weight: bold;">वेबसाइट का कंट्रोल रूम चालू है</p>
     
     <div class="form-group">
         <label>क्लास चुनें:</label>
@@ -49,14 +65,6 @@
             <option value="lesson3">Lesson 3</option>
             <option value="lesson4">Lesson 4</option>
             <option value="lesson5">Lesson 5</option>
-            <option value="lesson6">Lesson 6</option>
-            <option value="lesson7">Lesson 7</option>
-            <option value="lesson8">Lesson 8</option>
-            <option value="lesson9">Lesson 9</option>
-            <option value="lesson10">Lesson 10</option>
-            <option value="lesson11">Lesson 11</option>
-            <option value="lesson12">Lesson 12</option>
-            <option value="lesson13">Lesson 13</option>
         </select>
     </div>
 
@@ -69,7 +77,7 @@
         <label>PDF लिंक (Google Drive):</label>
         <input type="text" id="pdf-link" placeholder="यहाँ PDF का लिंक डालें...">
     </div>
-    <button onclick="saveNotes()">💾 वेबसाइट पर नोट्स सेव करें</button>
+    <button class="action-btn" onclick="saveNotes()">💾 वेबसाइट पर नोट्स सेव करें</button>
 
     <h3 class="section-title">🏆 2. क्विज़ (Quiz) का सवाल डालें</h3>
     <div class="form-group">
@@ -101,12 +109,11 @@
             <option value="D">D</option>
         </select>
     </div>
-    <button style="background-color: #E65100;" onclick="saveQuiz()">➕ क्विज़ में सवाल जोड़ें (Push)</button>
+    <button class="action-btn" style="background-color: #E65100;" onclick="saveQuiz()">➕ क्विज़ में सवाल जोड़ें (Push)</button>
 </div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    // यहाँ हमने push इम्पोर्ट कर लिया है
     import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
     const firebaseConfig = {
@@ -122,6 +129,18 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
+    // 🔒 पासवर्ड चेक करने वाला कोड
+    window.checkPassword = () => {
+        const pass = document.getElementById('admin-pass').value;
+        // 👇 यहाँ आप अपना पासवर्ड बदल सकते हैं, अभी मैंने sonu123 रखा है
+        if(pass === "sonu123") { 
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'block';
+        } else {
+            alert("❌ गलत पासवर्ड! आप सोनू सर नहीं हैं!");
+        }
+    };
+
     // Notes Save Function 
     window.saveNotes = () => {
         const cls = document.getElementById('class-select').value;
@@ -131,18 +150,15 @@
         const text = document.getElementById('notes-text').value;
         const pdf = document.getElementById('pdf-link').value;
 
-        if (text) {
-            set(ref(db, `appData/chapters/${cls}/${sub}/${les}`), text);
-        }
-        if (pdf) {
-            set(ref(db, `appData/notes/${cls}/${sub}/${les}`), pdf);
-        }
+        if (text) set(ref(db, `appData/chapters/${cls}/${sub}/${les}`), text);
+        if (pdf) set(ref(db, `appData/notes/${cls}/${sub}/${les}`), pdf);
+        
         alert("✅ नोट्स और PDF सक्सेसफुली सेव हो गए!");
         document.getElementById('notes-text').value = '';
         document.getElementById('pdf-link').value = '';
     };
 
-    // Quiz Save Function (Using PUSH - adds new question without deleting old ones)
+    // Quiz Save Function (Push)
     window.saveQuiz = () => {
         const cls = document.getElementById('class-select').value;
         const sub = document.getElementById('subject-select').value;
@@ -160,7 +176,6 @@
             return;
         }
 
-        // असली जादू यहाँ है: push() का इस्तेमाल
         const quizRef = ref(db, `appData/quizzes/${cls}/${sub}/${les}`);
         
         push(quizRef, {
@@ -168,17 +183,13 @@
             options: { A: optA, B: optB, C: optC, D: optD },
             answer: correctAns
         }).then(() => {
-            alert("✅ बॉस! सवाल सक्सेसफुली जुड़ गया! अब आप अगला सवाल डाल सकते हैं।");
-            
-            // सेव होने के बाद सिर्फ क्विज़ के डब्बों को खाली करना
+            alert("✅ बॉस! सवाल सक्सेसफुली जुड़ गया!");
             document.getElementById('quiz-question').value = '';
             document.getElementById('quiz-optA').value = '';
             document.getElementById('quiz-optB').value = '';
             document.getElementById('quiz-optC').value = '';
             document.getElementById('quiz-optD').value = '';
-        }).catch((error) => {
-            alert("❌ एरर आ गया: " + error);
-        });
+        }).catch((error) => alert("❌ एरर आ गया: " + error));
     };
 </script>
 </body>
