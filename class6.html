@@ -23,13 +23,16 @@
         .content-title { color: #E65100; border-bottom: 2px solid #E65100; padding-bottom: 5px; margin-top: 0; font-size: 20px; }
         
         .lesson-card { background: #fff8e1; border-left: 5px solid #ffb300; padding: 15px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .lesson-card h3 { margin: 0 0 10px 0; color: #333; font-size: 18px; }
-        .lesson-card p { margin: 0 0 15px 0; color: #555; font-size: 15px; line-height: 1.6; white-space: pre-wrap; }
+        .lesson-card h3 { margin: 0 0 5px 0; color: #1565C0; font-size: 17px; }
+        .lesson-card h4 { margin: 0 0 10px 0; color: #333; font-size: 18px; font-weight: bold; }
+        .lesson-text { margin: 10px 0; color: #444; font-size: 15px; line-height: 1.6; white-space: pre-wrap; display: none; background: #fff; padding: 10px; border-radius: 5px; border: 1px solid #ddd; }
+        
+        .action-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+        .read-btn { background: #2E7D32; color: white; padding: 8px 15px; border: none; border-radius: 5px; font-weight: bold; font-size: 14px; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         .pdf-btn { display: inline-block; background: #D32F2F; color: white; padding: 8px 15px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        .pdf-btn:hover { background: #B71C1C; }
-
+        .coming-soon { color: gray; font-size: 14px; font-weight: bold; font-style: italic; margin-top: 10px; display: inline-block; }
+        
         .loading { color: #1976D2; font-weight: bold; text-align: center; margin-top: 20px; font-size: 16px; }
-        .empty-msg { color: gray; text-align: center; font-style: italic; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
 
     <div class="hero">
         <h2>📚 कक्षा 6 के सभी विषय</h2>
-        <p>नए सिलेबस (2025-26) के अनुसार नोट्स और PDF</p>
+        <p>नए सिलेबस (2025-26) के अनुसार सभी चैप्टर्स</p>
     </div>
 
     <div class="subject-container">
@@ -51,13 +54,12 @@
         <button class="sub-btn" onclick="loadSubject('science', 'विज्ञान')">🔬 विज्ञान</button>
         <button class="sub-btn" onclick="loadSubject('sst', 'सामाजिक विज्ञान')">🌍 सा. विज्ञान</button>
         <button class="sub-btn" onclick="loadSubject('english', 'अंग्रेजी')">🔤 अंग्रेजी</button>
-        <button class="sub-btn" onclick="loadSubject('sanskrit', 'संस्कृत')">🕉️ संस्कृत</button>
     </div>
 
     <div id="content-area" class="content-area">
         <h2 id="content-title" class="content-title">विषय चुनें</h2>
         <div id="notes-display">
-            <p style="text-align: center; color: gray;">👆 ऊपर दिए गए किसी भी विषय पर क्लिक करके उसके नोट्स और PDF देखें।</p>
+            <p style="text-align: center; color: gray; font-weight: bold;">👆 ऊपर दिए गए किसी भी विषय पर क्लिक करें और उसके सारे चैप्टर्स देखें।</p>
         </div>
     </div>
 
@@ -78,66 +80,118 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
+    // 🌟 क्लास 6 के सारे विषयों के असली चैप्टर्स की लिस्ट 🌟
+    const class6Syllabus = {
+        "hindi": [
+            "अरमान (कविता)", "गोल (संस्मरण)", "पहली बूँद (कविता)", "हार की जीत (कहानी)", 
+            "भीष्म की प्रतिज्ञा", "तुम कल्पना करो (कविता)", "पिता का पत्र पुत्र के नाम", 
+            "मंत्र (कहानी)", "बाल लीला (कविता)"
+        ],
+        "math": [
+            "अपनी संख्याओं की जानकारी", "पूर्ण संख्याएँ", "संख्याओं के साथ खेलना", 
+            "आधारभूत ज्यामितीय अवधारणाएँ", "प्रारंभिक आकारों को समझना", "पूर्णांक", 
+            "भिन्न", "दशमलव", "आँकड़ों का प्रबंधन", "क्षेत्रमिति", "बीजगणित", "अनुपात और समानुपात"
+        ],
+        "science": [
+            "भोजन के घटक", "वस्तुओं के समूह बनाना", "पदार्थों का पृथक्करण", "पौधों को जानिए", 
+            "शरीर में गति", "सजीव: विशेषताएँ एवं आवास", "गति एवं दूरियों का मापन", 
+            "प्रकाश - छायाएँ एवं परावर्तन", "विद्युत् तथा परिपथ", "चुंबकों द्वारा मनोरंजन", "हमारे चारों ओर वायु"
+        ],
+        "sst": [
+            "क्या, कब, कहाँ और कैसे?", "आखेट-खाद्य संग्रह से भोजन उत्पादन तक", "आरंभिक नगर", 
+            "क्या बताती हैं हमें किताबें और कब्रें", "राज्य, राजा और एक प्राचीन गणराज्य", 
+            "सौरमंडल में पृथ्वी", "ग्लोब: अक्षांश एवं देशांतर", "पृथ्वी की गतियाँ", "विविधता की समझ"
+        ],
+        "english": [
+            "Who Did Patrick's Homework?", "How the Dog Found Himself a New Master!", 
+            "Taro's Reward", "An Indian – American Woman in Space", "A Different Kind of School"
+        ]
+    };
+
+    // टेक्स्ट पढ़ने वाला फंक्शन
+    window.toggleText = (id) => {
+        const textBox = document.getElementById(id);
+        if (textBox.style.display === "none" || textBox.style.display === "") {
+            textBox.style.display = "block";
+        } else {
+            textBox.style.display = "none";
+        }
+    };
+
     window.loadSubject = (subjectCode, subjectName) => {
         const contentArea = document.getElementById('content-area');
         const title = document.getElementById('content-title');
         const display = document.getElementById('notes-display');
 
-        // बटन का रंग बदलने के लिए
+        // बटन का रंग सेट करना
         document.querySelectorAll('.sub-btn').forEach(btn => btn.classList.remove('active'));
         event.target.classList.add('active');
 
         contentArea.style.display = 'block';
-        title.innerText = `📖 ${subjectName} के नोट्स`;
-        display.innerHTML = `<div class="loading">⏳ सोनू सर के नोट्स लोड हो रहे हैं...</div>`;
+        title.innerText = `📖 ${subjectName} के चैप्टर्स`;
+        display.innerHTML = `<div class="loading">⏳ विषय लोड हो रहा है...</div>`;
 
-        let chaptersData = {};
-        let pdfsData = {};
-        let dataFound = false;
-
-        // 1. एडमिन पैनल से टेक्स्ट/कविता खींचना
+        // 1. एडमिन पैनल से डेटा खींचना
         onValue(ref(db, `appData/chapters/class6/${subjectCode}`), (snapshot) => {
-            if(snapshot.exists()) { chaptersData = snapshot.val(); dataFound = true; }
+            let chaptersData = snapshot.exists() ? snapshot.val() : {};
             
-            // 2. एडमिन पैनल से PDF लिंक खींचना
             onValue(ref(db, `appData/notes/class6/${subjectCode}`), (pdfSnapshot) => {
-                if(pdfSnapshot.exists()) { pdfsData = pdfSnapshot.val(); dataFound = true; }
+                let pdfsData = pdfSnapshot.exists() ? pdfSnapshot.val() : {};
                 
-                renderContent(chaptersData, pdfsData, dataFound);
+                // 2. अब सिलेबस के हिसाब से पेज को डिज़ाइन करना
+                renderSyllabus(subjectCode, chaptersData, pdfsData);
             }, { onlyOnce: true });
             
         }, { onlyOnce: true });
     };
 
-    function renderContent(chapters, pdfs, found) {
+    function renderSyllabus(subjectCode, dbChapters, dbPdfs) {
         const display = document.getElementById('notes-display');
-        if(!found) {
-            display.innerHTML = `<div class="empty-msg">🚧 अभी इस विषय में कोई नोट्स नहीं हैं। सोनू सर जल्द ही अपलोड करेंगे!</div>`;
+        display.innerHTML = ''; // डब्बा साफ करो
+        
+        let chaptersList = class6Syllabus[subjectCode];
+
+        if(!chaptersList) {
+            display.innerHTML = `<p style="color:gray;">इस विषय के चैप्टर्स जल्द जोड़े जाएँगे।</p>`;
             return;
         }
 
-        display.innerHTML = '';
-        // 1 से 20 तक के लेसन चेक करना
-        for(let i=1; i<=20; i++) {
-            let key = `lesson${i}`;
-            let hasText = chapters[key] ? true : false;
-            let hasPdf = pdfs[key] ? true : false;
+        // हर चैप्टर के लिए एक कार्ड बनाना
+        chaptersList.forEach((chapterName, index) => {
+            let lessonNum = index + 1;
+            let key = `lesson${lessonNum}`;
+            
+            let hasText = dbChapters[key] ? true : false;
+            let hasPdf = dbPdfs[key] ? true : false;
 
-            if(hasText || hasPdf) {
-                let cardHTML = `<div class="lesson-card"><h3>📌 पाठ ${i}</h3>`;
-                
-                if(hasText) {
-                    cardHTML += `<p>${chapters[key]}</p>`;
-                }
-                
-                if(hasPdf) {
-                    cardHTML += `<a href="${pdfs[key]}" target="_blank" class="pdf-btn">📄 असली PDF डाउनलोड करें</a>`;
-                }
-                
-                cardHTML += `</div>`;
-                display.innerHTML += cardHTML;
+            let cardHTML = `
+                <div class="lesson-card">
+                    <h3>📌 पाठ ${lessonNum}</h3>
+                    <h4>${chapterName}</h4>
+            `;
+
+            // अगर टेक्स्ट मौजूद है तो डब्बा लगाओ
+            if(hasText) {
+                cardHTML += `<div class="lesson-text" id="text-${subjectCode}-${lessonNum}">${dbChapters[key]}</div>`;
             }
-        }
+
+            // बटन का सेक्शन
+            cardHTML += `<div class="action-btns">`;
+            
+            if(hasText) {
+                cardHTML += `<button class="read-btn" onclick="toggleText('text-${subjectCode}-${lessonNum}')">📖 नोट्स पढ़ें</button>`;
+            }
+            if(hasPdf) {
+                cardHTML += `<a href="${dbPdfs[key]}" target="_blank" class="pdf-btn">📄 PDF डाउनलोड करें</a>`;
+            }
+            if(!hasText && !hasPdf) {
+                cardHTML += `<span class="coming-soon">⏳ सोनू सर जल्द ही अपलोड करेंगे...</span>`;
+            }
+
+            cardHTML += `</div></div>`; // कार्ड बंद
+
+            display.innerHTML += cardHTML;
+        });
     }
 </script>
 </body>
