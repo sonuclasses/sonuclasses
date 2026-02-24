@@ -4,190 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#1976D2">
-    <title>Class 6 Notes - Sonu Classes</title>
+    <title>Class 6 - Sonu Classes</title>
     <style>
-        :root { --primary-green: #2E7D32; --primary-blue: #1976D2; --bg-light: #f4f4f9; --text-color: #333; --box-bg: white; --border-color: #ddd; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); color: var(--text-color); margin: 0; padding: 0; }
-        header { background-color: var(--primary-blue); color: white; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        h1 { margin: 0; font-size: 20px; display: flex; align-items: center; gap: 10px; }
-        .back-btn { background: white; color: var(--primary-blue); padding: 8px 15px; border: none; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; text-align: center; color: #333; }
+        header { background-color: #1976D2; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        h1 { margin: 0; font-size: 22px; }
+        .back-btn { color: white; text-decoration: none; font-size: 24px; font-weight: bold; }
         
-        .container { padding: 20px; max-width: 800px; margin: auto; }
-        
-        .subject-card { background: var(--box-bg); margin-bottom: 15px; border-radius: 10px; border: 1px solid var(--border-color); overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .subject-header { padding: 15px 20px; background: #f8f9fa; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 18px; font-weight: bold; border-bottom: 1px solid transparent; transition: 0.3s; }
-        .subject-header:hover { background: #e9ecef; }
-        .subject-header.active { border-bottom: 1px solid var(--border-color); background: #e3f2fd; color: var(--primary-blue); }
-        
-        .lesson-list { display: none; padding: 15px; background: white; }
-        .lesson-list.show { display: block; animation: fadeIn 0.3s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .lesson-btn { display: block; width: 100%; text-align: left; padding: 15px; margin-bottom: 10px; background: white; border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); text-decoration: none; font-size: 15px; font-weight: 500; transition: 0.2s; box-sizing: border-box; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .lesson-btn:hover { border-color: var(--primary-blue); color: var(--primary-blue); background: #f8f9fa; transform: translateX(5px); }
-        
-        /* PDF वाली बटन का डिज़ाइन */
-        .pdf-ready { background-color: #E8F5E9 !important; border-color: #2E7D32 !important; color: #2E7D32 !important; font-weight: bold; box-shadow: 0 2px 5px rgba(46, 125, 50, 0.2); }
-        .pdf-ready::after { content: " (PDF उपलब्ध ✅)"; font-size: 13px; color: #E65100; float: right; }
+        .hero { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 30px 20px; margin: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .hero h2 { color: #1565C0; margin-top: 0; font-size: 24px; }
+        .hero p { color: #555; font-size: 15px; font-weight: bold; margin-bottom: 0; }
 
-        /* Icons styling */
-        .icon-math { color: #E65100; }
-        .icon-sci { color: #2E7D32; }
-        .icon-sst { color: #00838F; }
-        .icon-lang { color: #C2185B; }
-        .icon-sans { color: #E91E63; }
+        .subject-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; padding: 10px 20px; }
+        .sub-btn { background: white; border: 2px solid #1976D2; color: #1976D2; padding: 12px 20px; border-radius: 30px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); flex: 1 1 120px; max-width: 180px; }
+        .sub-btn:hover, .sub-btn.active { background: #1976D2; color: white; transform: translateY(-2px); }
+
+        .content-area { background: white; margin: 20px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: left; display: none; min-height: 200px; }
+        .content-title { color: #E65100; border-bottom: 2px solid #E65100; padding-bottom: 5px; margin-top: 0; font-size: 20px; }
+        
+        .lesson-card { background: #fff8e1; border-left: 5px solid #ffb300; padding: 15px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .lesson-card h3 { margin: 0 0 10px 0; color: #333; font-size: 18px; }
+        .lesson-card p { margin: 0 0 15px 0; color: #555; font-size: 15px; line-height: 1.6; white-space: pre-wrap; }
+        .pdf-btn { display: inline-block; background: #D32F2F; color: white; padding: 8px 15px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .pdf-btn:hover { background: #B71C1C; }
+
+        .loading { color: #1976D2; font-weight: bold; text-align: center; margin-top: 20px; font-size: 16px; }
+        .empty-msg { color: gray; text-align: center; font-style: italic; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>📚 Class 6 Notes</h1>
-    <a href="index.html" class="back-btn">⬅ वापस होम</a>
-</header>
+    <header>
+        <a href="index.html" class="back-btn">⬅️</a>
+        <h1>Class 6 - NCERT</h1>
+        <div style="width: 24px;"></div>
+    </header>
 
-<div class="container">
-    
-    <div class="subject-card">
-        <div class="subject-header" onclick="toggleLessons(this)">
-            <span><span class="icon-sci">🔬</span> विज्ञान (Science)</span>
-            <span>➕</span>
-        </div>
-        <div class="lesson-list">
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="1">📄 Lesson 1: भोजन के घटक</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="2">📄 Lesson 2: वस्तुओं के समूह बनाना</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="3">📄 Lesson 3: पदार्थों का पृथक्करण</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="4">📄 Lesson 4: पौधों को जानिए</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="5">📄 Lesson 5: शरीर में गति</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="6">📄 Lesson 6: सजीव - विशेषताएँ एवं आवास</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="7">📄 Lesson 7: गति एवं दूरियों का मापन</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="8">📄 Lesson 8: प्रकाश - छायाएँ एवं परावर्तन</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="9">📄 Lesson 9: विद्युत् तथा परिपथ</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="10">📄 Lesson 10: चुंबकों द्वारा मनोरंजन</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="11">📄 Lesson 11: हमारे चारों ओर वायु</a>
-        </div>
+    <div class="hero">
+        <h2>📚 कक्षा 6 के सभी विषय</h2>
+        <p>नए सिलेबस (2025-26) के अनुसार नोट्स और PDF</p>
     </div>
 
-    <div class="subject-card">
-        <div class="subject-header" onclick="toggleLessons(this)">
-            <span><span class="icon-math">📐</span> गणित (Mathematics)</span>
-            <span>➕</span>
-        </div>
-        <div class="lesson-list">
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="1">📄 Lesson 1: अपनी संख्याओं की जानकारी</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="2">📄 Lesson 2: पूर्ण संख्याएँ</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="3">📄 Lesson 3: संख्याओं के साथ खेलना</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="4">📄 Lesson 4: आधारभूत ज्यामितीय अवधारणाएँ</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="5">📄 Lesson 5: प्रारंभिक आकारों को समझना</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="6">📄 Lesson 6: पूर्णांक</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="7">📄 Lesson 7: भिन्न</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="8">📄 Lesson 8: दशमलव</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="9">📄 Lesson 9: आँकड़ों का प्रबंधन</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="10">📄 Lesson 10: क्षेत्रमिति</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="11">📄 Lesson 11: बीजगणित</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="12">📄 Lesson 12: अनुपात और समानुपात</a>
-        </div>
+    <div class="subject-container">
+        <button class="sub-btn" onclick="loadSubject('hindi', 'हिंदी (मल्हार)')">📘 हिंदी</button>
+        <button class="sub-btn" onclick="loadSubject('math', 'गणित')">📐 गणित</button>
+        <button class="sub-btn" onclick="loadSubject('science', 'विज्ञान')">🔬 विज्ञान</button>
+        <button class="sub-btn" onclick="loadSubject('sst', 'सामाजिक विज्ञान')">🌍 सा. विज्ञान</button>
+        <button class="sub-btn" onclick="loadSubject('english', 'अंग्रेजी')">🔤 अंग्रेजी</button>
+        <button class="sub-btn" onclick="loadSubject('sanskrit', 'संस्कृत')">🕉️ संस्कृत</button>
     </div>
 
-    <div class="subject-card">
-        <div class="subject-header" onclick="toggleLessons(this)">
-            <span><span class="icon-sst">🌍</span> सामाजिक विज्ञान (SST)</span>
-            <span>➕</span>
-        </div>
-        <div class="lesson-list">
-            <h4 style="margin: 10px 0; color: #00838F;">इतिहास (हमारे अतीत - I)</h4>
-            <a href="#" class="lesson-btn" data-sub="history" data-lesson="1">📄 Lesson 1: क्या, कब, कहाँ और कैसे?</a>
-            <a href="#" class="lesson-btn" data-sub="history" data-lesson="2">📄 Lesson 2: आखेट-खाद्य संग्रह से भोजन उत्पादन तक</a>
-            <a href="#" class="lesson-btn" data-sub="history" data-lesson="3">📄 Lesson 3: आरंभिक नगर</a>
-            <a href="#" class="lesson-btn" data-sub="history" data-lesson="4">📄 Lesson 4: क्या बताती हैं हमें किताबें और कब्रें</a>
-            <a href="#" class="lesson-btn" data-sub="history" data-lesson="5">📄 Lesson 5: राज्य, राजा और एक प्राचीन गणराज्य</a>
-            <a href="#" class="lesson-btn" data-sub="history" data-lesson="6">📄 Lesson 6: नए प्रश्न नए विचार</a>
-            <a href="#" class="lesson-btn" data-sub="history" data-lesson="7">📄 Lesson 7: अशोक: एक अनोखा सम्राट जिसने युद्ध का त्याग किया</a>
-            <a href="#" class="lesson-btn" data-sub="history" data-lesson="8">📄 Lesson 8: खुशहाल गाँव और समृद्ध शहर</a>
-            <a href="#" class="lesson-btn" data-sub="history" data-lesson="9">📄 Lesson 9: व्यापारी, राजा और तीर्थयात्री</a>
-            <a href="#" class="lesson-btn" data-sub="history" data-lesson="10">📄 Lesson 10: नए साम्राज्य और राज्य</a>
-            <a href="#" class="lesson-btn" data-sub="history" data-lesson="11">📄 Lesson 11: इमारतें, चित्र तथा किताबें</a>
-            
-            <h4 style="margin: 10px 0; color: #00838F;">भूगोल (पृथ्वी: हमारा आवास)</h4>
-            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="1">📄 Lesson 1: सौरमंडल में पृथ्वी</a>
-            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="2">📄 Lesson 2: ग्लोब: अक्षांश एवं देशांतर</a>
-            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="3">📄 Lesson 3: पृथ्वी की गतियाँ</a>
-            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="4">📄 Lesson 4: मानचित्र</a>
-            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="5">📄 Lesson 5: पृथ्वी के प्रमुख परिमंडल</a>
-            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="6">📄 Lesson 6: पृथ्वी के प्रमुख स्थलरूप</a>
-            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="7">📄 Lesson 7: हमारा देश: भारत</a>
-            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="8">📄 Lesson 8: भारत: जलवायु, वनस्पति तथा वन्य प्राणी</a>
-            
-            <h4 style="margin: 10px 0; color: #00838F;">नागरिक शास्त्र</h4>
-            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="1">📄 Lesson 1: विविधता की समझ</a>
-            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="2">📄 Lesson 2: विविधता एवं भेदभाव</a>
-            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="3">📄 Lesson 3: सरकार क्या है?</a>
-            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="4">📄 Lesson 4: लोकतांत्रिक सरकार के मुख्य तत्त्व</a>
-            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="5">📄 Lesson 5: पंचायती राज</a>
-            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="6">📄 Lesson 6: गाँव का प्रशासन</a>
-            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="7">📄 Lesson 7: नगर प्रशासन</a>
-            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="8">📄 Lesson 8: ग्रामीण क्षेत्र में आजीविका</a>
-            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="9">📄 Lesson 9: शहरी क्षेत्र में आजीविका</a>
+    <div id="content-area" class="content-area">
+        <h2 id="content-title" class="content-title">विषय चुनें</h2>
+        <div id="notes-display">
+            <p style="text-align: center; color: gray;">👆 ऊपर दिए गए किसी भी विषय पर क्लिक करके उसके नोट्स और PDF देखें।</p>
         </div>
     </div>
-
-    <div class="subject-card">
-        <div class="subject-header" onclick="toggleLessons(this)">
-            <span><span class="icon-lang">📚</span> हिंदी एवं अंग्रेज़ी</span>
-            <span>➕</span>
-        </div>
-        <div class="lesson-list">
-            <h4 style="margin: 10px 0; color: #C2185B;">हिंदी (वसंत भाग 1)</h4>
-            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="1">📄 Lesson 1: वह चिड़िया जो</a>
-            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="2">📄 Lesson 2: बचपन</a>
-            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="3">📄 Lesson 3: नादान दोस्त</a>
-            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="4">📄 Lesson 4: चाँद से थोड़ी-सी गप्पें</a>
-            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="5">📄 Lesson 5: अक्षरों का महत्व</a>
-            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="6">📄 Lesson 6: पार नज़र के</a>
-            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="7">📄 Lesson 7: साथी हाथ बढ़ाना</a>
-            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="8">📄 Lesson 8: ऐसे-ऐसे</a>
-            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="9">📄 Lesson 9: टिकट अलबम</a>
-            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="10">📄 Lesson 10: झाँसी की रानी</a>
-            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="11">📄 Lesson 11: जो देखकर भी नहीं देखते</a>
-            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="12">📄 Lesson 12: संसार पुस्तक है</a>
-            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="13">📄 Lesson 13: मैं सबसे छोटी होऊं</a>
-            <a href="#" class="lesson-btn" data-sub="hindi" data-lesson="14">📄 Lesson 14: लोकगीत</a>
-            
-            <h4 style="margin: 10px 0; color: #C2185B;">अंग्रेज़ी (Honeysuckle)</h4>
-            <a href="#" class="lesson-btn" data-sub="english" data-lesson="1">📄 Lesson 1: Who Did Patrick's Homework?</a>
-            <a href="#" class="lesson-btn" data-sub="english" data-lesson="2">📄 Lesson 2: How the Dog Found Himself a New Master!</a>
-            <a href="#" class="lesson-btn" data-sub="english" data-lesson="3">📄 Lesson 3: Taro's Reward</a>
-            <a href="#" class="lesson-btn" data-sub="english" data-lesson="4">📄 Lesson 4: An Indian-American Woman in Space</a>
-            <a href="#" class="lesson-btn" data-sub="english" data-lesson="5">📄 Lesson 5: A Different Kind of School</a>
-            <a href="#" class="lesson-btn" data-sub="english" data-lesson="6">📄 Lesson 6: Who I Am</a>
-            <a href="#" class="lesson-btn" data-sub="english" data-lesson="7">📄 Lesson 7: Fair Play</a>
-            <a href="#" class="lesson-btn" data-sub="english" data-lesson="8">📄 Lesson 8: A Game of Chance</a>
-            <a href="#" class="lesson-btn" data-sub="english" data-lesson="9">📄 Lesson 9: Desert Animals</a>
-            <a href="#" class="lesson-btn" data-sub="english" data-lesson="10">📄 Lesson 10: The Banyan Tree</a>
-        </div>
-    </div>
-
-    <div class="subject-card">
-        <div class="subject-header" onclick="toggleLessons(this)">
-            <span><span class="icon-sans">🕉️</span> संस्कृत (रुचिरा भाग 1)</span>
-            <span>➕</span>
-        </div>
-        <div class="lesson-list">
-            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="1">📄 Lesson 1: शब्दपरिचयः - I</a>
-            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="2">📄 Lesson 2: शब्दपरिचयः - II</a>
-            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="3">📄 Lesson 3: शब्दपरिचयः - III</a>
-            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="4">📄 Lesson 4: विद्यालयः</a>
-            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="5">📄 Lesson 5: वृक्षाः</a>
-            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="6">📄 Lesson 6: समुद्रतटः</a>
-            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="7">📄 Lesson 7: बकस्य प्रतीकारः</a>
-            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="8">📄 Lesson 8: सूक्तिस्तबकः</a>
-            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="9">📄 Lesson 9: क्रीडास्पर्धा</a>
-            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="10">📄 Lesson 10: कृषिकाः कर्मवीराः</a>
-            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="11">📄 Lesson 11: दशमः त्वम् असि</a>
-            <a href="#" class="lesson-btn" data-sub="sanskrit" data-lesson="12">📄 Lesson 12: विमानयानं रचयाम</a>
-        </div>
-    </div>
-
-</div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
@@ -206,34 +78,65 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // यह कोड एडमिन पैनल से भेजे गए PDF लिंक को पकड़ता है (Class 6 के लिए)
-    onValue(ref(db, 'appData/notes/class6'), (snapshot) => {
-        if (snapshot.exists()) {
-            const data = snapshot.val();
-            for (const subject in data) {
-                for (const lessonKey in data[subject]) {
-                    const lessonNum = lessonKey.replace('lesson', '');
-                    const btn = document.querySelector(`a[data-sub="${subject}"][data-lesson="${lessonNum}"]`);
-                    
-                    if (btn) {
-                        btn.href = data[subject][lessonKey]; 
-                        btn.target = "_blank"; 
-                        btn.classList.add("pdf-ready"); 
-                    }
-                }
-            }
-        }
-    });
+    window.loadSubject = (subjectCode, subjectName) => {
+        const contentArea = document.getElementById('content-area');
+        const title = document.getElementById('content-title');
+        const display = document.getElementById('notes-display');
 
-    window.toggleLessons = function(header) {
-        const content = header.nextElementSibling;
-        const icon = header.querySelector("span:last-child");
-        if (content.classList.contains("show")) {
-            content.classList.remove("show"); header.classList.remove("active"); icon.innerText = "➕";
-        } else {
-            document.querySelectorAll(".lesson-list").forEach(list => list.classList.remove("show"));
-            document.querySelectorAll(".subject-header").forEach(h => { h.classList.remove("active"); h.querySelector("span:last-child").innerText = "➕"; });
-            content.classList.add("show"); header.classList.add("active"); icon.innerText = "➖";
+        // बटन का रंग बदलने के लिए
+        document.querySelectorAll('.sub-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        contentArea.style.display = 'block';
+        title.innerText = `📖 ${subjectName} के नोट्स`;
+        display.innerHTML = `<div class="loading">⏳ सोनू सर के नोट्स लोड हो रहे हैं...</div>`;
+
+        let chaptersData = {};
+        let pdfsData = {};
+        let dataFound = false;
+
+        // 1. एडमिन पैनल से टेक्स्ट/कविता खींचना
+        onValue(ref(db, `appData/chapters/class6/${subjectCode}`), (snapshot) => {
+            if(snapshot.exists()) { chaptersData = snapshot.val(); dataFound = true; }
+            
+            // 2. एडमिन पैनल से PDF लिंक खींचना
+            onValue(ref(db, `appData/notes/class6/${subjectCode}`), (pdfSnapshot) => {
+                if(pdfSnapshot.exists()) { pdfsData = pdfSnapshot.val(); dataFound = true; }
+                
+                renderContent(chaptersData, pdfsData, dataFound);
+            }, { onlyOnce: true });
+            
+        }, { onlyOnce: true });
+    };
+
+    function renderContent(chapters, pdfs, found) {
+        const display = document.getElementById('notes-display');
+        if(!found) {
+            display.innerHTML = `<div class="empty-msg">🚧 अभी इस विषय में कोई नोट्स नहीं हैं। सोनू सर जल्द ही अपलोड करेंगे!</div>`;
+            return;
+        }
+
+        display.innerHTML = '';
+        // 1 से 20 तक के लेसन चेक करना
+        for(let i=1; i<=20; i++) {
+            let key = `lesson${i}`;
+            let hasText = chapters[key] ? true : false;
+            let hasPdf = pdfs[key] ? true : false;
+
+            if(hasText || hasPdf) {
+                let cardHTML = `<div class="lesson-card"><h3>📌 पाठ ${i}</h3>`;
+                
+                if(hasText) {
+                    cardHTML += `<p>${chapters[key]}</p>`;
+                }
+                
+                if(hasPdf) {
+                    cardHTML += `<a href="${pdfs[key]}" target="_blank" class="pdf-btn">📄 असली PDF डाउनलोड करें</a>`;
+                }
+                
+                cardHTML += `</div>`;
+                display.innerHTML += cardHTML;
+            }
         }
     }
 </script>
