@@ -84,6 +84,7 @@
                 <li>✅ <b>सही जवाब:</b> <b>+10 नंबर</b></li>
                 <li>❌ <b>गलत जवाब:</b> <b>-5 नंबर</b></li>
                 <li>⏱️ <b>समय:</b> <b>30 सेकंड</b> प्रति सवाल</li>
+                <li>🏆 <b>लीडरबोर्ड:</b> टेस्ट के बाद अपना नाम सेव करें!</li>
             </ul>
         </div>
         <button class="btn btn-blue" onclick="startTest()">🚀 टेस्ट शुरू करें</button>
@@ -109,8 +110,14 @@
             <p>आपका स्कोर है:</p>
             <div class="score-text" id="final-score">0</div>
             <p id="feedback-msg" style="font-weight: bold;"></p>
-            <button class="btn btn-blue" onclick="location.reload()">फिर से टेस्ट दें 🔄</button>
-            <button class="btn" style="background-color: #2E7D32;" onclick="window.location.href='index.html'">🏠 होम पेज पर जाएँ</button>
+            
+            <div style="margin-top: 20px; padding: 15px; background: #e8f0fe; border-radius: 10px;">
+                <p style="margin-top:0; font-weight:bold; color:#1976D2;">🏆 लीडरबोर्ड में नाम दर्ज करें</p>
+                <input type="text" id="student-name-input" placeholder="अपना नाम लिखें..." style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; text-align:center; box-sizing: border-box; font-size: 16px;">
+                <button class="btn btn-blue" onclick="saveMyScore()" style="margin-top: 10px; background-color: #E65100;">सेव करें 🚀</button>
+            </div>
+            
+            <button class="btn" style="background-color: #2E7D32; margin-top: 15px;" onclick="window.location.href='index.html'">🏠 होम पेज पर जाएँ</button>
         </div>
     </div>
 
@@ -118,7 +125,8 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    // 🌟 push जोड़ा गया है ताकि डेटाबेस में नया स्कोर सेव हो सके
+    import { getDatabase, ref, get, child, push } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
@@ -160,7 +168,6 @@
             if (snapshot.exists()) {
                 const data = snapshot.val();
                 
-                // अगर डेटा पुराने तरीके से सेव है (बिना push के)
                 if(data.question && !data.options) {
                     alert("⚠️ बॉस! इस चैप्टर में पुराने डिज़ाइन वाला सवाल फँसा है। कृपया पैनल से 'Lesson 2' में नया सवाल डालकर टेस्ट करें!");
                     location.reload();
@@ -198,7 +205,6 @@
 
         const currentQ = allQuestions[currentQIndex];
         
-        // अगर सवाल में कोई दिक्कत है तो स्किप करो
         if(!currentQ.options) {
             currentQIndex++;
             loadQuestion();
@@ -255,6 +261,28 @@
         document.getElementById('final-score').innerText = score;
         document.getElementById('final-score').style.color = score > 0 ? "#4caf50" : "#d32f2f";
         document.getElementById('feedback-msg').innerText = score > 0 ? "शाबाश! 🎉" : "और मेहनत करो! 💪";
+    };
+
+    // 🌟 असली जादू: आज की तारीख के साथ स्कोर सेव करना 🌟
+    window.saveMyScore = () => {
+        const name = document.getElementById('student-name-input').value;
+        if (!name) {
+            alert("⚠️ बॉस, पहले अपना नाम तो लिखिए!");
+            return;
+        }
+
+        const today = new Date().toISOString().split('T')[0];
+        const scoreRef = ref(db, `daily_leaderboard/${today}`);
+        
+        push(scoreRef, {
+            name: name,
+            score: score
+        }).then(() => {
+            alert("🎉 आपका स्कोर आज के लीडरबोर्ड में सेव हो गया!");
+            window.location.href = 'index.html'; // सेव होते ही होम पेज पर भेज दो
+        }).catch((error) => {
+            alert("❌ एरर: " + error);
+        });
     };
 </script>
 </body>
