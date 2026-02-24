@@ -42,9 +42,6 @@
         body.dark-mode .hero-text p.sub-text { color: #ddd; }
         .hero-btn { background: var(--primary-green); color: white; padding: 12px 25px; border: none; border-radius: 30px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: 0.3s; }
         
-        #installAppBtn { display: none; background: #D50000; color: white; padding: 15px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); margin: 20px auto; width: 250px; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-
         .class-btn { display: inline-block; width: 120px; padding: 15px; margin: 10px; background: var(--primary-blue); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .class-btn:active { transform: scale(0.9); background: #1565C0; }
         .action-btn { display: block; width: 250px; margin: 15px auto; padding: 15px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; }
@@ -62,7 +59,7 @@
         .ai-msg { background: #e3f2fd; align-self: flex-start; border-bottom-left-radius: 0; color: #000; border: 1px solid #bbdefb; }
         .user-msg { background: #2E7D32; color: white; align-self: flex-end; border-bottom-right-radius: 0; }
         .error-msg { background: #ffebee; color: #d32f2f; border-color: #ffcdd2; }
-        .warning-msg { background: #FFF3E0; color: #E65100; border: 1px solid #FFE0B2; } /* नया वार्निंग डिज़ाइन */
+        .warning-msg { background: #FFF3E0; color: #E65100; border: 1px solid #FFE0B2; } 
         
         .ai-chat-input { display: flex; border-top: 1px solid var(--border-color); background: var(--box-bg); }
         .ai-chat-input input { flex: 1; padding: 12px; border: none; outline: none; background: transparent; color: var(--text-color); font-size: 15px; }
@@ -71,22 +68,16 @@
         .mic-btn { background: #E65100 !important; border-right: 1px solid white !important; font-size: 18px !important; }
         .mic-btn:active { background: #D84315 !important; }
         .speak-btn { background: none; border: none; font-size: 20px; cursor: pointer; float: right; margin-left: 10px; padding: 0; }
-        .speak-btn:hover { transform: scale(1.1); }
         
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; }
         .modal-content { background: var(--box-bg); color: var(--text-color); padding: 25px; border-radius: 20px; width: 90%; max-width: 400px; max-height: 85vh; overflow-y: auto; position: relative; text-align: left; border: 1px solid var(--border-color); }
         .close-btn { background: #333; color: white; border: none; padding: 12px 20px; border-radius: 5px; margin-top: 20px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; text-align: center; }
-        .submit-quiz-btn { background: var(--primary-green); color: white; border: none; padding: 12px 20px; border-radius: 5px; margin-top: 10px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
-        .q-block h4 { margin-top: 0; font-size: 17px; line-height: 1.4; color: var(--primary-blue); }
-        .option-btn { width: 100%; padding: 12px; margin: 6px 0; border: 2px solid var(--border-color); border-radius: 8px; background: var(--box-bg); color: var(--text-color); cursor: pointer; font-weight: bold; transition: 0.3s; text-align: left; font-size: 15px;}
-        .option-btn:disabled { opacity: 0.8; cursor: not-allowed; }
-        .correct { background-color: #4CAF50 !important; color: white !important; border-color: #2E7D32 !important; }
-        .wrong { background-color: #F44336 !important; color: white !important; border-color: #B71C1C !important; }
+        
         .leaderboard-list { list-style: none; padding: 0; margin: 0; }
         .leaderboard-list li { padding: 12px; border-bottom: 1px solid var(--border-color); font-size: 16px; font-weight: bold; display: flex; justify-content: space-between; }
         .leaderboard-list li:last-child { border-bottom: none; }
         .show { display: flex !important; }
-        footer { margin-top: 30px; padding: 15px; background: var(--box-bg); border-top: 1px solid var(--border-color); font-size: 14px; color: #666; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
@@ -136,7 +127,7 @@
         <a href="class12.html" class="class-btn">Class 12</a>
     </div>
 
-    <button class="action-btn btn-quiz" onclick="startQuiz()">📝 ऑनलाइन टेस्ट दें</button>
+    <button class="action-btn btn-quiz" onclick="window.location.href='test.html'">📝 ऑनलाइन टेस्ट दें 🚀</button>
     <button class="action-btn btn-leaderboard" onclick="showModal('leaderboard-modal')">🏆 लीडरबोर्ड देखें</button>
 
     <a href="https://wa.me/918521057039?text=नमस्ते सोनू सर, मुझे आपकी वेबसाइट से मदद चाहिए।" target="_blank" class="whatsapp-float">
@@ -159,29 +150,6 @@
             <input type="text" id="aiInput" placeholder="अपना सवाल यहाँ टाइप करें..." onkeypress="if(event.key === 'Enter') sendAIMessage()">
             <button class="mic-btn" onclick="startVoiceInput()" title="बोलकर पूछें">🎤</button>
             <button onclick="sendAIMessage()">➤</button>
-        </div>
-    </div>
-
-    <div id="quiz-modal" class="modal">
-        <div class="modal-content" id="quiz-container">
-            <h2 style="color: #E65100; text-align: center; margin-top: 0;">📝 ऑनलाइन टेस्ट</h2>
-            <div id="quiz-area" class="q-block">
-                <h4 id="quiz-q">प्रश्न लोड हो रहा है...</h4>
-                <button class="option-btn" id="btn-opt-a" onclick="checkAnswer('A')">A.</button>
-                <button class="option-btn" id="btn-opt-b" onclick="checkAnswer('B')">B.</button>
-                <button class="option-btn" id="btn-opt-c" onclick="checkAnswer('C')">C.</button>
-                <button class="option-btn" id="btn-opt-d" onclick="checkAnswer('D')">D.</button>
-                <div style="text-align: right; margin-top: 15px;">
-                    <button id="next-btn" style="display:none; background: #1976D2; color: white; padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 15px;" onclick="nextQuestion()">अगला सवाल ➡️</button>
-                </div>
-            </div>
-            <div id="quiz-result-area" style="display: none; text-align: center; padding: 20px 0;">
-                <h3 style="color: #2E7D32; font-size: 24px; margin-top: 0;">🎉 टेस्ट पूरा हुआ!</h3>
-                <p style="font-size: 18px; font-weight: bold;">आपका कुल स्कोर:</p>
-                <div style="font-size: 40px; font-weight: bold; color: #E65100; margin: 10px 0;"><span id="final-score-text">0</span> अंक</div>
-                <button class="submit-quiz-btn" onclick="submitQuiz()">✅ स्कोर लीडरबोर्ड में सेव करें</button>
-            </div>
-            <button class="close-btn" onclick="hideModal('quiz-modal')">🚪 बाहर निकलें</button>
         </div>
     </div>
 
@@ -216,7 +184,7 @@
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-  import { getDatabase, ref, set, onValue, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+  import { getDatabase, ref, onValue, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
@@ -233,10 +201,6 @@
   const db = getDatabase(app);
 
   let currentStudentName = "Student";
-  let myScore = 0;
-  let questionsList = [];
-  let currentQIndex = 0;
-  let currentCorrectAnswer = "A"; 
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -256,87 +220,6 @@
   onValue(ref(db, 'appData/news'), (snapshot) => {
       if(snapshot.val()) { document.getElementById('news-text-display').innerText = "📢 " + snapshot.val().replace(/\n/g, " | ") + " 📢"; document.getElementById('news-modal-text').innerText = snapshot.val(); }
   });
-
-  // 🌟 सवालो को डेटाबेस से खींचना 🌟
-  onValue(ref(db, 'appData/quizzes'), (snapshot) => { 
-      questionsList = []; 
-      if(snapshot.exists()) {
-          snapshot.forEach((child) => questionsList.push(child.val())); 
-      }
-  });
-
-  window.startQuiz = () => { 
-      myScore = 0; currentQIndex = 0; 
-      document.getElementById('quiz-area').style.display = 'block'; 
-      document.getElementById('quiz-result-area').style.display = 'none'; 
-      showModal('quiz-modal'); 
-      loadQuestion(); 
-  };
-
-  window.loadQuestion = () => {
-      if(questionsList.length === 0) {
-          document.getElementById('quiz-q').innerText = "🚧 अभी कोई टेस्ट नहीं है। सोनू सर जल्द ही सवाल डालेंगे!";
-          ['btn-opt-a', 'btn-opt-b', 'btn-opt-c', 'btn-opt-d'].forEach(id => document.getElementById(id).style.display = 'none'); 
-          return;
-      }
-      const data = questionsList[currentQIndex];
-      document.getElementById('quiz-q').innerText = `सवाल ${currentQIndex + 1}/${questionsList.length}: ${data.question}`;
-      
-      const btnA = document.getElementById('btn-opt-a'), btnB = document.getElementById('btn-opt-b'), btnC = document.getElementById('btn-opt-c'), btnD = document.getElementById('btn-opt-d');
-      btnA.innerText = "A. " + data.optionA; 
-      btnB.innerText = "B. " + data.optionB;
-      
-      if(data.optionC) { btnC.innerText = "C. " + data.optionC; btnC.style.display = 'block'; } else btnC.style.display = 'none';
-      if(data.optionD) { btnD.innerText = "D. " + data.optionD; btnD.style.display = 'block'; } else btnD.style.display = 'none';
-      
-      [btnA, btnB, btnC, btnD].forEach(b => { 
-          b.className = "option-btn"; 
-          b.disabled = false; 
-          if(b.innerText !== "C." && b.innerText !== "D.") b.style.display = 'block'; 
-      });
-      
-      currentCorrectAnswer = data.answer; 
-      document.getElementById('next-btn').style.display = 'none';
-  };
-
-  window.checkAnswer = (selectedOption) => {
-      let btn = document.getElementById('btn-opt-' + selectedOption.toLowerCase());
-      if(selectedOption === currentCorrectAnswer) { 
-          btn.classList.add('correct'); 
-          myScore += 10; 
-      } else { 
-          btn.classList.add('wrong'); 
-          document.getElementById('btn-opt-' + currentCorrectAnswer.toLowerCase()).classList.add('correct'); 
-      }
-      ['btn-opt-a', 'btn-opt-b', 'btn-opt-c', 'btn-opt-d'].forEach(id => document.getElementById(id).disabled = true);
-      const nextBtn = document.getElementById('next-btn'); 
-      nextBtn.style.display = 'inline-block'; 
-      nextBtn.innerText = (currentQIndex === questionsList.length - 1) ? "रिजल्ट देखें 🏆" : "अगला सवाल ➡️";
-  };
-
-  window.nextQuestion = () => { 
-      if(currentQIndex < questionsList.length - 1) { 
-          currentQIndex++; loadQuestion(); 
-      } else { 
-          document.getElementById('quiz-area').style.display = 'none'; 
-          document.getElementById('final-score-text').innerText = myScore; 
-          document.getElementById('quiz-result-area').style.display = 'block'; 
-      } 
-  };
-
-  // 🌟 स्कोर को डेटाबेस में सेव करना 🌟
-  window.submitQuiz = () => { 
-      if(auth.currentUser) {
-          set(ref(db, 'leaderboard/' + auth.currentUser.uid), { 
-              name: currentStudentName, 
-              score: myScore 
-          }).then(() => { 
-              alert("🎉 आपका स्कोर लीडरबोर्ड में सेव हो गया!"); 
-              hideModal('quiz-modal'); 
-              showModal('leaderboard-modal'); 
-          }); 
-      }
-  };
 
   // 🌟 लीडरबोर्ड को दिखाना 🌟
   onValue(query(ref(db, 'leaderboard'), orderByChild('score'), limitToLast(10)), (snapshot) => {
@@ -363,6 +246,7 @@
   window.toggleTheme = () => { document.body.classList.toggle('dark-mode'); const btn = document.getElementById('theme-btn'); if(document.body.classList.contains('dark-mode')) { btn.innerText = '☀️'; localStorage.setItem('theme', 'dark'); } else { btn.innerText = '🌙'; localStorage.setItem('theme', 'light'); } };
   window.onload = () => { if(localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-mode'); document.getElementById('theme-btn').innerText = '☀️'; } };
 
+  // AI Chat Code
   window.toggleAIChat = () => {
       const box = document.getElementById('aiChatBox');
       box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
@@ -427,7 +311,6 @@
           const data = await response.json();
           document.getElementById(loadingId).remove();
           
-          // 🌟 नया: लिमिट पार होने पर प्यारा सा हिंदी मैसेज 🌟
           if (data.error) {
               if(data.error.message.includes("quota") || data.error.message.includes("exceeded")) {
                   body.innerHTML += `<div class="ai-msg warning-msg">⚠️ <b>सोनू सर का AI अभी बहुत सारे बच्चों के साथ बिज़ी है!</b><br>कृपया 15 सेकंड बाद अपना सवाल फिर से पूछें। 🙏</div>`;
