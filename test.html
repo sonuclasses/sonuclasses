@@ -18,21 +18,17 @@
         .btn-blue { background-color: #1a73e8; box-shadow: 0 4px 6px rgba(26, 115, 232, 0.3); }
         .btn-blue:hover { background-color: #1557b0; }
 
-        /* Rules Screen */
         .rules-box { background-color: #e8f0fe; padding: 15px; border-radius: 8px; border-left: 5px solid #1a73e8; margin-bottom: 20px; }
         .rules-box ul { padding-left: 20px; line-height: 1.8; color: #333; }
         
-        /* Quiz Screen */
         .timer-box { font-size: 22px; font-weight: bold; color: #d32f2f; text-align: center; margin-bottom: 15px; background: #ffebee; padding: 10px; border-radius: 30px; }
         .question-text { font-size: 18px; font-weight: bold; color: #222; margin-bottom: 20px; }
         .option-btn { width: 100%; padding: 12px; margin-bottom: 10px; background-color: white; border: 2px solid #1a73e8; color: #1a73e8; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; text-align: left; transition: 0.2s; }
         .option-btn:hover, .option-btn.selected { background-color: #1a73e8; color: white; }
 
-        /* Result Screen */
         .result-box { text-align: center; padding: 20px; }
         .score-text { font-size: 40px; font-weight: bold; color: #4caf50; margin: 10px 0; }
         
-        /* Hide sections initially */
         #rules-screen, #quiz-screen, #result-screen { display: none; }
     </style>
 </head>
@@ -42,38 +38,60 @@
     
     <div id="selection-screen">
         <h2>📚 Sonu Classes Test</h2>
+        
         <div class="form-group">
             <label>क्लास चुनें:</label>
-            <select id="sel-class"><option value="class6">Class 6</option><option value="class10">Class 10</option></select>
+            <select id="sel-class">
+                <option value="class6">Class 6</option>
+                <option value="class7">Class 7</option>
+                <option value="class8">Class 8</option>
+                <option value="class9">Class 9</option>
+                <option value="class10">Class 10</option>
+            </select>
         </div>
+        
         <div class="form-group">
             <label>विषय चुनें:</label>
-            <select id="sel-subject"><option value="science">Science</option><option value="math">Math</option></select>
+            <select id="sel-subject">
+                <option value="hindi">Hindi</option>
+                <option value="math">Math</option>
+                <option value="science">Science</option>
+                <option value="sst">SST</option>
+                <option value="english">English</option>
+            </select>
         </div>
+        
         <div class="form-group">
             <label>चैप्टर चुनें:</label>
-            <select id="sel-lesson"><option value="lesson1">Lesson 1</option><option value="lesson2">Lesson 2</option></select>
+            <select id="sel-lesson">
+                <option value="lesson1">Lesson 1</option>
+                <option value="lesson2">Lesson 2</option>
+                <option value="lesson3">Lesson 3</option>
+                <option value="lesson4">Lesson 4</option>
+                <option value="lesson5">Lesson 5</option>
+                <option value="lesson6">Lesson 6</option>
+            </select>
         </div>
+        
         <button class="btn" onclick="showRules()">📝 ऑनलाइन टेस्ट दें</button>
+        <button class="btn" style="background-color: #555; margin-top: 10px;" onclick="window.location.href='index.html'">🏠 होम पेज पर वापस जाएँ</button>
     </div>
 
     <div id="rules-screen">
         <h2>⚠️ टेस्ट के नियम</h2>
         <div class="rules-box">
             <ul>
-                <li>✅ <b>सही जवाब:</b> हर सही जवाब पर <b>+10 नंबर</b> मिलेंगे।</li>
-                <li>❌ <b>गलत जवाब:</b> गलत जवाब देने पर <b>-5 नंबर</b> कट जाएँगे (Negative Marking)।</li>
-                <li>⏱️ <b>समय:</b> हर सवाल के लिए सिर्फ <b>30 सेकंड</b> का समय मिलेगा।</li>
-                <li>🏆 <b>लीडरबोर्ड:</b> जो सबसे ज़्यादा स्कोर करेगा, उसका नाम लीडरबोर्ड के टॉप पर आएगा!</li>
+                <li>✅ <b>सही जवाब:</b> <b>+10 नंबर</b></li>
+                <li>❌ <b>गलत जवाब:</b> <b>-5 नंबर</b></li>
+                <li>⏱️ <b>समय:</b> <b>30 सेकंड</b> प्रति सवाल</li>
             </ul>
         </div>
-        <p style="text-align: center; color: green; font-weight: bold;">क्या आप टेस्ट के लिए तैयार हैं?</p>
         <button class="btn btn-blue" onclick="startTest()">🚀 टेस्ट शुरू करें</button>
     </div>
 
     <div id="quiz-screen">
         <div class="timer-box">⏱️ समय: <span id="time-left">30</span> सेकंड</div>
-        <div class="question-text" id="question-text">सवाल यहाँ लोड हो रहा है...</div>
+        <div class="question-text" id="question-text">सवाल लोड हो रहा है...</div>
         
         <div id="options-container">
             <button class="option-btn" onclick="selectOption('A')" id="optA">A</button>
@@ -88,10 +106,11 @@
     <div id="result-screen">
         <h2>🏆 टेस्ट पूरा हुआ!</h2>
         <div class="result-box">
-            <p style="font-size: 18px; color: #555;">सोनू बॉस के टेस्ट में आपका स्कोर है:</p>
+            <p>आपका स्कोर है:</p>
             <div class="score-text" id="final-score">0</div>
-            <p id="feedback-msg" style="font-weight: bold; margin-bottom: 20px;"></p>
+            <p id="feedback-msg" style="font-weight: bold;"></p>
             <button class="btn btn-blue" onclick="location.reload()">फिर से टेस्ट दें 🔄</button>
+            <button class="btn" style="background-color: #2E7D32;" onclick="window.location.href='index.html'">🏠 होम पेज पर जाएँ</button>
         </div>
     </div>
 
@@ -114,7 +133,6 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // Global Variables
     let allQuestions = [];
     let currentQIndex = 0;
     let score = 0;
@@ -122,13 +140,11 @@
     let timeLeft = 30;
     let selectedAnswer = "";
 
-    // Step 1: Show Rules
     window.showRules = () => {
         document.getElementById('selection-screen').style.display = 'none';
         document.getElementById('rules-screen').style.display = 'block';
     };
 
-    // Step 2: Start Test & Fetch Data
     window.startTest = async () => {
         const cls = document.getElementById('sel-class').value;
         const sub = document.getElementById('sel-subject').value;
@@ -136,14 +152,21 @@
 
         document.getElementById('rules-screen').style.display = 'none';
         document.getElementById('quiz-screen').style.display = 'block';
-        document.getElementById('question-text').innerText = "सवाल लोड हो रहे हैं, कृपया रुकें... 🔄";
+        document.getElementById('question-text').innerText = "सवाल ढूँढ रहा हूँ... 🔄";
 
         const dbRef = ref(db);
         try {
             const snapshot = await get(child(dbRef, `appData/quizzes/${cls}/${sub}/${les}`));
             if (snapshot.exists()) {
-                // Firebase के ऑब्जेक्ट को लिस्ट (Array) में बदलना
                 const data = snapshot.val();
+                
+                // अगर डेटा पुराने तरीके से सेव है (बिना push के)
+                if(data.question && !data.options) {
+                    alert("⚠️ बॉस! इस चैप्टर में पुराने डिज़ाइन वाला सवाल फँसा है। कृपया पैनल से 'Lesson 2' में नया सवाल डालकर टेस्ट करें!");
+                    location.reload();
+                    return;
+                }
+
                 allQuestions = Object.values(data); 
                 loadQuestion();
             } else {
@@ -151,32 +174,37 @@
                 location.reload();
             }
         } catch (error) {
-            alert("❌ इंटरनेट या सर्वर में दिक्कत है: " + error);
+            alert("❌ एरर: " + error);
         }
     };
 
-    // Step 3: Load Single Question
     window.loadQuestion = () => {
         if(currentQIndex >= allQuestions.length) {
-            showResult(); // अगर सारे सवाल ख़त्म हो गए तो रिज़ल्ट दिखाओ
+            showResult(); 
             return;
         }
 
-        // Reset variables for new question
         selectedAnswer = "";
         timeLeft = 30;
         document.getElementById('time-left').innerText = timeLeft;
         document.getElementById('next-btn').style.display = 'none';
         
-        // Reset button colors
         ['A', 'B', 'C', 'D'].forEach(opt => {
             const btn = document.getElementById('opt' + opt);
             btn.style.backgroundColor = 'white';
             btn.style.color = '#1a73e8';
-            btn.disabled = false; // Enable buttons again
+            btn.disabled = false; 
         });
 
         const currentQ = allQuestions[currentQIndex];
+        
+        // अगर सवाल में कोई दिक्कत है तो स्किप करो
+        if(!currentQ.options) {
+            currentQIndex++;
+            loadQuestion();
+            return;
+        }
+
         document.getElementById('question-text').innerText = `Q${currentQIndex + 1}: ${currentQ.question}`;
         document.getElementById('optA').innerText = `A. ${currentQ.options.A}`;
         document.getElementById('optB').innerText = `B. ${currentQ.options.B}`;
@@ -186,71 +214,47 @@
         startTimer();
     };
 
-    // Step 4: Option Selection logic
     window.selectOption = (opt) => {
         selectedAnswer = opt;
-        
-        // Highlight selected, disable others
         ['A', 'B', 'C', 'D'].forEach(o => {
             const btn = document.getElementById('opt' + o);
-            btn.disabled = true; // बच्चा एक बार चुनने के बाद बदल नहीं सकता
+            btn.disabled = true; 
             if(o === opt) {
                 btn.style.backgroundColor = '#1a73e8';
                 btn.style.color = 'white';
             }
         });
-        
-        document.getElementById('next-btn').style.display = 'block'; // Next बटन दिखाओ
+        document.getElementById('next-btn').style.display = 'block'; 
     };
 
-    // Step 5: Next Button Logic (Score Calculation)
     window.nextQuestion = () => {
-        clearInterval(timerInterval); // Stop timer
-        
+        clearInterval(timerInterval); 
         const correctAns = allQuestions[currentQIndex].answer;
-        
-        if(selectedAnswer === correctAns) {
-            score += 10; // सही जवाब: +10
-        } else if (selectedAnswer !== "") {
-            score -= 5;  // गलत जवाब: -5
-        } // अगर टाइम आउट हो गया और कुछ सेलेक्ट नहीं किया, तो 0 कटेगा/मिलेगा
+        if(selectedAnswer === correctAns) score += 10;
+        else if (selectedAnswer !== "") score -= 5;  
         
         currentQIndex++;
         loadQuestion();
     };
 
-    // Step 6: Timer Logic
     window.startTimer = () => {
         clearInterval(timerInterval);
         timerInterval = setInterval(() => {
             timeLeft--;
             document.getElementById('time-left').innerText = timeLeft;
-            
             if(timeLeft <= 0) {
                 clearInterval(timerInterval);
-                alert("⏰ टाइम आउट! अगला सवाल आ रहा है...");
-                nextQuestion(); // टाइम ख़त्म होते ही अपने-आप अगला सवाल आ जाएगा
+                nextQuestion(); 
             }
         }, 1000);
     };
 
-    // Step 7: Final Result
     window.showResult = () => {
         document.getElementById('quiz-screen').style.display = 'none';
         document.getElementById('result-screen').style.display = 'block';
-        
-        const scoreBox = document.getElementById('final-score');
-        const feedback = document.getElementById('feedback-msg');
-        
-        scoreBox.innerText = score;
-        
-        if(score > 0) {
-            scoreBox.style.color = "#4caf50";
-            feedback.innerText = "शाबाश! आपने बहुत अच्छा खेला! 🎉";
-        } else {
-            scoreBox.style.color = "#d32f2f";
-            feedback.innerText = "थोड़ी और मेहनत की ज़रूरत है! 💪";
-        }
+        document.getElementById('final-score').innerText = score;
+        document.getElementById('final-score').style.color = score > 0 ? "#4caf50" : "#d32f2f";
+        document.getElementById('feedback-msg').innerText = score > 0 ? "शाबाश! 🎉" : "और मेहनत करो! 💪";
     };
 </script>
 </body>
