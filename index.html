@@ -155,7 +155,7 @@
 
     <div id="leaderboard-modal" class="modal">
         <div class="modal-content">
-            <h2 style="color: #FF9800; text-align: center; margin-top: 0;">🏆 टॉप स्कोरर्स</h2>
+            <h2 style="color: #FF9800; text-align: center; margin-top: 0;">🏆 आज के टॉप स्कोरर्स</h2>
             <ul id="leaderboard-list" class="leaderboard-list">
                 <li style="justify-content: center; color: gray;">कोई डाटा नहीं! अभी टेस्ट दें।</li>
             </ul>
@@ -221,8 +221,10 @@
       if(snapshot.val()) { document.getElementById('news-text-display').innerText = "📢 " + snapshot.val().replace(/\n/g, " | ") + " 📢"; document.getElementById('news-modal-text').innerText = snapshot.val(); }
   });
 
-  // 🌟 लीडरबोर्ड को दिखाना 🌟
-  onValue(query(ref(db, 'leaderboard'), orderByChild('score'), limitToLast(10)), (snapshot) => {
+  // 🌟 डेली लीडरबोर्ड का स्मार्ट कोड (जो रोज़ अपने आप खाली होगा) 🌟
+  const todayDate = new Date().toISOString().split('T')[0];
+
+  onValue(query(ref(db, `daily_leaderboard/${todayDate}`), orderByChild('score'), limitToLast(10)), (snapshot) => {
       const list = document.getElementById('leaderboard-list'); 
       list.innerHTML = ''; 
       let scores = []; 
@@ -230,10 +232,12 @@
       snapshot.forEach((childSnapshot) => {
           scores.push(childSnapshot.val()); 
       }); 
-      scores.reverse(); 
+      
+      // सबसे ज़्यादा नंबर वाले को टॉप पर रखने के लिए
+      scores.sort((a, b) => b.score - a.score);
       
       if(scores.length === 0) {
-          list.innerHTML = '<li style="justify-content: center; color: gray;">कोई डाटा नहीं! अभी टेस्ट दें।</li>'; 
+          list.innerHTML = '<li style="justify-content: center; color: gray;">आज अभी तक किसी ने टेस्ट नहीं दिया! पहला टेस्ट आप दें 🚀</li>'; 
       } else {
           scores.forEach((data, index) => { 
               let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🏅'; 
