@@ -25,7 +25,6 @@
         .section-title { font-size: 18px; color: #1976D2; border-bottom: 2px solid #1976D2; padding-bottom: 5px; margin-bottom: 15px; margin-top: 30px; }
         .home-link { display: block; margin-top: 30px; color: #1976D2; text-decoration: none; font-weight: bold; padding: 12px; border: 2px solid #1976D2; border-radius: 8px; text-align: center; transition: 0.3s;}
         .home-link:hover { background: #1976D2; color: white; }
-        
         #chapter-name-display { margin-top: -10px; margin-bottom: 20px; padding: 10px; background: #FFF3E0; border-left: 4px solid #E65100; color: #E65100; font-weight: bold; font-size: 15px; border-radius: 4px; display: none; }
         .opt-row { display: flex; gap: 10px; }
         .opt-row input { margin-bottom: 10px; }
@@ -47,56 +46,62 @@
     
     <button onclick="megaDelete()" class="mega-delete-btn">💣 1 झटके में 'सवाल' और 'लीडरबोर्ड' डिलीट करें</button>
 
-    <div class="section-title" style="color: #673AB7; border-color: #673AB7;">📝 1. आज का ऑनलाइन टेस्ट बनाएँ</div>
-    <label style="font-weight: bold; color: #333;">अपना सवाल यहाँ लिखें:</label>
-    <textarea id="manual-q" rows="2" placeholder="जैसे: भारत की राजधानी कहाँ है?"></textarea>
-
-    <label style="font-weight: bold; color: #333;">4 विकल्प (Options) दें:</label>
+    <div class="section-title" style="color: #673AB7; border-color: #673AB7;">📝 1. ऑनलाइन टेस्ट बनाएँ (Manual)</div>
+    <textarea id="manual-q" rows="2" placeholder="अपना सवाल यहाँ लिखें..."></textarea>
     <div class="opt-row">
-        <input type="text" id="opt-a" placeholder="A. (जैसे: पटना)">
-        <input type="text" id="opt-b" placeholder="B. (जैसे: नई दिल्ली)">
+        <input type="text" id="opt-a" placeholder="A. विकल्प">
+        <input type="text" id="opt-b" placeholder="B. विकल्प">
     </div>
     <div class="opt-row">
-        <input type="text" id="opt-c" placeholder="C. (जैसे: कोलकाता)">
-        <input type="text" id="opt-d" placeholder="D. (जैसे: मुंबई)">
+        <input type="text" id="opt-c" placeholder="C. विकल्प">
+        <input type="text" id="opt-d" placeholder="D. विकल्प">
     </div>
-
-    <label style="font-weight: bold; color: #333;">इनमें से सही जवाब कौन सा है?</label>
     <select id="correct-ans" style="border: 2px solid #673AB7; font-weight: bold;">
         <option value="A">सही जवाब है: A</option>
         <option value="B">सही जवाब है: B</option>
         <option value="C">सही जवाब है: C</option>
         <option value="D">सही जवाब है: D</option>
     </select>
-
-    <button onclick="addManualQuestion()" class="quiz-btn">➕ यह सवाल टेस्ट में जोड़ें</button>
-
-    <hr style="margin: 30px 0; border: 1px solid #ddd;">
+    <button onclick="addManualQuestion()" class="quiz-btn">➕ सवाल टेस्ट में जोड़ें</button>
 
     <div class="section-title" style="color: #E65100; border-color: #E65100;">📖 2. चैप्टर/कविता का टेक्स्ट सेव करें</div>
-    <label>क्लास और विषय (Class 6-12):</label>
     <div class="opt-row">
         <select id="ch-class" onchange="showChapterName()">
-            <option value="class6">Class 6</option>
+            <option value="class6" selected>Class 6</option>
             <option value="class7">Class 7</option>
             <option value="class8">Class 8</option>
             <option value="class9">Class 9</option>
-            <option value="class10" selected>Class 10</option>
+            <option value="class10">Class 10</option>
             <option value="class11">Class 11</option>
             <option value="class12">Class 12</option>
         </select>
         <input type="text" id="ch-sub" placeholder="विषय (जैसे: math, hindi)" oninput="showChapterName()">
     </div>
     <input type="number" id="ch-lesson" placeholder="लेसन नंबर (जैसे: 1, 2)" oninput="showChapterName()">
-    
     <div id="chapter-name-display"></div>
+    <textarea id="ch-content" rows="3" placeholder="यहाँ पूरे चैप्टर का टेक्स्ट पेस्ट करें..."></textarea>
+    <button onclick="saveChapterContent()" class="scan-btn">💾 टेक्स्ट सेव करें</button>
 
-    <textarea id="ch-content" rows="4" placeholder="यहाँ पूरे चैप्टर का टेक्स्ट या कविता पेस्ट करें..."></textarea>
-    <button onclick="saveChapterContent()" class="scan-btn">💾 वेबसाइट पर चैप्टर सेव करें</button>
+    <div class="section-title" style="color: #1565C0; border-color: #1565C0;">📚 3. PDF का Google Drive लिंक डालें</div>
+    <div class="opt-row">
+        <select id="pdf-class">
+            <option value="class6" selected>Class 6</option>
+            <option value="class7">Class 7</option>
+            <option value="class8">Class 8</option>
+            <option value="class9">Class 9</option>
+            <option value="class10">Class 10</option>
+            <option value="class11">Class 11</option>
+            <option value="class12">Class 12</option>
+        </select>
+        <input type="text" id="pdf-sub" placeholder="विषय (जैसे: science)">
+    </div>
+    <input type="number" id="pdf-lesson" placeholder="लेसन नंबर (जैसे: 1)">
+    <input type="text" id="pdf-link" placeholder="यहाँ PDF का लिंक पेस्ट करें...">
+    <button onclick="addPdfLink()" class="publish-btn" style="background: #1565C0;">🔗 PDF लिंक वेबसाइट पर भेजें</button>
 
     <hr style="margin: 30px 0; border: 1px solid #ddd;">
 
-    <div class="section-title">📢 3. मेन वेबसाइट की न्यूज़ बदलें</div>
+    <div class="section-title">📢 4. मेन वेबसाइट की न्यूज़ बदलें</div>
     <textarea id="news-input" rows="2" placeholder="यहाँ न्यूज़ टाइप करें..."></textarea>
     <button onclick="updateNews()" class="publish-btn">🚀 न्यूज़ पब्लिश करें</button>
 
@@ -120,7 +125,6 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // 🌟 क्लास 6 से 12 तक की जादुई डिक्शनरी 🌟
     const syllabusData = {
         "class6": {
             "hindi": { 1: "अरमान (कविता)", 2: "असली चित्र", 3: "चिड़िया" },
@@ -131,26 +135,6 @@
             "hindi": { 1: "मानव बनो (कविता)", 2: "नचिकेता", 3: "पुष्प की अभिलाषा" },
             "science": { 1: "पादपों में पोषण", 2: "प्राणियों में पोषण" },
             "math": { 1: "पूर्णांक", 2: "भिन्न एवं दशमलव" }
-        },
-        "class8": {
-            "hindi": { 1: "तू ज़िंदा है तो... (कविता)", 2: "ईदगाह (कहानी)", 3: "कर्मवीर" },
-            "science": { 1: "दहन और ज्वाला", 2: "तड़ित और भूकम्प" },
-            "math": { 1: "परिमेय संख्याएँ", 2: "एक चर वाले रैखिक समीकरण" }
-        },
-        "class9": {
-            "hindi": { 1: "कहानी का प्लॉट", 2: "भारत का पुरातन विद्यापीठ" },
-            "science": { 1: "हमारे आस-पास के पदार्थ", 2: "क्या हमारे आस-पास के पदार्थ शुद्ध हैं" }
-        },
-        "class10": {
-            "hindi": { 1: "श्रम विभाजन और जाति प्रथा", 2: "विष के दाँत", 3: "भारत से हम क्या सीखें", 4: "राम बिनु बिरथे जगि जनमा" },
-            "science": { 1: "रासायनिक अभिक्रियाएँ एवं समीकरण", 2: "अम्ल, क्षारक एवं लवण" },
-            "math": { 1: "वास्तविक संख्याएँ", 2: "बहुपद" }
-        },
-        "class11": {
-            "physics": { 1: "भौतिक जगत्", 2: "मात्रक और मापन" }
-        },
-        "class12": {
-            "hindi": { 1: "बातचीत", 2: "उसने कहा था", 3: "संपूर्ण क्रांति" }
         }
     };
 
@@ -161,69 +145,46 @@
         } else { document.getElementById('error-msg').style.display = "block"; }
     };
 
-    // 🌟 स्मार्ट स्कैनर फंक्शन 🌟
-    window.showChapterName = () => {
-        const cls = document.getElementById('ch-class').value;
-        const sub = document.getElementById('ch-sub').value.trim().toLowerCase();
-        const les = document.getElementById('ch-lesson').value.trim();
-        const displayBox = document.getElementById('chapter-name-display');
-
-        if(syllabusData[cls] && syllabusData[cls][sub] && syllabusData[cls][sub][les]) {
-            displayBox.innerHTML = `📖 चैप्टर का नाम: <b>${syllabusData[cls][sub][les]}</b>`;
-            displayBox.style.display = "block";
-        } else {
-            displayBox.style.display = "none";
-        }
-    };
-
-    // 🌟 ब्रह्मास्त्र: 1 झटके में सब डिलीट 🌟
     window.megaDelete = () => {
-        if(confirm("⚠️ वार्निंग: क्या आप सच में पुराने 'सवाल' और बच्चों का 'लीडरबोर्ड स्कोर' एक साथ डिलीट करना चाहते हैं? (यह वापस नहीं आएगा)")) {
+        if(confirm("⚠️ वार्निंग: क्या आप सच में पुराने 'सवाल' और बच्चों का 'लीडरबोर्ड स्कोर' एक साथ डिलीट करना चाहते हैं?")) {
             remove(ref(db, 'appData/quizzes'));
-            remove(ref(db, 'leaderboard'))
-            .then(() => alert("✅ कमाल बॉस! 1 झटके में पुराने सवाल और लीडरबोर्ड दोनों डिलीट हो गए। अब आप नया टेस्ट बना सकते हैं!"))
-            .catch((err) => alert("❌ कुछ गड़बड़ हुई: " + err));
+            remove(ref(db, 'leaderboard')).then(() => alert("✅ डिलीट हो गया!"));
         }
     };
 
-    // 🌟 मैनुअल सवाल जोड़ना 🌟
     window.addManualQuestion = () => {
-        const q = document.getElementById('manual-q').value.trim();
-        const a = document.getElementById('opt-a').value.trim();
-        const b = document.getElementById('opt-b').value.trim();
-        const c = document.getElementById('opt-c').value.trim();
-        const d = document.getElementById('opt-d').value.trim();
-        const ans = document.getElementById('correct-ans').value;
-
-        if(!q || !a || !b) return alert("❌ कृपया सवाल और कम से कम 2 ऑप्शन (A और B) जरूर लिखें!");
-
-        const newQuestion = { question: q, optionA: a, optionB: b, optionC: c, optionD: d, answer: ans };
-
-        push(ref(db, 'appData/quizzes'), newQuestion)
-        .then(() => {
-            alert("✅ सवाल टेस्ट में जुड़ गया! अब आप अगला सवाल टाइप कर सकते हैं।");
-            document.getElementById('manual-q').value = '';
-            document.getElementById('opt-a').value = '';
-            document.getElementById('opt-b').value = '';
-            document.getElementById('opt-c').value = '';
-            document.getElementById('opt-d').value = '';
+        const q = document.getElementById('manual-q').value.trim(), a = document.getElementById('opt-a').value.trim(), b = document.getElementById('opt-b').value.trim(), c = document.getElementById('opt-c').value.trim(), d = document.getElementById('opt-d').value.trim(), ans = document.getElementById('correct-ans').value;
+        if(!q || !a || !b) return alert("❌ सवाल और 2 ऑप्शन लिखें!");
+        push(ref(db, 'appData/quizzes'), { question: q, optionA: a, optionB: b, optionC: c, optionD: d, answer: ans }).then(() => {
+            alert("✅ सवाल जुड़ गया!"); document.getElementById('manual-q').value = ''; document.getElementById('opt-a').value = ''; document.getElementById('opt-b').value = ''; document.getElementById('opt-c').value = ''; document.getElementById('opt-d').value = '';
         });
     };
 
+    window.showChapterName = () => {
+        const cls = document.getElementById('ch-class').value, sub = document.getElementById('ch-sub').value.trim().toLowerCase(), les = document.getElementById('ch-lesson').value.trim(), displayBox = document.getElementById('chapter-name-display');
+        if(syllabusData[cls] && syllabusData[cls][sub] && syllabusData[cls][sub][les]) { displayBox.innerHTML = `📖 चैप्टर: <b>${syllabusData[cls][sub][les]}</b>`; displayBox.style.display = "block"; } else { displayBox.style.display = "none"; }
+    };
+
     window.saveChapterContent = () => {
-        const cls = document.getElementById('ch-class').value;
-        const sub = document.getElementById('ch-sub').value.trim().toLowerCase();
-        const les = document.getElementById('ch-lesson').value.trim();
-        const content = document.getElementById('ch-content').value.trim();
+        const cls = document.getElementById('ch-class').value, sub = document.getElementById('ch-sub').value.trim().toLowerCase(), les = document.getElementById('ch-lesson').value.trim(), content = document.getElementById('ch-content').value.trim();
+        if(!sub || !les || !content) return alert("❌ खाली डब्बे भरें!");
+        set(ref(db, `appData/chapters/${cls}/${sub}/lesson${les}`), content).then(() => { alert(`✅ टेक्स्ट सेव हो गया।`); document.getElementById('ch-lesson').value = ''; document.getElementById('ch-content').value = ''; });
+    };
 
-        if(!sub || !les || !content) return alert("❌ कृपया विषय, लेसन नंबर और नोट्स/कविता जरूर डालें!");
+    // 🌟 PDF सेव करने का लॉजिक 🌟
+    window.addPdfLink = () => {
+        const cls = document.getElementById('pdf-class').value;
+        const sub = document.getElementById('pdf-sub').value.trim().toLowerCase();
+        const les = document.getElementById('pdf-lesson').value.trim();
+        const link = document.getElementById('pdf-link').value.trim();
 
-        set(ref(db, `appData/chapters/${cls}/${sub}/lesson${les}`), content)
+        if(!sub || !les || !link) return alert("❌ कृपया विषय, लेसन नंबर और लिंक जरूर डालें!");
+
+        set(ref(db, `appData/notes/${cls}/${sub}/lesson${les}`), link)
         .then(() => {
-            alert(`✅ सक्सेस! वेबसाइट के डेटाबेस में सेव हो गया।`);
-            document.getElementById('ch-lesson').value = '';
-            document.getElementById('ch-content').value = '';
-            document.getElementById('chapter-name-display').style.display = 'none';
+            alert(`✅ सक्सेस! Class 6 का PDF लिंक वेबसाइट पर लाइव हो गया।`);
+            document.getElementById('pdf-lesson').value = ''; 
+            document.getElementById('pdf-link').value = '';
         });
     };
 
