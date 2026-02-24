@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#1976D2">
-    <title>Class 6 - Sonu Classes</title>
+    <title>Class 6 - NCERT (New Syllabus)</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; text-align: center; color: #333; }
         header { background-color: #1976D2; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
@@ -45,15 +45,15 @@
 
     <div class="hero">
         <h2>📚 कक्षा 6 के सभी विषय</h2>
-        <p>नए सिलेबस (2025-26) के अनुसार सभी चैप्टर्स</p>
+        <p>100% नया सिलेबस (2025-26) - सोनू क्लासेस</p>
     </div>
 
     <div class="subject-container">
         <button class="sub-btn" onclick="loadSubject('hindi', 'हिंदी (मल्हार)')">📘 हिंदी</button>
-        <button class="sub-btn" onclick="loadSubject('math', 'गणित')">📐 गणित</button>
-        <button class="sub-btn" onclick="loadSubject('science', 'विज्ञान')">🔬 विज्ञान</button>
+        <button class="sub-btn" onclick="loadSubject('math', 'गणित (गणित प्रकाश)')">📐 गणित</button>
+        <button class="sub-btn" onclick="loadSubject('science', 'विज्ञान (जिज्ञासा)')">🔬 विज्ञान</button>
         <button class="sub-btn" onclick="loadSubject('sst', 'सामाजिक विज्ञान')">🌍 सा. विज्ञान</button>
-        <button class="sub-btn" onclick="loadSubject('english', 'अंग्रेजी')">🔤 अंग्रेजी</button>
+        <button class="sub-btn" onclick="loadSubject('english', 'अंग्रेजी (Poorvi)')">🔤 अंग्रेजी</button>
     </div>
 
     <div id="content-area" class="content-area">
@@ -80,35 +80,48 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // 🌟 क्लास 6 के सारे विषयों के असली चैप्टर्स की लिस्ट 🌟
+    // 🌟 100% FINAL NEW SYLLABUS 2026 (All Subjects) 🌟
     const class6Syllabus = {
         "hindi": [
-            "अरमान (कविता)", "गोल (संस्मरण)", "पहली बूँद (कविता)", "हार की जीत (कहानी)", 
-            "भीष्म की प्रतिज्ञा", "तुम कल्पना करो (कविता)", "पिता का पत्र पुत्र के नाम", 
-            "मंत्र (कहानी)", "बाल लीला (कविता)"
+            "मातृभूमि (कविता)", "गोल (संस्मरण)", "पहली बूँद (कविता)", "हार की जीत (कहानी)", 
+            "रहीम के दोहे", "मेरी माँ (आत्मकथा)", "जलाते चलो (कविता)", "सत्रिया और बिहू नृत्य (निबंध)", 
+            "मैया मैं नहिं माखन खायो (पद)", "परीक्षा (कहानी)", "चेतक की वीरता (कविता)", 
+            "हिंद महासागर में छोटा-सा हिंदुस्तान", "पेड़ की बात (निबंध)"
         ],
         "math": [
-            "अपनी संख्याओं की जानकारी", "पूर्ण संख्याएँ", "संख्याओं के साथ खेलना", 
-            "आधारभूत ज्यामितीय अवधारणाएँ", "प्रारंभिक आकारों को समझना", "पूर्णांक", 
-            "भिन्न", "दशमलव", "आँकड़ों का प्रबंधन", "क्षेत्रमिति", "बीजगणित", "अनुपात और समानुपात"
+            "गणित में पैटर्न (Patterns in Mathematics)", 
+            "रेखाएं और कोण (Lines and Angles)", 
+            "संख्या का खेल (Number Play)", 
+            "आँकड़ों का प्रबंधन (Data Handling)", 
+            "अभाज्य समय (Prime Time)", 
+            "परिमाप और क्षेत्रफल (Perimeter and Area)", 
+            "भिन्‍न (Fractions)", 
+            "रचनाओं के साथ खेलना (Constructions)", 
+            "सममिति (Symmetry)", 
+            "शून्य के दूसरी ओर (The Other Side of Zero)"
         ],
         "science": [
-            "भोजन के घटक", "वस्तुओं के समूह बनाना", "पदार्थों का पृथक्करण", "पौधों को जानिए", 
-            "शरीर में गति", "सजीव: विशेषताएँ एवं आवास", "गति एवं दूरियों का मापन", 
-            "प्रकाश - छायाएँ एवं परावर्तन", "विद्युत् तथा परिपथ", "चुंबकों द्वारा मनोरंजन", "हमारे चारों ओर वायु"
+            "विज्ञान का अनूठा संसार", "सजीव जगत में विविधता", "उचित आहार— स्वस्थ शरीर का आधार", 
+            "चुंबकों को जानें", "लंबाई एवं गति का मापन", "हमारे आस-पास की सामग्री", 
+            "ताप एवं उसका मापन", "जल की विविध अवस्थाओं की यात्रा", "दैनिक जीवन में पृथक्करण विधियाँ", 
+            "सजीव— विशेषताओं का अन्वेषण", "प्रकृति की अमूल्य संपदा", "पृथ्वी से परे"
         ],
         "sst": [
-            "क्या, कब, कहाँ और कैसे?", "आखेट-खाद्य संग्रह से भोजन उत्पादन तक", "आरंभिक नगर", 
-            "क्या बताती हैं हमें किताबें और कब्रें", "राज्य, राजा और एक प्राचीन गणराज्य", 
-            "सौरमंडल में पृथ्वी", "ग्लोब: अक्षांश एवं देशांतर", "पृथ्वी की गतियाँ", "विविधता की समझ"
+            "भारत और विश्व: भूमि और लोग", 
+            "अतीत की बुनावट", 
+            "हमारी सांस्कृतिक विरासत", 
+            "शासन और लोकतंत्र", 
+            "हमारे आसपास का आर्थिक जीवन"
         ],
         "english": [
-            "Who Did Patrick's Homework?", "How the Dog Found Himself a New Master!", 
-            "Taro's Reward", "An Indian – American Woman in Space", "A Different Kind of School"
+            "Unit 1: Fables and Folk Tales", 
+            "Unit 2: Friendship", 
+            "Unit 3: Nurturing Nature", 
+            "Unit 4: Sports and Wellness", 
+            "Unit 5: Culture and Tradition"
         ]
     };
 
-    // टेक्स्ट पढ़ने वाला फंक्शन
     window.toggleText = (id) => {
         const textBox = document.getElementById(id);
         if (textBox.style.display === "none" || textBox.style.display === "") {
@@ -123,7 +136,6 @@
         const title = document.getElementById('content-title');
         const display = document.getElementById('notes-display');
 
-        // बटन का रंग सेट करना
         document.querySelectorAll('.sub-btn').forEach(btn => btn.classList.remove('active'));
         event.target.classList.add('active');
 
@@ -131,24 +143,19 @@
         title.innerText = `📖 ${subjectName} के चैप्टर्स`;
         display.innerHTML = `<div class="loading">⏳ विषय लोड हो रहा है...</div>`;
 
-        // 1. एडमिन पैनल से डेटा खींचना
         onValue(ref(db, `appData/chapters/class6/${subjectCode}`), (snapshot) => {
             let chaptersData = snapshot.exists() ? snapshot.val() : {};
             
             onValue(ref(db, `appData/notes/class6/${subjectCode}`), (pdfSnapshot) => {
                 let pdfsData = pdfSnapshot.exists() ? pdfSnapshot.val() : {};
-                
-                // 2. अब सिलेबस के हिसाब से पेज को डिज़ाइन करना
                 renderSyllabus(subjectCode, chaptersData, pdfsData);
             }, { onlyOnce: true });
-            
         }, { onlyOnce: true });
     };
 
     function renderSyllabus(subjectCode, dbChapters, dbPdfs) {
         const display = document.getElementById('notes-display');
-        display.innerHTML = ''; // डब्बा साफ करो
-        
+        display.innerHTML = ''; 
         let chaptersList = class6Syllabus[subjectCode];
 
         if(!chaptersList) {
@@ -156,7 +163,6 @@
             return;
         }
 
-        // हर चैप्टर के लिए एक कार्ड बनाना
         chaptersList.forEach((chapterName, index) => {
             let lessonNum = index + 1;
             let key = `lesson${lessonNum}`;
@@ -170,26 +176,15 @@
                     <h4>${chapterName}</h4>
             `;
 
-            // अगर टेक्स्ट मौजूद है तो डब्बा लगाओ
-            if(hasText) {
-                cardHTML += `<div class="lesson-text" id="text-${subjectCode}-${lessonNum}">${dbChapters[key]}</div>`;
-            }
+            if(hasText) { cardHTML += `<div class="lesson-text" id="text-${subjectCode}-${lessonNum}">${dbChapters[key]}</div>`; }
 
-            // बटन का सेक्शन
             cardHTML += `<div class="action-btns">`;
             
-            if(hasText) {
-                cardHTML += `<button class="read-btn" onclick="toggleText('text-${subjectCode}-${lessonNum}')">📖 नोट्स पढ़ें</button>`;
-            }
-            if(hasPdf) {
-                cardHTML += `<a href="${dbPdfs[key]}" target="_blank" class="pdf-btn">📄 PDF डाउनलोड करें</a>`;
-            }
-            if(!hasText && !hasPdf) {
-                cardHTML += `<span class="coming-soon">⏳ सोनू सर जल्द ही अपलोड करेंगे...</span>`;
-            }
+            if(hasText) { cardHTML += `<button class="read-btn" onclick="toggleText('text-${subjectCode}-${lessonNum}')">📖 नोट्स पढ़ें</button>`; }
+            if(hasPdf) { cardHTML += `<a href="${dbPdfs[key]}" target="_blank" class="pdf-btn">📄 PDF डाउनलोड करें</a>`; }
+            if(!hasText && !hasPdf) { cardHTML += `<span class="coming-soon">⏳ सोनू सर जल्द ही अपलोड करेंगे...</span>`; }
 
-            cardHTML += `</div></div>`; // कार्ड बंद
-
+            cardHTML += `</div></div>`; 
             display.innerHTML += cardHTML;
         });
     }
