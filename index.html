@@ -5,30 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1E40AF">
+    
+    <meta name="description" content="Free notes, online quiz, daily GK and IAS foundation preparation for Class 6 to 12 students. Study free with Sonu Classes.">
+    <meta name="keywords" content="Sonu Classes, Free Notes, Online Quiz, Daily GK, IAS Foundation, Bihar Board, Study Material">
+    <meta name="author" content="Sonu Kumar">
+
     <title>Sonu Classes - Your Success Starts Here!</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 🎨 नई कलर थीम (Professional + Attractive) */
-        :root { 
-            --primary-blue: #1E40AF; /* Deep Blue */
-            --highlight-orange: #F97316; /* Orange */
-            --bg-light: #F8FAFC; /* Light Clean White */
-            --text-dark: #0F172A; /* Dark Navy */
-            --hover-orange: #FB923C;
-            --card-bg: #FFFFFF;
-        }
+        :root { --primary-blue: #1E40AF; --highlight-orange: #F97316; --bg-light: #F8FAFC; --text-dark: #0F172A; --card-bg: #FFFFFF; }
+        body.dark-mode { --bg-light: #0F172A; --text-dark: #F8FAFC; --card-bg: #1E293B; --primary-blue: #3B82F6; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-light); color: var(--text-dark); margin: 0; padding: 0; transition: background-color 0.3s, color 0.3s; scroll-behavior: smooth; }
         
-        body.dark-mode { 
-            --bg-light: #0F172A; 
-            --text-dark: #F8FAFC; 
-            --card-bg: #1E293B; 
-            --primary-blue: #3B82F6;
-        }
-        
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-light); color: var(--text-dark); margin: 0; padding: 0; transition: background-color 0.3s, color 0.3s; }
-        
-        /* 1️⃣ Top Navbar */
-        header { background-color: var(--card-bg); color: var(--text-dark); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 3px solid var(--primary-blue); }
+        /* 1️⃣ Header & App Menu */
+        header { background-color: var(--card-bg); color: var(--text-dark); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #E2E8F0; }
         .logo { font-size: 22px; font-weight: 800; color: var(--primary-blue); display: flex; align-items: center; gap: 8px; margin: 0; }
         .logo i { color: var(--highlight-orange); }
         body.dark-mode .logo { color: var(--bg-light); }
@@ -40,16 +31,22 @@
         .profile-img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary-blue); cursor: pointer; object-fit: cover; background: #fff; }
         .dropdown { display: none; position: absolute; right: 0; top: 50px; background: var(--card-bg); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-radius: 8px; min-width: 150px; z-index: 100; overflow: hidden; border: 1px solid #E2E8F0; text-align: left; }
         body.dark-mode .dropdown { border-color: #334155; }
-        .dropdown button { width: 100%; padding: 12px 15px; border: none; background: none; color: var(--text-dark); cursor: pointer; font-weight: 600; text-align: left; transition: background 0.2s; }
+        .dropdown button { width: 100%; padding: 12px 15px; border: none; background: none; color: var(--text-dark); cursor: pointer; font-weight: 600; text-align: left; }
         .dropdown button:hover { background: #F1F5F9; color: var(--primary-blue); }
         body.dark-mode .dropdown button:hover { background: #334155; }
         .btn-logout { color: #EF4444 !important; border-top: 1px solid #E2E8F0 !important; }
 
-        .news-ticker { background-color: var(--primary-blue); color: white; padding: 8px; overflow: hidden; white-space: nowrap; cursor: pointer; font-weight: bold; font-size: 14px; display: flex; align-items: center; }
+        /* 🚀 2. Scrollable App Nav Menu (नया फीचर) 🚀 */
+        .app-nav { display: flex; overflow-x: auto; background: var(--primary-blue); padding: 10px 15px; gap: 15px; white-space: nowrap; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 999; }
+        .app-nav::-webkit-scrollbar { display: none; }
+        .nav-item { color: white; text-decoration: none; font-size: 14px; font-weight: 600; padding: 5px 10px; border-radius: 20px; transition: 0.3s; cursor: pointer; border: 1px solid transparent; }
+        .nav-item:hover, .nav-item:active { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); }
+
+        .news-ticker { background-color: #0F172A; color: white; padding: 8px; overflow: hidden; white-space: nowrap; cursor: pointer; font-weight: bold; font-size: 14px; display: flex; align-items: center; }
         .news-ticker span { display: inline-block; white-space: nowrap; animation: marquee 25s linear infinite; padding-left: 100%; }
         @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* 2️⃣ Hero Section (सबसे ऊपर वाला बड़ा सेक्शन) */
+        /* 3️⃣ Hero Section */
         .hero-section { background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); padding: 40px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; margin-bottom: 30px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
         body.dark-mode .hero-section { background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%); }
         .hero-title { font-size: 28px; font-weight: 800; color: var(--primary-blue); margin: 0 0 10px 0; line-height: 1.3; }
@@ -58,21 +55,18 @@
         body.dark-mode .hero-subtitle { color: #94A3B8; }
         
         .btn-main { background-color: var(--highlight-orange); color: white; padding: 14px 30px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(249, 115, 22, 0.3); transition: all 0.3s ease; text-decoration: none; display: inline-block; }
-        .btn-main:hover { background-color: var(--hover-orange); transform: translateY(-2px); box-shadow: 0 6px 12px rgba(249, 115, 22, 0.4); }
+        .btn-main:hover { background-color: #FB923C; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(249, 115, 22, 0.4); }
 
-        /* 3️⃣ Features Section (Card Design) */
+        /* 4️⃣ Features Section */
         .features-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 0 20px; margin-bottom: 30px; }
-        .feature-card { background: var(--card-bg); padding: 20px 15px; border-radius: 15px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); text-align: center; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; border: 1px solid #E2E8F0; text-decoration: none; color: var(--text-dark); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .feature-card { background: var(--card-bg); padding: 20px 15px; border-radius: 15px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); text-align: center; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; border: 1px solid #E2E8F0; text-decoration: none; color: var(--text-dark); display: flex; flex-direction: column; align-items: center; }
         body.dark-mode .feature-card { border-color: #334155; }
         .feature-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: var(--primary-blue); }
         .f-icon { font-size: 35px; margin-bottom: 10px; }
-        .f-icon.notes { color: #3B82F6; }
-        .f-icon.quiz { color: #EF4444; }
-        .f-icon.gk { color: var(--highlight-orange); }
-        .f-icon.ai { color: #10B981; }
+        .f-icon.notes { color: #3B82F6; } .f-icon.quiz { color: #EF4444; } .f-icon.gk { color: var(--highlight-orange); } .f-icon.ai { color: #10B981; }
         .f-title { font-size: 16px; font-weight: 700; margin: 0; }
 
-        /* 4️⃣ Student Trust Section */
+        /* 5️⃣ Trust Section */
         .trust-section { background-color: var(--primary-blue); color: white; padding: 20px; margin: 0 20px 30px 20px; border-radius: 15px; display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; box-shadow: 0 10px 15px -3px rgba(30, 64, 175, 0.3); }
         .trust-item { text-align: center; padding: 10px; flex: 1 1 45%; }
         .trust-number { font-size: 22px; font-weight: 800; color: var(--highlight-orange); margin: 0; }
@@ -80,46 +74,57 @@
 
         /* Classes Section */
         .classes-wrapper { padding: 0 20px 30px 20px; text-align: center; }
-        .section-heading { font-size: 20px; font-weight: 800; color: var(--primary-blue); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .section-heading { font-size: 22px; font-weight: 800; color: var(--primary-blue); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
         body.dark-mode .section-heading { color: #60A5FA; }
         .class-btn-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
         .class-btn { width: calc(33% - 10px); padding: 12px 5px; background: var(--card-bg); color: var(--primary-blue); text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 14px; border: 2px solid var(--primary-blue); transition: all 0.2s; }
         .class-btn:hover, .class-btn:active { background: var(--primary-blue); color: white; }
 
-        /* Action Buttons */
+        /* 🚀 6. About Section (नया डब्बा) 🚀 */
+        .about-section { background: var(--card-bg); margin: 0 20px 30px 20px; padding: 25px; border-radius: 15px; border: 1px solid #E2E8F0; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        body.dark-mode .about-section { border-color: #334155; }
+        .about-text { color: #475569; font-size: 15px; line-height: 1.6; text-align: justify; font-weight: 500; }
+        body.dark-mode .about-text { color: #94A3B8; }
+
+        /* 🚀 7. Contact Section (नया फॉर्म) 🚀 */
+        .contact-section { background: var(--card-bg); margin: 0 20px 30px 20px; padding: 25px; border-radius: 15px; border: 1px solid #E2E8F0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        body.dark-mode .contact-section { border-color: #334155; }
+        .contact-info { margin-bottom: 20px; text-align: center; }
+        .contact-info a { color: var(--primary-blue); font-weight: bold; text-decoration: none; display: block; margin-top: 5px; }
+        body.dark-mode .contact-info a { color: #60A5FA; }
+        .contact-input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #CBD5E1; background: #F8FAFC; box-sizing: border-box; font-family: inherit; font-size: 15px; }
+        .contact-btn { width: 100%; background: var(--primary-blue); color: white; padding: 14px; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; }
+        .contact-btn:hover { background: #1E3A8A; }
+
         .action-container { padding: 0 20px 30px 20px; display: flex; flex-direction: column; gap: 15px; }
         .btn-action { width: 100%; padding: 15px; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; color: white; transition: transform 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; justify-content: center; align-items: center; gap: 10px; }
-        .btn-action:active { transform: scale(0.98); }
         .btn-result { background: linear-gradient(to right, #EF4444, #DC2626); animation: pulse 2s infinite; }
         .btn-whatsapp { background: linear-gradient(to right, #10B981, #059669); }
         .btn-leader { background: linear-gradient(to right, #F59E0B, #D97706); }
 
-        /* Floating Buttons */
-        .whatsapp-float { position: fixed; width: 55px; height: 55px; bottom: 20px; right: 20px; background-color: #25D366; color: #FFF; border-radius: 50%; text-align: center; font-size: 30px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.3s; border: 2px solid white; }
+        /* Floating Buttons & Modals & Loader... (Same as before) */
+        .whatsapp-float { position: fixed; width: 55px; height: 55px; bottom: 20px; right: 20px; background-color: #25D366; color: #FFF; border-radius: 50%; text-align: center; font-size: 30px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; border: 2px solid white; }
         .ai-chat-btn { position: fixed; width: 55px; height: 55px; bottom: 20px; left: 20px; background-color: var(--primary-blue); color: #FFF; border-radius: 50%; border: 2px solid white; text-align: center; font-size: 25px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; animation: pulse 2s infinite; }
-
-        /* AI Chatbox */
         .ai-chat-box { display: none; position: fixed; bottom: 85px; left: 20px; width: 90%; max-width: 350px; height: 400px; background: var(--card-bg); border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 1000; flex-direction: column; overflow: hidden; border: 2px solid var(--primary-blue); }
         .ai-chat-header { background: var(--primary-blue); color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; font-size: 16px; }
         .ai-chat-body { flex: 1; padding: 15px; overflow-y: auto; background: var(--bg-light); display: flex; flex-direction: column; gap: 10px; }
-        .ai-msg, .user-msg { padding: 10px 15px; border-radius: 15px; max-width: 85%; font-size: 14px; line-height: 1.4; word-wrap: break-word; position: relative; }
+        .ai-msg, .user-msg { padding: 10px 15px; border-radius: 15px; max-width: 85%; font-size: 14px; line-height: 1.4; word-wrap: break-word; }
         .ai-msg { background: #E0F2FE; align-self: flex-start; border-bottom-left-radius: 0; color: #000; border: 1px solid #BAE6FD; }
         .user-msg { background: var(--primary-blue); color: white; align-self: flex-end; border-bottom-right-radius: 0; }
         .ai-chat-input { display: flex; border-top: 1px solid #E2E8F0; background: var(--card-bg); }
         .ai-chat-input input { flex: 1; padding: 12px; border: none; outline: none; background: transparent; color: var(--text-dark); font-size: 15px; }
-        .ai-chat-input button { background: var(--primary-blue); color: white; border: none; padding: 0 15px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; }
+        .ai-chat-input button { background: var(--primary-blue); color: white; border: none; padding: 0 15px; cursor: pointer; font-weight: bold; font-size: 16px; }
 
-        /* Modals */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.8); z-index: 2000; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
-        .modal-content { background: var(--card-bg); color: var(--text-dark); padding: 25px; border-radius: 20px; width: 100%; max-width: 400px; max-height: 85vh; overflow-y: auto; position: relative; text-align: left; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
-        .close-btn { background: #475569; color: white; border: none; padding: 12px; border-radius: 8px; margin-top: 20px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; text-align: center; }
+        .modal-content { background: var(--card-bg); color: var(--text-dark); padding: 25px; border-radius: 20px; width: 100%; max-width: 400px; max-height: 85vh; overflow-y: auto; text-align: left; }
+        .close-btn { background: #475569; color: white; border: none; padding: 12px; border-radius: 8px; margin-top: 20px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; }
         
-        /* 5️⃣ Footer */
-        footer { background-color: var(--primary-blue); color: white; text-align: center; padding: 20px; font-size: 14px; border-top-left-radius: 20px; border-top-right-radius: 20px; margin-top: 20px; }
-        .footer-links { display: flex; justify-content: center; gap: 15px; margin-bottom: 10px; flex-wrap: wrap; }
-        .footer-links a { color: #BAE6FD; text-decoration: none; font-weight: 600; }
+        /* 8️⃣ Footer */
+        footer { background-color: var(--primary-blue); color: white; text-align: center; padding: 25px 20px; font-size: 14px; border-top-left-radius: 20px; border-top-right-radius: 20px; }
+        .footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 15px; flex-wrap: wrap; }
+        .footer-links a { color: #BAE6FD; text-decoration: none; font-weight: bold; }
+        .footer-links a:hover { color: var(--highlight-orange); }
 
-        /* Loader */
         #loader-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-light); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         .spinner { width: 50px; height: 50px; border: 4px solid #E2E8F0; border-top: 4px solid var(--highlight-orange); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px; }
         
@@ -137,16 +142,14 @@
 </div>
 
 <div id="main-content" style="display: none;">
-    <header>
+    <header id="top-home">
         <h1 class="logo"><i class="fa-solid fa-graduation-cap"></i> Sonu Classes</h1>
         <div class="header-right">
             <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></button>
             <div class="profile-section">
                 <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" id="user-photo" class="profile-img" onclick="toggleDropdown()">
                 <div id="dropdown-menu" class="dropdown">
-                    <div style="padding: 10px 15px; border-bottom: 1px solid #eee; font-size: 12px; color: gray;">
-                        Hi, <span id="student-name-drop" style="font-weight: bold; color: var(--primary-blue);">Student</span>
-                    </div>
+                    <div style="padding: 10px 15px; border-bottom: 1px solid #eee; font-size: 12px; color: gray;">Hi, <span id="student-name-drop" style="font-weight: bold; color: var(--primary-blue);">Student</span></div>
                     <button onclick="document.getElementById('photo-input').click()"><i class="fa-solid fa-camera"></i> फोटो बदलें</button>
                     <button onclick="confirmLogout()" class="btn-logout"><i class="fa-solid fa-right-from-bracket"></i> लॉगआउट</button>
                     <input type="file" id="photo-input" style="display:none" accept="image/*" onchange="changePhoto(event)">
@@ -155,161 +158,108 @@
         </div>
     </header>
 
+    <nav class="app-nav">
+        <a href="#top-home" class="nav-item"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="#classes-section" class="nav-item"><i class="fa-solid fa-book"></i> Classes</a>
+        <a href="test.html" class="nav-item"><i class="fa-solid fa-brain"></i> Quiz</a>
+        <a onclick="showModal('gk-modal')" class="nav-item"><i class="fa-solid fa-flag-india"></i> GK</a>
+        <a onclick="toggleAIChat()" class="nav-item"><i class="fa-solid fa-robot"></i> AI Doubt</a>
+        <a href="#contact-section" class="nav-item"><i class="fa-solid fa-envelope"></i> Contact</a>
+    </nav>
+
     <div class="news-ticker" onclick="showModal('news-modal')">
         <span id="news-text-display">📢 ब्रेकिंग न्यूज़ लोड हो रही है... 📢</span>
     </div>
 
     <div class="hero-section">
         <h2 class="hero-title">Welcome to Sonu Classes – Your Success Starts Here!</h2>
-        <p class="hero-subtitle">Class 6–12 & IAS Foundation के लिए Free Notes, Online Tests, Daily GK और AI Doubt Solver.</p>
+        <p class="hero-subtitle">Free Notes, Online Quiz, Daily GK & AI Doubt Solver for Class 6–12 & IAS Foundation.</p>
         <a href="#classes-section" class="btn-main"><i class="fa-solid fa-rocket"></i> Start Learning Free</a>
     </div>
 
     <div class="features-container">
         <div class="feature-card" onclick="document.getElementById('classes-section').scrollIntoView({behavior: 'smooth'})">
-            <div class="f-icon notes"><i class="fa-solid fa-book-open"></i></div>
-            <p class="f-title">Free Notes</p>
+            <div class="f-icon notes"><i class="fa-solid fa-book-open"></i></div><p class="f-title">Free Notes</p>
         </div>
-        <a href="test.html" class="feature-card">
-            <div class="f-icon quiz"><i class="fa-solid fa-brain"></i></div>
-            <p class="f-title">Online Quiz</p>
+        <a href="test.html" class="feature-card" style="text-decoration:none;">
+            <div class="f-icon quiz"><i class="fa-solid fa-brain"></i></div><p class="f-title">Online Quiz</p>
         </a>
         <div class="feature-card" onclick="showModal('gk-modal')">
-            <div class="f-icon gk"><i class="fa-solid fa-lightbulb"></i></div>
-            <p class="f-title">Daily GK</p>
+            <div class="f-icon gk"><i class="fa-solid fa-lightbulb"></i></div><p class="f-title">Daily GK</p>
         </div>
         <div class="feature-card" onclick="toggleAIChat()">
-            <div class="f-icon ai"><i class="fa-solid fa-robot"></i></div>
-            <p class="f-title">AI Doubt Solver</p>
+            <div class="f-icon ai"><i class="fa-solid fa-robot"></i></div><p class="f-title">AI Doubt Solver</p>
         </div>
     </div>
 
     <div class="trust-section">
-        <div class="trust-item">
-            <p class="trust-number">1000+</p>
-            <p class="trust-text">Students</p>
-        </div>
-        <div class="trust-item">
-            <p class="trust-number">500+</p>
-            <p class="trust-text">PDF Notes</p>
-        </div>
-        <div class="trust-item">
-            <p class="trust-number">Daily</p>
-            <p class="trust-text">Updates</p>
-        </div>
-        <div class="trust-item">
-            <p class="trust-number">100%</p>
-            <p class="trust-text">Free</p>
-        </div>
+        <div class="trust-item"><p class="trust-number">1000+</p><p class="trust-text">Students</p></div>
+        <div class="trust-item"><p class="trust-number">500+</p><p class="trust-text">Notes</p></div>
+        <div class="trust-item"><p class="trust-number">Daily</p><p class="trust-text">Updates</p></div>
+        <div class="trust-item"><p class="trust-number">100%</p><p class="trust-text">Free Learning</p></div>
+    </div>
+
+    <div class="about-section" id="about-section">
+        <h2 class="section-heading">About Sonu Classes</h2>
+        <p class="about-text">Sonu Classes is a free educational platform helping students prepare for Board Exams and IAS Foundation with quality notes and quizzes. Our mission is to make education accessible and smart for everyone in Bihar and across India. 🇮🇳</p>
     </div>
 
     <div id="classes-section" class="classes-wrapper">
         <div class="section-heading">📚 Select Your Class</div>
         <div class="class-btn-container">
-            <a href="class6.html" class="class-btn">Class 6</a>
-            <a href="class7.html" class="class-btn">Class 7</a>
-            <a href="class8.html" class="class-btn">Class 8</a>
-            <a href="class9.html" class="class-btn">Class 9</a>
-            <a href="class10.html" class="class-btn">Class 10</a>
-            <a href="class11.html" class="class-btn">Class 11</a>
+            <a href="class6.html" class="class-btn">Class 6</a> <a href="class7.html" class="class-btn">Class 7</a> <a href="class8.html" class="class-btn">Class 8</a>
+            <a href="class9.html" class="class-btn">Class 9</a> <a href="class10.html" class="class-btn">Class 10</a> <a href="class11.html" class="class-btn">Class 11</a>
             <a href="class12.html" class="class-btn" style="width: 100%;">Class 12 (Coming Soon)</a>
         </div>
     </div>
 
     <div class="action-container">
-        <button class="btn-action btn-result" onclick="showModal('result-modal')"><i class="fa-solid fa-bullhorn"></i> 10वीं का रिजल्ट 2026 (Fast Links)</button>
-        <button id="register-btn-main" class="btn-action btn-whatsapp" style="display: none;" onclick="openRegisterModal()"><i class="fa-brands fa-whatsapp"></i> WhatsApp पर जुड़ें (Free Updates)</button>
-        <button class="btn-action btn-leader" onclick="showModal('leaderboard-modal')"><i class="fa-solid fa-trophy"></i> आज के टॉपर्स (Leaderboard)</button>
+        <button class="btn-action btn-result" onclick="showModal('result-modal')"><i class="fa-solid fa-bullhorn"></i> 10वीं का रिजल्ट 2026</button>
+        <button id="register-btn-main" class="btn-action btn-whatsapp" style="display: none;" onclick="openRegisterModal()"><i class="fa-brands fa-whatsapp"></i> WhatsApp पर जुड़ें</button>
+        <button class="btn-action btn-leader" onclick="showModal('leaderboard-modal')"><i class="fa-solid fa-trophy"></i> आज के टॉपर्स देखें</button>
+    </div>
+
+    <div class="contact-section" id="contact-section">
+        <h2 class="section-heading">Contact Sonu Sir</h2>
+        <div class="contact-info">
+            <p style="margin:0; color:#475569;"><i class="fa-solid fa-envelope"></i> Email Support:</p>
+            <a href="mailto:contact@sonuclasses.com">contact@sonuclasses.com</a>
+        </div>
+        <input type="text" id="contact-name" class="contact-input" placeholder="आपका नाम">
+        <textarea id="contact-msg" class="contact-input" placeholder="अपना मैसेज यहाँ लिखें..." style="height: 80px; resize: none;"></textarea>
+        <button class="contact-btn" onclick="sendContactMessage()"><i class="fa-solid fa-paper-plane"></i> Message भेजें</button>
     </div>
 
     <footer>
         <div class="footer-links">
-            <a href="#">Home</a>
+            <a href="#about-section">About</a>
             <a href="#">Privacy Policy</a>
-            <a href="#">Contact Us</a>
+            <a href="#">Terms</a>
+            <a href="#contact-section">Contact</a>
         </div>
-        <p style="margin: 5px 0 0 0; opacity: 0.8;">© 2026 Sonu Classes. All Rights Reserved.</p>
-        <p style="margin: 5px 0 0 0; font-size: 11px; opacity: 0.6;">Designed by Founder Sonu Kumar</p>
+        <p style="margin: 0; opacity: 0.9;">Copyright © 2026 Sonu Classes</p>
     </footer>
 
-    <a href="https://wa.me/918521057039?text=नमस्ते सोनू सर, मुझे आपकी वेबसाइट से मदद चाहिए।" target="_blank" class="whatsapp-float">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+    <a href="https://wa.me/918521057039?text=नमस्ते सोनू सर, मुझे आपकी वेबसाइट से मदद चाहिए।" target="_blank" class="whatsapp-float"><i class="fa-brands fa-whatsapp"></i></a>
     <button class="ai-chat-btn" onclick="toggleAIChat()"><i class="fa-solid fa-robot"></i></button>
 
     <div class="ai-chat-box" id="aiChatBox">
-        <div class="ai-chat-header">
-            <span>✨ Sonu AI (Doubt Solver)</span>
-            <button onclick="toggleAIChat()" style="background:none;border:none;color:white;font-size:20px;cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="ai-chat-body" id="aiChatBody">
-            <div class="ai-msg">
-                <span>नमस्ते प्यारे बच्चों! मैं <b>Sonu AI</b> हूँ। 🤖<br>आप मुझसे पढ़ाई से जुड़ा कोई भी डाउट पूछ सकते हैं। बताइए मैं आपकी क्या मदद करूँ?</span>
-            </div>
-        </div>
-        <div class="ai-chat-input">
-            <input type="text" id="aiInput" placeholder="अपना सवाल यहाँ टाइप करें..." onkeypress="if(event.key === 'Enter') sendAIMessage()">
-            <button onclick="startVoiceInput()" style="background: var(--highlight-orange);"><i class="fa-solid fa-microphone"></i></button>
-            <button onclick="sendAIMessage()"><i class="fa-solid fa-paper-plane"></i></button>
-        </div>
+        <div class="ai-chat-header"><span>✨ Sonu AI</span><button onclick="toggleAIChat()" style="background:none;border:none;color:white;font-size:20px;"><i class="fa-solid fa-xmark"></i></button></div>
+        <div class="ai-chat-body" id="aiChatBody"><div class="ai-msg"><span>नमस्ते! मैं <b>Sonu AI</b> हूँ। 🤖<br>पढ़ाई से जुड़ा कोई भी डाउट पूछें!</span></div></div>
+        <div class="ai-chat-input"><input type="text" id="aiInput" placeholder="सवाल टाइप करें..." onkeypress="if(event.key === 'Enter') sendAIMessage()"><button onclick="startVoiceInput()" style="background: var(--highlight-orange);"><i class="fa-solid fa-microphone"></i></button><button onclick="sendAIMessage()"><i class="fa-solid fa-paper-plane"></i></button></div>
     </div>
 
-    <div id="gk-modal" class="modal">
-        <div class="modal-content">
-            <h2 style="color: var(--highlight-orange); text-align: center; margin-top: 0;"><i class="fa-solid fa-flag-india"></i> IAS Foundation & Daily GK</h2>
-            <div style="background: #FFF3E0; padding: 15px; border-radius: 10px; border-left: 4px solid var(--highlight-orange); margin-top: 15px;">
-                <p id="gk-modal-text" style="line-height: 1.8; font-size: 16px; color: #333; margin: 0; font-weight: 500;">जानकारी लोड हो रही है...</p>
-            </div>
-            <button class="close-btn" onclick="hideModal('gk-modal')">🚪 बाहर निकलें</button>
-        </div>
-    </div>
-
-    <div id="result-modal" class="modal">
-        <div class="modal-content">
-            <h2 style="color: #EF4444; text-align: center; margin-top: 0;"><i class="fa-solid fa-graduation-cap"></i> BSEB 10th Result 2026</h2>
-            <p style="text-align: center; color: #64748B; font-size: 14px;">सर्वर डाउन है? नीचे दिए गए फास्ट सर्वर्स से तुरंत चेक करें:</p>
-            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
-                <a href="http://biharboardonline.bihar.gov.in/" target="_blank" class="btn-main" style="background: #1E40AF; text-align: center; padding: 12px; font-size: 15px;">🌍 Server 1 (Official)</a>
-                <a href="http://bihar.indiaresults.com/" target="_blank" class="btn-main" style="background: #F97316; text-align: center; padding: 12px; font-size: 15px;">⚡ Server 2 (IndiaResults)</a>
-                <a href="https://www.jagranjosh.com/results/bihar-board-10th-result-online-10th" target="_blank" class="btn-main" style="background: #10B981; text-align: center; padding: 12px; font-size: 15px;">🚀 Server 3 (Jagran Josh)</a>
-            </div>
-            <button class="close-btn" onclick="hideModal('result-modal')">🚪 बाहर निकलें</button>
-        </div>
-    </div>
-
-    <div id="register-modal" class="modal">
-        <div class="modal-content">
-            <h2 style="color: var(--highlight-orange); text-align: center; margin-top: 0;"><i class="fa-brands fa-whatsapp"></i> फ्री रजिस्ट्रेशन</h2>
-            <p style="text-align: center; color: #64748B; font-size: 14px;">फ्री PDF नोट्स और अपडेट्स के लिए अपना नंबर रजिस्टर करें:</p>
-            <div style="margin-top: 15px;"><label style="font-weight: bold; font-size: 14px;">आपका नाम:</label><input type="text" id="reg-name" readonly style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #CBD5E1; background: #F1F5F9; font-size: 15px; box-sizing: border-box; margin-top: 5px;"></div>
-            <div style="margin-top: 15px;"><label style="font-weight: bold; font-size: 14px;">WhatsApp / मोबाइल नंबर:</label><input type="number" id="reg-phone" placeholder="10 अंकों का नंबर डालें..." style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid var(--primary-blue); font-size: 15px; box-sizing: border-box; margin-top: 5px;"></div>
-            <button onclick="submitRegistration()" style="width: 100%; padding: 14px; background: #10B981; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; margin-top: 20px; cursor: pointer;"><i class="fa-solid fa-check-circle"></i> सुरक्षित सेव करें</button>
-            <button class="close-btn" onclick="hideModal('register-modal')">🚪 बाहर निकलें</button>
-        </div>
-    </div>
-
-    <div id="leaderboard-modal" class="modal">
-        <div class="modal-content">
-            <h2 style="color: #F59E0B; text-align: center; margin-top: 0;"><i class="fa-solid fa-crown"></i> आज के टॉपर्स</h2>
-            <ul id="leaderboard-list" style="list-style: none; padding: 0; margin: 0;"><li style="justify-content: center; color: gray; text-align: center; padding: 10px;">कोई डाटा नहीं! अभी टेस्ट दें।</li></ul>
-            <button class="close-btn" onclick="hideModal('leaderboard-modal')">🚪 बाहर निकलें</button>
-        </div>
-    </div>
-
-    <div id="news-modal" class="modal">
-        <div class="modal-content">
-            <h2 style="color: var(--primary-blue); text-align: center;"><i class="fa-solid fa-newspaper"></i> आज की बड़ी खबरें</h2>
-            <p id="news-modal-text" style="line-height: 1.8; font-size: 15px;">यहाँ आपकी न्यूज़ दिखेगी...</p>
-            <button class="close-btn" onclick="hideModal('news-modal')">🚪 बाहर निकलें</button>
-        </div>
-    </div>
-
+    <div id="gk-modal" class="modal"><div class="modal-content"><h2 style="color: var(--highlight-orange); text-align: center; margin-top: 0;"><i class="fa-solid fa-flag-india"></i> Daily GK</h2><div style="background: #FFF3E0; padding: 15px; border-radius: 10px; border-left: 4px solid var(--highlight-orange); margin-top: 15px;"><p id="gk-modal-text" style="line-height: 1.8; font-size: 16px; margin: 0; font-weight: 500;">लोड हो रहा है...</p></div><button class="close-btn" onclick="hideModal('gk-modal')">🚪 बाहर निकलें</button></div></div>
+    <div id="result-modal" class="modal"><div class="modal-content"><h2 style="color: #EF4444; text-align: center; margin-top: 0;"><i class="fa-solid fa-graduation-cap"></i> 10th Result 2026</h2><div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;"><a href="http://biharboardonline.bihar.gov.in/" target="_blank" class="btn-main" style="background: #1E40AF; text-align: center; padding: 12px; font-size: 15px;">🌍 Server 1 (Official)</a><a href="http://bihar.indiaresults.com/" target="_blank" class="btn-main" style="background: #F97316; text-align: center; padding: 12px; font-size: 15px;">⚡ Server 2 (IndiaResults)</a></div><button class="close-btn" onclick="hideModal('result-modal')">🚪 बाहर निकलें</button></div></div>
+    <div id="register-modal" class="modal"><div class="modal-content"><h2 style="color: var(--highlight-orange); text-align: center; margin-top: 0;"><i class="fa-brands fa-whatsapp"></i> फ्री रजिस्ट्रेशन</h2><div style="margin-top: 15px;"><label>नाम:</label><input type="text" id="reg-name" readonly style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #CBD5E1; background: #F1F5F9; box-sizing: border-box; margin-top: 5px;"></div><div style="margin-top: 15px;"><label>WhatsApp नंबर:</label><input type="number" id="reg-phone" placeholder="10 अंकों का नंबर..." style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid var(--primary-blue); box-sizing: border-box; margin-top: 5px;"></div><button onclick="submitRegistration()" style="width: 100%; padding: 14px; background: #10B981; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; margin-top: 20px;"><i class="fa-solid fa-check-circle"></i> सुरक्षित सेव करें</button><button class="close-btn" onclick="hideModal('register-modal')">🚪 बाहर निकलें</button></div></div>
+    <div id="leaderboard-modal" class="modal"><div class="modal-content"><h2 style="color: #F59E0B; text-align: center; margin-top: 0;"><i class="fa-solid fa-crown"></i> टॉपर्स</h2><ul id="leaderboard-list" style="list-style: none; padding: 0; margin: 0;"><li style="color: gray; text-align: center;">अभी टेस्ट दें।</li></ul><button class="close-btn" onclick="hideModal('leaderboard-modal')">🚪 बाहर निकलें</button></div></div>
+    <div id="news-modal" class="modal"><div class="modal-content"><h2 style="color: var(--primary-blue); text-align: center;"><i class="fa-solid fa-newspaper"></i> बड़ी खबरें</h2><p id="news-modal-text" style="line-height: 1.8; font-size: 15px;">न्यूज़ दिखेगी...</p><button class="close-btn" onclick="hideModal('news-modal')">🚪 बाहर निकलें</button></div></div>
 </div>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-  import { getDatabase, ref, onValue, query, orderByChild, limitToLast, set, get, child } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+  import { getDatabase, ref, onValue, query, orderByChild, limitToLast, set, get, child, push } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
   const firebaseConfig = { apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30", authDomain: "sonuclasses-b19db.firebaseapp.com", databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com", projectId: "sonuclasses-b19db", storageBucket: "sonuclasses-b19db.firebasestorage.app", messagingSenderId: "166740602272", appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5" };
   const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getDatabase(app);
@@ -323,8 +273,7 @@
       document.getElementById('student-name-drop').innerText = currentStudentName;
       if(user.photoURL) document.getElementById('user-photo').src = user.photoURL;
 
-      const dbRef = ref(db);
-      try { const snapshot = await get(child(dbRef, `appData/registered_students/${user.uid}`)); if (snapshot.exists()) { document.getElementById('register-btn-main').style.display = "none"; } else { document.getElementById('register-btn-main').style.display = "flex"; } } catch (error) { document.getElementById('register-btn-main').style.display = "flex"; }
+      try { const snapshot = await get(child(ref(db), `appData/registered_students/${user.uid}`)); if (!snapshot.exists()) { document.getElementById('register-btn-main').style.display = "flex"; } } catch (e) {}
     } else { window.location.replace("login.html"); }
   });
 
@@ -333,23 +282,32 @@
   window.hideModal = (id) => document.getElementById(id).classList.remove('show');
   window.confirmLogout = () => { if(confirm("लॉगआउट करना चाहते हैं?")) { signOut(auth).then(() => window.location.replace("login.html")); } };
 
-  onValue(ref(db, 'appData/news'), (snapshot) => { if(snapshot.val()) { document.getElementById('news-text-display').innerText = "📢 " + snapshot.val().replace(/\n/g, " | ") + " 📢"; document.getElementById('news-modal-text').innerText = snapshot.val(); } });
-  onValue(ref(db, 'appData/dailyGK'), (snapshot) => { const gkModal = document.getElementById('gk-modal-text'); if(snapshot.exists() && snapshot.val()) { gkModal.innerText = snapshot.val(); } else { gkModal.innerText = "भारतीय संविधान दुनिया का सबसे लंबा लिखित संविधान है। इसे बनने में 2 साल, 11 महीने और 18 दिन का समय लगा था। 🇮🇳 जय हिंद!"; } });
+  onValue(ref(db, 'appData/news'), (s) => { if(s.val()) { document.getElementById('news-text-display').innerText = "📢 " + s.val().replace(/\n/g, " | ") + " 📢"; document.getElementById('news-modal-text').innerText = s.val(); } });
+  onValue(ref(db, 'appData/dailyGK'), (s) => { const gk = document.getElementById('gk-modal-text'); if(s.exists() && s.val()) gk.innerText = s.val(); else gk.innerText = "भारतीय संविधान दुनिया का सबसे लंबा लिखित संविधान है। 🇮🇳"; });
 
   window.openRegisterModal = () => { document.getElementById('reg-name').value = currentStudentName; showModal('register-modal'); };
-  window.submitRegistration = () => { const phone = document.getElementById('reg-phone').value; if(!/^[6789]\d{9}$/.test(phone)) { alert("⚠️ बॉस! कृपया सही 10 अंकों का भारतीय मोबाइल नंबर डालें!"); return; } const user = auth.currentUser; if(user) { set(ref(db, 'appData/registered_students/' + user.uid), { name: currentStudentName, phone: phone, email: user.email, date: new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' }) }).then(() => { alert("🎉 बधाई हो! आपका नंबर रजिस्टर हो गया है।"); hideModal('register-modal'); document.getElementById('reg-phone').value = ''; document.getElementById('register-btn-main').style.display = "none"; }).catch((error) => { alert("❌ एरर: " + error); }); } };
+  window.submitRegistration = () => { const phone = document.getElementById('reg-phone').value; if(!/^[6789]\d{9}$/.test(phone)) { alert("सही 10 अंकों का नंबर डालें!"); return; } const u = auth.currentUser; if(u) { set(ref(db, 'appData/registered_students/' + u.uid), { name: currentStudentName, phone: phone, email: u.email, date: new Date().toLocaleDateString() }).then(() => { alert("रजिस्टर हो गया!"); hideModal('register-modal'); document.getElementById('register-btn-main').style.display = "none"; }); } };
 
-  const todayDate = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
-  onValue(query(ref(db, `daily_leaderboard/${todayDate}`), orderByChild('score'), limitToLast(10)), (snapshot) => { const list = document.getElementById('leaderboard-list'); list.innerHTML = ''; let scores = []; snapshot.forEach((childSnapshot) => { scores.push(childSnapshot.val()); }); scores.sort((a, b) => b.score - a.score); if(scores.length === 0) { list.innerHTML = '<li style="justify-content: center; color: gray; text-align: center; padding: 10px;">आज किसी ने टेस्ट नहीं दिया! 🚀</li>'; } else { scores.forEach((data, index) => { let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🏅'; list.innerHTML += `<li style="padding: 12px; border-bottom: 1px solid #E2E8F0; font-size: 15px; font-weight: bold; display: flex; justify-content: space-between;"><span>${medal} ${data.name}</span> <span style="color: var(--highlight-orange);">${data.score} अंक</span></li>`; }); } });
+  // 🚀 नया: Contact Form Message Sender 🚀
+  window.sendContactMessage = () => {
+      const name = document.getElementById('contact-name').value;
+      const msg = document.getElementById('contact-msg').value;
+      if(!name || !msg) { alert("⚠️ बॉस! नाम और मैसेज दोनों लिखिए!"); return; }
+      push(ref(db, 'appData/messages'), { name: name, message: msg, date: new Date().toLocaleString() })
+      .then(() => { alert("✅ मैसेज सोनू सर के पास पहुँच गया!"); document.getElementById('contact-name').value = ''; document.getElementById('contact-msg').value = ''; });
+  };
 
-  window.changePhoto = (event) => { const file = event.target.files[0]; if(file) { const reader = new FileReader(); reader.onload = (e) => { document.getElementById('user-photo').src = e.target.result; alert("फोटो अपडेट हो गई!"); }; reader.readAsDataURL(file); } };
+  const td = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+  onValue(query(ref(db, `daily_leaderboard/${td}`), orderByChild('score'), limitToLast(10)), (s) => { const list = document.getElementById('leaderboard-list'); list.innerHTML = ''; let arr = []; s.forEach(c => arr.push(c.val())); arr.sort((a, b) => b.score - a.score); if(arr.length === 0) { list.innerHTML = '<li style="text-align: center; padding: 10px;">आज कोई टेस्ट नहीं दिया!</li>'; } else { arr.forEach((d, i) => { let m = i===0?'🥇':i===1?'🥈':i===2?'🥉':'🏅'; list.innerHTML += `<li style="padding: 12px; border-bottom: 1px solid #E2E8F0; display: flex; justify-content: space-between;"><span>${m} ${d.name}</span> <span style="color: var(--highlight-orange); font-weight: bold;">${d.score} अंक</span></li>`; }); } });
+
+  window.changePhoto = (e) => { const file = e.target.files[0]; if(file) { const reader = new FileReader(); reader.onload = (ev) => { document.getElementById('user-photo').src = ev.target.result; alert("फोटो अपडेट!"); }; reader.readAsDataURL(file); } };
   window.toggleTheme = () => { document.body.classList.toggle('dark-mode'); const btn = document.getElementById('theme-btn'); if(document.body.classList.contains('dark-mode')) { btn.innerHTML = '<i class="fa-solid fa-sun"></i>'; localStorage.setItem('theme', 'dark'); } else { btn.innerHTML = '<i class="fa-solid fa-moon"></i>'; localStorage.setItem('theme', 'light'); } };
   window.onload = () => { if(localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-mode'); document.getElementById('theme-btn').innerHTML = '<i class="fa-solid fa-sun"></i>'; } };
 
   window.toggleAIChat = () => { const box = document.getElementById('aiChatBox'); box.style.display = box.style.display === 'flex' ? 'none' : 'flex'; };
-  window.startVoiceInput = () => { const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition; if (!SpeechRecognition) return alert("माफ़ करें, आपका ब्राउज़र आवाज़ नहीं सपोर्ट करता।"); const recognition = new SpeechRecognition(); recognition.lang = 'hi-IN'; const inputField = document.getElementById('aiInput'); inputField.placeholder = "सुन रहा हूँ... बोलिए 🎤"; recognition.start(); recognition.onresult = (event) => { inputField.value = event.results[0][0].transcript; inputField.placeholder = "अपना सवाल यहाँ टाइप करें..."; sendAIMessage(); }; recognition.onspeechend = () => { recognition.stop(); inputField.placeholder = "अपना सवाल यहाँ टाइप करें..."; }; };
+  window.startVoiceInput = () => { const sr = window.SpeechRecognition || window.webkitSpeechRecognition; if (!sr) return alert("ब्राउज़र सपोर्ट नहीं करता।"); const r = new sr(); r.lang = 'hi-IN'; const input = document.getElementById('aiInput'); input.placeholder = "सुन रहा हूँ... 🎤"; r.start(); r.onresult = (e) => { input.value = e.results[0][0].transcript; input.placeholder = "सवाल टाइप करें..."; sendAIMessage(); }; r.onspeechend = () => { r.stop(); input.placeholder = "सवाल टाइप करें..."; }; };
   
-  window.sendAIMessage = async () => { const input = document.getElementById('aiInput'); const text = input.value.trim(); if(!text) return; const body = document.getElementById('aiChatBody'); body.innerHTML += `<div class="user-msg">${text}</div>`; input.value = ''; body.scrollTop = body.scrollHeight; const secret1 = "AIzaSy"; const secret2 = "CBykQafD5nPNwf2ZSw20mPgrEWEgRLDZY"; const apiKey = secret1 + secret2; const loadingId = "load-" + Date.now(); body.innerHTML += `<div class="ai-msg" id="${loadingId}">सोच रहा हूँ... 🤔</div>`; body.scrollTop = body.scrollHeight; try { const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ contents: [{ parts: [{ text: "तुम 'Sonu AI' हो, जो Sonu Classes वेबसाइट का असिस्टेंट है। इस सवाल का जवाब हिंदी में और बहुत सरल भाषा में दो: " + text }] }] }) }); const data = await response.json(); document.getElementById(loadingId).remove(); if (data.error) { body.innerHTML += `<div class="ai-msg">❌ Error: ${data.error.message}</div>`; } else if (data.candidates && data.candidates.length > 0) { let reply = data.candidates[0].content.parts[0].text; body.innerHTML += `<div class="ai-msg"><span>${reply.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*/g, '<br>•')}</span></div>`; } body.scrollTop = body.scrollHeight; } catch(e) { document.getElementById(loadingId).remove(); body.innerHTML += `<div class="ai-msg">❌ कनेक्शन एरर!</div>`; body.scrollTop = body.scrollHeight; } };
+  window.sendAIMessage = async () => { const input = document.getElementById('aiInput'); const text = input.value.trim(); if(!text) return; const body = document.getElementById('aiChatBody'); body.innerHTML += `<div class="user-msg">${text}</div>`; input.value = ''; body.scrollTop = body.scrollHeight; const k = "AIzaSy" + "CBykQafD5nPNwf2ZSw20mPgrEWEgRLDZY"; const lid = "load-" + Date.now(); body.innerHTML += `<div class="ai-msg" id="${lid}">सोच रहा हूँ... 🤔</div>`; body.scrollTop = body.scrollHeight; try { const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${k}`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ contents: [{ parts: [{ text: "तुम 'Sonu AI' हो, जो Sonu Classes वेबसाइट का असिस्टेंट है। सरल हिंदी में जवाब दो: " + text }] }] }) }); const data = await res.json(); document.getElementById(lid).remove(); if (data.candidates) { body.innerHTML += `<div class="ai-msg"><span>${data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*/g, '<br>•')}</span></div>`; } body.scrollTop = body.scrollHeight; } catch(e) { document.getElementById(lid).remove(); body.innerHTML += `<div class="ai-msg">❌ एरर!</div>`; } };
 </script>
 </body>
 </html>
