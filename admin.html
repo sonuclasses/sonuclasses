@@ -14,9 +14,17 @@
         .pass-input { width: 90%; padding: 15px; border-radius: 8px; border: 2px solid #1976D2; font-size: 18px; text-align: center; margin-bottom: 20px; }
         
         /* 📊 डैशबोर्ड का डिज़ाइन */
-        .dashboard-box { background: linear-gradient(135deg, #1976D2, #1565C0); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .dashboard-box { background: linear-gradient(135deg, #1976D2, #1565C0); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .dashboard-box h3 { margin: 0 0 10px 0; font-size: 18px; color: #BBDEFB; }
         .dashboard-number { font-size: 45px; font-weight: bold; margin: 0; }
+
+        /* 📋 स्टूडेंट लिस्ट का डिज़ाइन */
+        .student-list-box { background: #E3F2FD; border: 2px solid #1976D2; border-radius: 12px; padding: 15px; margin-bottom: 30px; }
+        .student-list-box h3 { color: #0D47A1; margin-top: 0; text-align: center; font-size: 16px; border-bottom: 1px solid #90CAF9; padding-bottom: 10px; }
+        .student-items { max-height: 250px; overflow-y: auto; background: white; border-radius: 8px; padding: 10px; }
+        .student-item { border-bottom: 1px solid #eee; padding: 10px 0; font-size: 15px; }
+        .student-item:last-child { border-bottom: none; }
+        .student-phone { color: #2E7D32; font-weight: bold; text-decoration: none; font-size: 16px; }
 
         h2 { color: #1976D2; text-align: center; margin-bottom: 5px; font-size: 24px; }
         .subtitle { text-align: center; color: #555; font-weight: bold; margin-bottom: 25px; font-size: 14px; }
@@ -60,7 +68,16 @@
         <div class="dashboard-box">
             <h3>📱 कुल रजिस्टर हुए बच्चे</h3>
             <p class="dashboard-number" id="total-students-count">0</p>
-            <p style="font-size: 13px; margin-top: 5px; color: #90CAF9;">(जिनका नंबर आ चुका है)</p>
+            <p style="font-size: 13px; margin-top: 5px; color: #BBDEFB;">(जिनका नंबर आ चुका है)</p>
+        </div>
+
+        <div class="student-list-box">
+            <h3>📋 बच्चों के नंबर और डिटेल्स</h3>
+            <div class="student-items">
+                <ul id="registered-list" style="list-style: none; padding: 0; margin: 0;">
+                    <li style="color: gray; text-align: center;">डेटा लोड हो रहा है...</li>
+                </ul>
+            </div>
         </div>
 
         <div class="section-box quiz-box">
@@ -119,30 +136,44 @@
     // 🌟 1. ताला खोलने वाला जादुई फंक्शन 🌟
     window.unlockAdmin = () => {
         const pass = document.getElementById('admin-pass').value;
-        
-        // आपका सीक्रेट पासवर्ड यहाँ है (SonuBoss)
         if (pass === "SonuBoss") {
             document.getElementById('lock-screen').style.display = 'none';
             document.getElementById('admin-main').style.display = 'block';
-            
-            // जैसे ही ताला खुलेगा, डैशबोर्ड चालू हो जाएगा
-            startDashboard();
+            startDashboard(); // डैशबोर्ड चालू करो
         } else {
             alert("❌ गलत पासवर्ड बॉस! असली CEO का पासवर्ड डालिए।");
             document.getElementById('admin-pass').value = '';
         }
     };
 
-    // 🌟 2. सुपर डैशबोर्ड (नंबर गिनने वाला सिस्टम) 🌟
+    // 🌟 2. सुपर डैशबोर्ड और नंबर की लिस्ट 🌟
     window.startDashboard = () => {
         const studentRef = ref(db, 'appData/registered_students');
         onValue(studentRef, (snapshot) => {
+            const listContainer = document.getElementById('registered-list');
+            listContainer.innerHTML = ''; // पहले पुराना कचरा साफ़ करो
+
             if (snapshot.exists()) {
-                // डेटाबेस में जितने बच्चों के डब्बे हैं, उन्हें गिन लो
-                const totalCount = Object.keys(snapshot.val()).length;
+                const data = snapshot.val();
+                
+                // 1. कुल गिनती अपडेट करो
+                const totalCount = Object.keys(data).length;
                 document.getElementById('total-students-count').innerText = totalCount;
+
+                // 2. बच्चों की लिस्ट बनाओ
+                Object.values(data).forEach((student) => {
+                    listContainer.innerHTML += `
+                        <li class="student-item">
+                            👤 <b>${student.name}</b> <br>
+                            📞 <a href="tel:${student.phone}" class="student-phone">${student.phone}</a> <br>
+                            📅 <span style="font-size: 13px; color: gray;">Joined: ${student.date}</span>
+                        </li>
+                    `;
+                });
             } else {
+                // अगर कोई बच्चा नहीं है
                 document.getElementById('total-students-count').innerText = "0";
+                listContainer.innerHTML = '<li style="color: gray; text-align: center;">अभी तक कोई रजिस्टर नहीं हुआ है।</li>';
             }
         });
     };
