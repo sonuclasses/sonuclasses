@@ -42,6 +42,16 @@
         body.dark-mode .hero-text p.sub-text { color: #ddd; }
         .hero-btn { background: var(--primary-green); color: white; padding: 12px 25px; border: none; border-radius: 30px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: 0.3s; }
         
+        /* 🌟 नया: Daily GK / IAS Section डिज़ाइन 🌟 */
+        .gk-section { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); margin: 20px; border-radius: 15px; border-left: 5px solid #FF9800; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; text-align: left; overflow: hidden; transition: transform 0.2s; }
+        .gk-section:active { transform: scale(0.98); }
+        body.dark-mode .gk-section { background: linear-gradient(135deg, #4E342E, #3E2723); border-left-color: #FFB74D; }
+        .gk-header { background: #FF9800; color: white; padding: 10px 15px; font-weight: bold; font-size: 16px; display: flex; justify-content: space-between; align-items: center; }
+        .gk-content { padding: 15px; font-size: 15px; color: #333; line-height: 1.5; font-weight: 500; }
+        body.dark-mode .gk-content { color: #eee; }
+        .gk-footer { background: rgba(255, 152, 0, 0.1); padding: 8px 15px; font-size: 13px; color: #E65100; font-weight: bold; text-align: right; border-top: 1px solid rgba(255, 152, 0, 0.2); }
+        body.dark-mode .gk-footer { color: #FFB74D; }
+
         .class-btn { display: inline-block; width: 120px; padding: 15px; margin: 10px; background: var(--primary-blue); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .class-btn:active { transform: scale(0.9); background: #1565C0; }
         .action-btn { display: block; width: 250px; margin: 15px auto; padding: 15px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; }
@@ -115,6 +125,17 @@
         </div>
     </div>
 
+    <div class="gk-section" onclick="showModal('gk-modal')">
+        <div class="gk-header">
+            <span>🇮🇳 IAS Foundation & Daily GK</span>
+            <span>💡</span>
+        </div>
+        <div class="gk-content" id="daily-gk-text">
+            ज्ञान लोड हो रहा है... ✨
+        </div>
+        <div class="gk-footer">📖 पूरा पढ़ने के लिए क्लिक करें</div>
+    </div>
+
     <div class="container" style="margin-bottom: 20px;">
         <a href="class6.html" class="class-btn">Class 6</a>
         <a href="class7.html" class="class-btn">Class 7</a>
@@ -126,7 +147,6 @@
     </div>
 
     <button id="register-btn-main" class="action-btn" style="background: #E65100; color: white; display: none;" onclick="openRegisterModal()">📱 WhatsApp पर जुड़ें</button>
-    
     <button class="action-btn btn-quiz" onclick="window.location.href='test.html'">📝 ऑनलाइन टेस्ट दें 🚀</button>
     <button class="action-btn btn-leaderboard" onclick="showModal('leaderboard-modal')">🏆 लीडरबोर्ड देखें</button>
 
@@ -153,21 +173,24 @@
         </div>
     </div>
 
+    <div id="gk-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: #E65100; text-align: center; margin-top: 0;">🇮🇳 आज का सामान्य ज्ञान</h2>
+            <div style="background: #FFF3E0; padding: 15px; border-radius: 10px; border-left: 4px solid #FF9800; margin-top: 15px;">
+                <p id="gk-modal-text" style="line-height: 1.8; font-size: 16px; color: #333; margin: 0; font-weight: 500;">
+                    जानकारी लोड हो रही है...
+                </p>
+            </div>
+            <button class="close-btn" onclick="hideModal('gk-modal')">🚪 बाहर निकलें</button>
+        </div>
+    </div>
+
     <div id="register-modal" class="modal">
         <div class="modal-content">
             <h2 style="color: #E65100; text-align: center; margin-top: 0;">📱 फ्री रजिस्ट्रेशन</h2>
             <p style="text-align: center; color: #555; font-size: 15px;">फ्री PDF नोट्स और अपडेट्स के लिए अपना नंबर रजिस्टर करें:</p>
-            
-            <div style="margin-top: 15px;">
-                <label style="font-weight: bold; font-size: 14px; color: #333;">आपका नाम:</label>
-                <input type="text" id="reg-name" readonly style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; background: #eee; font-size: 15px; box-sizing: border-box; margin-top: 5px;">
-            </div>
-            
-            <div style="margin-top: 15px;">
-                <label style="font-weight: bold; font-size: 14px; color: #333;">WhatsApp / मोबाइल नंबर:</label>
-                <input type="number" id="reg-phone" placeholder="10 अंकों का नंबर डालें..." style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #1976D2; font-size: 15px; box-sizing: border-box; margin-top: 5px;">
-            </div>
-            
+            <div style="margin-top: 15px;"><label style="font-weight: bold; font-size: 14px; color: #333;">आपका नाम:</label><input type="text" id="reg-name" readonly style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; background: #eee; font-size: 15px; box-sizing: border-box; margin-top: 5px;"></div>
+            <div style="margin-top: 15px;"><label style="font-weight: bold; font-size: 14px; color: #333;">WhatsApp / मोबाइल नंबर:</label><input type="number" id="reg-phone" placeholder="10 अंकों का नंबर डालें..." style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #1976D2; font-size: 15px; box-sizing: border-box; margin-top: 5px;"></div>
             <button onclick="submitRegistration()" style="width: 100%; padding: 14px; background: #2E7D32; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 18px; margin-top: 20px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">✅ सुरक्षित सेव करें</button>
             <button class="close-btn" onclick="hideModal('register-modal')">🚪 बाहर निकलें</button>
         </div>
@@ -176,9 +199,7 @@
     <div id="leaderboard-modal" class="modal">
         <div class="modal-content">
             <h2 style="color: #FF9800; text-align: center; margin-top: 0;">🏆 आज के टॉप स्कोरर्स</h2>
-            <ul id="leaderboard-list" class="leaderboard-list">
-                <li style="justify-content: center; color: gray;">कोई डाटा नहीं! अभी टेस्ट दें।</li>
-            </ul>
+            <ul id="leaderboard-list" class="leaderboard-list"><li style="justify-content: center; color: gray;">कोई डाटा नहीं! अभी टेस्ट दें।</li></ul>
             <button class="close-btn" onclick="hideModal('leaderboard-modal')">🚪 बाहर निकलें</button>
         </div>
     </div>
@@ -204,7 +225,6 @@
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-  // 🌟 get और child इम्पोर्ट किया ताकि चेक कर सकें कि नंबर पहले से है या नहीं 🌟
   import { getDatabase, ref, onValue, query, orderByChild, limitToLast, set, get, child } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
   const firebaseConfig = {
@@ -223,7 +243,6 @@
 
   let currentStudentName = "Student";
 
-  // 🌟 लॉगिन होने पर चेक करने वाला स्मार्ट कोड 🌟
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       document.getElementById('loader-screen').style.display = "none";
@@ -232,21 +251,12 @@
       document.getElementById('student-name').innerText = currentStudentName;
       if(user.photoURL) document.getElementById('user-photo').src = user.photoURL;
 
-      // 🔍 चेक करो कि क्या बच्चे ने पहले ही नंबर दे दिया है?
       const dbRef = ref(db);
       try {
           const snapshot = await get(child(dbRef, `appData/registered_students/${user.uid}`));
-          if (snapshot.exists()) {
-              // हाँ, नंबर पहले से है! तो बटन को हमेशा के लिए छुपा दो
-              document.getElementById('register-btn-main').style.display = "none";
-          } else {
-              // नहीं, नंबर नहीं है! तो बटन दिखाओ
-              document.getElementById('register-btn-main').style.display = "block";
-          }
-      } catch (error) {
-          console.log(error);
-          document.getElementById('register-btn-main').style.display = "block"; // अगर नेटवर्क एरर हो, तो भी दिखा दो
-      }
+          if (snapshot.exists()) { document.getElementById('register-btn-main').style.display = "none"; } 
+          else { document.getElementById('register-btn-main').style.display = "block"; }
+      } catch (error) { document.getElementById('register-btn-main').style.display = "block"; }
 
     } else { window.location.replace("login.html"); }
   });
@@ -260,66 +270,48 @@
       if(snapshot.val()) { document.getElementById('news-text-display').innerText = "📢 " + snapshot.val().replace(/\n/g, " | ") + " 📢"; document.getElementById('news-modal-text').innerText = snapshot.val(); }
   });
 
-  window.openRegisterModal = () => {
-      document.getElementById('reg-name').value = currentStudentName; 
-      showModal('register-modal');
-  };
+  // 🌟 नया: Firebase से Daily GK मंगाना 🌟
+  onValue(ref(db, 'appData/dailyGK'), (snapshot) => {
+      const gkBox = document.getElementById('daily-gk-text');
+      const gkModal = document.getElementById('gk-modal-text');
+      
+      if(snapshot.exists() && snapshot.val()) {
+          // अगर आपने एडमिन से कोई GK डाला है, तो वो दिखेगा
+          gkBox.innerText = snapshot.val().substring(0, 80) + "..."; // डब्बे में सिर्फ 80 अक्षर दिखेंगे
+          gkModal.innerText = snapshot.val(); // क्लिक करने पर पूरा दिखेगा
+      } else {
+          // अगर आपने कुछ नहीं डाला है, तो यह 'डिफॉल्ट' भारतीय संविधान का फैक्ट दिखेगा! 🇮🇳
+          gkBox.innerText = "आज का फैक्ट: भारत का संविधान दुनिया का सबसे लंबा लिखित संविधान है... ";
+          gkModal.innerText = "भारतीय संविधान दुनिया का सबसे लंबा लिखित संविधान है। इसे बनने में 2 साल, 11 महीने और 18 दिन का समय लगा था। इसके मुख्य रचयिता डॉ. बी.आर. अंबेडकर हैं। 🇮🇳 जय हिंद!";
+      }
+  });
+
+  window.openRegisterModal = () => { document.getElementById('reg-name').value = currentStudentName; showModal('register-modal'); };
 
   window.submitRegistration = () => {
       const phone = document.getElementById('reg-phone').value;
       const phoneRegex = /^[6789]\d{9}$/;
-      
-      if(!phoneRegex.test(phone)) {
-          alert("⚠️ बॉस! कृपया सही 10 अंकों का भारतीय मोबाइल नंबर डालें!");
-          return;
-      }
-      
+      if(!phoneRegex.test(phone)) { alert("⚠️ बॉस! कृपया सही 10 अंकों का भारतीय मोबाइल नंबर डालें!"); return; }
       const user = auth.currentUser;
       if(user) {
-          set(ref(db, 'appData/registered_students/' + user.uid), {
-              name: currentStudentName,
-              phone: phone,
-              email: user.email, 
-              date: new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' })
-          }).then(() => {
-              alert("🎉 बधाई हो " + currentStudentName + "! आपका नंबर सफलतापूर्वक रजिस्टर हो गया है।");
-              hideModal('register-modal');
-              document.getElementById('reg-phone').value = ''; 
-              
-              // 🌟 सेव होते ही तुरंत बटन को गायब कर दो (बिना रिफ्रेश किए) 🌟
-              document.getElementById('register-btn-main').style.display = "none";
-              
-          }).catch((error) => {
-              alert("❌ एरर: " + error);
-          });
+          set(ref(db, 'appData/registered_students/' + user.uid), { name: currentStudentName, phone: phone, email: user.email, date: new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' }) })
+          .then(() => { alert("🎉 बधाई हो " + currentStudentName + "! आपका नंबर सफलतापूर्वक रजिस्टर हो गया है।"); hideModal('register-modal'); document.getElementById('reg-phone').value = ''; document.getElementById('register-btn-main').style.display = "none"; })
+          .catch((error) => { alert("❌ एरर: " + error); });
       }
   };
 
-  // डेली लीडरबोर्ड
   const todayDate = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
-
   onValue(query(ref(db, `daily_leaderboard/${todayDate}`), orderByChild('score'), limitToLast(10)), (snapshot) => {
-      const list = document.getElementById('leaderboard-list'); 
-      list.innerHTML = ''; 
-      let scores = []; 
-      snapshot.forEach((childSnapshot) => { scores.push(childSnapshot.val()); }); 
-      scores.sort((a, b) => b.score - a.score);
-      
-      if(scores.length === 0) {
-          list.innerHTML = '<li style="justify-content: center; color: gray;">आज अभी तक किसी ने टेस्ट नहीं दिया! पहला टेस्ट आप दें 🚀</li>'; 
-      } else {
-          scores.forEach((data, index) => { 
-              let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🏅'; 
-              list.innerHTML += `<li><span>${medal} ${data.name}</span> <span style="color: var(--primary-green);">${data.score} अंक</span></li>`; 
-          });
-      }
+      const list = document.getElementById('leaderboard-list'); list.innerHTML = ''; let scores = []; 
+      snapshot.forEach((childSnapshot) => { scores.push(childSnapshot.val()); }); scores.sort((a, b) => b.score - a.score);
+      if(scores.length === 0) { list.innerHTML = '<li style="justify-content: center; color: gray;">आज अभी तक किसी ने टेस्ट नहीं दिया! पहला टेस्ट आप दें 🚀</li>'; } 
+      else { scores.forEach((data, index) => { let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🏅'; list.innerHTML += `<li><span>${medal} ${data.name}</span> <span style="color: var(--primary-green);">${data.score} अंक</span></li>`; }); }
   });
 
   window.changePhoto = (event) => { const file = event.target.files[0]; if(file) { const reader = new FileReader(); reader.onload = (e) => { document.getElementById('user-photo').src = e.target.result; alert("फोटो अपडेट हो गई है!"); }; reader.readAsDataURL(file); } };
   window.toggleTheme = () => { document.body.classList.toggle('dark-mode'); const btn = document.getElementById('theme-btn'); if(document.body.classList.contains('dark-mode')) { btn.innerText = '☀️'; localStorage.setItem('theme', 'dark'); } else { btn.innerText = '🌙'; localStorage.setItem('theme', 'light'); } };
   window.onload = () => { if(localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-mode'); document.getElementById('theme-btn').innerText = '☀️'; } };
 
-  // AI Chat Code (Hidden for brevity, but same as before)
   window.toggleAIChat = () => { const box = document.getElementById('aiChatBox'); box.style.display = box.style.display === 'flex' ? 'none' : 'flex'; };
   window.startVoiceInput = () => { const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition; if (!SpeechRecognition) return alert("माफ़ करें, आपका ब्राउज़र आवाज़ नहीं सपोर्ट करता।"); const recognition = new SpeechRecognition(); recognition.lang = 'hi-IN'; const inputField = document.getElementById('aiInput'); inputField.placeholder = "सुन रहा हूँ... बोलिए 🎤"; recognition.start(); recognition.onresult = (event) => { inputField.value = event.results[0][0].transcript; inputField.placeholder = "अपना सवाल यहाँ टाइप करें..."; sendAIMessage(); }; recognition.onspeechend = () => { recognition.stop(); inputField.placeholder = "अपना सवाल यहाँ टाइप करें..."; }; recognition.onerror = () => { inputField.placeholder = "अपना सवाल यहाँ टाइप करें..."; }; };
   window.speakAnswer = (htmlText) => { window.speechSynthesis.cancel(); let plainText = htmlText.replace(/<[^>]*>?/gm, ''); let sentences = plainText.replace(/([\.!\?।])/g, "$1|").split("|"); sentences.forEach(sentence => { if(sentence.trim() !== "") { let speech = new SpeechSynthesisUtterance(sentence.trim()); speech.lang = 'hi-IN'; speech.rate = 0.9; window.speechSynthesis.speak(speech); } }); };
