@@ -34,9 +34,20 @@
         select, input, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; background-color: #fff; box-sizing: border-box; font-family: inherit; }
         
         .section-box { border-radius: 10px; padding: 20px; margin-bottom: 30px; position: relative; }
+        
+        /* 📰 न्यूज़ बॉक्स (Pink) */
+        .news-box { border: 2px solid #E91E63; background-color: #FCE4EC; }
+        .news-title { background: #E91E63; color: white; padding: 10px 15px; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block; margin-top: -35px; margin-bottom: 15px; }
+
+        /* 💡 GK बॉक्स (Purple) */
+        .gk-admin-box { border: 2px solid #673AB7; background-color: #F3E5F5; }
+        .gk-admin-title { background: #673AB7; color: white; padding: 10px 15px; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block; margin-top: -35px; margin-bottom: 15px; }
+
+        /* 🏆 क्विज़ बॉक्स (Orange) */
         .quiz-box { border: 2px solid #FF9800; background-color: #fff8e1; }
         .quiz-title { background: #FF9800; color: white; padding: 10px 15px; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block; margin-top: -35px; margin-bottom: 15px; }
         
+        /* 📝 PDF बॉक्स (Green) */
         .pdf-box { border: 2px solid #4CAF50; background-color: #e8f5e9; }
         .pdf-title { background: #4CAF50; color: white; padding: 10px 15px; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block; margin-top: -35px; margin-bottom: 15px; }
 
@@ -46,6 +57,8 @@
         .btn-blue { background-color: #1976D2; }
         .btn-orange { background-color: #E65100; }
         .btn-green { background-color: #2E7D32; }
+        .btn-pink { background-color: #E91E63; }
+        .btn-purple { background-color: #673AB7; }
     </style>
 </head>
 <body>
@@ -56,7 +69,6 @@
         <div class="lock-icon">🔒</div>
         <h2 style="color: #d32f2f;">खूफिया कंट्रोल रूम</h2>
         <p style="color: gray; margin-bottom: 20px;">कृपया सोनू सर का पासवर्ड डालें</p>
-        
         <input type="password" id="admin-pass" class="pass-input" placeholder="पासवर्ड यहाँ डालें...">
         <button class="btn btn-blue" onclick="unlockAdmin()">अनलॉक करें 🚀</button>
     </div>
@@ -80,8 +92,26 @@
             </div>
         </div>
 
+        <div class="section-box news-box">
+            <div class="news-title">📰 1. ब्रेकिंग न्यूज़ बदलें</div>
+            <div class="form-group">
+                <label>आज की ताज़ा खबर (News Ticker):</label>
+                <textarea id="news-input" placeholder="जैसे: आज शाम 5 बजे क्लास 10 का नया टेस्ट लाइव होगा..."></textarea>
+            </div>
+            <button class="btn btn-pink" onclick="saveNews()">📢 न्यूज़ वेबसाइट पर लाइव करें</button>
+        </div>
+
+        <div class="section-box gk-admin-box">
+            <div class="gk-admin-title">💡 2. IAS Foundation & Daily GK</div>
+            <div class="form-group">
+                <label>आज का सामान्य ज्ञान / फैक्ट:</label>
+                <textarea id="gk-input" placeholder="जैसे: भारत का क्षेत्रफल 32,87,263 वर्ग किमी है..."></textarea>
+            </div>
+            <button class="btn btn-purple" onclick="saveGK()">💡 ज्ञान वेबसाइट पर लाइव करें</button>
+        </div>
+
         <div class="section-box quiz-box">
-            <div class="quiz-title">🏆 1. ऑनलाइन टेस्ट डालें</div>
+            <div class="quiz-title">🏆 3. ऑनलाइन टेस्ट डालें</div>
             <div style="display: flex; gap: 10px; margin-bottom: 15px;">
                 <div style="flex: 1;"><label>क्लास:</label><select id="q-class"><option value="class6">Class 6</option><option value="class7">Class 7</option><option value="class8">Class 8</option><option value="class9">Class 9</option><option value="class10">Class 10</option></select></div>
                 <div style="flex: 1;"><label>विषय:</label><select id="q-subject"><option value="science">Science</option><option value="math">Math</option><option value="sst">SST</option><option value="hindi">Hindi</option><option value="english">English</option></select></div>
@@ -98,7 +128,7 @@
         </div>
 
         <div class="section-box pdf-box">
-            <div class="pdf-title">📝 2. PDF और नोट्स डालें</div>
+            <div class="pdf-title">📝 4. PDF और नोट्स डालें</div>
             <div style="display: flex; gap: 10px; margin-bottom: 15px;">
                 <div style="flex: 1;"><label>क्लास:</label><select id="n-class"><option value="class6">Class 6</option><option value="class7">Class 7</option><option value="class8">Class 8</option><option value="class9">Class 9</option><option value="class10">Class 10</option></select></div>
                 <div style="flex: 1;"><label>विषय:</label><select id="n-subject"><option value="science">Science</option><option value="math">Math</option><option value="sst">SST</option><option value="hindi">Hindi</option><option value="english">English</option></select></div>
@@ -133,34 +163,31 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // 🌟 1. ताला खोलने वाला जादुई फंक्शन 🌟
+    // 🌟 ताला खोलने वाला फंक्शन
     window.unlockAdmin = () => {
         const pass = document.getElementById('admin-pass').value;
         if (pass === "SonuBoss") {
             document.getElementById('lock-screen').style.display = 'none';
             document.getElementById('admin-main').style.display = 'block';
-            startDashboard(); // डैशबोर्ड चालू करो
+            startDashboard();
         } else {
             alert("❌ गलत पासवर्ड बॉस! असली CEO का पासवर्ड डालिए।");
             document.getElementById('admin-pass').value = '';
         }
     };
 
-    // 🌟 2. सुपर डैशबोर्ड और नंबर की लिस्ट 🌟
+    // 🌟 डैशबोर्ड और नंबर की लिस्ट
     window.startDashboard = () => {
         const studentRef = ref(db, 'appData/registered_students');
         onValue(studentRef, (snapshot) => {
             const listContainer = document.getElementById('registered-list');
-            listContainer.innerHTML = ''; // पहले पुराना कचरा साफ़ करो
+            listContainer.innerHTML = ''; 
 
             if (snapshot.exists()) {
                 const data = snapshot.val();
-                
-                // 1. कुल गिनती अपडेट करो
                 const totalCount = Object.keys(data).length;
                 document.getElementById('total-students-count').innerText = totalCount;
 
-                // 2. बच्चों की लिस्ट बनाओ
                 Object.values(data).forEach((student) => {
                     listContainer.innerHTML += `
                         <li class="student-item">
@@ -171,10 +198,38 @@
                     `;
                 });
             } else {
-                // अगर कोई बच्चा नहीं है
                 document.getElementById('total-students-count').innerText = "0";
                 listContainer.innerHTML = '<li style="color: gray; text-align: center;">अभी तक कोई रजिस्टर नहीं हुआ है।</li>';
             }
+        });
+    };
+
+    // 🌟 📰 न्यूज़ सेव करने का फंक्शन
+    window.saveNews = () => {
+        const newsText = document.getElementById('news-input').value;
+        if (!newsText.trim()) { alert("⚠️ बॉस! पहले डब्बे में कोई खबर तो लिखिए!"); return; }
+        set(ref(db, 'appData/news'), newsText)
+        .then(() => { alert("📢 शानदार! आपकी ताज़ा खबर वेबसाइट पर लाइव हो गई है!"); document.getElementById('news-input').value = ''; })
+        .catch((error) => { alert("❌ एरर: " + error); });
+    };
+
+    // 🌟 💡 नया: Daily GK / IAS फैक्ट सेव करने का फंक्शन 🌟
+    window.saveGK = () => {
+        const gkText = document.getElementById('gk-input').value;
+        
+        if (!gkText.trim()) {
+            alert("⚠️ बॉस! डब्बे में कोई ज्ञान की बात तो लिखिए!");
+            return;
+        }
+
+        // डेटाबेस में 'appData/dailyGK' वाले फोल्डर में सेव कर रहे हैं
+        set(ref(db, 'appData/dailyGK'), gkText)
+        .then(() => {
+            alert("💡 शानदार! आपका नया GK फैक्ट वेबसाइट पर लाइव हो गया है!");
+            document.getElementById('gk-input').value = ''; // बॉक्स खाली कर दो
+        })
+        .catch((error) => {
+            alert("❌ एरर: " + error);
         });
     };
 
