@@ -57,7 +57,23 @@
         </div>
         <div class="form-group">
             <label>पाठ (Lesson):</label>
-            <select id="q-lesson"><option value="lesson1">Lesson 1</option><option value="lesson2">Lesson 2</option><option value="lesson3">Lesson 3</option><option value="lesson4">Lesson 4</option><option value="lesson5">Lesson 5</option></select>
+            <select id="q-lesson">
+                <option value="lesson1">Lesson 1</option>
+                <option value="lesson2">Lesson 2</option>
+                <option value="lesson3">Lesson 3</option>
+                <option value="lesson4">Lesson 4</option>
+                <option value="lesson5">Lesson 5</option>
+                <option value="lesson6">Lesson 6</option>
+                <option value="lesson7">Lesson 7</option>
+                <option value="lesson8">Lesson 8</option>
+                <option value="lesson9">Lesson 9</option>
+                <option value="lesson10">Lesson 10</option>
+                <option value="lesson11">Lesson 11</option>
+                <option value="lesson12">Lesson 12</option>
+                <option value="lesson13">Lesson 13</option>
+                <option value="lesson14">Lesson 14</option>
+                <option value="lesson15">Lesson 15</option>
+            </select>
         </div>
 
         <div class="form-group"><input type="text" id="q-input" placeholder="सवाल यहाँ लिखें..."></div>
@@ -92,7 +108,23 @@
         </div>
         <div class="form-group">
             <label>पाठ (Lesson):</label>
-            <select id="n-lesson"><option value="lesson1">Lesson 1</option><option value="lesson2">Lesson 2</option><option value="lesson3">Lesson 3</option><option value="lesson4">Lesson 4</option><option value="lesson5">Lesson 5</option></select>
+            <select id="n-lesson">
+                <option value="lesson1">Lesson 1</option>
+                <option value="lesson2">Lesson 2</option>
+                <option value="lesson3">Lesson 3</option>
+                <option value="lesson4">Lesson 4</option>
+                <option value="lesson5">Lesson 5</option>
+                <option value="lesson6">Lesson 6</option>
+                <option value="lesson7">Lesson 7</option>
+                <option value="lesson8">Lesson 8</option>
+                <option value="lesson9">Lesson 9</option>
+                <option value="lesson10">Lesson 10</option>
+                <option value="lesson11">Lesson 11</option>
+                <option value="lesson12">Lesson 12</option>
+                <option value="lesson13">Lesson 13</option>
+                <option value="lesson14">Lesson 14</option>
+                <option value="lesson15">Lesson 15</option>
+            </select>
         </div>
 
         <div class="form-group">
@@ -126,7 +158,6 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // 🌟 1. क्विज़ सेव करने का फंक्शन (ऊपर वाला डब्बा) 🌟
     window.saveQuiz = () => {
         const cls = document.getElementById('q-class').value;
         const sub = document.getElementById('q-subject').value;
@@ -162,7 +193,6 @@
         });
     };
 
-    // 🌟 2. नोट्स और PDF सेव करने का फंक्शन (नीचे वाला डब्बा) 🌟
     window.saveNotes = () => {
         const cls = document.getElementById('n-class').value;
         const sub = document.getElementById('n-subject').value;
