@@ -4,106 +4,151 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#2E7D32">
-    <title>Sonu Classes - Home</title>
+    <meta name="theme-color" content="#1E40AF">
+    <title>Sonu Classes - Your Success Starts Here!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --primary-green: #2E7D32; --primary-blue: #1976D2; --bg-light: #f4f4f9; --text-color: #333; --box-bg: white; --border-color: #ddd; }
-        body.dark-mode { --bg-light: #121212; --text-color: #f1f1f1; --box-bg: #1e1e1e; --border-color: #444; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); color: var(--text-color); margin: 0; padding: 0; text-align: center; transition: background-color 0.3s, color 0.3s; }
+        /* 🎨 नई कलर थीम (Professional + Attractive) */
+        :root { 
+            --primary-blue: #1E40AF; /* Deep Blue */
+            --highlight-orange: #F97316; /* Orange */
+            --bg-light: #F8FAFC; /* Light Clean White */
+            --text-dark: #0F172A; /* Dark Navy */
+            --hover-orange: #FB923C;
+            --card-bg: #FFFFFF;
+        }
         
-        #loader-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-light); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .spinner { width: 50px; height: 50px; border: 5px solid #ccc; border-top: 5px solid var(--primary-green); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        #main-content { display: none; }
-
-        header { background-color: var(--primary-green); color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        h1 { margin: 0; font-size: 20px; }
+        body.dark-mode { 
+            --bg-light: #0F172A; 
+            --text-dark: #F8FAFC; 
+            --card-bg: #1E293B; 
+            --primary-blue: #3B82F6;
+        }
+        
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-light); color: var(--text-dark); margin: 0; padding: 0; transition: background-color 0.3s, color 0.3s; }
+        
+        /* 1️⃣ Top Navbar */
+        header { background-color: var(--card-bg); color: var(--text-dark); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 3px solid var(--primary-blue); }
+        .logo { font-size: 22px; font-weight: 800; color: var(--primary-blue); display: flex; align-items: center; gap: 8px; margin: 0; }
+        .logo i { color: var(--highlight-orange); }
+        body.dark-mode .logo { color: var(--bg-light); }
+        
         .header-right { display: flex; align-items: center; gap: 15px; }
-        .theme-toggle { background: none; border: none; font-size: 24px; cursor: pointer; color: white; padding: 0; margin: 0; }
+        .theme-toggle { background: none; border: none; font-size: 22px; cursor: pointer; color: var(--text-dark); padding: 0; margin: 0; transition: transform 0.3s; }
+        .theme-toggle:hover { transform: scale(1.1); color: var(--highlight-orange); }
         .profile-section { position: relative; }
-        .profile-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid white; cursor: pointer; object-fit: cover; background: #fff; }
-        .dropdown { display: none; position: absolute; right: 0; top: 55px; background: var(--box-bg); box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-radius: 10px; min-width: 160px; z-index: 100; overflow: hidden; border: 1px solid var(--border-color); text-align: left; }
-        .dropdown button { width: 100%; padding: 12px; border: none; background: none; color: var(--text-color); cursor: pointer; font-weight: bold; text-align: left; }
-        .dropdown button:hover { background: var(--bg-light); }
-        .btn-logout { color: #ff5252 !important; border-top: 1px solid var(--border-color) !important; }
+        .profile-img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary-blue); cursor: pointer; object-fit: cover; background: #fff; }
+        .dropdown { display: none; position: absolute; right: 0; top: 50px; background: var(--card-bg); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-radius: 8px; min-width: 150px; z-index: 100; overflow: hidden; border: 1px solid #E2E8F0; text-align: left; }
+        body.dark-mode .dropdown { border-color: #334155; }
+        .dropdown button { width: 100%; padding: 12px 15px; border: none; background: none; color: var(--text-dark); cursor: pointer; font-weight: 600; text-align: left; transition: background 0.2s; }
+        .dropdown button:hover { background: #F1F5F9; color: var(--primary-blue); }
+        body.dark-mode .dropdown button:hover { background: #334155; }
+        .btn-logout { color: #EF4444 !important; border-top: 1px solid #E2E8F0 !important; }
 
-        .news-ticker { background-color: var(--primary-blue); color: white; padding: 10px; overflow: hidden; white-space: nowrap; cursor: pointer; font-weight: bold; height: 25px; display: flex; align-items: center; }
-        .news-ticker span { display: inline-block; white-space: nowrap; animation: marquee 30s linear infinite; padding-left: 100%; font-size: 15px; }
+        .news-ticker { background-color: var(--primary-blue); color: white; padding: 8px; overflow: hidden; white-space: nowrap; cursor: pointer; font-weight: bold; font-size: 14px; display: flex; align-items: center; }
+        .news-ticker span { display: inline-block; white-space: nowrap; animation: marquee 25s linear infinite; padding-left: 100%; }
         @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-        .hero-section { display: flex; flex-wrap: wrap-reverse; align-items: center; justify-content: center; padding: 30px 20px; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); margin: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        body.dark-mode .hero-section { background: linear-gradient(135deg, #1b5e20 0%, #003300 100%); box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        .hero-text { flex: 1; min-width: 250px; text-align: left; padding: 10px; }
-        .hero-text p.welcome-msg { font-size: 16px; font-weight: bold; color: #555; margin-bottom: 5px; }
-        body.dark-mode .hero-text p.welcome-msg { color: #ccc; }
-        .hero-text h2 { font-size: 28px; margin-top: 0; color: var(--primary-blue); line-height: 1.3; }
-        body.dark-mode .hero-text h2 { color: #64B5F6; }
-        .hero-text p.sub-text { font-size: 15px; color: #444; line-height: 1.5; margin-bottom: 15px; }
-        body.dark-mode .hero-text p.sub-text { color: #ddd; }
-        .hero-btn { background: var(--primary-green); color: white; padding: 12px 25px; border: none; border-radius: 30px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: 0.3s; }
+        /* 2️⃣ Hero Section (सबसे ऊपर वाला बड़ा सेक्शन) */
+        .hero-section { background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); padding: 40px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; margin-bottom: 30px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+        body.dark-mode .hero-section { background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%); }
+        .hero-title { font-size: 28px; font-weight: 800; color: var(--primary-blue); margin: 0 0 10px 0; line-height: 1.3; }
+        body.dark-mode .hero-title { color: #60A5FA; }
+        .hero-subtitle { font-size: 16px; color: #475569; margin-bottom: 25px; line-height: 1.5; font-weight: 500; }
+        body.dark-mode .hero-subtitle { color: #94A3B8; }
         
-        .gk-section { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); margin: 20px; border-radius: 15px; border-left: 5px solid #FF9800; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; text-align: left; overflow: hidden; transition: transform 0.2s; }
-        .gk-section:active { transform: scale(0.98); }
-        body.dark-mode .gk-section { background: linear-gradient(135deg, #4E342E, #3E2723); border-left-color: #FFB74D; }
-        .gk-header { background: #FF9800; color: white; padding: 10px 15px; font-weight: bold; font-size: 16px; display: flex; justify-content: space-between; align-items: center; }
-        .gk-content { padding: 15px; font-size: 15px; color: #333; line-height: 1.5; font-weight: 500; }
-        body.dark-mode .gk-content { color: #eee; }
-        .gk-footer { background: rgba(255, 152, 0, 0.1); padding: 8px 15px; font-size: 13px; color: #E65100; font-weight: bold; text-align: right; border-top: 1px solid rgba(255, 152, 0, 0.2); }
-        body.dark-mode .gk-footer { color: #FFB74D; }
+        .btn-main { background-color: var(--highlight-orange); color: white; padding: 14px 30px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(249, 115, 22, 0.3); transition: all 0.3s ease; text-decoration: none; display: inline-block; }
+        .btn-main:hover { background-color: var(--hover-orange); transform: translateY(-2px); box-shadow: 0 6px 12px rgba(249, 115, 22, 0.4); }
 
-        .class-btn { display: inline-block; width: 120px; padding: 15px; margin: 10px; background: var(--primary-blue); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .class-btn:active { transform: scale(0.9); background: #1565C0; }
-        .action-btn { display: block; width: 250px; margin: 15px auto; padding: 15px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; }
-        .btn-quiz { background: #FFD600; color: #333; }
-        .btn-leaderboard { background: #FF9800; color: white; }
-        
-        .whatsapp-float { position: fixed; width: 55px; height: 55px; bottom: 20px; right: 20px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.3s; }
+        /* 3️⃣ Features Section (Card Design) */
+        .features-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 0 20px; margin-bottom: 30px; }
+        .feature-card { background: var(--card-bg); padding: 20px 15px; border-radius: 15px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); text-align: center; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; border: 1px solid #E2E8F0; text-decoration: none; color: var(--text-dark); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        body.dark-mode .feature-card { border-color: #334155; }
+        .feature-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: var(--primary-blue); }
+        .f-icon { font-size: 35px; margin-bottom: 10px; }
+        .f-icon.notes { color: #3B82F6; }
+        .f-icon.quiz { color: #EF4444; }
+        .f-icon.gk { color: var(--highlight-orange); }
+        .f-icon.ai { color: #10B981; }
+        .f-title { font-size: 16px; font-weight: 700; margin: 0; }
 
-        .ai-chat-btn { position: fixed; width: 55px; height: 55px; bottom: 20px; left: 20px; background-color: #1976D2; color: #FFF; border-radius: 50%; border: none; text-align: center; font-size: 30px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; animation: pulse 2s infinite; }
-        .ai-chat-box { display: none; position: fixed; bottom: 85px; left: 20px; width: 90%; max-width: 350px; height: 400px; background: var(--box-bg); border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1000; flex-direction: column; overflow: hidden; border: 2px solid #1976D2; }
-        .ai-chat-header { background: #1976D2; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; font-size: 16px; }
+        /* 4️⃣ Student Trust Section */
+        .trust-section { background-color: var(--primary-blue); color: white; padding: 20px; margin: 0 20px 30px 20px; border-radius: 15px; display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; box-shadow: 0 10px 15px -3px rgba(30, 64, 175, 0.3); }
+        .trust-item { text-align: center; padding: 10px; flex: 1 1 45%; }
+        .trust-number { font-size: 22px; font-weight: 800; color: var(--highlight-orange); margin: 0; }
+        .trust-text { font-size: 13px; font-weight: 600; margin-top: 5px; opacity: 0.9; }
+
+        /* Classes Section */
+        .classes-wrapper { padding: 0 20px 30px 20px; text-align: center; }
+        .section-heading { font-size: 20px; font-weight: 800; color: var(--primary-blue); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        body.dark-mode .section-heading { color: #60A5FA; }
+        .class-btn-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .class-btn { width: calc(33% - 10px); padding: 12px 5px; background: var(--card-bg); color: var(--primary-blue); text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 14px; border: 2px solid var(--primary-blue); transition: all 0.2s; }
+        .class-btn:hover, .class-btn:active { background: var(--primary-blue); color: white; }
+
+        /* Action Buttons */
+        .action-container { padding: 0 20px 30px 20px; display: flex; flex-direction: column; gap: 15px; }
+        .btn-action { width: 100%; padding: 15px; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; color: white; transition: transform 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .btn-action:active { transform: scale(0.98); }
+        .btn-result { background: linear-gradient(to right, #EF4444, #DC2626); animation: pulse 2s infinite; }
+        .btn-whatsapp { background: linear-gradient(to right, #10B981, #059669); }
+        .btn-leader { background: linear-gradient(to right, #F59E0B, #D97706); }
+
+        /* Floating Buttons */
+        .whatsapp-float { position: fixed; width: 55px; height: 55px; bottom: 20px; right: 20px; background-color: #25D366; color: #FFF; border-radius: 50%; text-align: center; font-size: 30px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.3s; border: 2px solid white; }
+        .ai-chat-btn { position: fixed; width: 55px; height: 55px; bottom: 20px; left: 20px; background-color: var(--primary-blue); color: #FFF; border-radius: 50%; border: 2px solid white; text-align: center; font-size: 25px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; animation: pulse 2s infinite; }
+
+        /* AI Chatbox */
+        .ai-chat-box { display: none; position: fixed; bottom: 85px; left: 20px; width: 90%; max-width: 350px; height: 400px; background: var(--card-bg); border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 1000; flex-direction: column; overflow: hidden; border: 2px solid var(--primary-blue); }
+        .ai-chat-header { background: var(--primary-blue); color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; font-size: 16px; }
         .ai-chat-body { flex: 1; padding: 15px; overflow-y: auto; background: var(--bg-light); display: flex; flex-direction: column; gap: 10px; }
         .ai-msg, .user-msg { padding: 10px 15px; border-radius: 15px; max-width: 85%; font-size: 14px; line-height: 1.4; word-wrap: break-word; position: relative; }
-        .ai-msg { background: #e3f2fd; align-self: flex-start; border-bottom-left-radius: 0; color: #000; border: 1px solid #bbdefb; }
-        .user-msg { background: #2E7D32; color: white; align-self: flex-end; border-bottom-right-radius: 0; }
-        .error-msg { background: #ffebee; color: #d32f2f; border-color: #ffcdd2; }
-        .warning-msg { background: #FFF3E0; color: #E65100; border: 1px solid #FFE0B2; } 
+        .ai-msg { background: #E0F2FE; align-self: flex-start; border-bottom-left-radius: 0; color: #000; border: 1px solid #BAE6FD; }
+        .user-msg { background: var(--primary-blue); color: white; align-self: flex-end; border-bottom-right-radius: 0; }
+        .ai-chat-input { display: flex; border-top: 1px solid #E2E8F0; background: var(--card-bg); }
+        .ai-chat-input input { flex: 1; padding: 12px; border: none; outline: none; background: transparent; color: var(--text-dark); font-size: 15px; }
+        .ai-chat-input button { background: var(--primary-blue); color: white; border: none; padding: 0 15px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; }
+
+        /* Modals */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.8); z-index: 2000; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
+        .modal-content { background: var(--card-bg); color: var(--text-dark); padding: 25px; border-radius: 20px; width: 100%; max-width: 400px; max-height: 85vh; overflow-y: auto; position: relative; text-align: left; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+        .close-btn { background: #475569; color: white; border: none; padding: 12px; border-radius: 8px; margin-top: 20px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; text-align: center; }
         
-        .ai-chat-input { display: flex; border-top: 1px solid var(--border-color); background: var(--box-bg); }
-        .ai-chat-input input { flex: 1; padding: 12px; border: none; outline: none; background: transparent; color: var(--text-color); font-size: 15px; }
-        .ai-chat-input button { background: #1976D2; color: white; border: none; padding: 0 15px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; }
-        .mic-btn { background: #E65100 !important; border-right: 1px solid white !important; font-size: 18px !important; }
-        .speak-btn { background: none; border: none; font-size: 20px; cursor: pointer; float: right; margin-left: 10px; padding: 0; }
+        /* 5️⃣ Footer */
+        footer { background-color: var(--primary-blue); color: white; text-align: center; padding: 20px; font-size: 14px; border-top-left-radius: 20px; border-top-right-radius: 20px; margin-top: 20px; }
+        .footer-links { display: flex; justify-content: center; gap: 15px; margin-bottom: 10px; flex-wrap: wrap; }
+        .footer-links a { color: #BAE6FD; text-decoration: none; font-weight: 600; }
+
+        /* Loader */
+        #loader-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-light); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .spinner { width: 50px; height: 50px; border: 4px solid #E2E8F0; border-top: 4px solid var(--highlight-orange); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px; }
         
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-content { background: var(--box-bg); color: var(--text-color); padding: 25px; border-radius: 20px; width: 90%; max-width: 400px; max-height: 85vh; overflow-y: auto; position: relative; text-align: left; border: 1px solid var(--border-color); }
-        .close-btn { background: #333; color: white; border: none; padding: 12px 20px; border-radius: 5px; margin-top: 20px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; text-align: center; }
-        
-        .leaderboard-list { list-style: none; padding: 0; margin: 0; }
-        .leaderboard-list li { padding: 12px; border-bottom: 1px solid var(--border-color); font-size: 16px; font-weight: bold; display: flex; justify-content: space-between; }
-        .leaderboard-list li:last-child { border-bottom: none; }
         .show { display: flex !important; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
 
 <div id="loader-screen">
     <div class="spinner"></div>
-    <h2 style="color: var(--primary-blue); margin: 0;">Sonu Classes</h2>
-    <p style="color: gray; font-size: 14px; font-weight: bold;">लोड हो रहा है...</p>
+    <h2 style="color: var(--primary-blue); margin: 0; font-weight: 800;">Sonu Classes</h2>
+    <p style="color: var(--highlight-orange); font-size: 14px; font-weight: bold; margin-top: 5px;">लोड हो रहा है...</p>
 </div>
 
-<div id="main-content">
+<div id="main-content" style="display: none;">
     <header>
-        <h1>Sonu Classes</h1>
+        <h1 class="logo"><i class="fa-solid fa-graduation-cap"></i> Sonu Classes</h1>
         <div class="header-right">
-            <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">🌙</button>
+            <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></button>
             <div class="profile-section">
                 <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" id="user-photo" class="profile-img" onclick="toggleDropdown()">
                 <div id="dropdown-menu" class="dropdown">
-                    <button onclick="document.getElementById('photo-input').click()">📷 फोटो बदलें</button>
-                    <button onclick="confirmLogout()" class="btn-logout">🚪 लॉगआउट</button>
+                    <div style="padding: 10px 15px; border-bottom: 1px solid #eee; font-size: 12px; color: gray;">
+                        Hi, <span id="student-name-drop" style="font-weight: bold; color: var(--primary-blue);">Student</span>
+                    </div>
+                    <button onclick="document.getElementById('photo-input').click()"><i class="fa-solid fa-camera"></i> फोटो बदलें</button>
+                    <button onclick="confirmLogout()" class="btn-logout"><i class="fa-solid fa-right-from-bracket"></i> लॉगआउट</button>
                     <input type="file" id="photo-input" style="display:none" accept="image/*" onchange="changePhoto(event)">
                 </div>
             </div>
@@ -111,127 +156,151 @@
     </header>
 
     <div class="news-ticker" onclick="showModal('news-modal')">
-        <span id="news-text-display">📢 न्यूज़ लोड हो रही है... 📢</span>
+        <span id="news-text-display">📢 ब्रेकिंग न्यूज़ लोड हो रही है... 📢</span>
     </div>
 
     <div class="hero-section">
-        <div class="hero-text">
-            <p class="welcome-msg">आपका स्वागत है, <span id="student-name" style="color: var(--primary-green);">लोडिंग...</span></p>
-            <h2>Welcome to <br><span style="color: var(--primary-blue);">Sonu Classes</span></h2>
-            <p class="sub-text">बोर्ड परीक्षा 2027 और IAS की तैयारी के लिए फ्री नोट्स एवं सर्वश्रेष्ठ क्विज़।</p>
-            <button class="hero-btn" onclick="showModal('notes-modal')">📚 पढ़ना शुरू करें</button>
+        <h2 class="hero-title">Welcome to Sonu Classes – Your Success Starts Here!</h2>
+        <p class="hero-subtitle">Class 6–12 & IAS Foundation के लिए Free Notes, Online Tests, Daily GK और AI Doubt Solver.</p>
+        <a href="#classes-section" class="btn-main"><i class="fa-solid fa-rocket"></i> Start Learning Free</a>
+    </div>
+
+    <div class="features-container">
+        <div class="feature-card" onclick="document.getElementById('classes-section').scrollIntoView({behavior: 'smooth'})">
+            <div class="f-icon notes"><i class="fa-solid fa-book-open"></i></div>
+            <p class="f-title">Free Notes</p>
+        </div>
+        <a href="test.html" class="feature-card">
+            <div class="f-icon quiz"><i class="fa-solid fa-brain"></i></div>
+            <p class="f-title">Online Quiz</p>
+        </a>
+        <div class="feature-card" onclick="showModal('gk-modal')">
+            <div class="f-icon gk"><i class="fa-solid fa-lightbulb"></i></div>
+            <p class="f-title">Daily GK</p>
+        </div>
+        <div class="feature-card" onclick="toggleAIChat()">
+            <div class="f-icon ai"><i class="fa-solid fa-robot"></i></div>
+            <p class="f-title">AI Doubt Solver</p>
         </div>
     </div>
 
-    <div class="gk-section" onclick="showModal('gk-modal')">
-        <div class="gk-header">
-            <span>🇮🇳 IAS Foundation & Daily GK</span>
-            <span>💡</span>
+    <div class="trust-section">
+        <div class="trust-item">
+            <p class="trust-number">1000+</p>
+            <p class="trust-text">Students</p>
         </div>
-        <div class="gk-content" id="daily-gk-text">
-            ज्ञान लोड हो रहा है... ✨
+        <div class="trust-item">
+            <p class="trust-number">500+</p>
+            <p class="trust-text">PDF Notes</p>
         </div>
-        <div class="gk-footer">📖 पूरा पढ़ने के लिए क्लिक करें</div>
+        <div class="trust-item">
+            <p class="trust-number">Daily</p>
+            <p class="trust-text">Updates</p>
+        </div>
+        <div class="trust-item">
+            <p class="trust-number">100%</p>
+            <p class="trust-text">Free</p>
+        </div>
     </div>
 
-    <div class="container" style="margin-bottom: 20px;">
-        <a href="class6.html" class="class-btn">Class 6</a>
-        <a href="class7.html" class="class-btn">Class 7</a>
-        <a href="class8.html" class="class-btn">Class 8</a>
-        <a href="class9.html" class="class-btn">Class 9</a>
-        <a href="class10.html" class="class-btn">Class 10</a>
-        <a href="class11.html" class="class-btn">Class 11</a>
-        <a href="class12.html" class="class-btn">Class 12</a>
+    <div id="classes-section" class="classes-wrapper">
+        <div class="section-heading">📚 Select Your Class</div>
+        <div class="class-btn-container">
+            <a href="class6.html" class="class-btn">Class 6</a>
+            <a href="class7.html" class="class-btn">Class 7</a>
+            <a href="class8.html" class="class-btn">Class 8</a>
+            <a href="class9.html" class="class-btn">Class 9</a>
+            <a href="class10.html" class="class-btn">Class 10</a>
+            <a href="class11.html" class="class-btn">Class 11</a>
+            <a href="class12.html" class="class-btn" style="width: 100%;">Class 12 (Coming Soon)</a>
+        </div>
     </div>
 
-    <button class="action-btn" style="background: #D32F2F; color: white; animation: pulse 2s infinite;" onclick="showModal('result-modal')">📢 10वीं का रिजल्ट 2026 (Fast Links)</button>
+    <div class="action-container">
+        <button class="btn-action btn-result" onclick="showModal('result-modal')"><i class="fa-solid fa-bullhorn"></i> 10वीं का रिजल्ट 2026 (Fast Links)</button>
+        <button id="register-btn-main" class="btn-action btn-whatsapp" style="display: none;" onclick="openRegisterModal()"><i class="fa-brands fa-whatsapp"></i> WhatsApp पर जुड़ें (Free Updates)</button>
+        <button class="btn-action btn-leader" onclick="showModal('leaderboard-modal')"><i class="fa-solid fa-trophy"></i> आज के टॉपर्स (Leaderboard)</button>
+    </div>
 
-    <button id="register-btn-main" class="action-btn" style="background: #E65100; color: white; display: none;" onclick="openRegisterModal()">📱 WhatsApp पर जुड़ें</button>
-    <button class="action-btn btn-quiz" onclick="window.location.href='test.html'">📝 ऑनलाइन टेस्ट दें 🚀</button>
-    <button class="action-btn btn-leaderboard" onclick="showModal('leaderboard-modal')">🏆 लीडरबोर्ड देखें</button>
+    <footer>
+        <div class="footer-links">
+            <a href="#">Home</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <p style="margin: 5px 0 0 0; opacity: 0.8;">© 2026 Sonu Classes. All Rights Reserved.</p>
+        <p style="margin: 5px 0 0 0; font-size: 11px; opacity: 0.6;">Designed by Founder Sonu Kumar</p>
+    </footer>
 
     <a href="https://wa.me/918521057039?text=नमस्ते सोनू सर, मुझे आपकी वेबसाइट से मदद चाहिए।" target="_blank" class="whatsapp-float">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 35px; height: 35px;">
+        <i class="fa-brands fa-whatsapp"></i>
     </a>
+    <button class="ai-chat-btn" onclick="toggleAIChat()"><i class="fa-solid fa-robot"></i></button>
 
-    <button class="ai-chat-btn" onclick="toggleAIChat()">🤖</button>
     <div class="ai-chat-box" id="aiChatBox">
         <div class="ai-chat-header">
             <span>✨ Sonu AI (Doubt Solver)</span>
-            <button onclick="toggleAIChat()" style="background:none;border:none;color:white;font-size:20px;cursor:pointer;">✖</button>
+            <button onclick="toggleAIChat()" style="background:none;border:none;color:white;font-size:20px;cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="ai-chat-body" id="aiChatBody">
             <div class="ai-msg">
-                <button class="speak-btn" onclick="speakAnswer(this.nextElementSibling.innerHTML)" title="सुनें">🔊</button>
                 <span>नमस्ते प्यारे बच्चों! मैं <b>Sonu AI</b> हूँ। 🤖<br>आप मुझसे पढ़ाई से जुड़ा कोई भी डाउट पूछ सकते हैं। बताइए मैं आपकी क्या मदद करूँ?</span>
             </div>
         </div>
         <div class="ai-chat-input">
             <input type="text" id="aiInput" placeholder="अपना सवाल यहाँ टाइप करें..." onkeypress="if(event.key === 'Enter') sendAIMessage()">
-            <button class="mic-btn" onclick="startVoiceInput()" title="बोलकर पूछें">🎤</button>
-            <button onclick="sendAIMessage()">➤</button>
-        </div>
-    </div>
-
-    <div id="result-modal" class="modal">
-        <div class="modal-content">
-            <h2 style="color: #D32F2F; text-align: center; margin-top: 0;">🎓 BSEB 10th Result 2026</h2>
-            <p style="text-align: center; color: #555; font-size: 15px;">सरकारी वेबसाइट का सर्वर डाउन है? कोई बात नहीं! नीचे दिए गए फास्ट सर्वर्स से अपना रिजल्ट तुरंत चेक करें:</p>
-            
-            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
-                <a href="http://biharboardonline.bihar.gov.in/" target="_blank" class="action-btn" style="background: #1976D2; color: white; margin: 0; width: 100%; text-decoration: none; text-align: center; font-size: 16px;">🌍 Server 1 (Official Website)</a>
-                <a href="http://bihar.indiaresults.com/" target="_blank" class="action-btn" style="background: #E65100; color: white; margin: 0; width: 100%; text-decoration: none; text-align: center; font-size: 16px;">⚡ Server 2 (IndiaResults)</a>
-                <a href="https://www.jagranjosh.com/results/bihar-board-10th-result-online-10th" target="_blank" class="action-btn" style="background: #2E7D32; color: white; margin: 0; width: 100%; text-decoration: none; text-align: center; font-size: 16px;">🚀 Server 3 (Jagran Josh)</a>
-            </div>
-            
-            <button class="close-btn" onclick="hideModal('result-modal')">🚪 बाहर निकलें</button>
+            <button onclick="startVoiceInput()" style="background: var(--highlight-orange);"><i class="fa-solid fa-microphone"></i></button>
+            <button onclick="sendAIMessage()"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
     </div>
 
     <div id="gk-modal" class="modal">
         <div class="modal-content">
-            <h2 style="color: #E65100; text-align: center; margin-top: 0;">🇮🇳 आज का सामान्य ज्ञान</h2>
-            <div style="background: #FFF3E0; padding: 15px; border-radius: 10px; border-left: 4px solid #FF9800; margin-top: 15px;">
-                <p id="gk-modal-text" style="line-height: 1.8; font-size: 16px; color: #333; margin: 0; font-weight: 500;">
-                    जानकारी लोड हो रही है...
-                </p>
+            <h2 style="color: var(--highlight-orange); text-align: center; margin-top: 0;"><i class="fa-solid fa-flag-india"></i> IAS Foundation & Daily GK</h2>
+            <div style="background: #FFF3E0; padding: 15px; border-radius: 10px; border-left: 4px solid var(--highlight-orange); margin-top: 15px;">
+                <p id="gk-modal-text" style="line-height: 1.8; font-size: 16px; color: #333; margin: 0; font-weight: 500;">जानकारी लोड हो रही है...</p>
             </div>
             <button class="close-btn" onclick="hideModal('gk-modal')">🚪 बाहर निकलें</button>
         </div>
     </div>
 
+    <div id="result-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: #EF4444; text-align: center; margin-top: 0;"><i class="fa-solid fa-graduation-cap"></i> BSEB 10th Result 2026</h2>
+            <p style="text-align: center; color: #64748B; font-size: 14px;">सर्वर डाउन है? नीचे दिए गए फास्ट सर्वर्स से तुरंत चेक करें:</p>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+                <a href="http://biharboardonline.bihar.gov.in/" target="_blank" class="btn-main" style="background: #1E40AF; text-align: center; padding: 12px; font-size: 15px;">🌍 Server 1 (Official)</a>
+                <a href="http://bihar.indiaresults.com/" target="_blank" class="btn-main" style="background: #F97316; text-align: center; padding: 12px; font-size: 15px;">⚡ Server 2 (IndiaResults)</a>
+                <a href="https://www.jagranjosh.com/results/bihar-board-10th-result-online-10th" target="_blank" class="btn-main" style="background: #10B981; text-align: center; padding: 12px; font-size: 15px;">🚀 Server 3 (Jagran Josh)</a>
+            </div>
+            <button class="close-btn" onclick="hideModal('result-modal')">🚪 बाहर निकलें</button>
+        </div>
+    </div>
+
     <div id="register-modal" class="modal">
         <div class="modal-content">
-            <h2 style="color: #E65100; text-align: center; margin-top: 0;">📱 फ्री रजिस्ट्रेशन</h2>
-            <p style="text-align: center; color: #555; font-size: 15px;">फ्री PDF नोट्स और अपडेट्स के लिए अपना नंबर रजिस्टर करें:</p>
-            <div style="margin-top: 15px;"><label style="font-weight: bold; font-size: 14px; color: #333;">आपका नाम:</label><input type="text" id="reg-name" readonly style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; background: #eee; font-size: 15px; box-sizing: border-box; margin-top: 5px;"></div>
-            <div style="margin-top: 15px;"><label style="font-weight: bold; font-size: 14px; color: #333;">WhatsApp / मोबाइल नंबर:</label><input type="number" id="reg-phone" placeholder="10 अंकों का नंबर डालें..." style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #1976D2; font-size: 15px; box-sizing: border-box; margin-top: 5px;"></div>
-            <button onclick="submitRegistration()" style="width: 100%; padding: 14px; background: #2E7D32; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 18px; margin-top: 20px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">✅ सुरक्षित सेव करें</button>
+            <h2 style="color: var(--highlight-orange); text-align: center; margin-top: 0;"><i class="fa-brands fa-whatsapp"></i> फ्री रजिस्ट्रेशन</h2>
+            <p style="text-align: center; color: #64748B; font-size: 14px;">फ्री PDF नोट्स और अपडेट्स के लिए अपना नंबर रजिस्टर करें:</p>
+            <div style="margin-top: 15px;"><label style="font-weight: bold; font-size: 14px;">आपका नाम:</label><input type="text" id="reg-name" readonly style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #CBD5E1; background: #F1F5F9; font-size: 15px; box-sizing: border-box; margin-top: 5px;"></div>
+            <div style="margin-top: 15px;"><label style="font-weight: bold; font-size: 14px;">WhatsApp / मोबाइल नंबर:</label><input type="number" id="reg-phone" placeholder="10 अंकों का नंबर डालें..." style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid var(--primary-blue); font-size: 15px; box-sizing: border-box; margin-top: 5px;"></div>
+            <button onclick="submitRegistration()" style="width: 100%; padding: 14px; background: #10B981; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; margin-top: 20px; cursor: pointer;"><i class="fa-solid fa-check-circle"></i> सुरक्षित सेव करें</button>
             <button class="close-btn" onclick="hideModal('register-modal')">🚪 बाहर निकलें</button>
         </div>
     </div>
 
     <div id="leaderboard-modal" class="modal">
         <div class="modal-content">
-            <h2 style="color: #FF9800; text-align: center; margin-top: 0;">🏆 आज के टॉप स्कोरर्स</h2>
-            <ul id="leaderboard-list" class="leaderboard-list"><li style="justify-content: center; color: gray;">कोई डाटा नहीं! अभी टेस्ट दें।</li></ul>
+            <h2 style="color: #F59E0B; text-align: center; margin-top: 0;"><i class="fa-solid fa-crown"></i> आज के टॉपर्स</h2>
+            <ul id="leaderboard-list" style="list-style: none; padding: 0; margin: 0;"><li style="justify-content: center; color: gray; text-align: center; padding: 10px;">कोई डाटा नहीं! अभी टेस्ट दें।</li></ul>
             <button class="close-btn" onclick="hideModal('leaderboard-modal')">🚪 बाहर निकलें</button>
         </div>
     </div>
 
     <div id="news-modal" class="modal">
         <div class="modal-content">
-            <h2 style="color: var(--primary-blue); text-align: center;">आज की बड़ी खबरें</h2>
+            <h2 style="color: var(--primary-blue); text-align: center;"><i class="fa-solid fa-newspaper"></i> आज की बड़ी खबरें</h2>
             <p id="news-modal-text" style="line-height: 1.8; font-size: 15px;">यहाँ आपकी न्यूज़ दिखेगी...</p>
             <button class="close-btn" onclick="hideModal('news-modal')">🚪 बाहर निकलें</button>
-        </div>
-    </div>
-
-    <div id="notes-modal" class="modal">
-        <div class="modal-content">
-            <h2 style="color: #4CAF50; text-align: center; margin-top: 0;">📚 स्टडी नोट्स</h2>
-            <p>असली नोट्स पढ़ने के लिए किसी भी क्लास के बटन पर क्लिक करें!</p>
-            <button class="close-btn" onclick="hideModal('notes-modal')">🚪 बाहर निकलें</button>
         </div>
     </div>
 
@@ -242,20 +311,8 @@
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
   import { getDatabase, ref, onValue, query, orderByChild, limitToLast, set, get, child } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
-    authDomain: "sonuclasses-b19db.firebaseapp.com",
-    databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com",
-    projectId: "sonuclasses-b19db",
-    storageBucket: "sonuclasses-b19db.firebasestorage.app",
-    messagingSenderId: "166740602272",
-    appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getDatabase(app);
-
+  const firebaseConfig = { apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30", authDomain: "sonuclasses-b19db.firebaseapp.com", databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com", projectId: "sonuclasses-b19db", storageBucket: "sonuclasses-b19db.firebasestorage.app", messagingSenderId: "166740602272", appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5" };
+  const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getDatabase(app);
   let currentStudentName = "Student";
 
   onAuthStateChanged(auth, async (user) => {
@@ -263,16 +320,11 @@
       document.getElementById('loader-screen').style.display = "none";
       document.getElementById('main-content').style.display = "block";
       currentStudentName = user.displayName || user.email.split('@')[0];
-      document.getElementById('student-name').innerText = currentStudentName;
+      document.getElementById('student-name-drop').innerText = currentStudentName;
       if(user.photoURL) document.getElementById('user-photo').src = user.photoURL;
 
       const dbRef = ref(db);
-      try {
-          const snapshot = await get(child(dbRef, `appData/registered_students/${user.uid}`));
-          if (snapshot.exists()) { document.getElementById('register-btn-main').style.display = "none"; } 
-          else { document.getElementById('register-btn-main').style.display = "block"; }
-      } catch (error) { document.getElementById('register-btn-main').style.display = "block"; }
-
+      try { const snapshot = await get(child(dbRef, `appData/registered_students/${user.uid}`)); if (snapshot.exists()) { document.getElementById('register-btn-main').style.display = "none"; } else { document.getElementById('register-btn-main').style.display = "flex"; } } catch (error) { document.getElementById('register-btn-main').style.display = "flex"; }
     } else { window.location.replace("login.html"); }
   });
 
@@ -281,69 +333,23 @@
   window.hideModal = (id) => document.getElementById(id).classList.remove('show');
   window.confirmLogout = () => { if(confirm("लॉगआउट करना चाहते हैं?")) { signOut(auth).then(() => window.location.replace("login.html")); } };
 
-  onValue(ref(db, 'appData/news'), (snapshot) => {
-      if(snapshot.val()) { document.getElementById('news-text-display').innerText = "📢 " + snapshot.val().replace(/\n/g, " | ") + " 📢"; document.getElementById('news-modal-text').innerText = snapshot.val(); }
-  });
-
-  onValue(ref(db, 'appData/dailyGK'), (snapshot) => {
-      const gkBox = document.getElementById('daily-gk-text');
-      const gkModal = document.getElementById('gk-modal-text');
-      if(snapshot.exists() && snapshot.val()) {
-          gkBox.innerText = snapshot.val().substring(0, 80) + "..."; 
-          gkModal.innerText = snapshot.val(); 
-      } else {
-          gkBox.innerText = "आज का फैक्ट: भारत का संविधान दुनिया का सबसे लंबा लिखित संविधान है... ";
-          gkModal.innerText = "भारतीय संविधान दुनिया का सबसे लंबा लिखित संविधान है। इसे बनने में 2 साल, 11 महीने और 18 दिन का समय लगा था। इसके मुख्य रचयिता डॉ. बी.आर. अंबेडकर हैं। 🇮🇳 जय हिंद!";
-      }
-  });
+  onValue(ref(db, 'appData/news'), (snapshot) => { if(snapshot.val()) { document.getElementById('news-text-display').innerText = "📢 " + snapshot.val().replace(/\n/g, " | ") + " 📢"; document.getElementById('news-modal-text').innerText = snapshot.val(); } });
+  onValue(ref(db, 'appData/dailyGK'), (snapshot) => { const gkModal = document.getElementById('gk-modal-text'); if(snapshot.exists() && snapshot.val()) { gkModal.innerText = snapshot.val(); } else { gkModal.innerText = "भारतीय संविधान दुनिया का सबसे लंबा लिखित संविधान है। इसे बनने में 2 साल, 11 महीने और 18 दिन का समय लगा था। 🇮🇳 जय हिंद!"; } });
 
   window.openRegisterModal = () => { document.getElementById('reg-name').value = currentStudentName; showModal('register-modal'); };
-
-  window.submitRegistration = () => {
-      const phone = document.getElementById('reg-phone').value;
-      const phoneRegex = /^[6789]\d{9}$/;
-      if(!phoneRegex.test(phone)) { alert("⚠️ बॉस! कृपया सही 10 अंकों का भारतीय मोबाइल नंबर डालें!"); return; }
-      const user = auth.currentUser;
-      if(user) {
-          set(ref(db, 'appData/registered_students/' + user.uid), { name: currentStudentName, phone: phone, email: user.email, date: new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' }) })
-          .then(() => { alert("🎉 बधाई हो " + currentStudentName + "! आपका नंबर सफलतापूर्वक रजिस्टर हो गया है।"); hideModal('register-modal'); document.getElementById('reg-phone').value = ''; document.getElementById('register-btn-main').style.display = "none"; })
-          .catch((error) => { alert("❌ एरर: " + error); });
-      }
-  };
+  window.submitRegistration = () => { const phone = document.getElementById('reg-phone').value; if(!/^[6789]\d{9}$/.test(phone)) { alert("⚠️ बॉस! कृपया सही 10 अंकों का भारतीय मोबाइल नंबर डालें!"); return; } const user = auth.currentUser; if(user) { set(ref(db, 'appData/registered_students/' + user.uid), { name: currentStudentName, phone: phone, email: user.email, date: new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' }) }).then(() => { alert("🎉 बधाई हो! आपका नंबर रजिस्टर हो गया है।"); hideModal('register-modal'); document.getElementById('reg-phone').value = ''; document.getElementById('register-btn-main').style.display = "none"; }).catch((error) => { alert("❌ एरर: " + error); }); } };
 
   const todayDate = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
-  onValue(query(ref(db, `daily_leaderboard/${todayDate}`), orderByChild('score'), limitToLast(10)), (snapshot) => {
-      const list = document.getElementById('leaderboard-list'); list.innerHTML = ''; let scores = []; 
-      snapshot.forEach((childSnapshot) => { scores.push(childSnapshot.val()); }); scores.sort((a, b) => b.score - a.score);
-      if(scores.length === 0) { list.innerHTML = '<li style="justify-content: center; color: gray;">आज अभी तक किसी ने टेस्ट नहीं दिया! पहला टेस्ट आप दें 🚀</li>'; } 
-      else { scores.forEach((data, index) => { let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🏅'; list.innerHTML += `<li><span>${medal} ${data.name}</span> <span style="color: var(--primary-green);">${data.score} अंक</span></li>`; }); }
-  });
+  onValue(query(ref(db, `daily_leaderboard/${todayDate}`), orderByChild('score'), limitToLast(10)), (snapshot) => { const list = document.getElementById('leaderboard-list'); list.innerHTML = ''; let scores = []; snapshot.forEach((childSnapshot) => { scores.push(childSnapshot.val()); }); scores.sort((a, b) => b.score - a.score); if(scores.length === 0) { list.innerHTML = '<li style="justify-content: center; color: gray; text-align: center; padding: 10px;">आज किसी ने टेस्ट नहीं दिया! 🚀</li>'; } else { scores.forEach((data, index) => { let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🏅'; list.innerHTML += `<li style="padding: 12px; border-bottom: 1px solid #E2E8F0; font-size: 15px; font-weight: bold; display: flex; justify-content: space-between;"><span>${medal} ${data.name}</span> <span style="color: var(--highlight-orange);">${data.score} अंक</span></li>`; }); } });
 
-  window.changePhoto = (event) => { const file = event.target.files[0]; if(file) { const reader = new FileReader(); reader.onload = (e) => { document.getElementById('user-photo').src = e.target.result; alert("फोटो अपडेट हो गई है!"); }; reader.readAsDataURL(file); } };
-  window.toggleTheme = () => { document.body.classList.toggle('dark-mode'); const btn = document.getElementById('theme-btn'); if(document.body.classList.contains('dark-mode')) { btn.innerText = '☀️'; localStorage.setItem('theme', 'dark'); } else { btn.innerText = '🌙'; localStorage.setItem('theme', 'light'); } };
-  window.onload = () => { if(localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-mode'); document.getElementById('theme-btn').innerText = '☀️'; } };
+  window.changePhoto = (event) => { const file = event.target.files[0]; if(file) { const reader = new FileReader(); reader.onload = (e) => { document.getElementById('user-photo').src = e.target.result; alert("फोटो अपडेट हो गई!"); }; reader.readAsDataURL(file); } };
+  window.toggleTheme = () => { document.body.classList.toggle('dark-mode'); const btn = document.getElementById('theme-btn'); if(document.body.classList.contains('dark-mode')) { btn.innerHTML = '<i class="fa-solid fa-sun"></i>'; localStorage.setItem('theme', 'dark'); } else { btn.innerHTML = '<i class="fa-solid fa-moon"></i>'; localStorage.setItem('theme', 'light'); } };
+  window.onload = () => { if(localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-mode'); document.getElementById('theme-btn').innerHTML = '<i class="fa-solid fa-sun"></i>'; } };
 
   window.toggleAIChat = () => { const box = document.getElementById('aiChatBox'); box.style.display = box.style.display === 'flex' ? 'none' : 'flex'; };
-  window.startVoiceInput = () => { const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition; if (!SpeechRecognition) return alert("माफ़ करें, आपका ब्राउज़र आवाज़ नहीं सपोर्ट करता।"); const recognition = new SpeechRecognition(); recognition.lang = 'hi-IN'; const inputField = document.getElementById('aiInput'); inputField.placeholder = "सुन रहा हूँ... बोलिए 🎤"; recognition.start(); recognition.onresult = (event) => { inputField.value = event.results[0][0].transcript; inputField.placeholder = "अपना सवाल यहाँ टाइप करें..."; sendAIMessage(); }; recognition.onspeechend = () => { recognition.stop(); inputField.placeholder = "अपना सवाल यहाँ टाइप करें..."; }; recognition.onerror = () => { inputField.placeholder = "अपना सवाल यहाँ टाइप करें..."; }; };
-  window.speakAnswer = (htmlText) => { window.speechSynthesis.cancel(); let plainText = htmlText.replace(/<[^>]*>?/gm, ''); let sentences = plainText.replace(/([\.!\?।])/g, "$1|").split("|"); sentences.forEach(sentence => { if(sentence.trim() !== "") { let speech = new SpeechSynthesisUtterance(sentence.trim()); speech.lang = 'hi-IN'; speech.rate = 0.9; window.speechSynthesis.speak(speech); } }); };
+  window.startVoiceInput = () => { const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition; if (!SpeechRecognition) return alert("माफ़ करें, आपका ब्राउज़र आवाज़ नहीं सपोर्ट करता।"); const recognition = new SpeechRecognition(); recognition.lang = 'hi-IN'; const inputField = document.getElementById('aiInput'); inputField.placeholder = "सुन रहा हूँ... बोलिए 🎤"; recognition.start(); recognition.onresult = (event) => { inputField.value = event.results[0][0].transcript; inputField.placeholder = "अपना सवाल यहाँ टाइप करें..."; sendAIMessage(); }; recognition.onspeechend = () => { recognition.stop(); inputField.placeholder = "अपना सवाल यहाँ टाइप करें..."; }; };
   
-  window.sendAIMessage = async () => {
-      const input = document.getElementById('aiInput'); const text = input.value.trim(); if(!text) return; const body = document.getElementById('aiChatBody');
-      body.innerHTML += `<div class="user-msg">${text}</div>`; input.value = ''; body.scrollTop = body.scrollHeight;
-      const secret1 = "AIzaSy"; const secret2 = "CBykQafD5nPNwf2ZSw20mPgrEWEgRLDZY"; const apiKey = secret1 + secret2;
-      const loadingId = "load-" + Date.now(); body.innerHTML += `<div class="ai-msg" id="${loadingId}">सोच रहा हूँ... 🤔</div>`; body.scrollTop = body.scrollHeight;
-      try {
-          const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ contents: [{ parts: [{ text: "तुम 'Sonu AI' हो, जो Sonu Classes वेबसाइट का असिस्टेंट है। इस सवाल का जवाब हिंदी में और बहुत सरल भाषा में दो (ताकि स्कूली बच्चे समझ सकें): " + text }] }] }) });
-          const data = await response.json(); document.getElementById(loadingId).remove();
-          if (data.error) {
-              if(data.error.message.includes("quota") || data.error.message.includes("exceeded")) { body.innerHTML += `<div class="ai-msg warning-msg">⚠️ <b>सोनू सर का AI अभी बहुत सारे बच्चों के साथ बिज़ी है!</b><br>कृपया 15 सेकंड बाद अपना सवाल फिर से पूछें। 🙏</div>`; } else { body.innerHTML += `<div class="ai-msg error-msg">❌ Google AI Error: ${data.error.message}</div>`; }
-          } else if (data.candidates && data.candidates.length > 0) {
-              let reply = data.candidates[0].content.parts[0].text; let formattedReply = reply.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*/g, '<br>•');
-              body.innerHTML += `<div class="ai-msg"><button class="speak-btn" onclick="speakAnswer(this.nextElementSibling.innerHTML)" title="सुनें">🔊</button><span>${formattedReply}</span></div>`;
-          } else { body.innerHTML += `<div class="ai-msg error-msg">❌ कुछ गड़बड़ है, जवाब नहीं आया!</div>`; }
-          body.scrollTop = body.scrollHeight;
-      } catch(e) { document.getElementById(loadingId).remove(); body.innerHTML += `<div class="ai-msg error-msg">❌ कनेक्शन में दिक्कत है: ${e.message}</div>`; body.scrollTop = body.scrollHeight; }
-  };
+  window.sendAIMessage = async () => { const input = document.getElementById('aiInput'); const text = input.value.trim(); if(!text) return; const body = document.getElementById('aiChatBody'); body.innerHTML += `<div class="user-msg">${text}</div>`; input.value = ''; body.scrollTop = body.scrollHeight; const secret1 = "AIzaSy"; const secret2 = "CBykQafD5nPNwf2ZSw20mPgrEWEgRLDZY"; const apiKey = secret1 + secret2; const loadingId = "load-" + Date.now(); body.innerHTML += `<div class="ai-msg" id="${loadingId}">सोच रहा हूँ... 🤔</div>`; body.scrollTop = body.scrollHeight; try { const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ contents: [{ parts: [{ text: "तुम 'Sonu AI' हो, जो Sonu Classes वेबसाइट का असिस्टेंट है। इस सवाल का जवाब हिंदी में और बहुत सरल भाषा में दो: " + text }] }] }) }); const data = await response.json(); document.getElementById(loadingId).remove(); if (data.error) { body.innerHTML += `<div class="ai-msg">❌ Error: ${data.error.message}</div>`; } else if (data.candidates && data.candidates.length > 0) { let reply = data.candidates[0].content.parts[0].text; body.innerHTML += `<div class="ai-msg"><span>${reply.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*/g, '<br>•')}</span></div>`; } body.scrollTop = body.scrollHeight; } catch(e) { document.getElementById(loadingId).remove(); body.innerHTML += `<div class="ai-msg">❌ कनेक्शन एरर!</div>`; body.scrollTop = body.scrollHeight; } };
 </script>
 </body>
 </html>
