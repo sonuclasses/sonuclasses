@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonu Classes - Admin Panel</title>
+    <title>Sonu Classes - Secure Admin Panel</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; margin: 0; padding: 15px; }
-        .admin-container { max-width: 500px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); padding: 20px; }
+        .admin-container { max-width: 500px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); padding: 20px; overflow: hidden; }
         
+        /* 🔒 लॉक स्क्रीन का डिज़ाइन */
+        #lock-screen { text-align: center; padding: 50px 10px; }
+        .lock-icon { font-size: 60px; margin-bottom: 10px; }
+        .pass-input { width: 90%; padding: 15px; border-radius: 8px; border: 2px solid #1976D2; font-size: 18px; text-align: center; margin-bottom: 20px; }
+        
+        /* 📊 डैशबोर्ड का डिज़ाइन */
+        .dashboard-box { background: linear-gradient(135deg, #1976D2, #1565C0); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .dashboard-box h3 { margin: 0 0 10px 0; font-size: 18px; color: #BBDEFB; }
+        .dashboard-number { font-size: 45px; font-weight: bold; margin: 0; }
+
         h2 { color: #1976D2; text-align: center; margin-bottom: 5px; font-size: 24px; }
         .subtitle { text-align: center; color: #555; font-weight: bold; margin-bottom: 25px; font-size: 14px; }
         
@@ -15,135 +25,83 @@
         label { font-weight: bold; color: #333; margin-bottom: 5px; display: block; font-size: 14px; }
         select, input, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; background-color: #fff; box-sizing: border-box; font-family: inherit; }
         
-        /* अलग-अलग डब्बों का डिज़ाइन */
         .section-box { border-radius: 10px; padding: 20px; margin-bottom: 30px; position: relative; }
-        
-        /* क्विज़ वाले डब्बे का रंग (Orange) */
         .quiz-box { border: 2px solid #FF9800; background-color: #fff8e1; }
-        .quiz-title { background: #FF9800; color: white; padding: 10px 15px; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block; margin-top: -35px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .quiz-title { background: #FF9800; color: white; padding: 10px 15px; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block; margin-top: -35px; margin-bottom: 15px; }
         
-        /* PDF वाले डब्बे का रंग (Green) */
         .pdf-box { border: 2px solid #4CAF50; background-color: #e8f5e9; }
-        .pdf-title { background: #4CAF50; color: white; padding: 10px 15px; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block; margin-top: -35px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .pdf-title { background: #4CAF50; color: white; padding: 10px 15px; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block; margin-top: -35px; margin-bottom: 15px; }
 
         textarea { height: 90px; resize: none; }
         
         .btn { width: 100%; padding: 14px; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: 0.3s; }
+        .btn-blue { background-color: #1976D2; }
         .btn-orange { background-color: #E65100; }
-        .btn-orange:hover { background-color: #bf360c; }
         .btn-green { background-color: #2E7D32; }
-        .btn-green:hover { background-color: #1b5e20; }
-        
     </style>
 </head>
 <body>
 
 <div class="admin-container">
-    <h2>👑 सोनू बॉस कंट्रोल रूम</h2>
-    <p class="subtitle">डेटाबेस सीधा आपके हाथों में है!</p>
 
-    <div class="section-box quiz-box">
-        <div class="quiz-title">🏆 1. ऑनलाइन टेस्ट डालें</div>
+    <div id="lock-screen">
+        <div class="lock-icon">🔒</div>
+        <h2 style="color: #d32f2f;">खूफिया कंट्रोल रूम</h2>
+        <p style="color: gray; margin-bottom: 20px;">कृपया सोनू सर का पासवर्ड डालें</p>
         
-        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-            <div style="flex: 1;">
-                <label>क्लास:</label>
-                <select id="q-class"><option value="class6">Class 6</option><option value="class7">Class 7</option><option value="class8">Class 8</option><option value="class9">Class 9</option><option value="class10">Class 10</option></select>
-            </div>
-            <div style="flex: 1;">
-                <label>विषय:</label>
-                <select id="q-subject"><option value="science">Science</option><option value="math">Math</option><option value="sst">SST</option><option value="hindi">Hindi</option><option value="english">English</option></select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>पाठ (Lesson):</label>
-            <select id="q-lesson">
-                <option value="lesson1">Lesson 1</option>
-                <option value="lesson2">Lesson 2</option>
-                <option value="lesson3">Lesson 3</option>
-                <option value="lesson4">Lesson 4</option>
-                <option value="lesson5">Lesson 5</option>
-                <option value="lesson6">Lesson 6</option>
-                <option value="lesson7">Lesson 7</option>
-                <option value="lesson8">Lesson 8</option>
-                <option value="lesson9">Lesson 9</option>
-                <option value="lesson10">Lesson 10</option>
-                <option value="lesson11">Lesson 11</option>
-                <option value="lesson12">Lesson 12</option>
-                <option value="lesson13">Lesson 13</option>
-                <option value="lesson14">Lesson 14</option>
-                <option value="lesson15">Lesson 15</option>
-            </select>
-        </div>
-
-        <div class="form-group"><input type="text" id="q-input" placeholder="सवाल यहाँ लिखें..."></div>
-        <div class="form-group"><input type="text" id="optA" placeholder="Option A"></div>
-        <div class="form-group"><input type="text" id="optB" placeholder="Option B"></div>
-        <div class="form-group"><input type="text" id="optC" placeholder="Option C"></div>
-        <div class="form-group"><input type="text" id="optD" placeholder="Option D"></div>
-        
-        <div class="form-group">
-            <label style="color: #d32f2f;">सही जवाब चुनें:</label>
-            <select id="correct-ans">
-                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option>
-            </select>
-        </div>
-        
-        <button class="btn btn-orange" onclick="saveQuiz()">➕ सवाल सेव करें</button>
+        <input type="password" id="admin-pass" class="pass-input" placeholder="पासवर्ड यहाँ डालें...">
+        <button class="btn btn-blue" onclick="unlockAdmin()">अनलॉक करें 🚀</button>
     </div>
 
+    <div id="admin-main" style="display: none;">
+        <h2>👑 सोनू बॉस कंट्रोल रूम</h2>
+        <p class="subtitle">डेटाबेस सीधा आपके हाथों में है!</p>
 
-    <div class="section-box pdf-box">
-        <div class="pdf-title">📝 2. PDF और नोट्स डालें</div>
-        
-        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-            <div style="flex: 1;">
-                <label>क्लास:</label>
-                <select id="n-class"><option value="class6">Class 6</option><option value="class7">Class 7</option><option value="class8">Class 8</option><option value="class9">Class 9</option><option value="class10">Class 10</option></select>
-            </div>
-            <div style="flex: 1;">
-                <label>विषय:</label>
-                <select id="n-subject"><option value="science">Science</option><option value="math">Math</option><option value="sst">SST</option><option value="hindi">Hindi</option><option value="english">English</option></select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>पाठ (Lesson):</label>
-            <select id="n-lesson">
-                <option value="lesson1">Lesson 1</option>
-                <option value="lesson2">Lesson 2</option>
-                <option value="lesson3">Lesson 3</option>
-                <option value="lesson4">Lesson 4</option>
-                <option value="lesson5">Lesson 5</option>
-                <option value="lesson6">Lesson 6</option>
-                <option value="lesson7">Lesson 7</option>
-                <option value="lesson8">Lesson 8</option>
-                <option value="lesson9">Lesson 9</option>
-                <option value="lesson10">Lesson 10</option>
-                <option value="lesson11">Lesson 11</option>
-                <option value="lesson12">Lesson 12</option>
-                <option value="lesson13">Lesson 13</option>
-                <option value="lesson14">Lesson 14</option>
-                <option value="lesson15">Lesson 15</option>
-            </select>
+        <div class="dashboard-box">
+            <h3>📱 कुल रजिस्टर हुए बच्चे</h3>
+            <p class="dashboard-number" id="total-students-count">0</p>
+            <p style="font-size: 13px; margin-top: 5px; color: #90CAF9;">(जिनका नंबर आ चुका है)</p>
         </div>
 
-        <div class="form-group">
-            <label>नोट्स (VVI Text):</label>
-            <textarea id="notes-input" placeholder="यहाँ कुछ ज़रूरी बातें लिख सकते हैं..."></textarea>
+        <div class="section-box quiz-box">
+            <div class="quiz-title">🏆 1. ऑनलाइन टेस्ट डालें</div>
+            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                <div style="flex: 1;"><label>क्लास:</label><select id="q-class"><option value="class6">Class 6</option><option value="class7">Class 7</option><option value="class8">Class 8</option><option value="class9">Class 9</option><option value="class10">Class 10</option></select></div>
+                <div style="flex: 1;"><label>विषय:</label><select id="q-subject"><option value="science">Science</option><option value="math">Math</option><option value="sst">SST</option><option value="hindi">Hindi</option><option value="english">English</option></select></div>
+            </div>
+            <div class="form-group"><label>पाठ (Lesson):</label><select id="q-lesson"><option value="lesson1">Lesson 1</option><option value="lesson2">Lesson 2</option><option value="lesson3">Lesson 3</option><option value="lesson4">Lesson 4</option><option value="lesson5">Lesson 5</option><option value="lesson6">Lesson 6</option><option value="lesson7">Lesson 7</option><option value="lesson8">Lesson 8</option><option value="lesson9">Lesson 9</option><option value="lesson10">Lesson 10</option><option value="lesson11">Lesson 11</option><option value="lesson12">Lesson 12</option><option value="lesson13">Lesson 13</option><option value="lesson14">Lesson 14</option><option value="lesson15">Lesson 15</option></select></div>
+
+            <div class="form-group"><input type="text" id="q-input" placeholder="सवाल यहाँ लिखें..."></div>
+            <div class="form-group"><input type="text" id="optA" placeholder="Option A"></div>
+            <div class="form-group"><input type="text" id="optB" placeholder="Option B"></div>
+            <div class="form-group"><input type="text" id="optC" placeholder="Option C"></div>
+            <div class="form-group"><input type="text" id="optD" placeholder="Option D"></div>
+            <div class="form-group"><label style="color: #d32f2f;">सही जवाब चुनें:</label><select id="correct-ans"><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select></div>
+            <button class="btn btn-orange" onclick="saveQuiz()">➕ सवाल सेव करें</button>
         </div>
-        <div class="form-group">
-            <label>PDF लिंक (Google Drive):</label>
-            <input type="text" id="pdf-input" placeholder="Google Drive का लिंक यहाँ डालें...">
+
+        <div class="section-box pdf-box">
+            <div class="pdf-title">📝 2. PDF और नोट्स डालें</div>
+            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                <div style="flex: 1;"><label>क्लास:</label><select id="n-class"><option value="class6">Class 6</option><option value="class7">Class 7</option><option value="class8">Class 8</option><option value="class9">Class 9</option><option value="class10">Class 10</option></select></div>
+                <div style="flex: 1;"><label>विषय:</label><select id="n-subject"><option value="science">Science</option><option value="math">Math</option><option value="sst">SST</option><option value="hindi">Hindi</option><option value="english">English</option></select></div>
+            </div>
+            <div class="form-group"><label>पाठ (Lesson):</label><select id="n-lesson"><option value="lesson1">Lesson 1</option><option value="lesson2">Lesson 2</option><option value="lesson3">Lesson 3</option><option value="lesson4">Lesson 4</option><option value="lesson5">Lesson 5</option><option value="lesson6">Lesson 6</option><option value="lesson7">Lesson 7</option><option value="lesson8">Lesson 8</option><option value="lesson9">Lesson 9</option><option value="lesson10">Lesson 10</option><option value="lesson11">Lesson 11</option><option value="lesson12">Lesson 12</option><option value="lesson13">Lesson 13</option><option value="lesson14">Lesson 14</option><option value="lesson15">Lesson 15</option></select></div>
+
+            <div class="form-group"><label>नोट्स (VVI Text):</label><textarea id="notes-input" placeholder="यहाँ कुछ ज़रूरी बातें लिख सकते हैं..."></textarea></div>
+            <div class="form-group"><label>PDF लिंक (Google Drive):</label><input type="text" id="pdf-input" placeholder="Google Drive का लिंक यहाँ डालें..."></div>
+            <button class="btn btn-green" onclick="saveNotes()">✅ PDF अपलोड करें</button>
         </div>
         
-        <button class="btn btn-green" onclick="saveNotes()">✅ PDF अपलोड करें</button>
+        <button class="btn" style="background-color: #555; margin-top: 10px;" onclick="window.location.href='index.html'">🏠 होम पेज पर वापस जाएँ</button>
+
     </div>
 
 </div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
@@ -158,67 +116,63 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
+    // 🌟 1. ताला खोलने वाला जादुई फंक्शन 🌟
+    window.unlockAdmin = () => {
+        const pass = document.getElementById('admin-pass').value;
+        
+        // आपका सीक्रेट पासवर्ड यहाँ है (SonuBoss)
+        if (pass === "SonuBoss") {
+            document.getElementById('lock-screen').style.display = 'none';
+            document.getElementById('admin-main').style.display = 'block';
+            
+            // जैसे ही ताला खुलेगा, डैशबोर्ड चालू हो जाएगा
+            startDashboard();
+        } else {
+            alert("❌ गलत पासवर्ड बॉस! असली CEO का पासवर्ड डालिए।");
+            document.getElementById('admin-pass').value = '';
+        }
+    };
+
+    // 🌟 2. सुपर डैशबोर्ड (नंबर गिनने वाला सिस्टम) 🌟
+    window.startDashboard = () => {
+        const studentRef = ref(db, 'appData/registered_students');
+        onValue(studentRef, (snapshot) => {
+            if (snapshot.exists()) {
+                // डेटाबेस में जितने बच्चों के डब्बे हैं, उन्हें गिन लो
+                const totalCount = Object.keys(snapshot.val()).length;
+                document.getElementById('total-students-count').innerText = totalCount;
+            } else {
+                document.getElementById('total-students-count').innerText = "0";
+            }
+        });
+    };
+
+    // पुराने सेव करने वाले फंक्शन्स
     window.saveQuiz = () => {
         const cls = document.getElementById('q-class').value;
         const sub = document.getElementById('q-subject').value;
         const les = document.getElementById('q-lesson').value;
-        
         const qText = document.getElementById('q-input').value;
-        const a = document.getElementById('optA').value;
-        const b = document.getElementById('optB').value;
-        const c = document.getElementById('optC').value;
-        const d = document.getElementById('optD').value;
+        const a = document.getElementById('optA').value; const b = document.getElementById('optB').value; const c = document.getElementById('optC').value; const d = document.getElementById('optD').value;
         const ans = document.getElementById('correct-ans').value;
 
-        if (!qText || !a || !b) {
-            alert("⚠️ बॉस! सवाल और कम से कम दो ऑप्शन तो लिखने पड़ेंगे!");
-            return;
-        }
-
-        const quizRef = ref(db, `appData/quizzes/${cls}/${sub}/${les}`);
-        
-        push(quizRef, {
-            question: qText,
-            options: { A: a, B: b, C: c, D: d },
-            answer: ans
-        }).then(() => {
-            alert("🚀 शानदार! सवाल ऑनलाइन टेस्ट में जुड़ गया!");
-            document.getElementById('q-input').value = '';
-            document.getElementById('optA').value = '';
-            document.getElementById('optB').value = '';
-            document.getElementById('optC').value = '';
-            document.getElementById('optD').value = '';
-        }).catch((error) => {
-            alert("❌ एरर: " + error);
-        });
+        if (!qText || !a || !b) { alert("⚠️ बॉस! सवाल और कम से कम दो ऑप्शन तो लिखने पड़ेंगे!"); return; }
+        push(ref(db, `appData/quizzes/${cls}/${sub}/${les}`), { question: qText, options: { A: a, B: b, C: c, D: d }, answer: ans })
+        .then(() => { alert("🚀 शानदार! सवाल ऑनलाइन टेस्ट में जुड़ गया!"); document.getElementById('q-input').value = ''; document.getElementById('optA').value = ''; document.getElementById('optB').value = ''; document.getElementById('optC').value = ''; document.getElementById('optD').value = ''; })
+        .catch((error) => { alert("❌ एरर: " + error); });
     };
 
     window.saveNotes = () => {
         const cls = document.getElementById('n-class').value;
         const sub = document.getElementById('n-subject').value;
         const les = document.getElementById('n-lesson').value;
-        
         const notesText = document.getElementById('notes-input').value;
         const pdfLink = document.getElementById('pdf-input').value;
 
-        if (!notesText && !pdfLink) {
-            alert("⚠️ बॉस! खाली मत छोड़िए, नोट्स या PDF लिंक में से कुछ तो डालिए!");
-            return;
-        }
-
-        const notesRef = ref(db, `appData/notes/${cls}/${sub}/${les}`);
-        
-        set(notesRef, {
-            text: notesText,
-            pdf: pdfLink,
-            date: new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' })
-        }).then(() => {
-            alert("✅ बहुत बढ़िया! आपका PDF लिंक वेबसाइट पर लाइव हो गया!");
-            document.getElementById('notes-input').value = '';
-            document.getElementById('pdf-input').value = '';
-        }).catch((error) => {
-            alert("❌ एरर: " + error);
-        });
+        if (!notesText && !pdfLink) { alert("⚠️ बॉस! खाली मत छोड़िए, नोट्स या PDF लिंक में से कुछ तो डालिए!"); return; }
+        set(ref(db, `appData/notes/${cls}/${sub}/${les}`), { text: notesText, pdf: pdfLink, date: new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' }) })
+        .then(() => { alert("✅ बहुत बढ़िया! आपका PDF लिंक वेबसाइट पर लाइव हो गया!"); document.getElementById('notes-input').value = ''; document.getElementById('pdf-input').value = ''; })
+        .catch((error) => { alert("❌ एरर: " + error); });
     };
 </script>
 </body>
