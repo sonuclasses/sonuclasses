@@ -3,130 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonu Classes - Live Test Portal</title>
+    <title>Sonu Classes - Online Test</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 0; padding: 15px; }
-        .app-container { max-width: 500px; margin: 20px auto; background: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); padding: 20px; overflow: hidden; }
-        h2 { color: #1a73e8; text-align: center; border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; }
+        :root { --primary-green: #2E7D32; --primary-blue: #1976D2; --bg-color: #f4f6f9; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); margin: 0; padding: 15px; text-align: center; }
         
-        .form-group { margin-bottom: 15px; }
-        label { font-weight: bold; color: #333; margin-bottom: 5px; display: block; }
-        select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background-color: #f9f9f9; }
+        .test-container { max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); padding: 20px; text-align: left; }
+        h2 { color: var(--primary-blue); text-align: center; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         
-        .btn { width: 100%; padding: 14px; background-color: #ff5722; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; box-shadow: 0 4px 6px rgba(255, 87, 34, 0.3); transition: 0.3s; }
-        .btn:hover { background-color: #e64a19; }
-        .btn-blue { background-color: #1a73e8; box-shadow: 0 4px 6px rgba(26, 115, 232, 0.3); }
-        .btn-blue:hover { background-color: #1557b0; }
-
-        .rules-box { background-color: #e8f0fe; padding: 15px; border-radius: 8px; border-left: 5px solid #1a73e8; margin-bottom: 20px; }
-        .rules-box ul { padding-left: 20px; line-height: 1.8; color: #333; }
+        /* 🌟 सिर्फ विषय चुनने वाला डब्बा 🌟 */
+        .setup-box { background: #E3F2FD; padding: 20px; border-radius: 10px; border: 2px solid var(--primary-blue); text-align: center; margin-bottom: 20px; }
+        .setup-box label { font-size: 18px; font-weight: bold; color: #333; display: block; margin-bottom: 10px; }
+        .setup-box select { width: 100%; max-width: 300px; padding: 12px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 15px; }
         
-        .timer-box { font-size: 22px; font-weight: bold; color: #d32f2f; text-align: center; margin-bottom: 15px; background: #ffebee; padding: 10px; border-radius: 30px; }
-        .question-text { font-size: 18px; font-weight: bold; color: #222; margin-bottom: 20px; }
-        .option-btn { width: 100%; padding: 12px; margin-bottom: 10px; background-color: white; border: 2px solid #1a73e8; color: #1a73e8; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; text-align: left; transition: 0.2s; }
+        .btn { width: 100%; padding: 15px; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+        .btn-start { background-color: #FF9800; }
+        .btn-start:hover { background-color: #F57C00; }
+        .btn-submit { background-color: var(--primary-green); margin-top: 20px; display: none; }
         
-        .result-box { text-align: center; padding: 20px; }
-        .score-text { font-size: 40px; font-weight: bold; color: #4caf50; margin: 10px 0; }
+        /* क्विज़ का डिज़ाइन */
+        #quiz-section { display: none; }
+        .question-card { background: #fff8e1; border: 1px solid #FFE0B2; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .q-text { font-size: 16px; font-weight: bold; color: #333; margin-bottom: 12px; }
+        .option-label { display: block; background: white; padding: 12px; margin-bottom: 8px; border-radius: 8px; border: 1px solid #ccc; cursor: pointer; transition: 0.2s; font-size: 15px; }
+        .option-label:hover { background: #f0f0f0; }
+        input[type="radio"] { margin-right: 10px; transform: scale(1.2); cursor: pointer; }
         
-        #rules-screen, #quiz-screen, #result-screen { display: none; }
+        /* टाइमर */
+        .timer { font-size: 20px; font-weight: bold; color: #D32F2F; text-align: center; margin-bottom: 15px; padding: 10px; background: #FFEBEE; border-radius: 8px; border: 1px solid #FFCDD2; display: none; }
+        
+        /* रिजल्ट स्क्रीन */
+        #result-section { display: none; text-align: center; padding: 20px; }
+        .score-circle { width: 120px; height: 120px; background: var(--primary-green); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: bold; margin: 0 auto 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
 
-<div class="app-container">
-    
-    <div id="selection-screen">
-        <h2>📚 Sonu Classes Test</h2>
-        
-        <div class="form-group">
-            <label>क्लास चुनें:</label>
-            <select id="sel-class">
-                <option value="class6">Class 6</option>
-                <option value="class7">Class 7</option>
-                <option value="class8">Class 8</option>
-                <option value="class9">Class 9</option>
-                <option value="class10">Class 10</option>
-            </select>
-        </div>
-        
-        <div class="form-group">
-            <label>विषय चुनें:</label>
-            <select id="sel-subject">
-                <option value="hindi">Hindi</option>
-                <option value="math">Math</option>
-                <option value="science">Science</option>
-                <option value="sst">SST</option>
-                <option value="english">English</option>
-            </select>
-        </div>
-        
-        <div class="form-group">
-            <label>चैप्टर चुनें:</label>
-            <select id="sel-lesson">
-                <option value="lesson1">Lesson 1</option>
-                <option value="lesson2">Lesson 2</option>
-                <option value="lesson3">Lesson 3</option>
-                <option value="lesson4">Lesson 4</option>
-                <option value="lesson5">Lesson 5</option>
-                <option value="lesson6">Lesson 6</option>
-            </select>
-        </div>
-        
-        <button class="btn" onclick="showRules()">📝 ऑनलाइन टेस्ट दें</button>
-        <button class="btn" style="background-color: #555; margin-top: 10px;" onclick="window.location.href='index.html'">🏠 होम पेज पर वापस जाएँ</button>
+<div class="test-container">
+    <h2>📝 सोनू ऑनलाइन टेस्ट</h2>
+
+    <div id="setup-section" class="setup-box">
+        <label>अपना विषय (Subject) चुनें:</label>
+        <select id="subject-select">
+            <option value="science">🔬 विज्ञान (Science)</option>
+            <option value="sst">🌍 सामाजिक विज्ञान (SST)</option>
+            <option value="math">📐 गणित (Math)</option>
+            <option value="hindi">अ हिंदी (Hindi)</option>
+            <option value="english">A अंग्रेज़ी (English)</option>
+        </select>
+        <button class="btn btn-start" onclick="startTest()">🚀 टेस्ट शुरू करें</button>
+        <p style="color: gray; font-size: 13px; margin-top: 15px;">नोट: यह टेस्ट 10वीं बोर्ड परीक्षा के लिए है।</p>
     </div>
 
-    <div id="rules-screen">
-        <h2>⚠️ टेस्ट के नियम</h2>
-        <div class="rules-box">
-            <ul>
-                <li>✅ <b>सही जवाब:</b> <b>+10 नंबर</b></li>
-                <li>❌ <b>गलत जवाब:</b> <b>-5 नंबर</b></li>
-                <li>⏱️ <b>समय:</b> <b>30 सेकंड</b> प्रति सवाल</li>
-                <li>🏆 <b>लीडरबोर्ड:</b> आपका नाम अपने-आप सेव होगा!</li>
-            </ul>
-        </div>
-        <button class="btn btn-blue" onclick="startTest()">🚀 टेस्ट शुरू करें</button>
+    <div id="timer-display" class="timer">⏱️ समय: 15:00</div>
+
+    <div id="quiz-section">
+        <div id="questions-container"></div>
+        <button id="submit-btn" class="btn btn-submit" onclick="submitTest()">✅ टेस्ट जमा करें</button>
     </div>
 
-    <div id="quiz-screen">
-        <div class="timer-box">⏱️ समय: <span id="time-left">30</span> सेकंड</div>
-        <div class="question-text" id="question-text">सवाल लोड हो रहा है...</div>
-        
-        <div id="options-container">
-            <button class="option-btn" onclick="selectOption('A')" id="optA">A</button>
-            <button class="option-btn" onclick="selectOption('B')" id="optB">B</button>
-            <button class="option-btn" onclick="selectOption('C')" id="optC">C</button>
-            <button class="option-btn" onclick="selectOption('D')" id="optD">D</button>
-        </div>
-        
-        <button class="btn" id="next-btn" onclick="nextQuestion()" style="display: none;">Next / अगला सवाल ⏭️</button>
-    </div>
-
-    <div id="result-screen">
-        <h2>🏆 टेस्ट पूरा हुआ!</h2>
-        <div class="result-box">
-            <p>आपका स्कोर है:</p>
-            <div class="score-text" id="final-score">0</div>
-            <p id="feedback-msg" style="font-weight: bold;"></p>
-            
-            <div style="margin-top: 20px; padding: 15px; background: #e8f0fe; border-radius: 10px;">
-                <p style="margin-top:0; font-weight:bold; color:#1976D2;">🏆 लीडरबोर्ड में स्कोर सेव करें</p>
-                <p style="font-size: 18px; font-weight: bold; color: #333;">👤 आपका नाम: <span id="auto-student-name" style="color: #E65100;">लोड हो रहा है...</span></p>
-                <button class="btn btn-blue" onclick="saveMyScore()" style="margin-top: 10px; background-color: #E65100;">सेव करें 🚀</button>
-            </div>
-            
-            <button class="btn" style="background-color: #2E7D32; margin-top: 15px;" onclick="window.location.href='index.html'">🏠 होम पेज पर जाएँ</button>
-        </div>
+    <div id="result-section">
+        <h2 style="color: var(--primary-green);">🎉 टेस्ट पूरा हुआ!</h2>
+        <p style="font-size: 18px; color: #555;">आपका स्कोर:</p>
+        <div class="score-circle" id="final-score">0</div>
+        <p style="color: #FF9800; font-weight: bold;">आपका नाम लीडरबोर्ड पर भेज दिया गया है! 🏆</p>
+        <button class="btn btn-start" style="margin-top: 20px;" onclick="window.location.href='index.html'">🏠 होम पेज पर वापस जाएँ</button>
     </div>
 
 </div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    // 🌟 डुप्लीकेट रोकने के लिए 'set' जोड़ा गया है 🌟
-    import { getDatabase, ref, get, child, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+    import { getDatabase, ref, get, child, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
@@ -139,199 +88,130 @@
     };
 
     const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
     const auth = getAuth(app);
+    const db = getDatabase(app);
 
-    let allQuestions = [];
-    let currentQIndex = 0;
-    let score = 0;
+    let studentName = "Student";
+    let studentId = "Unknown";
+    let questionsData = [];
+    let timeLeft = 900; // 15 मिनट (900 सेकंड)
     let timerInterval;
-    let timeLeft = 30;
-    let selectedAnswer = "";
-    let currentStudentName = "Student";
 
+    // चेक करें कि बच्चा लॉगिन है या नहीं
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            currentStudentName = user.displayName || user.email.split('@')[0];
+            studentName = user.displayName || user.email.split('@')[0];
+            studentId = user.uid;
         } else {
+            alert("⚠️ टेस्ट देने के लिए पहले लॉगिन करना होगा!");
             window.location.replace("login.html");
         }
     });
 
-    window.showRules = () => {
-        document.getElementById('selection-screen').style.display = 'none';
-        document.getElementById('rules-screen').style.display = 'block';
-    };
-
+    // 🚀 टेस्ट शुरू करने का फंक्शन
     window.startTest = async () => {
-        const cls = document.getElementById('sel-class').value;
-        const sub = document.getElementById('sel-subject').value;
-        const les = document.getElementById('sel-lesson').value;
-
-        document.getElementById('rules-screen').style.display = 'none';
-        document.getElementById('quiz-screen').style.display = 'block';
-        document.getElementById('question-text').innerText = "सवाल ढूँढ रहा हूँ... 🔄";
-
+        const subject = document.getElementById('subject-select').value;
         const dbRef = ref(db);
-        try {
-            const snapshot = await get(child(dbRef, `appData/quizzes/${cls}/${sub}/${les}`));
-            if (snapshot.exists()) {
-                const data = snapshot.val();
-                
-                if(data.question && !data.options) {
-                    alert("⚠️ बॉस! इस चैप्टर में पुराने डिज़ाइन वाला सवाल फँसा है। कृपया पैनल से नया सवाल डालकर टेस्ट करें!");
-                    window.location.href = 'index.html';
-                    return;
-                }
+        
+        // 🌟 बैकग्राउंड में क्लास 10 फिक्स है! 🌟
+        const fetchPath = `appData/quizzes/class10/${subject}`;
 
-                allQuestions = Object.values(data); 
-                loadQuestion();
+        document.getElementById('setup-section').innerHTML = "<h3 style='color: var(--primary-blue);'>सवाल लोड हो रहे हैं... ⏳</h3>";
+
+        try {
+            const snapshot = await get(child(dbRef, fetchPath));
+            if (snapshot.exists()) {
+                questionsData = [];
+                snapshot.forEach((childSnapshot) => {
+                    questionsData.push({ id: childSnapshot.key, ...childSnapshot.val() });
+                });
+
+                renderQuestions();
+                document.getElementById('setup-section').style.display = "none";
+                document.getElementById('quiz-section').style.display = "block";
+                document.getElementById('submit-btn').style.display = "block";
+                document.getElementById('timer-display').style.display = "block";
+                
+                startTimer();
             } else {
-                alert("⚠️ सोनू सर ने अभी इस चैप्टर में कोई सवाल नहीं डाला है!");
-                window.location.href = 'index.html';
+                alert("❌ माफ़ करें! अभी इस विषय के सवाल सोनू सर ने अपलोड नहीं किए हैं।");
+                window.location.reload();
             }
         } catch (error) {
-            alert("❌ एरर: " + error);
+            alert("❌ इंटरनेट कनेक्शन चेक करें: " + error);
+            window.location.reload();
         }
     };
 
-    window.loadQuestion = () => {
-        if(currentQIndex >= allQuestions.length) {
-            showResult(); 
-            return;
-        }
-
-        selectedAnswer = "";
-        timeLeft = 30;
-        document.getElementById('time-left').innerText = timeLeft;
-        document.getElementById('next-btn').style.display = 'none';
-        
-        ['A', 'B', 'C', 'D'].forEach(opt => {
-            const btn = document.getElementById('opt' + opt);
-            btn.style.backgroundColor = 'white';
-            btn.style.color = '#1a73e8';
-            btn.style.borderColor = '#1a73e8';
-            btn.disabled = false; 
-        });
-
-        const currentQ = allQuestions[currentQIndex];
-        
-        if(!currentQ.options) {
-            currentQIndex++;
-            loadQuestion();
-            return;
-        }
-
-        document.getElementById('question-text').innerText = `Q${currentQIndex + 1}: ${currentQ.question}`;
-        document.getElementById('optA').innerText = `A. ${currentQ.options.A}`;
-        document.getElementById('optB').innerText = `B. ${currentQ.options.B}`;
-        document.getElementById('optC').innerText = `C. ${currentQ.options.C}`;
-        document.getElementById('optD').innerText = `D. ${currentQ.options.D}`;
-
-        startTimer();
-    };
-
-    window.selectOption = (opt) => {
-        selectedAnswer = opt;
-        const correctAns = allQuestions[currentQIndex].answer;
-
-        ['A', 'B', 'C', 'D'].forEach(o => {
-            const btn = document.getElementById('opt' + o);
-            btn.disabled = true; 
-            
-            if (o === correctAns) {
-                btn.style.backgroundColor = '#4CAF50'; 
-                btn.style.color = 'white';
-                btn.style.borderColor = '#2E7D32';
-                btn.innerText += " ✅"; 
-            } 
-            else if (o === opt && opt !== correctAns) {
-                btn.style.backgroundColor = '#F44336'; 
-                btn.style.color = 'white';
-                btn.style.borderColor = '#B71C1C';
-                btn.innerText += " ❌"; 
-            }
-        });
-        document.getElementById('next-btn').style.display = 'block'; 
-    };
-
-    window.nextQuestion = () => {
-        clearInterval(timerInterval); 
-        const correctAns = allQuestions[currentQIndex].answer;
-        if(selectedAnswer === correctAns) score += 10;
-        else if (selectedAnswer !== "") score -= 5;  
-        
-        currentQIndex++;
-        loadQuestion();
-    };
-
-    window.startTimer = () => {
-        clearInterval(timerInterval);
+    // ⏱️ टाइमर चलाने का फंक्शन
+    function startTimer() {
         timerInterval = setInterval(() => {
-            timeLeft--;
-            document.getElementById('time-left').innerText = timeLeft;
-            if(timeLeft <= 0) {
+            if (timeLeft <= 0) {
                 clearInterval(timerInterval);
-                nextQuestion(); 
+                alert("⏰ समय समाप्त! आपका टेस्ट अपने-आप जमा हो रहा है।");
+                submitTest();
+            } else {
+                let m = Math.floor(timeLeft / 60);
+                let s = timeLeft % 60;
+                document.getElementById('timer-display').innerText = `⏱️ समय: ${m}:${s < 10 ? '0'+s : s}`;
+                timeLeft--;
             }
         }, 1000);
-    };
+    }
 
-    window.showResult = () => {
-        document.getElementById('quiz-screen').style.display = 'none';
-        document.getElementById('result-screen').style.display = 'block';
-        document.getElementById('final-score').innerText = score;
-        document.getElementById('final-score').style.color = score > 0 ? "#4caf50" : "#d32f2f";
-        document.getElementById('feedback-msg').innerText = score > 0 ? "शाबाश! 🎉" : "और मेहनत करो! 💪";
-        
-        document.getElementById('auto-student-name').innerText = currentStudentName;
-    };
+    // 📝 सवाल दिखाने का फंक्शन
+    function renderQuestions() {
+        const container = document.getElementById('questions-container');
+        container.innerHTML = "";
 
-    // 🌟 डुप्लीकेट नाम रोकने और हाई-स्कोर अपडेट करने वाला कोड 🌟
-    window.saveMyScore = () => {
-        const user = auth.currentUser;
-        if (!user) {
-            alert("⚠️ आपको पहले लॉगिन करना होगा!");
-            return;
-        }
-        
-        const userId = user.uid; // हर बच्चे का एक यूनिक ताला (ID)
-        const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' }); // 🇮🇳 भारतीय समय
-        
-        // उस बच्चे के पक्के डब्बे (ID) में जाओ
-        const userScoreRef = ref(db, `daily_leaderboard/${today}/${userId}`);
-        
-        get(userScoreRef).then((snapshot) => {
-            if (snapshot.exists()) {
-                const oldData = snapshot.val();
-                
-                // अगर नया स्कोर पुराने से ज़्यादा है, तो अपडेट करो
-                if (score > oldData.score) {
-                    set(userScoreRef, {
-                        name: currentStudentName,
-                        score: score
-                    }).then(() => {
-                        alert("🎉 शाबाश! आपका नया हाई-स्कोर लीडरबोर्ड में अपडेट हो गया!");
-                        window.location.href = 'index.html'; 
-                    });
-                } else {
-                    alert("😊 आपने टेस्ट तो दिया, लेकिन आपका पुराना स्कोर (" + oldData.score + ") ज़्यादा था। इसलिए लीडरबोर्ड पर पुराना स्कोर ही रहेगा!");
-                    window.location.href = 'index.html';
-                }
-            } else {
-                // अगर बच्चा आज पहली बार टेस्ट दे रहा है
-                set(userScoreRef, {
-                    name: currentStudentName,
-                    score: score
-                }).then(() => {
-                    alert("🎉 आपका स्कोर आज के लीडरबोर्ड में सेव हो गया!");
-                    window.location.href = 'index.html'; 
-                });
-            }
-        }).catch((error) => {
-            alert("❌ एरर: " + error);
+        questionsData.forEach((q, index) => {
+            const qDiv = document.createElement('div');
+            qDiv.className = "question-card";
+            qDiv.innerHTML = `
+                <div class="q-text">Q${index + 1}. ${q.question}</div>
+                <label class="option-label"><input type="radio" name="ans_${index}" value="A"> A. ${q.options.A}</label>
+                <label class="option-label"><input type="radio" name="ans_${index}" value="B"> B. ${q.options.B}</label>
+                <label class="option-label"><input type="radio" name="ans_${index}" value="C"> C. ${q.options.C}</label>
+                <label class="option-label"><input type="radio" name="ans_${index}" value="D"> D. ${q.options.D}</label>
+            `;
+            container.appendChild(qDiv);
         });
+    }
+
+    // ✅ टेस्ट जमा करने और स्कोर निकालने का फंक्शन
+    window.submitTest = () => {
+        clearInterval(timerInterval);
+        let score = 0;
+
+        questionsData.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="ans_${index}"]:checked`);
+            if (selected && selected.value === q.answer) {
+                score += 10; // हर सही जवाब के 10 अंक
+            }
+        });
+
+        document.getElementById('quiz-section').style.display = "none";
+        document.getElementById('timer-display').style.display = "none";
+        document.getElementById('result-section').style.display = "block";
+        document.getElementById('final-score').innerText = score;
+
+        saveScoreToLeaderboard(score);
     };
+
+    // 🏆 स्कोर को लीडरबोर्ड (Firebase) पर भेजने का फंक्शन
+    function saveScoreToLeaderboard(score) {
+        const todayDate = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+        
+        // 🌟 set() का इस्तेमाल किया गया है ताकि एक बच्चे का नाम सिर्फ एक बार आए! 🌟
+        set(ref(db, `daily_leaderboard/${todayDate}/${studentId}`), {
+            name: studentName,
+            score: score
+        }).then(() => {
+            console.log("स्कोर सेव हो गया!");
+        }).catch((error) => {
+            console.log("स्कोर सेव करने में एरर: ", error);
+        });
+    }
 </script>
 </body>
 </html>
