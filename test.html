@@ -124,8 +124,8 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getDatabase, ref, get, child, push } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
-    // 🌟 Auth इम्पोर्ट किया ताकि बच्चे का नाम पता चल सके
+    // 🌟 डुप्लीकेट रोकने के लिए 'set' जोड़ा गया है 🌟
+    import { getDatabase, ref, get, child, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
     const firebaseConfig = {
@@ -148,16 +148,12 @@
     let timerInterval;
     let timeLeft = 30;
     let selectedAnswer = "";
-    
-    // बच्चे का नाम स्टोर करने के लिए
     let currentStudentName = "Student";
 
-    // 🌟 लॉगिन वाले बच्चे का नाम अपने-आप पता करना 🌟
     onAuthStateChanged(auth, (user) => {
         if (user) {
             currentStudentName = user.displayName || user.email.split('@')[0];
         } else {
-            // अगर बच्चा लॉगिन नहीं है, तो उसे लॉगिन पेज पर भेज दो
             window.location.replace("login.html");
         }
     });
@@ -183,7 +179,7 @@
                 const data = snapshot.val();
                 
                 if(data.question && !data.options) {
-                    alert("⚠️ बॉस! इस चैप्टर में पुराने डिज़ाइन वाला सवाल फँसा है। कृपया पैनल से 'Lesson 2' में नया सवाल डालकर टेस्ट करें!");
+                    alert("⚠️ बॉस! इस चैप्टर में पुराने डिज़ाइन वाला सवाल फँसा है। कृपया पैनल से नया सवाल डालकर टेस्ट करें!");
                     window.location.href = 'index.html';
                     return;
                 }
@@ -210,7 +206,6 @@
         document.getElementById('time-left').innerText = timeLeft;
         document.getElementById('next-btn').style.display = 'none';
         
-        // 🌟 बटन का रंग रीसेट करना (ताकि अगले सवाल में हरा/लाल न दिखे)
         ['A', 'B', 'C', 'D'].forEach(opt => {
             const btn = document.getElementById('opt' + opt);
             btn.style.backgroundColor = 'white';
@@ -236,24 +231,21 @@
         startTimer();
     };
 
-    // 🌟 लाल (गलत) और हरा (सही) वाला जादुई कोड 🌟
     window.selectOption = (opt) => {
         selectedAnswer = opt;
         const correctAns = allQuestions[currentQIndex].answer;
 
         ['A', 'B', 'C', 'D'].forEach(o => {
             const btn = document.getElementById('opt' + o);
-            btn.disabled = true; // एक बार दबाने के बाद सारे बटन लॉक
+            btn.disabled = true; 
             
             if (o === correctAns) {
-                // सही जवाब हमेशा हरा हो जाएगा
                 btn.style.backgroundColor = '#4CAF50'; 
                 btn.style.color = 'white';
                 btn.style.borderColor = '#2E7D32';
                 btn.innerText += " ✅"; 
             } 
             else if (o === opt && opt !== correctAns) {
-                // अगर गलत चुना है, तो वो लाल हो जाएगा
                 btn.style.backgroundColor = '#F44336'; 
                 btn.style.color = 'white';
                 btn.style.borderColor = '#B71C1C';
@@ -292,21 +284,50 @@
         document.getElementById('final-score').style.color = score > 0 ? "#4caf50" : "#d32f2f";
         document.getElementById('feedback-msg').innerText = score > 0 ? "शाबाश! 🎉" : "और मेहनत करो! 💪";
         
-        // 🌟 रिज़ल्ट स्क्रीन पर बच्चे का नाम दिखाओ
         document.getElementById('auto-student-name').innerText = currentStudentName;
     };
 
-    // 🌟 बिना नाम टाइप किए सीधा स्कोर सेव करना
+    // 🌟 डुप्लीकेट नाम रोकने और हाई-स्कोर अपडेट करने वाला कोड 🌟
     window.saveMyScore = () => {
-        const today = new Date().toISOString().split('T')[0];
-        const scoreRef = ref(db, `daily_leaderboard/${today}`);
+        const user = auth.currentUser;
+        if (!user) {
+            alert("⚠️ आपको पहले लॉगिन करना होगा!");
+            return;
+        }
         
-        push(scoreRef, {
-            name: currentStudentName, // सिस्टम ने जो नाम पकड़ा, वही सेव होगा
-            score: score
-        }).then(() => {
-            alert("🎉 " + currentStudentName + " बॉस! आपका स्कोर लीडरबोर्ड में सेव हो गया!");
-            window.location.href = 'index.html'; 
+        const userId = user.uid; // हर बच्चे का एक यूनिक ताला (ID)
+        const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' }); // 🇮🇳 भारतीय समय
+        
+        // उस बच्चे के पक्के डब्बे (ID) में जाओ
+        const userScoreRef = ref(db, `daily_leaderboard/${today}/${userId}`);
+        
+        get(userScoreRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                const oldData = snapshot.val();
+                
+                // अगर नया स्कोर पुराने से ज़्यादा है, तो अपडेट करो
+                if (score > oldData.score) {
+                    set(userScoreRef, {
+                        name: currentStudentName,
+                        score: score
+                    }).then(() => {
+                        alert("🎉 शाबाश! आपका नया हाई-स्कोर लीडरबोर्ड में अपडेट हो गया!");
+                        window.location.href = 'index.html'; 
+                    });
+                } else {
+                    alert("😊 आपने टेस्ट तो दिया, लेकिन आपका पुराना स्कोर (" + oldData.score + ") ज़्यादा था। इसलिए लीडरबोर्ड पर पुराना स्कोर ही रहेगा!");
+                    window.location.href = 'index.html';
+                }
+            } else {
+                // अगर बच्चा आज पहली बार टेस्ट दे रहा है
+                set(userScoreRef, {
+                    name: currentStudentName,
+                    score: score
+                }).then(() => {
+                    alert("🎉 आपका स्कोर आज के लीडरबोर्ड में सेव हो गया!");
+                    window.location.href = 'index.html'; 
+                });
+            }
         }).catch((error) => {
             alert("❌ एरर: " + error);
         });
