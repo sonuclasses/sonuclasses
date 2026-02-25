@@ -3,179 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#1976D2">
-    <title>Class 10 Notes - Sonu Classes</title>
+    <meta name="theme-color" content="#1E40AF">
+    <title>Class 10 - Sonu Classes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --primary-green: #2E7D32; --primary-blue: #1976D2; --bg-light: #f4f4f9; --text-color: #333; --box-bg: white; --border-color: #ddd; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); color: var(--text-color); margin: 0; padding: 0; }
-        header { background-color: var(--primary-blue); color: white; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        h1 { margin: 0; font-size: 20px; display: flex; align-items: center; gap: 10px; }
-        .back-btn { background: white; color: var(--primary-blue); padding: 8px 15px; border: none; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        :root { --primary-blue: #1E40AF; --highlight-orange: #F97316; --bg-light: #F8FAFC; --text-dark: #0F172A; --card-bg: #FFFFFF; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-light); color: var(--text-dark); margin: 0; padding: 0; }
         
-        .container { padding: 20px; max-width: 800px; margin: auto; }
+        header { background-color: var(--card-bg); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--primary-blue); }
+        .logo { font-size: 20px; font-weight: 800; color: var(--primary-blue); margin: 0; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+        .logo i { color: var(--highlight-orange); }
+        .back-btn { background: var(--primary-blue); color: white; border: none; padding: 8px 15px; border-radius: 8px; font-weight: bold; cursor: pointer; text-decoration: none; font-size: 14px; }
         
-        .subject-card { background: var(--box-bg); margin-bottom: 15px; border-radius: 10px; border: 1px solid var(--border-color); overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .subject-header { padding: 15px 20px; background: #f8f9fa; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 18px; font-weight: bold; border-bottom: 1px solid transparent; transition: 0.3s; }
-        .subject-header:hover { background: #e9ecef; }
-        .subject-header.active { border-bottom: 1px solid var(--border-color); background: #e3f2fd; color: var(--primary-blue); }
-        
-        .lesson-list { display: none; padding: 15px; background: white; }
-        .lesson-list.show { display: block; animation: fadeIn 0.3s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .lesson-btn { display: block; width: 100%; text-align: left; padding: 15px; margin-bottom: 10px; background: white; border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); text-decoration: none; font-size: 15px; font-weight: 500; transition: 0.2s; box-sizing: border-box; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .lesson-btn:hover { border-color: var(--primary-blue); color: var(--primary-blue); background: #f8f9fa; transform: translateX(5px); }
-        
-        /* PDF वाली बटन का डिज़ाइन */
-        .pdf-ready { background-color: #E8F5E9 !important; border-color: #2E7D32 !important; color: #2E7D32 !important; font-weight: bold; box-shadow: 0 2px 5px rgba(46, 125, 50, 0.2); }
-        .pdf-ready::after { content: " (PDF उपलब्ध ✅)"; font-size: 13px; color: #E65100; float: right; }
+        .page-header { background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); padding: 30px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .page-title { font-size: 26px; font-weight: 800; color: var(--primary-blue); margin: 0 0 5px 0; }
+        .page-subtitle { font-size: 15px; color: #475569; margin: 0; font-weight: 500; }
 
-        .icon-math { color: #E65100; }
-        .icon-sci { color: #2E7D32; }
-        .icon-sst { color: #00838F; }
+        .selection-container { max-width: 500px; margin: 0 auto; padding: 0 20px; }
+        .setup-box { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 2px solid var(--primary-blue); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); text-align: left; }
+        
+        .form-group { margin-bottom: 15px; }
+        .form-group label { font-size: 15px; font-weight: 700; display: block; margin-bottom: 8px; }
+        .form-group select { width: 100%; padding: 12px; font-size: 16px; border-radius: 8px; border: 1px solid #CBD5E1; background-color: #F8FAFC; color: var(--text-dark); box-sizing: border-box; outline: none; }
+        
+        .btn-search { width: 100%; background-color: var(--highlight-orange); color: white; padding: 14px; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(249, 115, 22, 0.3); }
+        
+        #result-container { max-width: 500px; margin: 25px auto; padding: 0 20px; display: none; }
+        .notes-card { background: var(--card-bg); padding: 20px; border-radius: 15px; border-top: 5px solid var(--primary-blue); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        
+        /* 🌟 किताब जैसी 'कहानी' का डिज़ाइन 🌟 */
+        .story-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed #CBD5E1; padding-bottom: 10px; margin-bottom: 15px; }
+        .story-title { font-size: 20px; font-weight: 800; color: var(--primary-blue); margin: 0; }
+        
+        .story-content { background: #F8FAFC; padding: 20px; border-radius: 10px; font-size: 16px; color: #1E293B; line-height: 1.8; text-align: justify; white-space: pre-wrap; border: 1px solid #E2E8F0; margin-bottom: 20px; }
+        
+        .btn-audio { background: #10B981; color: white; border: none; padding: 8px 15px; border-radius: 20px; font-size: 14px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 5px; box-shadow: 0 4px 6px rgba(16, 185, 129, 0.3); }
+        .btn-audio:active { transform: scale(0.95); }
+
+        .btn-pdf { display: block; width: 100%; text-align: center; background-color: #EF4444; color: white; text-decoration: none; padding: 14px; border-radius: 8px; font-weight: bold; font-size: 16px; transition: 0.3s; box-shadow: 0 4px 6px rgba(239, 68, 68, 0.3); box-sizing: border-box; }
+        
+        .no-data { text-align: center; padding: 20px; background: #FEF2F2; color: #DC2626; border-radius: 10px; border: 1px solid #FECACA; font-weight: bold; font-size: 15px; }
+        #loading { display: none; text-align: center; margin-top: 20px; color: var(--primary-blue); font-weight: bold; font-size: 16px; }
+        .spinner { border: 4px solid rgba(0,0,0,0.1); width: 36px; height: 36px; border-radius: 50%; border-left-color: var(--highlight-orange); animation: spin 1s linear infinite; margin: 0 auto 10px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>📚 Class 10 Notes</h1>
-    <a href="index.html" class="back-btn">⬅ वापस होम</a>
-</header>
+    <header>
+        <a href="index.html" class="logo"><i class="fa-solid fa-graduation-cap"></i> Sonu Classes</a>
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Home</a>
+    </header>
 
-<div class="container">
-    
-    <div class="subject-card">
-        <div class="subject-header" onclick="toggleLessons(this)">
-            <span><span class="icon-sci">🔬</span> विज्ञान (Science)</span>
-            <span>➕</span>
-        </div>
-        <div class="lesson-list">
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="1">📄 Lesson 1: रासायनिक अभिक्रियाएँ एवं समीकरण</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="2">📄 Lesson 2: अम्ल, क्षारक एवं लवण</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="3">📄 Lesson 3: धातु एवं अधातु</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="4">📄 Lesson 4: कार्बन एवं उसके यौगिक</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="5">📄 Lesson 5: जैव प्रक्रम</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="6">📄 Lesson 6: नियंत्रण एवं समन्वय</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="7">📄 Lesson 7: जीव जनन कैसे करते हैं?</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="8">📄 Lesson 8: आनुवंशिकता</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="9">📄 Lesson 9: प्रकाश – परावर्तन तथा अपवर्तन</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="10">📄 Lesson 10: मानव नेत्र तथा रंगबिरंगा संसार</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="11">📄 Lesson 11: विद्युत्</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="12">📄 Lesson 12: विद्युत् धारा के चुंबकीय प्रभाव</a>
-            <a href="#" class="lesson-btn" data-sub="science" data-lesson="13">📄 Lesson 13: हमारा पर्यावरण</a>
+    <div class="page-header">
+        <h1 class="page-title">Class 10 Study Room</h1>
+        <p class="page-subtitle">कहानियाँ पढ़ें, सुनें और PDF डाउनलोड करें 📚</p>
+    </div>
+
+    <div class="selection-container">
+        <div class="setup-box">
+            <div class="form-group">
+                <label><i class="fa-solid fa-book"></i> विषय (Subject) चुनें:</label>
+                <select id="subject-select">
+                    <option value="hindi">अ हिंदी (Hindi)</option>
+                    <option value="science">🔬 विज्ञान (Science)</option>
+                    <option value="sst">🌍 सामाजिक विज्ञान (SST)</option>
+                    <option value="math">📐 गणित (Math)</option>
+                    <option value="english">A अंग्रेज़ी (English)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fa-solid fa-list-ol"></i> पाठ (Lesson) चुनें:</label>
+                <select id="lesson-select">
+                    <option value="lesson1">Lesson 1 (पाठ 1)</option>
+                    <option value="lesson2">Lesson 2 (पाठ 2)</option>
+                    <option value="lesson3">Lesson 3 (पाठ 3)</option>
+                    <option value="lesson4">Lesson 4 (पाठ 4)</option>
+                    <option value="lesson5">Lesson 5 (पाठ 5)</option>
+                    <option value="lesson6">Lesson 6 (पाठ 6)</option>
+                    <option value="lesson7">Lesson 7 (पाठ 7)</option>
+                    <option value="lesson8">Lesson 8 (पाठ 8)</option>
+                    <option value="lesson9">Lesson 9 (पाठ 9)</option>
+                    <option value="lesson10">Lesson 10 (पाठ 10)</option>
+                    <option value="lesson11">Lesson 11 (पाठ 11)</option>
+                    <option value="lesson12">Lesson 12 (पाठ 12)</option>
+                    <option value="lesson13">Lesson 13 (पाठ 13)</option>
+                    <option value="lesson14">Lesson 14 (पाठ 14)</option>
+                    <option value="lesson15">Lesson 15 (पाठ 15)</option>
+                </select>
+            </div>
+
+            <button class="btn-search" onclick="fetchNotes()"><i class="fa-solid fa-book-open-reader"></i> पाठ पढ़ें</button>
         </div>
     </div>
 
-    <div class="subject-card">
-        <div class="subject-header" onclick="toggleLessons(this)">
-            <span><span class="icon-math">📐</span> गणित (Mathematics)</span>
-            <span>➕</span>
-        </div>
-        <div class="lesson-list">
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="1">📄 Lesson 1: वास्तविक संख्याएँ</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="2">📄 Lesson 2: बहुपद</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="3">📄 Lesson 3: दो चर वाले रैखिक समीकरण युग्म</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="4">📄 Lesson 4: द्विघात समीकरण</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="5">📄 Lesson 5: समांतर श्रेढ़ियाँ (A.P.)</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="6">📄 Lesson 6: त्रिभुज</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="7">📄 Lesson 7: निर्देशांक ज्यामिति</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="8">📄 Lesson 8: त्रिकोणमिति का परिचय</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="9">📄 Lesson 9: त्रिकोणमिति के कुछ अनुप्रयोग</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="10">📄 Lesson 10: वृत्त</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="11">📄 Lesson 11: वृत्तों से संबंधित क्षेत्रफल</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="12">📄 Lesson 12: पृष्ठीय क्षेत्रफल और आयतन</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="13">📄 Lesson 13: सांख्यिकी</a>
-            <a href="#" class="lesson-btn" data-sub="math" data-lesson="14">📄 Lesson 14: प्रायिकता</a>
-        </div>
+    <div id="loading">
+        <div class="spinner"></div>
+        पाठ खोजा जा रहा है...
     </div>
 
-    <div class="subject-card">
-        <div class="subject-header" onclick="toggleLessons(this)">
-            <span><span class="icon-sst">🌍</span> सामाजिक विज्ञान (SST)</span>
-            <span>➕</span>
-        </div>
-        <div class="lesson-list">
-            <h4 style="margin: 10px 0; color: #00838F;">इतिहास</h4>
-            <a href="#" class="lesson-btn" data-sub="history" data-lesson="1">📄 Lesson 1: यूरोप में राष्ट्रवाद का उदय</a>
-            <a href="#" class="lesson-btn" data-sub="history" data-lesson="2">📄 Lesson 2: भारत में राष्ट्रवाद</a>
-            <a href="#" class="lesson-btn" data-sub="history" data-lesson="3">📄 Lesson 3: भूमंडलीकृत विश्व का बनना</a>
-            <a href="#" class="lesson-btn" data-sub="history" data-lesson="4">📄 Lesson 4: औद्योगीकरण का युग</a>
-            <a href="#" class="lesson-btn" data-sub="history" data-lesson="5">📄 Lesson 5: मुद्रण संस्कृति और आधुनिक दुनिया</a>
-            
-            <h4 style="margin: 10px 0; color: #00838F;">भूगोल</h4>
-            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="1">📄 Lesson 1: संसाधन और विकास</a>
-            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="2">📄 Lesson 2: वन और वन्य जीव संसाधन</a>
-            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="3">📄 Lesson 3: जल संसाधन</a>
-            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="4">📄 Lesson 4: कृषि</a>
-            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="5">📄 Lesson 5: खनिज तथा ऊर्जा संसाधन</a>
-            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="6">📄 Lesson 6: विनिर्माण उद्योग</a>
-            <a href="#" class="lesson-btn" data-sub="geography" data-lesson="7">📄 Lesson 7: राष्ट्रीय अर्थव्यवस्था की जीवन रेखाएँ</a>
-            
-            <h4 style="margin: 10px 0; color: #00838F;">नागरिक शास्त्र</h4>
-            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="1">📄 Lesson 1: सत्ता की साझेदारी</a>
-            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="2">📄 Lesson 2: संघवाद</a>
-            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="3">📄 Lesson 3: जाति, धर्म और लैंगिक मसले</a>
-            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="4">📄 Lesson 4: राजनीतिक दल</a>
-            <a href="#" class="lesson-btn" data-sub="civics" data-lesson="5">📄 Lesson 5: लोकतंत्र के परिणाम</a>
-            
-            <h4 style="margin: 10px 0; color: #00838F;">अर्थशास्त्र</h4>
-            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="1">📄 Lesson 1: विकास</a>
-            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="2">📄 Lesson 2: भारतीय अर्थव्यवस्था के क्षेत्रक</a>
-            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="3">📄 Lesson 3: मुद्रा और साख</a>
-            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="4">📄 Lesson 4: वैश्वीकरण और भारतीय अर्थव्यवस्था</a>
-            <a href="#" class="lesson-btn" data-sub="economics" data-lesson="5">📄 Lesson 5: उपभोक्ता अधिकार</a>
-        </div>
-    </div>
+    <div id="result-container"></div>
 
-</div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+        const firebaseConfig = { apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30", authDomain: "sonuclasses-b19db.firebaseapp.com", databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com", projectId: "sonuclasses-b19db", storageBucket: "sonuclasses-b19db.firebasestorage.app", messagingSenderId: "166740602272", appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5" };
+        const app = initializeApp(firebaseConfig); const db = getDatabase(app);
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
-        authDomain: "sonuclasses-b19db.firebaseapp.com",
-        databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com",
-        projectId: "sonuclasses-b19db",
-        storageBucket: "sonuclasses-b19db.firebasestorage.app",
-        messagingSenderId: "166740602272",
-        appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    // यह कोड एडमिन पैनल से भेजे गए PDF लिंक को पकड़ता है (Class 10 के लिए)
-    onValue(ref(db, 'appData/notes/class10'), (snapshot) => {
-        if (snapshot.exists()) {
-            const data = snapshot.val();
-            for (const subject in data) {
-                for (const lessonKey in data[subject]) {
-                    const lessonNum = lessonKey.replace('lesson', '');
-                    const btn = document.querySelector(`a[data-sub="${subject}"][data-lesson="${lessonNum}"]`);
-                    
-                    if (btn) {
-                        btn.href = data[subject][lessonKey]; 
-                        btn.target = "_blank"; 
-                        btn.classList.add("pdf-ready"); 
-                    }
-                }
+        // 🔊 कहानी सुनाने वाला जादुई फंक्शन
+        window.playStoryAudio = (buttonElement) => {
+            const storyText = document.getElementById('story-text-content').innerText;
+            if(window.speechSynthesis.speaking) { 
+                window.speechSynthesis.cancel(); 
+                buttonElement.innerHTML = '<i class="fa-solid fa-volume-high"></i> कहानी सुनें';
+                buttonElement.style.background = '#10B981';
+                return; 
             }
-        }
-    });
+            
+            let speech = new SpeechSynthesisUtterance(storyText);
+            speech.lang = 'hi-IN'; // हिंदी आवाज़
+            speech.rate = 0.9; // आराम से बोलेगा
+            
+            buttonElement.innerHTML = '<i class="fa-solid fa-circle-stop"></i> सुनना बंद करें';
+            buttonElement.style.background = '#DC2626'; // लाल रंग
+            
+            speech.onend = () => {
+                buttonElement.innerHTML = '<i class="fa-solid fa-volume-high"></i> कहानी सुनें';
+                buttonElement.style.background = '#10B981';
+            };
+            
+            window.speechSynthesis.speak(speech);
+        };
 
-    window.toggleLessons = function(header) {
-        const content = header.nextElementSibling;
-        const icon = header.querySelector("span:last-child");
-        if (content.classList.contains("show")) {
-            content.classList.remove("show"); header.classList.remove("active"); icon.innerText = "➕";
-        } else {
-            document.querySelectorAll(".lesson-list").forEach(list => list.classList.remove("show"));
-            document.querySelectorAll(".subject-header").forEach(h => { h.classList.remove("active"); h.querySelector("span:last-child").innerText = "➕"; });
-            content.classList.add("show"); header.classList.add("active"); icon.innerText = "➖";
-        }
-    }
-</script>
+        window.fetchNotes = async () => {
+            // कोई पुरानी आवाज़ चल रही हो तो बंद कर दो
+            window.speechSynthesis.cancel();
+            
+            const subject = document.getElementById('subject-select').value;
+            const lesson = document.getElementById('lesson-select').value;
+            const resultContainer = document.getElementById('result-container');
+            const loader = document.getElementById('loading');
+            
+            resultContainer.style.display = 'none'; loader.style.display = 'block';
+
+            try {
+                const snapshot = await get(child(ref(db), `appData/notes/class10/${subject}/${lesson}`));
+                loader.style.display = 'none'; 
+
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    let htmlContent = `<div class="notes-card">`;
+                    
+                    // 🌟 अगर कहानी / नोट्स लिखे हैं, तो ये 'किताब' जैसा दिखेगा 🌟
+                    if(data.text && data.text.trim() !== "") {
+                        htmlContent += `
+                            <div class="story-header">
+                                <h3 class="story-title"><i class="fa-solid fa-book-open"></i> पाठ का सारांश</h3>
+                                <button class="btn-audio" onclick="playStoryAudio(this)"><i class="fa-solid fa-volume-high"></i> कहानी सुनें</button>
+                            </div>
+                            <div class="story-content" id="story-text-content">${data.text}</div>
+                        `;
+                    }
+                    
+                    // अगर PDF लिंक है
+                    if(data.pdf && data.pdf.trim() !== "") {
+                        htmlContent += `<a href="${data.pdf}" target="_blank" class="btn-pdf"><i class="fa-solid fa-file-pdf"></i> ओरिजिनल PDF डाउनलोड करें</a>`;
+                    }
+
+                    htmlContent += `</div>`;
+                    resultContainer.innerHTML = htmlContent;
+                } else {
+                    resultContainer.innerHTML = `<div class="no-data"><i class="fa-solid fa-triangle-exclamation" style="font-size: 24px; margin-bottom: 10px; display: block;"></i> सोनू सर ने अभी इस पाठ की कहानी या PDF अपलोड नहीं की है! 🙏</div>`;
+                }
+                resultContainer.style.display = 'block';
+            } catch (error) {
+                loader.style.display = 'none'; alert("❌ कनेक्शन एरर!");
+            }
+        };
+    </script>
 </body>
 </html>
