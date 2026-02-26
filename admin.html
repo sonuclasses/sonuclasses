@@ -4,27 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sonu Classes - Secure Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; margin: 0; padding: 15px; }
-        .admin-container { max-width: 500px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); padding: 20px; overflow: hidden; }
+        .admin-container { max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); padding: 20px; overflow: hidden; }
         
-        /* 🔒 लॉक स्क्रीन का डिज़ाइन */
         #lock-screen { text-align: center; padding: 50px 10px; }
         .lock-icon { font-size: 60px; margin-bottom: 10px; }
-        .pass-input { width: 90%; padding: 15px; border-radius: 8px; border: 2px solid #1976D2; font-size: 18px; text-align: center; margin-bottom: 20px; }
+        .pass-input { width: 90%; padding: 15px; border-radius: 8px; border: 2px solid #1976D2; font-size: 18px; text-align: center; margin-bottom: 20px; box-sizing: border-box; }
         
-        /* 📊 डैशबोर्ड का डिज़ाइन */
         .dashboard-box { background: linear-gradient(135deg, #1976D2, #1565C0); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .dashboard-box h3 { margin: 0 0 10px 0; font-size: 18px; color: #BBDEFB; }
         .dashboard-number { font-size: 45px; font-weight: bold; margin: 0; }
 
-        /* 📋 स्टूडेंट लिस्ट का डिज़ाइन */
-        .student-list-box { background: #E3F2FD; border: 2px solid #1976D2; border-radius: 12px; padding: 15px; margin-bottom: 30px; }
+        .student-list-box { background: #E3F2FD; border: 2px solid #1976D2; border-radius: 12px; padding: 15px; margin-bottom: 20px; }
         .student-list-box h3 { color: #0D47A1; margin-top: 0; text-align: center; font-size: 16px; border-bottom: 1px solid #90CAF9; padding-bottom: 10px; }
         .student-items { max-height: 250px; overflow-y: auto; background: white; border-radius: 8px; padding: 10px; }
         .student-item { border-bottom: 1px solid #eee; padding: 10px 0; font-size: 15px; }
         .student-item:last-child { border-bottom: none; }
         .student-phone { color: #2E7D32; font-weight: bold; text-decoration: none; font-size: 16px; }
+
+        /* 🚀 नया: मैसेज बॉक्स डिज़ाइन 🚀 */
+        .message-list-box { background: #FFF3E0; border: 2px solid #F97316; border-radius: 12px; padding: 15px; margin-bottom: 30px; }
+        .message-list-box h3 { color: #E65100; margin-top: 0; text-align: center; font-size: 16px; border-bottom: 1px solid #FFCC80; padding-bottom: 10px; }
+        .message-items { max-height: 300px; overflow-y: auto; background: white; border-radius: 8px; padding: 10px; }
+        .msg-card { background: #FAFAFA; border-left: 4px solid #F97316; padding: 12px; margin-bottom: 10px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .msg-card:last-child { margin-bottom: 0; }
+        .msg-name { font-weight: bold; color: #1E40AF; font-size: 15px; margin-bottom: 5px; }
+        .msg-text { color: #333; font-size: 14px; line-height: 1.5; margin-bottom: 5px; }
+        .msg-date { font-size: 11px; color: gray; text-align: right; margin: 0; }
 
         h2 { color: #1976D2; text-align: center; margin-bottom: 5px; font-size: 24px; }
         .subtitle { text-align: center; color: #555; font-weight: bold; margin-bottom: 25px; font-size: 14px; }
@@ -32,33 +40,23 @@
         .form-group { margin-bottom: 15px; }
         label { font-weight: bold; color: #333; margin-bottom: 5px; display: block; font-size: 14px; }
         select, input, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; background-color: #fff; box-sizing: border-box; font-family: inherit; }
+        textarea { height: 90px; resize: none; }
         
         .section-box { border-radius: 10px; padding: 20px; margin-bottom: 30px; position: relative; }
-        
-        /* 📰 न्यूज़ बॉक्स (Pink) */
         .news-box { border: 2px solid #E91E63; background-color: #FCE4EC; }
         .news-title { background: #E91E63; color: white; padding: 10px 15px; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block; margin-top: -35px; margin-bottom: 15px; }
 
-        /* 💡 GK बॉक्स (Purple) */
         .gk-admin-box { border: 2px solid #673AB7; background-color: #F3E5F5; }
         .gk-admin-title { background: #673AB7; color: white; padding: 10px 15px; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block; margin-top: -35px; margin-bottom: 15px; }
 
-        /* 🏆 क्विज़ बॉक्स (Orange) */
         .quiz-box { border: 2px solid #FF9800; background-color: #fff8e1; }
         .quiz-title { background: #FF9800; color: white; padding: 10px 15px; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block; margin-top: -35px; margin-bottom: 15px; }
         
-        /* 📝 PDF बॉक्स (Green) */
         .pdf-box { border: 2px solid #4CAF50; background-color: #e8f5e9; }
         .pdf-title { background: #4CAF50; color: white; padding: 10px 15px; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block; margin-top: -35px; margin-bottom: 15px; }
-
-        textarea { height: 90px; resize: none; }
         
         .btn { width: 100%; padding: 14px; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: 0.3s; }
-        .btn-blue { background-color: #1976D2; }
-        .btn-orange { background-color: #E65100; }
-        .btn-green { background-color: #2E7D32; }
-        .btn-pink { background-color: #E91E63; }
-        .btn-purple { background-color: #673AB7; }
+        .btn-blue { background-color: #1976D2; } .btn-orange { background-color: #E65100; } .btn-green { background-color: #2E7D32; } .btn-pink { background-color: #E91E63; } .btn-purple { background-color: #673AB7; }
     </style>
 </head>
 <body>
@@ -84,7 +82,7 @@
         </div>
 
         <div class="student-list-box">
-            <h3>📋 बच्चों के नंबर और डिटेल्स</h3>
+            <h3>📋 बच्चों के नंबर (WhatsApp List)</h3>
             <div class="student-items">
                 <ul id="registered-list" style="list-style: none; padding: 0; margin: 0;">
                     <li style="color: gray; text-align: center;">डेटा लोड हो रहा है...</li>
@@ -92,32 +90,31 @@
             </div>
         </div>
 
+        <div class="message-list-box">
+            <h3><i class="fa-solid fa-envelope"></i> बच्चों के मैसेज (Inbox)</h3>
+            <div class="message-items" id="message-container">
+                <div style="color: gray; text-align: center; padding: 10px;">अभी तक कोई नया मैसेज नहीं आया है।</div>
+            </div>
+        </div>
+
         <div class="section-box news-box">
             <div class="news-title">📰 1. ब्रेकिंग न्यूज़ बदलें</div>
-            <div class="form-group">
-                <label>आज की ताज़ा खबर (News Ticker):</label>
-                <textarea id="news-input" placeholder="जैसे: आज शाम 5 बजे क्लास 10 का नया टेस्ट लाइव होगा..."></textarea>
-            </div>
-            <button class="btn btn-pink" onclick="saveNews()">📢 न्यूज़ वेबसाइट पर लाइव करें</button>
+            <div class="form-group"><textarea id="news-input" placeholder="आज शाम 5 बजे क्लास 10 का नया टेस्ट लाइव होगा..."></textarea></div>
+            <button class="btn btn-pink" onclick="saveNews()">📢 न्यूज़ लाइव करें</button>
         </div>
 
         <div class="section-box gk-admin-box">
-            <div class="gk-admin-title">💡 2. IAS Foundation & Daily GK</div>
-            <div class="form-group">
-                <label>आज का सामान्य ज्ञान / फैक्ट:</label>
-                <textarea id="gk-input" placeholder="जैसे: भारत का क्षेत्रफल 32,87,263 वर्ग किमी है..."></textarea>
-            </div>
-            <button class="btn btn-purple" onclick="saveGK()">💡 ज्ञान वेबसाइट पर लाइव करें</button>
+            <div class="gk-admin-title">💡 2. Daily GK (IAS Foundation)</div>
+            <div class="form-group"><textarea id="gk-input" placeholder="भारत का क्षेत्रफल 32,87,263 वर्ग किमी है..."></textarea></div>
+            <button class="btn btn-purple" onclick="saveGK()">💡 ज्ञान लाइव करें</button>
         </div>
 
         <div class="section-box quiz-box">
             <div class="quiz-title">🏆 3. ऑनलाइन टेस्ट डालें</div>
             <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                <div style="flex: 1;"><label>क्लास:</label><select id="q-class"><option value="class6">Class 6</option><option value="class7">Class 7</option><option value="class8">Class 8</option><option value="class9">Class 9</option><option value="class10">Class 10</option></select></div>
-                <div style="flex: 1;"><label>विषय:</label><select id="q-subject"><option value="science">Science</option><option value="math">Math</option><option value="sst">SST</option><option value="hindi">Hindi</option><option value="english">English</option></select></div>
+                <div style="flex: 1;"><label>क्लास:</label><select id="q-class"><option value="class10">Class 10</option></select></div>
+                <div style="flex: 1;"><label>विषय:</label><select id="q-subject"><option value="science">Science</option><option value="sst">SST</option><option value="math">Math</option><option value="hindi">Hindi</option><option value="english">English</option></select></div>
             </div>
-            <div class="form-group"><label>पाठ (Lesson):</label><select id="q-lesson"><option value="lesson1">Lesson 1</option><option value="lesson2">Lesson 2</option><option value="lesson3">Lesson 3</option><option value="lesson4">Lesson 4</option><option value="lesson5">Lesson 5</option><option value="lesson6">Lesson 6</option><option value="lesson7">Lesson 7</option><option value="lesson8">Lesson 8</option><option value="lesson9">Lesson 9</option><option value="lesson10">Lesson 10</option><option value="lesson11">Lesson 11</option><option value="lesson12">Lesson 12</option><option value="lesson13">Lesson 13</option><option value="lesson14">Lesson 14</option><option value="lesson15">Lesson 15</option></select></div>
-
             <div class="form-group"><input type="text" id="q-input" placeholder="सवाल यहाँ लिखें..."></div>
             <div class="form-group"><input type="text" id="optA" placeholder="Option A"></div>
             <div class="form-group"><input type="text" id="optB" placeholder="Option B"></div>
@@ -128,16 +125,14 @@
         </div>
 
         <div class="section-box pdf-box">
-            <div class="pdf-title">📝 4. PDF और नोट्स डालें</div>
+            <div class="pdf-title">📝 4. पाठ की कहानी और PDF</div>
             <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                <div style="flex: 1;"><label>क्लास:</label><select id="n-class"><option value="class6">Class 6</option><option value="class7">Class 7</option><option value="class8">Class 8</option><option value="class9">Class 9</option><option value="class10">Class 10</option></select></div>
-                <div style="flex: 1;"><label>विषय:</label><select id="n-subject"><option value="science">Science</option><option value="math">Math</option><option value="sst">SST</option><option value="hindi">Hindi</option><option value="english">English</option></select></div>
+                <div style="flex: 1;"><label>विषय:</label><select id="n-subject"><option value="hindi">Hindi</option><option value="science">Science</option><option value="sst">SST</option><option value="math">Math</option><option value="english">English</option></select></div>
+                <div style="flex: 1;"><label>पाठ:</label><select id="n-lesson"><option value="lesson1">Lesson 1</option><option value="lesson2">Lesson 2</option><option value="lesson3">Lesson 3</option><option value="lesson4">Lesson 4</option><option value="lesson5">Lesson 5</option></select></div>
             </div>
-            <div class="form-group"><label>पाठ (Lesson):</label><select id="n-lesson"><option value="lesson1">Lesson 1</option><option value="lesson2">Lesson 2</option><option value="lesson3">Lesson 3</option><option value="lesson4">Lesson 4</option><option value="lesson5">Lesson 5</option><option value="lesson6">Lesson 6</option><option value="lesson7">Lesson 7</option><option value="lesson8">Lesson 8</option><option value="lesson9">Lesson 9</option><option value="lesson10">Lesson 10</option><option value="lesson11">Lesson 11</option><option value="lesson12">Lesson 12</option><option value="lesson13">Lesson 13</option><option value="lesson14">Lesson 14</option><option value="lesson15">Lesson 15</option></select></div>
-
-            <div class="form-group"><label>नोट्स (VVI Text):</label><textarea id="notes-input" placeholder="यहाँ कुछ ज़रूरी बातें लिख सकते हैं..."></textarea></div>
+            <div class="form-group"><label>कहानी / नोट्स (VVI Text):</label><textarea id="notes-input" placeholder="यहाँ पूरी कहानी या थ्योरी लिख सकते हैं..."></textarea></div>
             <div class="form-group"><label>PDF लिंक (Google Drive):</label><input type="text" id="pdf-input" placeholder="Google Drive का लिंक यहाँ डालें..."></div>
-            <button class="btn btn-green" onclick="saveNotes()">✅ PDF अपलोड करें</button>
+            <button class="btn btn-green" onclick="saveNotes()">✅ अपलोड करें</button>
         </div>
         
         <button class="btn" style="background-color: #555; margin-top: 10px;" onclick="window.location.href='index.html'">🏠 होम पेज पर वापस जाएँ</button>
@@ -150,116 +145,60 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
     import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30",
-        authDomain: "sonuclasses-b19db.firebaseapp.com",
-        databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com",
-        projectId: "sonuclasses-b19db",
-        storageBucket: "sonuclasses-b19db.firebasestorage.app",
-        messagingSenderId: "166740602272",
-        appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5"
-    };
+    const firebaseConfig = { apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30", authDomain: "sonuclasses-b19db.firebaseapp.com", databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com", projectId: "sonuclasses-b19db", storageBucket: "sonuclasses-b19db.firebasestorage.app", messagingSenderId: "166740602272", appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5" };
+    const app = initializeApp(firebaseConfig); const db = getDatabase(app);
 
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    // 🌟 ताला खोलने वाला फंक्शन
     window.unlockAdmin = () => {
         const pass = document.getElementById('admin-pass').value;
         if (pass === "SonuBoss") {
             document.getElementById('lock-screen').style.display = 'none';
             document.getElementById('admin-main').style.display = 'block';
             startDashboard();
+            fetchMessages(); // 🚀 अनलॉक होते ही मैसेज लाओ
         } else {
-            alert("❌ गलत पासवर्ड बॉस! असली CEO का पासवर्ड डालिए।");
-            document.getElementById('admin-pass').value = '';
+            alert("❌ गलत पासवर्ड बॉस!"); document.getElementById('admin-pass').value = '';
         }
     };
 
-    // 🌟 डैशबोर्ड और नंबर की लिस्ट
     window.startDashboard = () => {
-        const studentRef = ref(db, 'appData/registered_students');
-        onValue(studentRef, (snapshot) => {
-            const listContainer = document.getElementById('registered-list');
-            listContainer.innerHTML = ''; 
-
+        onValue(ref(db, 'appData/registered_students'), (snapshot) => {
+            const list = document.getElementById('registered-list'); list.innerHTML = ''; 
             if (snapshot.exists()) {
-                const data = snapshot.val();
-                const totalCount = Object.keys(data).length;
-                document.getElementById('total-students-count').innerText = totalCount;
+                const data = snapshot.val(); document.getElementById('total-students-count').innerText = Object.keys(data).length;
+                Object.values(data).forEach((st) => { list.innerHTML += `<li class="student-item">👤 <b>${st.name}</b> <br>📞 <a href="tel:${st.phone}" class="student-phone">${st.phone}</a></li>`; });
+            } else { document.getElementById('total-students-count').innerText = "0"; list.innerHTML = '<li style="color: gray; text-align: center;">अभी कोई रजिस्टर नहीं हुआ है।</li>'; }
+        });
+    };
 
-                Object.values(data).forEach((student) => {
-                    listContainer.innerHTML += `
-                        <li class="student-item">
-                            👤 <b>${student.name}</b> <br>
-                            📞 <a href="tel:${student.phone}" class="student-phone">${student.phone}</a> <br>
-                            📅 <span style="font-size: 13px; color: gray;">Joined: ${student.date}</span>
-                        </li>
+    // 🚀 📩 नया: मैसेज लाने वाला फंक्शन 🚀
+    window.fetchMessages = () => {
+        onValue(ref(db, 'appData/messages'), (snapshot) => {
+            const msgBox = document.getElementById('message-container');
+            msgBox.innerHTML = '';
+            if(snapshot.exists()) {
+                const messages = [];
+                snapshot.forEach((childSnap) => { messages.push(childSnap.val()); });
+                // सबसे नया मैसेज सबसे ऊपर दिखाने के लिए लिस्ट को पलट दो (Reverse)
+                messages.reverse().forEach((msg) => {
+                    msgBox.innerHTML += `
+                        <div class="msg-card">
+                            <div class="msg-name"><i class="fa-solid fa-user"></i> ${msg.name}</div>
+                            <div class="msg-text">${msg.message}</div>
+                            <p class="msg-date">${msg.date}</p>
+                        </div>
                     `;
                 });
             } else {
-                document.getElementById('total-students-count').innerText = "0";
-                listContainer.innerHTML = '<li style="color: gray; text-align: center;">अभी तक कोई रजिस्टर नहीं हुआ है।</li>';
+                msgBox.innerHTML = '<div style="color: gray; text-align: center; padding: 10px;">अभी तक कोई नया मैसेज नहीं आया है।</div>';
             }
         });
     };
 
-    // 🌟 📰 न्यूज़ सेव करने का फंक्शन
-    window.saveNews = () => {
-        const newsText = document.getElementById('news-input').value;
-        if (!newsText.trim()) { alert("⚠️ बॉस! पहले डब्बे में कोई खबर तो लिखिए!"); return; }
-        set(ref(db, 'appData/news'), newsText)
-        .then(() => { alert("📢 शानदार! आपकी ताज़ा खबर वेबसाइट पर लाइव हो गई है!"); document.getElementById('news-input').value = ''; })
-        .catch((error) => { alert("❌ एरर: " + error); });
-    };
-
-    // 🌟 💡 नया: Daily GK / IAS फैक्ट सेव करने का फंक्शन 🌟
-    window.saveGK = () => {
-        const gkText = document.getElementById('gk-input').value;
-        
-        if (!gkText.trim()) {
-            alert("⚠️ बॉस! डब्बे में कोई ज्ञान की बात तो लिखिए!");
-            return;
-        }
-
-        // डेटाबेस में 'appData/dailyGK' वाले फोल्डर में सेव कर रहे हैं
-        set(ref(db, 'appData/dailyGK'), gkText)
-        .then(() => {
-            alert("💡 शानदार! आपका नया GK फैक्ट वेबसाइट पर लाइव हो गया है!");
-            document.getElementById('gk-input').value = ''; // बॉक्स खाली कर दो
-        })
-        .catch((error) => {
-            alert("❌ एरर: " + error);
-        });
-    };
-
-    // पुराने सेव करने वाले फंक्शन्स
-    window.saveQuiz = () => {
-        const cls = document.getElementById('q-class').value;
-        const sub = document.getElementById('q-subject').value;
-        const les = document.getElementById('q-lesson').value;
-        const qText = document.getElementById('q-input').value;
-        const a = document.getElementById('optA').value; const b = document.getElementById('optB').value; const c = document.getElementById('optC').value; const d = document.getElementById('optD').value;
-        const ans = document.getElementById('correct-ans').value;
-
-        if (!qText || !a || !b) { alert("⚠️ बॉस! सवाल और कम से कम दो ऑप्शन तो लिखने पड़ेंगे!"); return; }
-        push(ref(db, `appData/quizzes/${cls}/${sub}/${les}`), { question: qText, options: { A: a, B: b, C: c, D: d }, answer: ans })
-        .then(() => { alert("🚀 शानदार! सवाल ऑनलाइन टेस्ट में जुड़ गया!"); document.getElementById('q-input').value = ''; document.getElementById('optA').value = ''; document.getElementById('optB').value = ''; document.getElementById('optC').value = ''; document.getElementById('optD').value = ''; })
-        .catch((error) => { alert("❌ एरर: " + error); });
-    };
-
-    window.saveNotes = () => {
-        const cls = document.getElementById('n-class').value;
-        const sub = document.getElementById('n-subject').value;
-        const les = document.getElementById('n-lesson').value;
-        const notesText = document.getElementById('notes-input').value;
-        const pdfLink = document.getElementById('pdf-input').value;
-
-        if (!notesText && !pdfLink) { alert("⚠️ बॉस! खाली मत छोड़िए, नोट्स या PDF लिंक में से कुछ तो डालिए!"); return; }
-        set(ref(db, `appData/notes/${cls}/${sub}/${les}`), { text: notesText, pdf: pdfLink, date: new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' }) })
-        .then(() => { alert("✅ बहुत बढ़िया! आपका PDF लिंक वेबसाइट पर लाइव हो गया!"); document.getElementById('notes-input').value = ''; document.getElementById('pdf-input').value = ''; })
-        .catch((error) => { alert("❌ एरर: " + error); });
-    };
+    // बाकी सेव करने वाले फंक्शन (News, GK, Quiz, Notes)
+    window.saveNews = () => { const text = document.getElementById('news-input').value; if(!text) return alert("खाली है!"); set(ref(db, 'appData/news'), text).then(() => { alert("न्यूज़ लाइव हो गई!"); document.getElementById('news-input').value = ''; }); };
+    window.saveGK = () => { const text = document.getElementById('gk-input').value; if(!text) return alert("खाली है!"); set(ref(db, 'appData/dailyGK'), text).then(() => { alert("GK लाइव हो गया!"); document.getElementById('gk-input').value = ''; }); };
+    window.saveQuiz = () => { const cls = document.getElementById('q-class').value; const sub = document.getElementById('q-subject').value; const q = document.getElementById('q-input').value; const a = document.getElementById('optA').value; const b = document.getElementById('optB').value; const c = document.getElementById('optC').value; const d = document.getElementById('optD').value; const ans = document.getElementById('correct-ans').value; if(!q || !a) return alert("सवाल लिखें!"); push(ref(db, `appData/quizzes/${cls}/${sub}`), { question: q, options: {A: a, B: b, C: c, D: d}, answer: ans }).then(() => { alert("सवाल सेव!"); document.getElementById('q-input').value=''; document.getElementById('optA').value=''; document.getElementById('optB').value=''; document.getElementById('optC').value=''; document.getElementById('optD').value=''; }); };
+    window.saveNotes = () => { const sub = document.getElementById('n-subject').value; const les = document.getElementById('n-lesson').value; const text = document.getElementById('notes-input').value; const pdf = document.getElementById('pdf-input').value; if(!text && !pdf) return alert("कुछ तो डालें!"); set(ref(db, `appData/notes/class10/${sub}/${les}`), { text: text, pdf: pdf }).then(() => { alert("नोट्स सेव!"); document.getElementById('notes-input').value=''; document.getElementById('pdf-input').value=''; }); };
 </script>
 </body>
 </html>
