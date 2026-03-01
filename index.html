@@ -11,12 +11,10 @@
         :root { --primary-blue: #1E40AF; --highlight-orange: #F97316; --bg-light: #F8FAFC; --text-dark: #0F172A; --card-bg: #FFFFFF; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-light); color: var(--text-dark); margin: 0; padding: 0; scroll-behavior: smooth; }
         
-        /* 1. Header & Menu */
         header { background-color: var(--card-bg); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary-blue); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
         .logo { font-size: 22px; font-weight: 800; color: var(--primary-blue); display: flex; align-items: center; gap: 8px; margin: 0; text-decoration: none; }
         .logo i { color: var(--highlight-orange); }
         
-        /* Profile Dropdown */
         .profile-section { position: relative; }
         .profile-img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary-blue); cursor: pointer; object-fit: cover; background: #fff; transition: 0.3s; }
         .dropdown { display: none; position: absolute; right: 0; top: 50px; background: var(--card-bg); box-shadow: 0 10px 15px rgba(0,0,0,0.1); border-radius: 8px; min-width: 160px; z-index: 1000; border: 1px solid #E2E8F0; overflow: hidden; }
@@ -24,32 +22,27 @@
         .dropdown button:hover { background: #F1F5F9; color: var(--primary-blue); }
         .show { display: block !important; }
 
-        /* Top Navigation Menu */
         nav { background-color: var(--primary-blue); display: flex; overflow-x: auto; white-space: nowrap; padding: 10px 5px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); position: sticky; top: 74px; z-index: 99; scrollbar-width: none; }
         nav::-webkit-scrollbar { display: none; }
         nav a { color: white; text-decoration: none; padding: 8px 15px; margin: 0 5px; font-size: 15px; font-weight: bold; border-radius: 20px; transition: 0.3s; display: flex; align-items: center; gap: 6px; }
         nav a:hover, nav a.active { background-color: rgba(255,255,255,0.2); }
 
-        /* 2. News Ticker */
         .news-ticker { background-color: #0F172A; color: white; padding: 10px; font-size: 14px; display: flex; align-items: center; overflow: hidden; cursor: pointer; }
         .news-ticker span { font-weight: bold; background: var(--highlight-orange); padding: 3px 8px; border-radius: 4px; margin-right: 10px; white-space: nowrap; }
         .marquee { flex: 1; overflow: hidden; white-space: nowrap; }
         .marquee p { display: inline-block; margin: 0; padding-left: 100%; animation: scroll 15s linear infinite; font-weight: 500; }
         @keyframes scroll { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* 3. Hero Section */
         .hero-section { background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); padding: 40px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .hero-title { font-size: 26px; font-weight: 800; color: var(--primary-blue); margin: 0 0 10px 0; line-height: 1.3; }
         .hero-subtitle { font-size: 15px; color: #475569; margin-bottom: 25px; font-weight: 500; }
         .btn-main { background-color: var(--highlight-orange); color: white; padding: 14px 30px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3); transition: 0.3s; }
         
-        /* 🚀 4. वो 4 जादुई डब्बे (Feature Grid) 🚀 */
         .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px 25px; margin-top: -15px; }
         .feature-box { background: var(--card-bg); border-radius: 15px; padding: 20px 10px; text-align: center; text-decoration: none; color: var(--primary-blue); font-weight: 800; font-size: 15px; border: 2px solid var(--primary-blue); box-shadow: 0 6px 0 var(--primary-blue); transition: 0.1s; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
         .feature-box i { font-size: 32px; color: var(--highlight-orange); }
         .feature-box:active { transform: translateY(6px); box-shadow: 0 0 0 var(--primary-blue); background: var(--primary-blue); color: white; }
 
-        /* 5. Stats & About */
         .stats-container { display: flex; justify-content: space-around; background: var(--primary-blue); color: white; margin: 0 20px 25px; padding: 15px; border-radius: 15px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .stat-box h3 { margin: 0; font-size: 20px; color: var(--highlight-orange); }
         .stat-box p { margin: 5px 0 0 0; font-size: 12px; font-weight: 600; }
@@ -57,35 +50,29 @@
         .about-box h3 { color: var(--primary-blue); margin-top: 0; font-size: 18px; }
         .about-box p { color: #475569; font-size: 14px; line-height: 1.6; margin-bottom: 0; }
 
-        /* 6. Classes (3D Buttons) */
         .classes-wrapper { padding: 0 20px 25px 20px; text-align: center; }
         .section-heading { font-size: 20px; font-weight: 800; color: var(--primary-blue); margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .class-btn-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
         .class-btn { width: calc(50% - 10px); padding: 15px 5px; background: var(--card-bg); color: var(--primary-blue); text-decoration: none; border-radius: 10px; font-weight: 800; font-size: 16px; border: 2px solid var(--primary-blue); box-shadow: 0 6px 0 var(--primary-blue); transition: all 0.1s ease; text-align: center; }
         .class-btn:active { transform: translateY(6px); box-shadow: 0 0 0 var(--primary-blue); background: var(--primary-blue); color: white; }
 
-        /* 7. Action Buttons (Leaderboard) */
         .action-btns { padding: 0 20px 25px; display: flex; flex-direction: column; gap: 15px; }
         .btn-red { background: #EF4444; color: white; padding: 15px; border-radius: 10px; text-align: center; font-weight: bold; text-decoration: none; font-size: 18px; box-shadow: 0 4px 6px rgba(239, 68, 68, 0.3); }
         .btn-gold { background: #F59E0B; color: white; padding: 15px; border-radius: 10px; text-align: center; font-weight: bold; text-decoration: none; font-size: 18px; box-shadow: 0 4px 6px rgba(245, 158, 11, 0.3); cursor: pointer; border: none; }
 
-        /* 8. Contact Form */
         .contact-box { background: var(--card-bg); margin: 0 20px 30px; padding: 25px 20px; border-radius: 15px; border: 1px solid #E2E8F0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .contact-box h3 { color: var(--primary-blue); text-align: center; margin-top: 0; font-size: 18px; }
         .form-control { width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 8px; font-size: 15px; outline: none; box-sizing: border-box; font-family: inherit; margin-bottom: 15px;}
         textarea.form-control { resize: none; height: 90px; }
         .btn-submit { width: 100%; background: var(--primary-blue); color: white; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
 
-        /* 9. Footer */
         footer { background: var(--text-dark); color: white; text-align: center; padding: 20px; font-size: 14px; margin-bottom: 70px; }
         footer a { color: var(--highlight-orange); text-decoration: none; }
 
-        /* 10. Floating Buttons (AI & WA) */
         .wa-btn { position: fixed; width: 55px; height: 55px; bottom: 20px; right: 20px; background-color: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 999; }
         .ai-chat-btn { position: fixed; width: 55px; height: 55px; bottom: 20px; left: 20px; background-color: var(--primary-blue); color: #FFF; border-radius: 50%; border: 2px solid white; text-align: center; font-size: 25px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; animation: bounce 2s infinite; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
         
-        /* 11. AI Chat Box (Mic & Speaker) */
         .ai-chat-box { display: none; position: fixed; bottom: 85px; left: 20px; width: 90%; max-width: 350px; height: 400px; background: var(--card-bg); border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 1000; flex-direction: column; overflow: hidden; border: 2px solid var(--primary-blue); }
         .ai-chat-header { background: var(--primary-blue); color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
         .ai-chat-body { flex: 1; padding: 15px; overflow-y: auto; background: var(--bg-light); display: flex; flex-direction: column; gap: 10px; }
@@ -97,7 +84,6 @@
         .btn-mic { background: var(--highlight-orange); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; margin-right: 5px; transition: 0.3s; }
         .btn-send { background: var(--primary-blue); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
 
-        /* 12. Leaderboard Modal (पॉप-अप) */
         #leaderboardModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:2000; align-items:center; justify-content:center; backdrop-filter: blur(5px); }
         .leaderboard-content { background:white; width:90%; max-width:400px; border-radius:15px; padding:20px; text-align:center; position:relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border-top: 5px solid #F59E0B; }
         .close-btn { position:absolute; top:15px; right:15px; background:none; border:none; font-size:22px; color:#EF4444; cursor:pointer; }
@@ -162,6 +148,8 @@
         <a href="class8.html" class="class-btn">Class 8</a> <a href="class9.html" class="class-btn">Class 9</a> 
         <a href="class10.html" class="class-btn">Class 10</a> <a href="class11.html" class="class-btn">Class 11</a>
         <a href="class12.html" class="class-btn" style="width: 100%; margin-top: 5px;">Class 12</a>
+        
+        <a href="#" class="class-btn" style="width: 100%; margin-top: 5px; background: #FEF3C7; border-color: #F59E0B; color: #D97706;"><i class="fa-solid fa-landmark"></i> IAS Foundation</a>
     </div>
 </div>
 
@@ -174,6 +162,9 @@
     <h3>CONTACT SONU SIR</h3>
     <p style="text-align:center; color:gray; font-size:14px; margin-top:-5px;"><i class="fa-solid fa-envelope"></i> contact@sonuclasses.com</p>
     <input type="text" id="contact-name" class="form-control" placeholder="आपका नाम">
+    
+    <input type="number" id="contact-wa" class="form-control" placeholder="अपना WhatsApp नंबर डालें...">
+    
     <textarea id="contact-msg" class="form-control" placeholder="अपना मैसेज यहाँ लिखें..."></textarea>
     <button class="btn-submit" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i> Message भेजें</button>
 </div>
@@ -251,12 +242,20 @@
 
   onValue(ref(db, 'appData/news'), (snapshot) => { if(snapshot.exists()) document.getElementById('news-text').innerText = snapshot.val(); });
 
+  // 🚀 WhatsApp नंबर सेव करने वाला जादुई फंक्शन 🚀
   window.sendMessage = () => {
       const name = document.getElementById('contact-name').value;
+      const waNumber = document.getElementById('contact-wa').value; // बच्चों का व्हाट्सएप नंबर
       const msg = document.getElementById('contact-msg').value;
-      if(!name || !msg) return alert("❌ कृपया नाम और मैसेज दोनों लिखें!");
+      
+      if(!name || !waNumber || !msg) return alert("❌ कृपया नाम, WhatsApp नंबर और मैसेज तीनों लिखें!");
+      
       const td = new Date().toLocaleString('en-CA', { timeZone: 'Asia/Kolkata' });
-      push(ref(db, 'appData/messages'), { name: name, message: msg, date: td }).then(() => { alert("✅ मैसेज सोनू सर को भेज दिया गया है!"); document.getElementById('contact-msg').value = ''; });
+      push(ref(db, 'appData/messages'), { name: name, whatsapp: waNumber, message: msg, date: td }).then(() => { 
+          alert("✅ आपका मैसेज और नंबर सोनू सर को भेज दिया गया है!"); 
+          document.getElementById('contact-msg').value = ''; 
+          document.getElementById('contact-wa').value = ''; // भेजने के बाद डब्बा खाली कर दो
+      });
   };
 
   window.startVoiceTyping = () => {
