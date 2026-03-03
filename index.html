@@ -108,7 +108,7 @@
     <a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a>
     <a href="#classes-section"><i class="fa-solid fa-book"></i> Classes</a>
     <a href="test.html"><i class="fa-solid fa-brain"></i> Quiz</a>
-    <a href="#" onclick="alert('Daily GK पेज जल्द आ रहा है!')"><i class="fa-solid fa-lightbulb"></i> GK</a>
+    <a href="focus.html"><i class="fa-solid fa-stopwatch"></i> Focus</a>
     <a href="#about-section"><i class="fa-solid fa-user-tie"></i> About</a>
 </nav>
 
@@ -123,10 +123,19 @@
     <a href="test.html" class="btn-main"><i class="fa-solid fa-rocket"></i> Start Learning Free</a>
 </div>
 
+<div style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); margin: 0 20px 25px; padding: 20px; border-radius: 15px; text-align: center; color: white; box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4); position: relative; overflow: hidden; border: 2px solid #34D399;">
+    <div style="position: absolute; top: -15px; right: -15px; font-size: 100px; opacity: 0.1;"><i class="fa-solid fa-calendar-check"></i></div>
+    <h3 style="margin: 0 0 10px 0; font-size: 22px; font-weight: 900; position: relative; z-index: 2;"><i class="fa-solid fa-file-pdf"></i> 30-Day Topper's Routine</h3>
+    <p style="margin: 0 0 15px 0; font-size: 14px; opacity: 0.9; position: relative; z-index: 2;">बोर्ड एग्जाम्स के लिए सोनू सर का स्पेशल रूटीन। इसे देखें और अपने कमरे में चिपकाएं!</p>
+    <a href="https://drive.google.com/file/d/142FLfWpobpBqry_7xuGzknbsbiDZl0Xm/view?usp=drivesdk" target="_blank" style="background: white; color: #059669; padding: 12px 25px; border-radius: 30px; font-size: 16px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; position: relative; z-index: 2;">
+        <i class="fa-solid fa-download"></i> फ्री PDF देखें / डाउनलोड करें
+    </a>
+</div>
+
 <div class="feature-grid">
     <a href="#classes-section" class="feature-box"><i class="fa-solid fa-book-open"></i> Free Notes</a>
     <a href="test.html" class="feature-box"><i class="fa-solid fa-brain"></i> Online Quiz</a>
-    <a href="#" onclick="alert('Daily GK पॉप-अप जल्द आ रहा है!')" class="feature-box"><i class="fa-solid fa-lightbulb"></i> Daily GK</a>
+    <a href="focus.html" class="feature-box"><i class="fa-solid fa-stopwatch"></i> Library Timer</a>
     <a href="#" onclick="document.getElementById('aiChatBox').style.display='flex'" class="feature-box"><i class="fa-solid fa-robot"></i> Sonu AI</a>
 </div>
 
@@ -173,7 +182,6 @@
 </footer>
 
 <a href="https://wa.me/91XXXXXXXXXX" class="wa-btn"><i class="fa-brands fa-whatsapp"></i></a>
-
 <button class="ai-chat-btn" onclick="document.getElementById('aiChatBox').style.display='flex'"><i class="fa-solid fa-robot"></i></button>
 
 <div class="ai-chat-box" id="aiChatBox">
@@ -222,12 +230,10 @@
       document.getElementById('contact-name').value = userName; 
       if(user.photoURL) document.getElementById('user-photo').src = user.photoURL;
       
-      // 🚀 जादुई वेलकम आवाज़ 
       setTimeout(() => { welcomeVoice(userName); }, 1000);
     } else { window.location.replace("login.html"); }
   });
 
-  // 🔊 Welcome Voice Function
   window.welcomeVoice = (name) => {
       if (!name) return;
       let msg = new SpeechSynthesisUtterance(`नमस्ते ${name}! सोनू क्लासेस में आपका स्वागत है। आपकी सफलता यहीं से शुरू होती है।`);
@@ -256,9 +262,7 @@
       const name = document.getElementById('contact-name').value;
       const waNumber = document.getElementById('contact-wa').value;
       const msg = document.getElementById('contact-msg').value;
-      
       if(!name || !waNumber || !msg) return alert("❌ कृपया नाम, WhatsApp नंबर और मैसेज तीनों लिखें!");
-      
       const td = new Date().toLocaleString('en-CA', { timeZone: 'Asia/Kolkata' });
       push(ref(db, 'appData/messages'), { name: name, whatsapp: waNumber, message: msg, date: td }).then(() => { 
           alert("✅ आपका मैसेज और नंबर सोनू सर को भेज दिया गया है!"); 
@@ -267,7 +271,6 @@
       });
   };
 
-  // 🎤 माइक वाला सिस्टम 
   window.startVoiceTyping = () => {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) { alert("❌ आपका ब्राउज़र बोलकर टाइप करना सपोर्ट नहीं करता।"); return; }
@@ -279,7 +282,6 @@
       recognition.start();
   };
 
-  // 🔊 एआई को पढ़ने वाला सिस्टम 
   window.speakSmoothly = (text, btnElement) => {
       if (window.speechSynthesis.speaking) { window.speechSynthesis.cancel(); if(btnElement) btnElement.innerHTML = '<i class="fa-solid fa-volume-high"></i> सुनें'; return; }
       if(btnElement) btnElement.innerHTML = '<i class="fa-solid fa-circle-stop"></i> बंद करें';
@@ -311,7 +313,6 @@
       } catch(e) { document.getElementById(lid).remove(); body.innerHTML += `<div class="ai-msg">❌ एरर!</div>`; } 
   };
 
-  // 🏆 लीडरबोर्ड सिस्टम 
   window.showLeaderboard = async () => {
       document.getElementById('leaderboardModal').style.display = 'flex';
       const list = document.getElementById('leaderboard-list');
