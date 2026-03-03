@@ -79,7 +79,7 @@
         .ai-chat-box { display: none; position: fixed; bottom: 85px; left: 20px; width: 90%; max-width: 350px; height: 400px; background: var(--card-bg); border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 1000; flex-direction: column; overflow: hidden; border: 2px solid var(--primary-blue); }
         .ai-chat-header { background: var(--primary-blue); color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
         .ai-chat-body { flex: 1; padding: 15px; overflow-y: auto; background: var(--bg-light); display: flex; flex-direction: column; gap: 10px; }
-        .ai-msg, .user-msg { padding: 10px 15px; border-radius: 15px; max-width: 85%; font-size: 14px; line-height: 1.4; }
+        .ai-msg, .user-msg { padding: 10px 15px; border-radius: 15px; max-width: 85%; font-size: 14px; line-height: 1.4; word-wrap: break-word; }
         .ai-msg { background: #E0F2FE; align-self: flex-start; border-bottom-left-radius: 0; color: #000; }
         .user-msg { background: var(--primary-blue); color: white; align-self: flex-end; border-bottom-right-radius: 0; }
         .ai-chat-input { display: flex; border-top: 1px solid #E2E8F0; background: var(--card-bg); padding: 5px; align-items: center;}
@@ -257,7 +257,7 @@
 
   window.welcomeVoice = (name) => {
       if (!name) return;
-      let msg = new SpeechSynthesisUtterance(`नमस्ते ${name}! सोनू क्लासेस में आपका स्वागत है। आपकी सफलता यहीं से शुरू होती है।`);
+      let msg = new SpeechSynthesisUtterance(`नमस्ते ${name}! सोनू क्लासेस में आपका स्वागत है।`);
       msg.lang = 'hi-IN'; msg.rate = 0.9; window.speechSynthesis.speak(msg);
   };
 
@@ -277,7 +277,6 @@
       } 
   };
 
-  // 📰 यहाँ से एडमिन पैनल वाली न्यूज़ आ रही है
   onValue(ref(db, 'appData/news'), (snapshot) => { if(snapshot.exists()) document.getElementById('news-text').innerText = snapshot.val(); });
 
   window.sendMessage = () => {
@@ -287,7 +286,7 @@
       if(!name || !waNumber || !msg) return alert("❌ कृपया नाम, WhatsApp नंबर और मैसेज तीनों लिखें!");
       const td = new Date().toLocaleString('en-CA', { timeZone: 'Asia/Kolkata' });
       push(ref(db, 'appData/messages'), { name: name, whatsapp: waNumber, message: msg, date: td }).then(() => { 
-          alert("✅ आपका मैसेज और नंबर सोनू सर को भेज दिया गया है!"); 
+          alert("✅ आपका मैसेज भेज दिया गया है!"); 
           document.getElementById('contact-msg').value = ''; 
           document.getElementById('contact-wa').value = ''; 
       });
@@ -317,22 +316,48 @@
       speakNextChunk();
   };
 
+  // 🤖 AI का एकदम नया और फिक्स किया हुआ कोड
   window.sendAIMessage = async () => { 
-      const input = document.getElementById('aiInput'); const text = input.value.trim(); if(!text) return; 
-      const body = document.getElementById('aiChatBody'); body.innerHTML += `<div class="user-msg">${text}</div>`; 
-      input.value = ''; body.scrollTop = body.scrollHeight; 
-      const k = "AIzaSy" + "CBykQafD5nPNwf2ZSw20mPgrEWEgRLDZY"; const lid = "load-" + Date.now(); 
-      body.innerHTML += `<div class="ai-msg" id="${lid}">सोच रहा हूँ... 🤔</div>`; body.scrollTop = body.scrollHeight; 
+      const input = document.getElementById('aiInput'); 
+      const text = input.value.trim(); 
+      if(!text) return; 
+      
+      const body = document.getElementById('aiChatBody'); 
+      body.innerHTML += `<div class="user-msg">${text}</div>`; 
+      input.value = ''; 
+      body.scrollTop = body.scrollHeight; 
+      
+      // ⚠️ बॉस, पुरानी Key काम नहीं कर रही थी। गूगल AI स्टूडियो (aistudio.google.com) से अपनी एक नई फ्री Key लाकर नीचे डालें:
+      const k = "AIzaSyCBykQafD5nPNwf2ZSw20mPgrEWEgRLDZY"; // <--- यहाँ नई Key डालना मत भूलना!
+      
+      const lid = "load-" + Date.now(); 
+      body.innerHTML += `<div class="ai-msg" id="${lid}">सोच रहा हूँ... 🤔</div>`; 
+      body.scrollTop = body.scrollHeight; 
+      
       try { 
-          const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${k}`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ contents: [{ parts: [{ text: "तुम 'Sonu AI' हो, सरल हिंदी में जवाब दो: " + text }] }] }) }); 
-          const data = await res.json(); document.getElementById(lid).remove(); 
-          if (data.candidates) { 
+          const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${k}`, { 
+              method: 'POST', 
+              headers: {'Content-Type': 'application/json'}, 
+              body: JSON.stringify({ contents: [{ parts: [{ text: "तुम 'Sonu AI' हो, सरल हिंदी में जवाब दो: " + text }] }] }) 
+          }); 
+          const data = await res.json(); 
+          
+          if(document.getElementById(lid)) document.getElementById(lid).remove(); 
+          
+          if (data.candidates && data.candidates.length > 0) { 
               let rawReply = data.candidates[0].content.parts[0].text;
               let formattedReply = rawReply.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*/g, '<br>•');
               body.innerHTML += `<div class="ai-msg"><span style="display:block; margin-bottom:8px;">${formattedReply}</span><div style="text-align: right; border-top: 1px solid #BAE6FD; padding-top: 5px;"><button onclick="speakSmoothly('${rawReply.replace(/'/g, "\\'")}', this)" style="background: #BAE6FD; border: none; padding: 5px 12px; border-radius: 15px; color: #0284C7; font-size: 12px; cursor: pointer; font-weight: bold;"><i class="fa-solid fa-volume-high"></i> सुनें</button></div></div>`; 
-          } 
+          } else if (data.error) {
+              // अगर Key खराब है, तो अब गायब नहीं होगा, बल्कि ये लाल एरर दिखाएगा!
+              body.innerHTML += `<div class="ai-msg" style="color: #DC2626; background: #FEE2E2; border: 1px solid #FCA5A5;">❌ <b>AI Error:</b><br>${data.error.message}<br><br><i>(बॉस, कृपया अपनी नई Gemini API Key डालें!)</i></div>`;
+          }
           body.scrollTop = body.scrollHeight; 
-      } catch(e) { document.getElementById(lid).remove(); body.innerHTML += `<div class="ai-msg">❌ एरर!</div>`; } 
+      } catch(e) { 
+          if(document.getElementById(lid)) document.getElementById(lid).remove(); 
+          body.innerHTML += `<div class="ai-msg" style="color: red;">❌ इंटरनेट या सर्वर एरर!</div>`; 
+          body.scrollTop = body.scrollHeight;
+      } 
   };
 
   window.showLeaderboard = async () => {
@@ -359,15 +384,10 @@
 
 <script>
     const englishWords = [
-        { word: "Courage", meaning: "साहस / हिम्मत", sentence: "Have the courage to follow your dreams. (अपने सपनों का पीछा करने की हिम्मत रखो।)" },
-        { word: "Determine", meaning: "ठान लेना / दृढ़ निश्चय करना", sentence: "He is determined to become an IAS officer. (उसने IAS अफसर बनने की ठान ली है।)" },
-        { word: "Improve", meaning: "सुधारना / बेहतर करना", sentence: "Read books to improve your English. (अपनी इंग्लिश सुधारने के लिए किताबें पढ़ें।)" },
-        { word: "Consistent", meaning: "लगातार / निरंतर", sentence: "Consistent hard work is the key to success. (लगातार कड़ी मेहनत सफलता की कुंजी है।)" },
-        { word: "Knowledge", meaning: "ज्ञान / जानकारी", sentence: "Knowledge is power. (ज्ञान ही शक्ति है।)" },
-        { word: "Patience", meaning: "धैर्य / सब्र", sentence: "Patience is a great quality. (धैर्य एक बहुत बड़ा गुण है।)" },
-        { word: "Achieve", meaning: "हासिल करना / प्राप्त करना", sentence: "You can achieve anything with hard work. (आप कड़ी मेहनत से कुछ भी हासिल कर सकते हैं।)" }
+        { word: "Courage", meaning: "साहस / हिम्मत", sentence: "Have the courage to follow your dreams." },
+        { word: "Determine", meaning: "ठान लेना / दृढ़ निश्चय करना", sentence: "He is determined to become an IAS officer." },
+        { word: "Improve", meaning: "सुधारना / बेहतर करना", sentence: "Read books to improve your English." }
     ];
-
     const todayDate = new Date();
     const dayOfYear = Math.floor((todayDate - new Date(todayDate.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
     const wordOfTheDay = englishWords[dayOfYear % englishWords.length];
@@ -379,9 +399,7 @@
     function speakEnglishWord() {
         if(window.speechSynthesis.speaking) window.speechSynthesis.cancel();
         let enMsg = new SpeechSynthesisUtterance(wordOfTheDay.word);
-        enMsg.lang = 'en-US'; 
-        enMsg.rate = 0.8; 
-        window.speechSynthesis.speak(enMsg);
+        enMsg.lang = 'en-US'; enMsg.rate = 0.8; window.speechSynthesis.speak(enMsg);
     }
 </script>
 </body>
