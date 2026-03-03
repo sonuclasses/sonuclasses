@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1E40AF">
+    <title>IAS Foundation - Sonu Classes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-blue: #1E40AF; --highlight-orange: #F97316; --gold: #F59E0B; --bg-light: #F8FAFC; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-light); color: #0F172A; margin: 0; padding: 0; }
+        
+        header { background-color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--gold); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .back-btn { font-size: 16px; font-weight: bold; color: var(--primary-blue); text-decoration: none; display: flex; align-items: center; gap: 5px; }
+        
+        .hero-section { background: linear-gradient(135deg, #1E40AF 0%, #1e3a8a 100%); color: white; padding: 50px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; }
+        .hero-title { font-size: 28px; font-weight: 900; color: var(--gold); margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .content-box { background: white; margin: -20px 20px 20px; padding: 25px 20px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); text-align: center; position: relative; border-top: 5px solid var(--gold); }
+        
+        .subject-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .sub-box { background: #FEF3C7; border: 1px solid var(--gold); padding: 15px; border-radius: 10px; font-weight: bold; color: #92400E; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .sub-box i { font-size: 24px; color: var(--gold); }
+        
+        .btn-start { background: var(--gold); color: white; padding: 15px; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; width: calc(100% - 40px); margin: 10px 20px; display: block; text-align: center; text-decoration: none; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.4); }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Home</a>
+    <h2 style="margin:0; font-size:18px; color:var(--primary-blue);"><i class="fa-solid fa-landmark"></i> IAS Foundation</h2>
+</header>
+
+<div class="hero-section">
+    <h1 class="hero-title">Dream Big. Start Early.</h1>
+    <p style="margin:0; font-size:15px; opacity:0.9;">UPSC की तैयारी स्कूल से ही शुरू करें! सोनू सर के साथ अपने IAS बनने के सपने की नींव मज़बूत करें।</p>
+</div>
+
+<div class="content-box">
+    <h3 style="margin-top:0; color:var(--primary-blue);">फाउंडेशन में क्या सीखेंगे?</h3>
+    <p style="color:gray; font-size:14px;">बोर्ड एग्जाम्स के साथ-साथ देश की सबसे बड़ी परीक्षा की बेसिक तैयारी।</p>
+    
+    <div class="subject-grid">
+        <div class="sub-box"><i class="fa-solid fa-book-open"></i> NCERT बेसिक्स</div>
+        <div class="sub-box"><i class="fa-solid fa-globe"></i> भूगोल (Geography)</div>
+        <div class="sub-box"><i class="fa-solid fa-landmark-dome"></i> संविधान (Polity)</div>
+        <div class="sub-box"><i class="fa-solid fa-newspaper"></i> करेंट अफेयर्स</div>
+    </div>
+</div>
+
+<a href="#" onclick="alert('IAS Foundation की क्लासेज बहुत जल्द शुरू हो रही हैं! तैयार रहें।')" class="btn-start"><i class="fa-solid fa-rocket"></i> सिलेबस डाउनलोड करें</a>
+
+</body>
+</html>
