@@ -115,9 +115,9 @@
     <a href="#about-section"><i class="fa-solid fa-user-tie"></i> About</a>
 </nav>
 
-<div class="news-ticker" onclick="window.open('https://wa.me/918521057039?text=Sir,%20mujhe%20latest%20news%20aur%20updates%20jaan-na%20hai!', '_blank')">
+<div class="news-ticker" onclick="alert('📢 आज की ताज़ा ख़बर:\n\n' + document.getElementById('news-text').innerText)">
     <span>अपडेट्स</span>
-    <div class="marquee"><p id="news-text">सोनू क्लासेज़ पर आपका स्वागत है। 10वीं के नए बैचेस शुरू हो रहे हैं!</p></div>
+    <div class="marquee"><p id="news-text">सोनू क्लासेज़ पर आपका स्वागत है। डेटा लोड हो रहा है...</p></div>
 </div>
 
 <div class="hero-section">
@@ -277,6 +277,7 @@
       } 
   };
 
+  // 📰 यहाँ से एडमिन पैनल वाली न्यूज़ आ रही है
   onValue(ref(db, 'appData/news'), (snapshot) => { if(snapshot.exists()) document.getElementById('news-text').innerText = snapshot.val(); });
 
   window.sendMessage = () => {
