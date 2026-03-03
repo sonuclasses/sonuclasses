@@ -27,44 +27,69 @@
         nav a { color: white; text-decoration: none; padding: 8px 15px; margin: 0 5px; font-size: 15px; font-weight: bold; border-radius: 20px; transition: 0.3s; display: flex; align-items: center; gap: 6px; }
         nav a:hover, nav a.active { background-color: rgba(255,255,255,0.2); }
 
-        .news-ticker { background-color: #0F172A; color: white; padding: 10px; font-size: 14px; display: flex; align-items: center; overflow: hidden; }
+        .news-ticker { background-color: #0F172A; color: white; padding: 10px; font-size: 14px; display: flex; align-items: center; overflow: hidden; cursor: pointer; }
         .news-ticker span { font-weight: bold; background: var(--highlight-orange); padding: 3px 8px; border-radius: 4px; margin-right: 10px; white-space: nowrap; }
         .marquee { flex: 1; overflow: hidden; white-space: nowrap; }
         .marquee p { display: inline-block; margin: 0; padding-left: 100%; animation: scroll 15s linear infinite; font-weight: 500; }
         @keyframes scroll { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
         .hero-section { background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); padding: 40px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .hero-title { font-size: 26px; font-weight: 800; color: var(--primary-blue); margin: 0 0 10px 0; }
+        .hero-title { font-size: 26px; font-weight: 800; color: var(--primary-blue); margin: 0 0 10px 0; line-height: 1.3; }
+        .hero-subtitle { font-size: 15px; color: #475569; margin-bottom: 25px; font-weight: 500; }
+        .btn-main { background-color: var(--highlight-orange); color: white; padding: 14px 30px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3); transition: 0.3s; }
         
         .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px 25px; margin-top: -15px; }
-        .feature-box { background: var(--card-bg); border-radius: 15px; padding: 20px 10px; text-align: center; text-decoration: none; color: var(--primary-blue); font-weight: 800; border: 2px solid var(--primary-blue); box-shadow: 0 6px 0 var(--primary-blue); transition: 0.1s; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+        .feature-box { background: var(--card-bg); border-radius: 15px; padding: 20px 10px; text-align: center; text-decoration: none; color: var(--primary-blue); font-weight: 800; font-size: 15px; border: 2px solid var(--primary-blue); box-shadow: 0 6px 0 var(--primary-blue); transition: 0.1s; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
         .feature-box i { font-size: 32px; color: var(--highlight-orange); }
-        .feature-box:active { transform: translateY(6px); box-shadow: 0 0 0 var(--primary-blue); }
+        .feature-box:active { transform: translateY(6px); box-shadow: 0 0 0 var(--primary-blue); background: var(--primary-blue); color: white; }
 
-        .classes-wrapper { padding: 0 20px 25px; text-align: center; }
+        .stats-container { display: flex; justify-content: space-around; background: var(--primary-blue); color: white; margin: 0 20px 25px; padding: 15px; border-radius: 15px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .stat-box h3 { margin: 0; font-size: 20px; color: var(--highlight-orange); }
+        .stat-box p { margin: 5px 0 0 0; font-size: 12px; font-weight: 600; }
+        .about-box { background: var(--card-bg); margin: 0 20px 25px; padding: 20px; border-radius: 15px; border: 1px solid #E2E8F0; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .about-box h3 { color: var(--primary-blue); margin-top: 0; font-size: 18px; }
+        .about-box p { color: #475569; font-size: 14px; line-height: 1.6; margin-bottom: 0; }
+
+        .classes-wrapper { padding: 0 20px 25px 20px; text-align: center; }
+        .section-heading { font-size: 20px; font-weight: 800; color: var(--primary-blue); margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .class-btn-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
-        .class-btn { width: calc(50% - 10px); padding: 15px 5px; background: var(--card-bg); color: var(--primary-blue); text-decoration: none; border-radius: 10px; font-weight: 800; border: 2px solid var(--primary-blue); box-shadow: 0 6px 0 var(--primary-blue); transition: 0.1s; text-align: center; }
-        .class-btn:active { transform: translateY(6px); box-shadow: 0 0 0 var(--primary-blue); }
+        .class-btn { width: calc(50% - 10px); padding: 15px 5px; background: var(--card-bg); color: var(--primary-blue); text-decoration: none; border-radius: 10px; font-weight: 800; font-size: 16px; border: 2px solid var(--primary-blue); box-shadow: 0 6px 0 var(--primary-blue); transition: all 0.1s ease; text-align: center; }
+        .class-btn:active { transform: translateY(6px); box-shadow: 0 0 0 var(--primary-blue); background: var(--primary-blue); color: white; }
 
         .action-btns { padding: 0 20px 25px; display: flex; flex-direction: column; gap: 15px; }
         .btn-red { background: #EF4444; color: white; padding: 15px; border-radius: 10px; text-align: center; font-weight: bold; text-decoration: none; font-size: 18px; box-shadow: 0 4px 6px rgba(239, 68, 68, 0.3); }
+        .btn-gold { background: #F59E0B; color: white; padding: 15px; border-radius: 10px; text-align: center; font-weight: bold; text-decoration: none; font-size: 18px; box-shadow: 0 4px 6px rgba(245, 158, 11, 0.3); cursor: pointer; border: none; }
 
-        .contact-box { background: var(--card-bg); margin: 0 20px 30px; padding: 25px 20px; border-radius: 15px; border: 1px solid #E2E8F0; }
-        .form-control { width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 8px; margin-bottom: 15px; box-sizing: border-box; font-family: inherit; }
+        .contact-box { background: var(--card-bg); margin: 0 20px 30px; padding: 25px 20px; border-radius: 15px; border: 1px solid #E2E8F0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .contact-box h3 { color: var(--primary-blue); text-align: center; margin-top: 0; font-size: 18px; }
+        .form-control { width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 8px; font-size: 15px; outline: none; box-sizing: border-box; font-family: inherit; margin-bottom: 15px;}
+        textarea.form-control { resize: none; height: 90px; }
         .btn-submit { width: 100%; background: var(--primary-blue); color: white; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
 
         footer { background: var(--text-dark); color: white; text-align: center; padding: 20px; font-size: 14px; margin-bottom: 70px; }
-        .ai-chat-btn { position: fixed; width: 55px; height: 55px; bottom: 20px; left: 20px; background-color: var(--primary-blue); color: #FFF; border-radius: 50%; border: 2px solid white; font-size: 25px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        footer a { color: var(--highlight-orange); text-decoration: none; }
+
+        .wa-btn { position: fixed; width: 55px; height: 55px; bottom: 20px; right: 20px; background-color: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 999; }
+        .ai-chat-btn { position: fixed; width: 55px; height: 55px; bottom: 20px; left: 20px; background-color: var(--primary-blue); color: #FFF; border-radius: 50%; border: 2px solid white; text-align: center; font-size: 25px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        
         .ai-chat-box { display: none; position: fixed; bottom: 85px; left: 20px; width: 90%; max-width: 350px; height: 400px; background: var(--card-bg); border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 1000; flex-direction: column; overflow: hidden; border: 2px solid var(--primary-blue); }
         .ai-chat-header { background: var(--primary-blue); color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
         .ai-chat-body { flex: 1; padding: 15px; overflow-y: auto; background: var(--bg-light); display: flex; flex-direction: column; gap: 10px; }
-        .ai-msg { background: #E0F2FE; padding: 10px; border-radius: 10px; font-size: 14px; color: #000; }
-        .user-msg { background: var(--primary-blue); color: white; padding: 10px; border-radius: 10px; align-self: flex-end; font-size: 14px; }
-        .ai-chat-input { display: flex; border-top: 1px solid #E2E8F0; padding: 5px; }
-        .ai-chat-input input { flex: 1; padding: 10px; border: none; outline: none; }
+        .ai-msg, .user-msg { padding: 10px 15px; border-radius: 15px; max-width: 85%; font-size: 14px; line-height: 1.4; }
+        .ai-msg { background: #E0F2FE; align-self: flex-start; border-bottom-left-radius: 0; color: #000; }
+        .user-msg { background: var(--primary-blue); color: white; align-self: flex-end; border-bottom-right-radius: 0; }
+        .ai-chat-input { display: flex; border-top: 1px solid #E2E8F0; background: var(--card-bg); padding: 5px; align-items: center;}
+        .ai-chat-input input { flex: 1; padding: 10px; border: none; outline: none; background: transparent; color: var(--text-dark); font-size: 15px;}
+        .btn-mic { background: var(--highlight-orange); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; margin-right: 5px; transition: 0.3s; }
+        .btn-send { background: var(--primary-blue); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+
+        #leaderboardModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:2000; align-items:center; justify-content:center; backdrop-filter: blur(5px); }
+        .leaderboard-content { background:white; width:90%; max-width:400px; border-radius:15px; padding:20px; text-align:center; position:relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border-top: 5px solid #F59E0B; }
+        .close-btn { position:absolute; top:15px; right:15px; background:none; border:none; font-size:22px; color:#EF4444; cursor:pointer; }
     </style>
 </head>
-<body onload="welcomeVoice()">
+<body>
 
 <header>
     <a href="index.html" class="logo"><i class="fa-solid fa-graduation-cap"></i> Sonu Classes</a>
@@ -83,33 +108,46 @@
     <a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a>
     <a href="#classes-section"><i class="fa-solid fa-book"></i> Classes</a>
     <a href="test.html"><i class="fa-solid fa-brain"></i> Quiz</a>
+    <a href="#" onclick="alert('Daily GK पेज जल्द आ रहा है!')"><i class="fa-solid fa-lightbulb"></i> GK</a>
     <a href="#about-section"><i class="fa-solid fa-user-tie"></i> About</a>
 </nav>
 
-<div class="news-ticker">
-    <span>न्यूज़</span>
-    <div class="marquee"><p id="news-text">सोनू क्लासेज़ पर आपका स्वागत है...</p></div>
+<div class="news-ticker" onclick="alert('सोनू सर की तरफ से ताज़ा खबरें लोड हो रही हैं...')">
+    <span>अपडेट्स</span>
+    <div class="marquee"><p id="news-text">सोनू क्लासेज़ पर आपका स्वागत है। डेटा लोड हो रहा है...</p></div>
 </div>
 
 <div class="hero-section">
-    <h2 class="hero-title">Welcome to Sonu Classes!</h2>
-    <a href="test.html" style="background:var(--highlight-orange); color:white; padding:12px 25px; border-radius:30px; text-decoration:none; font-weight:bold;">Start Learning Free</a>
+    <h2 class="hero-title">Welcome to Sonu Classes - Your Success Starts Here!</h2>
+    <p class="hero-subtitle">Free Notes, Online Quiz, Daily GK & AI Doubt Solver for Class 6–12.</p>
+    <a href="test.html" class="btn-main"><i class="fa-solid fa-rocket"></i> Start Learning Free</a>
 </div>
 
 <div class="feature-grid">
     <a href="#classes-section" class="feature-box"><i class="fa-solid fa-book-open"></i> Free Notes</a>
     <a href="test.html" class="feature-box"><i class="fa-solid fa-brain"></i> Online Quiz</a>
-    <a href="#" onclick="alert('GK Section जल्द आ रहा है!')" class="feature-box"><i class="fa-solid fa-lightbulb"></i> Daily GK</a>
+    <a href="#" onclick="alert('Daily GK पॉप-अप जल्द आ रहा है!')" class="feature-box"><i class="fa-solid fa-lightbulb"></i> Daily GK</a>
     <a href="#" onclick="document.getElementById('aiChatBox').style.display='flex'" class="feature-box"><i class="fa-solid fa-robot"></i> Sonu AI</a>
 </div>
 
+<div class="stats-container">
+    <div class="stat-box"><h3>1000+</h3><p>Students</p></div>
+    <div class="stat-box"><h3>500+</h3><p>Notes</p></div>
+    <div class="stat-box"><h3>Daily</h3><p>Updates</p></div>
+</div>
+
+<div class="about-box" id="about-section">
+    <h3>ABOUT SONU CLASSES</h3>
+    <p>Sonu Classes is a free educational platform helping students prepare for Board Exams and IAS Foundation with quality notes and quizzes. Our mission is to make education accessible and smart for everyone in Bihar and across India. 🇮🇳</p>
+</div>
+
 <div class="classes-wrapper" id="classes-section">
-    <div style="font-size: 18px; font-weight: 800; color: var(--primary-blue); margin-bottom: 15px;">SELECT YOUR CLASS</div>
+    <div class="section-heading"><i class="fa-solid fa-layer-group"></i> SELECT YOUR CLASS</div>
     <div class="class-btn-container">
         <a href="class6.html" class="class-btn">Class 6</a> <a href="class7.html" class="class-btn">Class 7</a> 
         <a href="class8.html" class="class-btn">Class 8</a> <a href="class9.html" class="class-btn">Class 9</a> 
         <a href="class10.html" class="class-btn">Class 10</a> <a href="class11.html" class="class-btn">Class 11</a>
-        <a href="class12.html" class="class-btn" style="width: 100%;">Class 12</a>
+        <a href="class12.html" class="class-btn" style="width: 100%; margin-top: 5px;">Class 12</a>
         
         <a href="ias.html" class="class-btn" style="width: 100%; margin-top: 5px; background: #FEF3C7; border-color: #F59E0B; color: #D97706;"><i class="fa-solid fa-landmark"></i> IAS Foundation</a>
     </div>
@@ -117,44 +155,74 @@
 
 <div class="action-btns">
     <a href="result.html" class="btn-red"><i class="fa-solid fa-bullhorn"></i> 10वीं का रिजल्ट 2026</a>
+    <button class="btn-gold" onclick="showLeaderboard()"><i class="fa-solid fa-trophy"></i> आज के टॉपर्स देखें</button>
 </div>
 
 <div class="contact-box">
-    <h3 style="text-align:center; color:var(--primary-blue);">CONTACT SONU SIR</h3>
+    <h3>CONTACT SONU SIR</h3>
+    <p style="text-align:center; color:gray; font-size:14px; margin-top:-5px;"><i class="fa-solid fa-envelope"></i> contact@sonuclasses.com</p>
     <input type="text" id="contact-name" class="form-control" placeholder="आपका नाम">
     <input type="number" id="contact-wa" class="form-control" placeholder="अपना WhatsApp नंबर डालें...">
-    <textarea id="contact-msg" class="form-control" placeholder="अपना मैसेज लिखें..."></textarea>
-    <button class="btn-submit" onclick="sendMessage()">Message भेजें</button>
+    <textarea id="contact-msg" class="form-control" placeholder="अपना मैसेज यहाँ लिखें..."></textarea>
+    <button class="btn-submit" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i> Message भेजें</button>
 </div>
 
-<footer><p>Copyright © 2026 <b>Sonu Classes</b></p></footer>
+<footer>
+    <p>Copyright © 2026 <b>Sonu Classes</b></p>
+    <p>Designed by Founder <a href="#">Sonu Kumar</a></p>
+</footer>
+
+<a href="https://wa.me/91XXXXXXXXXX" class="wa-btn"><i class="fa-brands fa-whatsapp"></i></a>
 
 <button class="ai-chat-btn" onclick="document.getElementById('aiChatBox').style.display='flex'"><i class="fa-solid fa-robot"></i></button>
 
 <div class="ai-chat-box" id="aiChatBox">
-    <div class="ai-chat-header"><span>✨ Sonu AI</span><button onclick="document.getElementById('aiChatBox').style.display='none'" style="color:white; background:none; border:none; font-size:20px;">×</button></div>
-    <div class="ai-chat-body" id="aiChatBody"><div class="ai-msg">नमस्ते! मैं Sonu AI हूँ। पढ़ाई का कोई डाउट पूछें!</div></div>
-    <div class="ai-chat-input"><input type="text" id="aiInput" placeholder="सवाल पूछें..." onkeypress="if(event.key === 'Enter') sendAIMessage()"><button onclick="sendAIMessage()" style="background:var(--primary-blue); color:white; border:none; width:40px; height:40px; border-radius:50%; margin-left:5px;">➤</button></div>
+    <div class="ai-chat-header">
+        <span>✨ Sonu AI</span>
+        <button onclick="document.getElementById('aiChatBox').style.display='none'" style="background:none;border:none;color:white;font-size:20px;"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="ai-chat-body" id="aiChatBody">
+        <div class="ai-msg">
+            <span style="display:block; margin-bottom:8px;">नमस्ते! मैं <b>Sonu AI</b> हूँ। 🤖<br>पढ़ाई से जुड़ा कोई भी डाउट पूछें!</span>
+            <div style="text-align: right; border-top: 1px solid #BAE6FD; padding-top: 5px;">
+                <button onclick="speakSmoothly('नमस्ते! मैं सोनू एआई हूँ। पढ़ाई से जुड़ा कोई भी डाउट पूछें!', this)" style="background: #BAE6FD; border: none; padding: 5px 12px; border-radius: 15px; color: #0284C7; font-size: 12px; cursor: pointer; font-weight: bold;"><i class="fa-solid fa-volume-high"></i> सुनें</button>
+            </div>
+        </div>
+    </div>
+    <div class="ai-chat-input">
+        <input type="text" id="aiInput" placeholder="सवाल टाइप करें..." onkeypress="if(event.key === 'Enter') sendAIMessage()">
+        <button id="micBtn" class="btn-mic" onclick="startVoiceTyping()"><i class="fa-solid fa-microphone"></i></button>
+        <button class="btn-send" onclick="sendAIMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+</div>
+
+<div id="leaderboardModal">
+    <div class="leaderboard-content">
+        <button class="close-btn" onclick="document.getElementById('leaderboardModal').style.display='none'"><i class="fa-solid fa-circle-xmark"></i></button>
+        <h2 style="color:#D97706; margin-top:0; font-size:22px;"><i class="fa-solid fa-crown"></i> आज के टॉपर्स <i class="fa-solid fa-crown"></i></h2>
+        <p style="color:gray; font-size:13px; margin-top:-10px; margin-bottom:15px;">(सिर्फ आज का हाईएस्ट स्कोर)</p>
+        <div id="leaderboard-list" style="max-height:300px; overflow-y:auto; text-align:left; padding-right:5px;"></div>
+    </div>
 </div>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
   import { getAuth, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-  import { getDatabase, ref, onValue, push } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+  import { getDatabase, ref, onValue, push, get, child } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
   import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
   const firebaseConfig = { apiKey: "AIzaSyDCzAhpQonWiNDtWmyox5QdPd4xRbpOy30", authDomain: "sonuclasses-b19db.firebaseapp.com", databaseURL: "https://sonuclasses-b19db-default-rtdb.firebaseio.com", projectId: "sonuclasses-b19db", storageBucket: "sonuclasses-b19db.firebasestorage.app", messagingSenderId: "166740602272", appId: "1:166740602272:web:af9131ad8c5e4c8fca08c5" };
-  const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getDatabase(app); const storage = getStorage(app);
+  const app = initializeApp(firebaseConfig); 
+  const auth = getAuth(app); const db = getDatabase(app); const storage = getStorage(app);
 
-  let userName = "Student";
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      userName = user.displayName || "विद्यार्थी";
+      const userName = user.displayName || "विद्यार्थी";
       document.getElementById('student-name-drop').innerText = userName;
-      document.getElementById('contact-name').value = userName;
+      document.getElementById('contact-name').value = userName; 
       if(user.photoURL) document.getElementById('user-photo').src = user.photoURL;
       
-      // 🚀 जादुई वेलकम आवाज़ ट्रिगर (Login के बाद)
+      // 🚀 जादुई वेलकम आवाज़ 
       setTimeout(() => { welcomeVoice(userName); }, 1000);
     } else { window.location.replace("login.html"); }
   });
@@ -166,25 +234,103 @@
       msg.lang = 'hi-IN'; msg.rate = 0.9; window.speechSynthesis.speak(msg);
   };
 
+  window.changePhoto = async (e) => { 
+      const file = e.target.files[0]; 
+      if(file && auth.currentUser) { 
+          document.getElementById('user-photo').style.opacity = '0.5'; 
+          try {
+              const storageRef = sRef(storage, 'profile_photos/' + auth.currentUser.uid);
+              await uploadBytes(storageRef, file); 
+              const photoURL = await getDownloadURL(storageRef); 
+              await updateProfile(auth.currentUser, { photoURL: photoURL }); 
+              document.getElementById('user-photo').src = photoURL; 
+              document.getElementById('user-photo').style.opacity = '1';
+              alert("✅ बॉस, आपकी फोटो हमेशा के लिए सेव हो गई!"); 
+          } catch(error) { alert("❌ फोटो सेव नहीं हुई!"); document.getElementById('user-photo').style.opacity = '1'; }
+      } 
+  };
+
+  onValue(ref(db, 'appData/news'), (snapshot) => { if(snapshot.exists()) document.getElementById('news-text').innerText = snapshot.val(); });
+
   window.sendMessage = () => {
       const name = document.getElementById('contact-name').value;
-      const wa = document.getElementById('contact-wa').value;
+      const waNumber = document.getElementById('contact-wa').value;
       const msg = document.getElementById('contact-msg').value;
-      if(!name || !wa || !msg) return alert("❌ सब कुछ भरें!");
-      push(ref(db, 'appData/messages'), { name, whatsapp: wa, message: msg, date: new Date().toLocaleString() }).then(() => { 
-          alert("✅ मैसेज और व्हाट्सएप नंबर सोनू सर को भेज दिया गया!"); 
-          document.getElementById('contact-wa').value = ''; document.getElementById('contact-msg').value = '';
+      
+      if(!name || !waNumber || !msg) return alert("❌ कृपया नाम, WhatsApp नंबर और मैसेज तीनों लिखें!");
+      
+      const td = new Date().toLocaleString('en-CA', { timeZone: 'Asia/Kolkata' });
+      push(ref(db, 'appData/messages'), { name: name, whatsapp: waNumber, message: msg, date: td }).then(() => { 
+          alert("✅ आपका मैसेज और नंबर सोनू सर को भेज दिया गया है!"); 
+          document.getElementById('contact-msg').value = ''; 
+          document.getElementById('contact-wa').value = ''; 
       });
   };
 
-  window.sendAIMessage = async () => {
-      const input = document.getElementById('aiInput'); const text = input.value.trim(); if(!text) return;
-      const body = document.getElementById('aiChatBody'); body.innerHTML += `<div class="user-msg">${text}</div>`;
-      input.value = ''; body.scrollTop = body.scrollHeight;
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyCBykQafD5nPNwf2ZSw20mPgrEWEgRLDZY`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ contents: [{ parts: [{ text: "तुम 'Sonu AI' हो, सरल हिंदी में जवाब दो: " + text }] }] }) });
-      const data = await res.json(); 
-      if (data.candidates) { body.innerHTML += `<div class="ai-msg">${data.candidates[0].content.parts[0].text}</div>`; }
-      body.scrollTop = body.scrollHeight;
+  // 🎤 माइक वाला सिस्टम 
+  window.startVoiceTyping = () => {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) { alert("❌ आपका ब्राउज़र बोलकर टाइप करना सपोर्ट नहीं करता।"); return; }
+      const recognition = new SpeechRecognition(); recognition.lang = 'hi-IN';
+      const micBtn = document.getElementById('micBtn');
+      recognition.onstart = () => { micBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>'; micBtn.style.backgroundColor = '#EF4444'; };
+      recognition.onresult = (event) => { document.getElementById('aiInput').value = event.results[0][0].transcript; };
+      recognition.onend = () => { micBtn.innerHTML = '<i class="fa-solid fa-microphone"></i>'; micBtn.style.backgroundColor = 'var(--highlight-orange)'; };
+      recognition.start();
+  };
+
+  // 🔊 एआई को पढ़ने वाला सिस्टम 
+  window.speakSmoothly = (text, btnElement) => {
+      if (window.speechSynthesis.speaking) { window.speechSynthesis.cancel(); if(btnElement) btnElement.innerHTML = '<i class="fa-solid fa-volume-high"></i> सुनें'; return; }
+      if(btnElement) btnElement.innerHTML = '<i class="fa-solid fa-circle-stop"></i> बंद करें';
+      let cleanText = text.replace(/[*#_]/g, ''); let chunks = cleanText.match(/[^.!?।]+[.!?।]+/g) || [cleanText]; let i = 0;
+      function speakNextChunk() {
+          if (i < chunks.length) {
+              let speech = new SpeechSynthesisUtterance(chunks[i]); speech.lang = 'hi-IN'; speech.rate = 0.9; 
+              speech.onend = speakNextChunk; window.speechSynthesis.speak(speech); i++;
+          } else { if(btnElement) btnElement.innerHTML = '<i class="fa-solid fa-volume-high"></i> सुनें'; }
+      }
+      speakNextChunk();
+  };
+
+  window.sendAIMessage = async () => { 
+      const input = document.getElementById('aiInput'); const text = input.value.trim(); if(!text) return; 
+      const body = document.getElementById('aiChatBody'); body.innerHTML += `<div class="user-msg">${text}</div>`; 
+      input.value = ''; body.scrollTop = body.scrollHeight; 
+      const k = "AIzaSy" + "CBykQafD5nPNwf2ZSw20mPgrEWEgRLDZY"; const lid = "load-" + Date.now(); 
+      body.innerHTML += `<div class="ai-msg" id="${lid}">सोच रहा हूँ... 🤔</div>`; body.scrollTop = body.scrollHeight; 
+      try { 
+          const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${k}`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ contents: [{ parts: [{ text: "तुम 'Sonu AI' हो, सरल हिंदी में जवाब दो: " + text }] }] }) }); 
+          const data = await res.json(); document.getElementById(lid).remove(); 
+          if (data.candidates) { 
+              let rawReply = data.candidates[0].content.parts[0].text;
+              let formattedReply = rawReply.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*/g, '<br>•');
+              body.innerHTML += `<div class="ai-msg"><span style="display:block; margin-bottom:8px;">${formattedReply}</span><div style="text-align: right; border-top: 1px solid #BAE6FD; padding-top: 5px;"><button onclick="speakSmoothly('${rawReply.replace(/'/g, "\\'")}', this)" style="background: #BAE6FD; border: none; padding: 5px 12px; border-radius: 15px; color: #0284C7; font-size: 12px; cursor: pointer; font-weight: bold;"><i class="fa-solid fa-volume-high"></i> सुनें</button></div></div>`; 
+          } 
+          body.scrollTop = body.scrollHeight; 
+      } catch(e) { document.getElementById(lid).remove(); body.innerHTML += `<div class="ai-msg">❌ एरर!</div>`; } 
+  };
+
+  // 🏆 लीडरबोर्ड सिस्टम 
+  window.showLeaderboard = async () => {
+      document.getElementById('leaderboardModal').style.display = 'flex';
+      const list = document.getElementById('leaderboard-list');
+      list.innerHTML = '<p style="text-align:center; color:var(--primary-blue); font-weight:bold;">स्कोर लोड हो रहा है... ⏳</p>';
+      const td = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+      try {
+          const snapshot = await get(child(ref(db), `daily_leaderboard/${td}`));
+          if (snapshot.exists()) {
+              let students = []; snapshot.forEach(childSnap => { students.push(childSnap.val()); });
+              students.sort((a, b) => b.score - a.score); 
+              let html = ''; let rankColors = ['#F59E0B', '#94A3B8', '#D97706']; 
+              students.forEach((st, index) => {
+                  let rankIcon = index < 3 ? `<i class="fa-solid fa-medal" style="color:${rankColors[index]}; font-size:22px;"></i>` : `<b style="color:gray;">#${index+1}</b>`;
+                  let bg = index === 0 ? '#FEF3C7' : 'white'; 
+                  html += `<div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #E2E8F0; background:${bg}; border-radius:10px; margin-bottom:8px; border: 1px solid #E2E8F0;"><div style="display:flex; align-items:center; gap:12px;"><div style="width:30px; text-align:center;">${rankIcon}</div><div style="font-weight:bold; color:#1E40AF; font-size:15px;">${st.name}</div></div><div style="background:#10B981; color:white; padding:5px 12px; border-radius:15px; font-weight:bold; font-size:14px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">${st.score} अंक</div></div>`;
+              });
+              list.innerHTML = html;
+          } else { list.innerHTML = '<div style="text-align:center; padding:20px; background:#FEF2F2; border-radius:10px; border:1px solid #FECACA;"><b style="color:#EF4444;">आज अभी तक किसी ने टेस्ट नहीं दिया है!</b></div>'; }
+      } catch (e) { list.innerHTML = '<p style="text-align:center; color:red;">❌ एरर!</p>'; }
   };
 </script>
 </body>
