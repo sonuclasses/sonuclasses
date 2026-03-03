@@ -69,7 +69,10 @@
         footer { background: var(--text-dark); color: white; text-align: center; padding: 20px; font-size: 14px; margin-bottom: 70px; }
         footer a { color: var(--highlight-orange); text-decoration: none; }
 
-        .wa-btn { position: fixed; width: 55px; height: 55px; bottom: 20px; right: 20px; background-color: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 999; }
+        /* 🚀 WhatsApp & AI Buttons */
+        .wa-btn { position: fixed; width: 55px; height: 55px; bottom: 20px; right: 20px; background-color: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 999; transition: 0.3s; }
+        .wa-btn:active { transform: scale(0.9); }
+        
         .ai-chat-btn { position: fixed; width: 55px; height: 55px; bottom: 20px; left: 20px; background-color: var(--primary-blue); color: #FFF; border-radius: 50%; border: 2px solid white; text-align: center; font-size: 25px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; animation: bounce 2s infinite; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
         
@@ -112,9 +115,9 @@
     <a href="#about-section"><i class="fa-solid fa-user-tie"></i> About</a>
 </nav>
 
-<div class="news-ticker" onclick="alert('सोनू सर की तरफ से ताज़ा खबरें लोड हो रही हैं...')">
+<div class="news-ticker" onclick="window.open('https://wa.me/918521057039?text=Sir,%20mujhe%20latest%20news%20aur%20updates%20jaan-na%20hai!', '_blank')">
     <span>अपडेट्स</span>
-    <div class="marquee"><p id="news-text">सोनू क्लासेज़ पर आपका स्वागत है। डेटा लोड हो रहा है...</p></div>
+    <div class="marquee"><p id="news-text">सोनू क्लासेज़ पर आपका स्वागत है। 10वीं के नए बैचेस शुरू हो रहे हैं!</p></div>
 </div>
 
 <div class="hero-section">
@@ -139,6 +142,25 @@
     <a href="#" onclick="document.getElementById('aiChatBox').style.display='flex'" class="feature-box"><i class="fa-solid fa-robot"></i> Sonu AI</a>
 </div>
 
+<div style="background: var(--card-bg); margin: 0 20px 25px; padding: 20px; border-radius: 15px; border-left: 5px solid var(--primary-blue); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h3 style="margin: 0; color: var(--primary-blue); font-size: 18px;"><i class="fa-solid fa-language"></i> Daily English</h3>
+        <span style="background: #DBEAFE; color: #1D4ED8; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">आज का शब्द</span>
+    </div>
+    
+    <div id="word-container">
+        <h2 id="daily-word" style="margin: 0 0 5px 0; font-size: 26px; color: var(--highlight-orange);">Loading...</h2>
+        <p id="daily-meaning" style="margin: 0 0 12px 0; font-size: 16px; color: #475569; font-weight: bold;">अर्थ: लोड हो रहा है...</p>
+        <div style="background: #F8FAFC; padding: 12px; border-radius: 8px; font-style: italic; color: #64748B; font-size: 14px; border: 1px solid #E2E8F0;" id="daily-sentence">
+            लोड हो रहा है...
+        </div>
+    </div>
+    
+    <button onclick="speakEnglishWord()" style="margin-top: 15px; width: 100%; background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 15px;">
+        <i class="fa-solid fa-volume-high"></i> सही उच्चारण सुनें
+    </button>
+</div>
+
 <div class="stats-container">
     <div class="stat-box"><h3>1000+</h3><p>Students</p></div>
     <div class="stat-box"><h3>500+</h3><p>Notes</p></div>
@@ -157,7 +179,6 @@
         <a href="class8.html" class="class-btn">Class 8</a> <a href="class9.html" class="class-btn">Class 9</a> 
         <a href="class10.html" class="class-btn">Class 10</a> <a href="class11.html" class="class-btn">Class 11</a>
         <a href="class12.html" class="class-btn" style="width: 100%; margin-top: 5px;">Class 12</a>
-        
         <a href="ias.html" class="class-btn" style="width: 100%; margin-top: 5px; background: #FEF3C7; border-color: #F59E0B; color: #D97706;"><i class="fa-solid fa-landmark"></i> IAS Foundation</a>
     </div>
 </div>
@@ -181,7 +202,7 @@
     <p>Designed by Founder <a href="#">Sonu Kumar</a></p>
 </footer>
 
-<a href="https://wa.me/91XXXXXXXXXX" class="wa-btn"><i class="fa-brands fa-whatsapp"></i></a>
+<a href="https://wa.me/918521057039" target="_blank" class="wa-btn"><i class="fa-brands fa-whatsapp"></i></a>
 <button class="ai-chat-btn" onclick="document.getElementById('aiChatBox').style.display='flex'"><i class="fa-solid fa-robot"></i></button>
 
 <div class="ai-chat-box" id="aiChatBox">
@@ -214,6 +235,7 @@
 </div>
 
 <script type="module">
+  // 🔥 Firebase Setup
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
   import { getAuth, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
   import { getDatabase, ref, onValue, push, get, child } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
@@ -229,7 +251,6 @@
       document.getElementById('student-name-drop').innerText = userName;
       document.getElementById('contact-name').value = userName; 
       if(user.photoURL) document.getElementById('user-photo').src = user.photoURL;
-      
       setTimeout(() => { welcomeVoice(userName); }, 1000);
     } else { window.location.replace("login.html"); }
   });
@@ -333,6 +354,34 @@
           } else { list.innerHTML = '<div style="text-align:center; padding:20px; background:#FEF2F2; border-radius:10px; border:1px solid #FECACA;"><b style="color:#EF4444;">आज अभी तक किसी ने टेस्ट नहीं दिया है!</b></div>'; }
       } catch (e) { list.innerHTML = '<p style="text-align:center; color:red;">❌ एरर!</p>'; }
   };
+</script>
+
+<script>
+    const englishWords = [
+        { word: "Courage", meaning: "साहस / हिम्मत", sentence: "Have the courage to follow your dreams. (अपने सपनों का पीछा करने की हिम्मत रखो।)" },
+        { word: "Determine", meaning: "ठान लेना / दृढ़ निश्चय करना", sentence: "He is determined to become an IAS officer. (उसने IAS अफसर बनने की ठान ली है।)" },
+        { word: "Improve", meaning: "सुधारना / बेहतर करना", sentence: "Read books to improve your English. (अपनी इंग्लिश सुधारने के लिए किताबें पढ़ें।)" },
+        { word: "Consistent", meaning: "लगातार / निरंतर", sentence: "Consistent hard work is the key to success. (लगातार कड़ी मेहनत सफलता की कुंजी है।)" },
+        { word: "Knowledge", meaning: "ज्ञान / जानकारी", sentence: "Knowledge is power. (ज्ञान ही शक्ति है।)" },
+        { word: "Patience", meaning: "धैर्य / सब्र", sentence: "Patience is a great quality. (धैर्य एक बहुत बड़ा गुण है।)" },
+        { word: "Achieve", meaning: "हासिल करना / प्राप्त करना", sentence: "You can achieve anything with hard work. (आप कड़ी मेहनत से कुछ भी हासिल कर सकते हैं।)" }
+    ];
+
+    const todayDate = new Date();
+    const dayOfYear = Math.floor((todayDate - new Date(todayDate.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+    const wordOfTheDay = englishWords[dayOfYear % englishWords.length];
+
+    document.getElementById('daily-word').innerText = wordOfTheDay.word;
+    document.getElementById('daily-meaning').innerHTML = "<b>अर्थ:</b> " + wordOfTheDay.meaning;
+    document.getElementById('daily-sentence').innerText = `"${wordOfTheDay.sentence}"`;
+
+    function speakEnglishWord() {
+        if(window.speechSynthesis.speaking) window.speechSynthesis.cancel();
+        let enMsg = new SpeechSynthesisUtterance(wordOfTheDay.word);
+        enMsg.lang = 'en-US'; 
+        enMsg.rate = 0.8; 
+        window.speechSynthesis.speak(enMsg);
+    }
 </script>
 </body>
 </html>
